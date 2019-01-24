@@ -78,7 +78,3 @@ class V2AServer:
 
         # Delete UUID folder.
         shutil.rmtree(self.outfolder)
-
-server = V2AServer()
-
-time.sleep(2000)
