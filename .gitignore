@@ -1,1 +1,5 @@
+# JetBrains settings
 .idea/
+
+# Temp folder
+temp/
