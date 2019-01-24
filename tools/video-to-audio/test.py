@@ -1,9 +1,11 @@
 import os
+import shutil
 from unittest import *
 
 from filetype import filetype
 
-import videotoaudio
+from V2ALib import convert_video
+from V2AServer import V2AServer
 
 data_dir = os.path.abspath("../../sampledata")
 audio_dir = os.path.join(data_dir, "audio")
@@ -23,8 +25,8 @@ class LibraryTest(TestCase):
     def test_conversion(self):
         """Test if the library can just convert video files and produce MP3 files."""
 
-        potato_mp3_path = videotoaudio.convert_video(os.path.join(video_dir, "potato.mp4"),
-                                                     os.path.join(temp_dir, "potato.mp3"))
+        potato_mp3_path = convert_video(os.path.join(video_dir, "potato.mp4"),
+                                        os.path.join(temp_dir, "potato.mp3"))
 
         # File should exist.
         assert (os.path.exists(potato_mp3_path))
