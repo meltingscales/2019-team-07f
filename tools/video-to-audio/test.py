@@ -36,3 +36,18 @@ class LibraryTest(TestCase):
 
         # It should look like an MP3.
         assert filetype.guess(potato_mp3_path).extension == "mp3"
+
+
+class ServerTest(TestCase):
+
+    def setUp(self):
+        """Clean out our temp folder."""
+        shutil.rmtree(V2AServer.tempfolder())
+
+    def testLocks(self):
+        """Test if our V2AServer locks its directories properly."""
+        a = V2AServer()
+        b = V2AServer()
+
+        while True:
+            pass
