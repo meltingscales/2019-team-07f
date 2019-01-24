@@ -31,6 +31,14 @@ class V2AServer:
 
     magicname = "V2AServer"
 
+    @staticmethod
+    def tempfolder():
+        return os.path.join(tempfile.gettempdir(), "V2AServer")
+
+    @staticmethod
+    def lockfile_name():
+        return "lock.lock"
+
     def __init__(self):
         """Make a new V2AServer.
 
@@ -43,7 +51,7 @@ class V2AServer:
         self.uuid = uuid1()  # TODO possibly collides if millions of uuids are created in under 100ns. This is nit-picky.
 
         # Folder that this V2AServer will output to.
-        self.outfolder = os.path.join(tempfile.gettempdir(), "V2AServer", str(self.uuid))
+        self.outfolder = os.path.join(V2AServer.tempfolder(), str(self.uuid))
 
         if not os.path.exists(self.outfolder):
             os.makedirs(self.outfolder)
@@ -51,7 +59,7 @@ class V2AServer:
         print(f"Output folder: {self.outfolder}")
 
         # Location of a lock file that may exist.
-        self.lockfile = os.path.join(self.outfolder, "lock.lock")
+        self.lockfile = os.path.join(self.outfolder, V2AServer.lockfile_name())
 
         if os.path.isfile(self.lockfile):
             # If lockfile exists,
