@@ -43,6 +43,11 @@ class V2AServer:
         # Folder that this V2AServer will output to.
         self.outfolder = os.path.join(V2AServer.tempfolder(), str(self.uuid))
 
+        # If root tempfolder doesn't exist, make it.
+        if not os.path.exists(V2AServer.tempfolder()):
+            os.makedirs(V2AServer.tempfolder())
+
+        # If OUR tempfolder doesn't exist, make it.
         if not os.path.exists(self.outfolder):
             os.makedirs(self.outfolder)
 

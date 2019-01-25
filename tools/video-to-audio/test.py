@@ -13,6 +13,10 @@ audio_dir = os.path.join(data_dir, "audio")
 video_dir = os.path.join(data_dir, "video")
 temp_dir = os.path.abspath("./temp")
 
+# Fix temp dir not existing.
+if not os.path.exists(temp_dir):
+    os.mkdir(temp_dir)
+
 
 class LibraryTest(TestCase):
     """These only test the libraries my V2AServer class uses, not the server itself."""
@@ -47,23 +51,23 @@ class ServerTest(TestCase):
 
     def setUp(self):
         """Clean out our temp folder in case of any tasty crust left over."""
-        shutil.rmtree(V2AServer.tempfolder())
+        if os.path.exists(V2AServer.tempfolder()):
+            shutil.rmtree(V2AServer.tempfolder())
 
     def testConversion(self):
         """Tests if I can put an MP4 into a pipe, and get an MP3 back."""
         v2aserver = V2AServer()
 
-        r, w = os.pipe() # File descriptors for read/write
+        r, w = os.pipe()  # File descriptors for read/write
 
-        def listen(): # Listen function, to be called on a different thread.
+        def listen():  # Listen function, to be called on a different thread.
             v2aserver.listen(r, w)
 
-        t1 = threading.Thread(target=listen()) # Run the server's listen on a different thread.
+        t1 = threading.Thread(target=listen())  # Run the server's listen on a different thread.
 
         # TODO send MP4 through w pipe
 
-        #TODO recieve MP3 through r pipe
-
+        # TODO recieve MP3 through r pipe
 
     def testLocksStress(self, maxservers=100):
         """Stress test if our V2AServer locks its directories properly."""
