@@ -5,6 +5,8 @@ from uuid import uuid1
 
 import V2ALib
 
+class FolderLockedException(Exception):
+    pass
 
 class V2AServer:
     """A server that listens for requests to convert video to audio."""
@@ -19,7 +21,15 @@ class V2AServer:
     def lockfile_name():
         return "lock.lock"
 
-    def __init__(self):
+    @staticmethod
+    def force_purge_tempfolder():
+        """Note: Should only ever be used if you interrupt the Python runtime and never give the V2AServer a chance
+        to clean up, so there's stale lockfiles.
+
+        Do NOT run this when V2AServers are still running."""
+        shutil.rmtree(V2AServer.tempfolder())
+
+    def __init__(self, verbose=0):
         """Make a new V2AServer.
 
         This will generate a folder inside ~/tmp/V2AServer/<UUID> that's a V2AServer object-specific folder which gets
@@ -36,35 +46,41 @@ class V2AServer:
         if not os.path.exists(self.outfolder):
             os.makedirs(self.outfolder)
 
-        print(f"Output folder: {self.outfolder}")
+        if verbose: print(f"Output folder: {self.outfolder}")
 
         # Location of a lock file that may exist.
         self.lockfile = os.path.join(self.outfolder, V2AServer.lockfile_name())
 
         if os.path.isfile(self.lockfile):
             # If lockfile exists,
-            try:
-                tf = open(self.lockfile)  # Try to open it.
-                tf.close()
-            except IOError as e:  # If it fails,
-                print("Folder that we want to use is somehow in use. Collision?")
-                raise Exception(f"{self.lockfile} is in use!")
+            print("Folder that we want to use is somehow in use. Collision?")
+            raise FolderLockedException(f"{self.lockfile} is in use!")
         else:  # Lockfile doesn't exist.
             open(self.lockfile, 'w+').close()  # Create it and release lock.
 
         # Open the file to obtain a lock on it.
-        self.lock = open(self.lockfile, 'r')
+        self.lock = open(self.lockfile, 'w+')
+        self.lock.write(str(self.uuid))
+        self.lock.flush()
 
     def __del__(self):
-        """Called when this object is deleted."""
+        """Called when this object is deleted or is garbage collected."""
+        self.close()
+
+    def close(self):
+        """Stop the server and clean up."""
         # Release lock on lockfile.
-        self.lock.close()
+        if(not self.lock.closed):
+            self.lock.close()
 
         # Delete lockfile.
-        os.remove(self.lockfile)
+        if(os.path.isfile(self.lockfile)):
+            os.remove(self.lockfile)
 
         # Delete UUID folder.
-        shutil.rmtree(self.outfolder)
+        if os.path.exists(self.outfolder):
+            shutil.rmtree(self.outfolder)
+
 
     def listen(self, r: int, w: int):
         """
