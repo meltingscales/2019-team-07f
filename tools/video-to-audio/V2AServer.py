@@ -32,7 +32,7 @@ class V2AServer:
     def __init__(self, verbose=0):
         """Make a new V2AServer.
 
-        This will generate a folder inside ~/tmp/V2AServer/<UUID> that's a V2AServer object-specific folder which gets
+        This will generate a folder inside /tmp/V2AServer/<UUID> that's a V2AServer object-specific folder which gets
         deleted when this object is destroyed.
 
         That lets you make many!"""
@@ -88,9 +88,11 @@ class V2AServer:
         This is a blocking operation.
 
         Listen on a pair of file descriptors first for:
+
         - An incoming MP4 file on `r`.
 
         And then:
+
         - A read request on `w`, to which MP3 bytes will be written.
 
         :param r: Readable file descriptor, i.e. 1st return value of `os.pipe()`.
