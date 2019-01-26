@@ -22,3 +22,13 @@ def convert_video(videopath: str, outpath: str) -> str:
 
     # Return path.
     return outpath
+
+def stream(reader, writer, chunksize=1024, stoplen=0):
+    """Low-level utility function to stream all of `reader`'s contents into `writer` chunk-by-chunk."""
+    while True:
+        data = reader.read(chunksize) # Read a lil
+
+        if len(data) <= stoplen: # End of stream
+            break
+
+        writer.write(data) # Write a lil

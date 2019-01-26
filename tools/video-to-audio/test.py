@@ -5,7 +5,7 @@ import unittest
 
 from filetype import filetype
 
-from V2ALib import convert_video
+from V2ALib import convert_video, stream
 from V2AServer import V2AServer
 
 data_dir = os.path.abspath("../../sampledata")
@@ -13,19 +13,18 @@ audio_dir = os.path.join(data_dir, "audio")
 video_dir = os.path.join(data_dir, "video")
 temp_dir = os.path.abspath("./temp")
 
-# Fix temp dir not existing.
-if not os.path.exists(temp_dir):
-    os.mkdir(temp_dir)
-
 
 class LibraryTest(unittest.TestCase):
     """These only test the libraries my V2AServer class uses, not the server itself."""
 
     def setUp(self):
-        _ = os.path.join(temp_dir, "potato.mp3")
+        # Create temp directory right here.
+        if not os.path.exists(temp_dir):
+            os.mkdir(temp_dir)
 
-        if os.path.isfile(_):
-            os.remove(_)
+    def tearDown(self):
+        # Remove temp directory.
+        shutil.rmtree(temp_dir)
 
     def test_conversion(self):
         """Test if the library can just convert video files and produce MP3 files."""
@@ -51,12 +50,25 @@ class ServerTest(unittest.TestCase):
 
     def setUp(self):
         """Clean out our temp folder in case of any tasty crust left over."""
+        # Make temp folder if not exists.
+        if not os.path.exists(temp_dir):
+            os.mkdir(temp_dir)
+
+    def tearDown(self):
+
+        # Delete V2AServer's temp dirs as if it was never run.
         if os.path.exists(V2AServer.tempfolder()):
             shutil.rmtree(V2AServer.tempfolder())
+
+        # Remove temp directory.
+        shutil.rmtree(temp_dir)
 
     def testConversion(self):
         """Tests if I can put an MP4 into a pipe, and get an MP3 back."""
         v2aserver = V2AServer()
+
+        mp3_out_path = os.path.join(temp_dir, "potato.mp3") # Where to save MP3?
+        mp4_in_path = os.path.join(video_dir, "potato.mp4")
 
         r, w = os.pipe()  # File descriptors for read/write
 
@@ -64,16 +76,10 @@ class ServerTest(unittest.TestCase):
                                        args=(r,))  # Run the server's read on a different thread.
         thread_read.start()  # Server will now wait to read a file.
 
-        # send MP4 through writer pipe
-        with open(os.path.join(video_dir, "potato.mp4"), 'rb') as read_file:
+        # Send MP4 through writer pipe
+        with open(mp4_in_path, 'rb') as read_file:
             with os.fdopen(w, 'wb') as writer:
-                while True:
-                    data = read_file.read(1024)
-
-                    if len(data) <= 0:
-                        break
-
-                    writer.write(data)
+                stream(read_file, writer)
 
         thread_read.join()  # Wait for read thread to end.
 
@@ -87,20 +93,25 @@ class ServerTest(unittest.TestCase):
 
         thread_write.start()  # Server will wait to write a file.
 
+        # Create blank MP3 output file if not exists
+        if not os.path.exists(mp3_out_path):
+            open(mp3_out_path, 'a').close()
+
         # get MP3 through reader pipe
-        with open(os.path.join(temp_dir, "potato.mp3"), 'wb') as write_file:
+        with open(mp3_out_path, 'wb') as write_file:
             with os.fdopen(r, 'rb') as reader:
-                while True:
-                    data = reader.read(1024)
-
-                    if len(data) <= 0:
-                        break
-
-                    write_file.write(data)
+                stream(reader, write_file)
 
         thread_write.join()  # Wait for write thread to end.
+
         # Converted file should exist.
-        assert (os.path.exists(os.path.join(temp_dir, "potato.mp3")))
+        assert (os.path.exists(mp3_out_path))
+
+        # Should still look like an MP3...
+        with open(mp3_out_path, 'rb') as mp3outfile:
+            data = mp3outfile.read(1000)
+            assert (b"ID3" in data)
+            assert (b"LAME" in data)
 
         v2aserver.close()  # Done converting!
 
