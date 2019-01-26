@@ -49,26 +49,50 @@ class ServerTest(unittest.TestCase):
     """Test our servers."""
 
     def setUp(self):
-        """Clean out our temp folder in case of any tasty crust left over."""
         # Make temp folder if not exists.
         if not os.path.exists(temp_dir):
             os.mkdir(temp_dir)
 
-    def tearDown(self):
-
-        # Delete V2AServer's temp dirs as if it was never run.
+        # Clean V2AServer's tempfolder.
         if os.path.exists(V2AServer.tempfolder()):
             shutil.rmtree(V2AServer.tempfolder())
+
+
+    def tearDown(self):
 
         # Remove temp directory.
         shutil.rmtree(temp_dir)
 
-    def testConversion(self):
+    def testConcurrentConversion(self, threads=50):
+        """Tests if I can convert multiple MP4s at a time."""
+        threadlist = []
+
+        for i in range(threads):
+            # Copy our potato.mp4 to let each process have its own file, as it should be.
+            shutil.copy(os.path.join(video_dir, "potato.mp4"), os.path.join(temp_dir, f"potato-{i}.mp4"))
+
+            threadlist.append(
+                threading.Thread(target=self.testConversion,
+                                 kwargs={
+                                     "mp4_in_path": os.path.join(temp_dir, f"potato-{i}.mp4"),
+                                     "mp3_out_path": os.path.join(temp_dir, f"potato-{i}.mp3")}),
+            )
+
+        for i in range(len(threadlist)):
+            threadlist[i].start()
+
+        for i in range(len(threadlist)):
+            threadlist[i].join()
+            print(f"{i}th thread done.")
+
+            # That one converted file should exist.
+            assert(os.path.exists(os.path.join(temp_dir, f"potato-{i}.mp3")))
+
+    def testConversion(self,
+                       mp4_in_path=os.path.join(video_dir, "potato.mp4"),
+                       mp3_out_path=os.path.join(temp_dir, "potato.mp3")):
         """Tests if I can put an MP4 into a pipe, and get an MP3 back."""
         v2aserver = V2AServer()
-
-        mp3_out_path = os.path.join(temp_dir, "potato.mp3") # Where to save MP3?
-        mp4_in_path = os.path.join(video_dir, "potato.mp4")
 
         r, w = os.pipe()  # File descriptors for read/write
 
@@ -83,7 +107,7 @@ class ServerTest(unittest.TestCase):
 
         thread_read.join()  # Wait for read thread to end.
 
-        print("Converted. File should be at " + v2aserver.outfile_name())
+        print(f"Converted {mp4_in_path}. File should be at " + v2aserver.outfile_name())
         assert (os.path.exists(v2aserver.outfile_name()))
 
         r, w = os.pipe()  # Regenerate file descriptors for read/write

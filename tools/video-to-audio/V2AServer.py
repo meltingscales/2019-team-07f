@@ -53,7 +53,10 @@ class V2AServer:
 
         # If root tempfolder doesn't exist, make it.
         if not os.path.exists(V2AServer.tempfolder()):
-            os.makedirs(V2AServer.tempfolder())
+            try:
+                os.makedirs(V2AServer.tempfolder()) # Allows a non-threadsafe operation to be threadsafe.
+            except FileExistsError:
+                pass
 
         # If OUR tempfolder doesn't exist, make it.
         if not os.path.exists(self.outfolder):

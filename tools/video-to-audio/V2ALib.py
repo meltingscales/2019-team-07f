@@ -4,7 +4,7 @@
 
 from moviepy.editor import *
 
-def convert_video(videopath: str, outpath: str) -> str:
+def convert_video(videopath: str, outpath: str, verbose=False, progress_bar=False) -> str:
     """
     :param videopath:   Path to a video file.
     :param outpath:     Path where audio file should be saved.
@@ -14,7 +14,7 @@ def convert_video(videopath: str, outpath: str) -> str:
     clip = VideoFileClip(videopath)
 
     # Write audio.
-    clip.audio.write_audiofile(outpath)
+    clip.audio.write_audiofile(outpath, progress_bar=progress_bar, verbose=verbose)
 
     clip.audio.close()
 
