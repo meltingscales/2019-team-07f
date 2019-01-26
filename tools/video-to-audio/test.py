@@ -2,6 +2,7 @@ import os
 import shutil
 import threading
 import unittest
+
 from filetype import filetype
 
 from V2ALib import convert_video
@@ -59,18 +60,54 @@ class ServerTest(unittest.TestCase):
 
         r, w = os.pipe()  # File descriptors for read/write
 
-        def listen():  # Listen function, to be called on a different thread.
-            v2aserver.listen(r, w)
+        thread_read = threading.Thread(target=v2aserver.read_file,
+                                       args=(r,))  # Run the server's read on a different thread.
+        thread_read.start()  # Server will now wait to read a file.
 
-        print("FINISH testConversion! Do it! DO IT! DOOO ITTTT!")
-        return "nope lol"
+        # send MP4 through writer pipe
+        with open(os.path.join(video_dir, "potato.mp4"), 'rb') as read_file:
+            with os.fdopen(w, 'wb') as writer:
+                while True:
+                    data = read_file.read(1024)
 
-        t1 = threading.Thread(target=listen)  # Run the server's listen on a different thread.
-        t1.run()
+                    if len(data) <= 0:
+                        break
 
-        # TODO send MP4 through w pipe
+                    writer.write(data)
 
-        # TODO recieve MP3 through r pipe
+        thread_read.join()  # Wait for read thread to end.
+
+        print("Converted. File should be at " + v2aserver.outfile_name())
+        assert (os.path.exists(v2aserver.outfile_name()))
+
+        r, w = os.pipe()  # Regenerate file descriptors for read/write
+
+        thread_write = threading.Thread(target=v2aserver.write_file,
+                                        args=(w,))  # Run the server's write on a different thread.
+
+        thread_write.start()  # Server will wait to write a file.
+
+        # get MP3 through reader pipe
+        with open(os.path.join(temp_dir, "potato.mp3"), 'wb') as write_file:
+            with os.fdopen(r, 'rb') as reader:
+                while True:
+                    data = reader.read(1024)
+
+                    if len(data) <= 0:
+                        break
+
+                    write_file.write(data)
+
+        thread_write.join()  # Wait for write thread to end.
+        # Converted file should exist.
+        assert (os.path.exists(os.path.join(temp_dir, "potato.mp3")))
+
+        v2aserver.close()  # Done converting!
+
+        # All dirs should be destroyed.
+        assert (not os.path.exists(v2aserver.outfile_name()))
+        assert (not os.path.exists(v2aserver.infile_name()))
+        assert (not os.path.exists(v2aserver.outfolder))
 
     def testLocksStress(self, maxservers=100):
         """Stress test if our V2AServer locks its directories properly."""
@@ -115,6 +152,7 @@ class ServerTest(unittest.TestCase):
 
         # After all V2AServers are closed, they should have cleaned up properly.
         assert (len(os.listdir(V2AServer.tempfolder())) == 0)
+
 
 if __name__ == "__main__":
     unittest.main()

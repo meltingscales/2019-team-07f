@@ -16,5 +16,9 @@ def convert_video(videopath: str, outpath: str) -> str:
     # Write audio.
     clip.audio.write_audiofile(outpath)
 
+    clip.audio.close()
+
+    clip.close()
+
     # Return path.
     return outpath

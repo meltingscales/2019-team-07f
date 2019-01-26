@@ -5,8 +5,10 @@ from uuid import uuid1
 
 import V2ALib
 
+
 class FolderLockedException(Exception):
     pass
+
 
 class V2AServer:
     """A server that listens for requests to convert video to audio."""
@@ -20,6 +22,12 @@ class V2AServer:
     @staticmethod
     def lockfile_name():
         return "lock.lock"
+
+    def infile_name(self) -> str:
+        return os.path.join(self.outfolder, 'in.mp4')
+
+    def outfile_name(self) -> str:
+        return os.path.join(self.outfolder, 'out.mp3')
 
     @staticmethod
     def force_purge_tempfolder():
@@ -75,38 +83,28 @@ class V2AServer:
     def close(self):
         """Stop the server and clean up."""
         # Release lock on lockfile.
-        if(not self.lock.closed):
+        if (not self.lock.closed):
             self.lock.close()
 
         # Delete lockfile.
-        if(os.path.isfile(self.lockfile)):
+        if (os.path.isfile(self.lockfile)):
             os.remove(self.lockfile)
 
         # Delete UUID folder.
         if os.path.exists(self.outfolder):
             shutil.rmtree(self.outfolder)
 
+    def read_file(self, r: int) -> str:
+        """Listen on a read pipe file descriptor for an incoming MP4 file on `r`, and save it to a file.
 
-    def listen(self, r: int, w: int):
-        """
-
-        This is a blocking operation.
-
-        Listen on a pair of file descriptors first for:
-
-        - An incoming MP4 file on `r`.
-
-        And then:
-
-        - A read request on `w`, to which MP3 bytes will be written.
+        That file gets converted.
 
         :param r: Readable file descriptor, i.e. 1st return value of `os.pipe()`.
-        :param w: Writable file descriptor, i.e. 2nd return value of `os.pipe()`.
+        :return: Path to output file.
         """
         # Get MP4 path to save incoming data.
-        mp4in = os.path.join(self.outfolder, 'in.mp4')
+        mp4in = self.infile_name()
 
-        # Get MP3 path to the soon-to-be converted file.
         mp3out = os.path.join(self.outfolder, 'out.mp3')
 
         # Open a handle on the read pipe in binary mode.
@@ -122,7 +120,17 @@ class V2AServer:
                     infile.write(data)  # Write what small data we took to a file.
 
         # Convert MP4 to MP3 file.
-        mp3out = V2ALib.convert_video(mp4in, mp3out)
+        return V2ALib.convert_video(mp4in, mp3out)
+
+    def write_file(self, w: int):
+        """
+        Listen on a file descriptor for an outgoing A read request on `w`, to which MP3 bytes will be written.
+
+        :param w: Writable file descriptor, i.e. 2nd return value of `os.pipe()`.
+        """
+
+        # Get MP3 path to the soon-to-be converted file.
+        mp3out = self.outfile_name()
 
         # Open a handle on the write pipe in binary mode to send the MP3.
         with os.fdopen(w, 'wb') as writer:
