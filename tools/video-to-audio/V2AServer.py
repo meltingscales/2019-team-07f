@@ -1,6 +1,7 @@
 import os
 import shutil
 import tempfile
+from typing import IO
 from uuid import uuid1
 
 import V2ALib
@@ -57,7 +58,7 @@ class V2AServer:
         # If root tempfolder doesn't exist, make it.
         if not os.path.exists(V2AServer.tempfolder()):
             try:
-                os.makedirs(V2AServer.tempfolder()) # Allows a non-threadsafe operation to be threadsafe.
+                os.makedirs(V2AServer.tempfolder())  # Allows a non-threadsafe operation to be threadsafe.
             except FileExistsError:
                 pass
 
@@ -100,12 +101,9 @@ class V2AServer:
         if os.path.exists(self.outfolder):
             shutil.rmtree(self.outfolder)
 
-    def read_file(self, r: int) -> str:
-        """Listen on a read pipe file descriptor for an incoming MP4 file on `r`, and save it to a file.
+    def read_file(self, reader: IO) -> str:
+        """Listen on a reader for an incoming MP4 file on `reader`, and save it to a file.
 
-        That file gets converted.
-
-        :param r: Readable file descriptor, i.e. 1st return value of `os.pipe()`.
         :return: Path to output file.
         """
         # Get MP4 path to save incoming data.
@@ -113,39 +111,17 @@ class V2AServer:
 
         mp3out = os.path.join(self.outfolder, 'out.mp3')
 
-        # Open a handle on the read pipe in binary mode.
-        with os.fdopen(r, 'rb') as reader:
-            # Open a handle on the file that will get the MP4's contents
-            with open(mp4in, 'wb') as infile:
-                while True:  # While we have stuff to read,
-                    data = reader.read(1024)  # Take a little data.
+        # Pipe MP4 stream to MP4 file.
+        V2ALib.stream(reader, open(mp4in, 'wb'), close=True)
 
-                    if len(data) == 0:  # No more to read?
-                        break  # Stop reading.
-
-                    infile.write(data)  # Write what small data we took to a file.
-
-        # Convert MP4 to MP3 file.
+        # Convert MP4 to MP3 file and return temp path.
         return V2ALib.convert_video(mp4in, mp3out)
 
-    def write_file(self, w: int):
-        """
-        Listen on a file descriptor for an outgoing A read request on `w`, to which MP3 bytes will be written.
-
-        :param w: Writable file descriptor, i.e. 2nd return value of `os.pipe()`.
-        """
+    def write_file(self, writer: IO):
+        """Listen on a writer to write an MP4 file."""
 
         # Get MP3 path to the soon-to-be converted file.
         mp3out = self.outfile_name()
 
-        # Open a handle on the write pipe in binary mode to send the MP3.
-        with os.fdopen(w, 'wb') as writer:
-            # Open the mp3 file to read from.
-            with open(mp3out, 'rb') as outfile:
-                while True:  # While we have stuff to read,
-                    data = outfile.read(1024)  # Take a little data.
-
-                    if len(data) == 0:  # No more to read?
-                        break  # Stop reading.
-
-                    writer.write(data)  # Write what small data we took to a pipe.
+        # Write MP3 file to writer.
+        V2ALib.stream(open(mp3out, 'rb'), writer, close=True)

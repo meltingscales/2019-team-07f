@@ -96,7 +96,7 @@ class ServerTest(unittest.TestCase):
         r, w = os.pipe()  # File descriptors for read/write
 
         thread_read = threading.Thread(target=v2aserver.read_file,
-                                       args=(r,))  # Run the server's read on a different thread.
+                                       args=(os.fdopen(r, 'rb'),))  # Run the server's read on a different thread.
         thread_read.start()  # Server will now wait to read a file.
 
         # Send MP4 through writer pipe
@@ -110,7 +110,7 @@ class ServerTest(unittest.TestCase):
         r, w = os.pipe()  # Regenerate file descriptors for read/write
 
         thread_write = threading.Thread(target=v2aserver.write_file,
-                                        args=(w,))  # Run the server's write on a different thread.
+                                        args=(os.fdopen(w, 'wb'),))  # Run the server's write on a different thread.
 
         thread_write.start()  # Server will wait to write a file.
 
