@@ -1,8 +1,12 @@
 # JetBrains settings
 .idea/
 
+# Vagrant crust
+.vagrant/
+
 # Temp folder
 temp/
 
 # python compiled files
 __pycache__/
+
