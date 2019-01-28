@@ -29,6 +29,9 @@ class V2AServer:
     def outfile_name(self) -> str:
         return os.path.join(self.outfolder, 'out.mp3')
 
+    def uuid_name(self):
+        return str(self.uuid)
+
     @staticmethod
     def force_purge_tempfolder():
         """Note: Should only ever be used if you interrupt the Python runtime and never give the V2AServer a chance

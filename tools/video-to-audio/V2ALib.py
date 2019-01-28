@@ -1,8 +1,12 @@
+from typing import IO
+
+# @formatter:off
+from moviepy.editor import *
 # TODO package known good ffmpeg binary to avoid security risk when ffmpeg doesn't exist and gets downloaded by Imageio.
 # Any external downloads that happen upon setup are a security risk.
 # This is very nit-picky, but could be important if GitHub is compromised.
+# @formatter:on
 
-from moviepy.editor import *
 
 def convert_video(videopath: str, outpath: str, verbose=False, progress_bar=False) -> str:
     """
@@ -23,12 +27,17 @@ def convert_video(videopath: str, outpath: str, verbose=False, progress_bar=Fals
     # Return path.
     return outpath
 
-def stream(reader, writer, chunksize=1024, stoplen=0):
+
+def stream(reader: IO, writer: IO, chunksize=1024, stoplen=0, close=False):
     """Low-level utility function to stream all of `reader`'s contents into `writer` chunk-by-chunk."""
     while True:
-        data = reader.read(chunksize) # Read a lil
+        data = reader.read(chunksize)  # Read a lil
 
-        if len(data) <= stoplen: # End of stream
+        if len(data) <= stoplen:  # End of stream
             break
 
-        writer.write(data) # Write a lil
+        writer.write(data)  # Write a lil
+
+    if close:
+        reader.close()
+        writer.close()
