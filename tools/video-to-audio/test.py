@@ -8,7 +8,7 @@ from filetype import filetype
 from V2ALib import convert_video, stream
 from V2AServer import V2AServer
 
-data_dir = os.path.abspath("../../sampledata")
+data_dir = os.path.abspath("./sampledata")
 audio_dir = os.path.join(data_dir, "audio")
 video_dir = os.path.join(data_dir, "video")
 temp_dir = os.path.abspath("./temp")
