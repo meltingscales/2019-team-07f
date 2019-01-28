@@ -57,7 +57,6 @@ class ServerTest(unittest.TestCase):
         if os.path.exists(V2AServer.tempfolder()):
             shutil.rmtree(V2AServer.tempfolder())
 
-
     def tearDown(self):
 
         # Remove temp directory.
@@ -86,7 +85,7 @@ class ServerTest(unittest.TestCase):
             print(f"{i}th thread done.")
 
             # That one converted file should exist.
-            assert(os.path.exists(os.path.join(temp_dir, f"potato-{i}.mp3")))
+            assert (os.path.exists(os.path.join(temp_dir, f"potato-{i}.mp3")))
 
     def testConversion(self,
                        mp4_in_path=os.path.join(video_dir, "potato.mp4"),
@@ -101,9 +100,7 @@ class ServerTest(unittest.TestCase):
         thread_read.start()  # Server will now wait to read a file.
 
         # Send MP4 through writer pipe
-        with open(mp4_in_path, 'rb') as read_file:
-            with os.fdopen(w, 'wb') as writer:
-                stream(read_file, writer)
+        stream(open(mp4_in_path, 'rb'), os.fdopen(w, 'wb'), close=True)
 
         thread_read.join()  # Wait for read thread to end.
 
@@ -122,9 +119,7 @@ class ServerTest(unittest.TestCase):
             open(mp3_out_path, 'a').close()
 
         # get MP3 through reader pipe
-        with open(mp3_out_path, 'wb') as write_file:
-            with os.fdopen(r, 'rb') as reader:
-                stream(reader, write_file)
+        stream(os.fdopen(r, 'rb'), open(mp3_out_path, 'wb'))
 
         thread_write.join()  # Wait for write thread to end.
 
