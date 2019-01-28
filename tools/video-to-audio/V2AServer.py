@@ -118,7 +118,7 @@ class V2AServer:
         return V2ALib.convert_video(mp4in, mp3out)
 
     def write_file(self, writer: IO):
-        """Listen on a writer to write an MP4 file."""
+        """Listen on a writer to write an MP3 file."""
 
         # Get MP3 path to the soon-to-be converted file.
         mp3out = self.outfile_name()

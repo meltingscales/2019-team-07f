@@ -13,6 +13,13 @@ audio_dir = os.path.join(data_dir, "audio")
 video_dir = os.path.join(data_dir, "video")
 temp_dir = os.path.abspath("./temp")
 
+"""
+This is a suite of tests to check if my V2AServer actually works.
+
+If you want to see (in my tests) how my V2AServer works under the hood, just put a `input("waiting lol")` wherever you
+want to debug and look in `/tmp/V2AServer` for a whole lot of crazy looking UUID folders.
+"""
+
 
 class LibraryTest(unittest.TestCase):
     """These only test the libraries my V2AServer class uses, not the server itself."""
