@@ -3,3 +3,6 @@
 
 # Temp folder
 temp/
+
+# python compiled files
+__pycache__/
