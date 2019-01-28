@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     print(f"Converted file is at '{MP3_path}'! Will be deleted in ten seconds. Better open it fast.")
 
-    time.sleep(10 * 1000)
+    time.sleep(10)
 
     # Like to keep the temp dir clean.
     if (os.path.exists(temp_dir)):
