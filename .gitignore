@@ -10,3 +10,6 @@ temp/
 # python compiled files
 __pycache__/
 
+# Java builds
+target/
+out/

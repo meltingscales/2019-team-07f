@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "19af0120416aec7db36e734a737849b6532c112e62b05b601762a7c92562c57d"
+            "sha256": "f726c8f9cfd567485db65933f47e4be0292ae72f023fcfb7ffa12f7b3e6dd1d9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -57,6 +57,13 @@
                 "sha256:16b8077bc8a5fa7a58b3e744f7ecbb156d8c088132df31e0f4f546c98de3514a"
             ],
             "version": "==2.4.1"
+        },
+        "jep": {
+            "hashes": [
+                "sha256:6825fa2d399c228ebcb0c70b979b6ab733468b7c9541ab48ef1d9ca83184de2f"
+            ],
+            "index": "pypi",
+            "version": "==3.8.2"
         },
         "moviepy": {
             "hashes": [
