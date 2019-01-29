@@ -81,7 +81,7 @@ public class Example {
         assert (potatoMP3.length() > 0);
 
         // Come and get it!
-        System.out.printf("Come and get your piping hot Java/Python MP3 at %n'%s'%n before it explodes in 10 seconds!%n", potatoMP3.getCanonicalPath());
+        System.out.printf("Come and get your piping hot Java/Python MP3 at %n%s%n before it explodes in 10 seconds!%n", potatoMP3.getCanonicalPath());
 
         Thread.sleep(10 * 1000);
 

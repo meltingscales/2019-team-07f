@@ -8,10 +8,10 @@ You'll need:
 
 - Python 3.6.4 or greater
 - A somewhat high (8,9,10,11) JDK version.
-- To install jep
+- To install jep (`pip install jep` or [build from source](https://github.com/ninia/jep/wiki/Getting-Started))
 - To set a jep environment variable to tell (java's) jep which Python
   installation to use
-- Maven
+- Install [Maven](https://maven.apache.org/install.html)
 
 ## Windows 'mc.exe' errors
 If you get weird errors about EXE files missing (Esp. on Windows), during the 
@@ -31,7 +31,7 @@ Add `PYTHON_INSTALL_DIR\Lib\site-packages\jep` to the `PATH` env var.
 
 Java uses this to find Python.
 
-Sucks to have to do this, could be automated <!-- TODO do it! -->
+Sucks to have to do this, could be automated. <!-- TODO do it! -->
 
 # How the heck do I build this?
 
