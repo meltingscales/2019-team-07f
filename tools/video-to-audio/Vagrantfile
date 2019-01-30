@@ -1,25 +1,63 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+$setup_pre = <<SCRIPT
+#!/usr/bin/env bash
+
+# Install add-apt-repository command.
+apt-get install -y software-properties-common
+
+# Add repo for Java 11.
+add-apt-repository ppa:openjdk-r/ppa
+
+# Add Python3.6 repo.
+add-apt-repository ppa:deadsnakes/ppa
+
+apt-get update
+
+SCRIPT
+
+$setup_java = <<SCRIPT
+#!/usr/bin/env bash
+
+# Pre-accept liscense.
+echo debconf shared/accepted-oracle-license-v1-2 select true | debconf-set-selections 
+echo debconf shared/accepted-oracle-license-v1-2 seen true | debconf-set-selections
+
+# Install Java 11.
+apt-get install -y openjdk-11-jdk
+
+SCRIPT
+
 $setup_python = <<SCRIPT
 #!/usr/bin/env bash
 
-sudo apt-get install -y software-properties-common
-sudo add-apt-repository ppa:deadsnakes/ppa
-apt-get update
-
+# Install Python3 pip
 apt-get install -y python3.6 python3-pip
 python3 -m pip install pipenv
 
+# Install Python dependencies from Pipfile
 cd /vagrant/
-python3 -m pipenv install
+python3 -m pipenv install 
+
 SCRIPT
 
-$run_tests = <<SCRIPT
+$run_python_tests = <<SCRIPT
 #!/usr/bin/env bash
 
 cd /vagrant/
 pipenv run python test.py
+
+SCRIPT
+
+$run_java_tests = <<SCRIPT
+#!/usr/bin/env bash
+
+cd /vagrant/
+
+java -version
+echo "No Java compilation, or tests yet. Hold tight."
+
 SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -89,10 +127,19 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   
-  # Set up deps.
+  # Set up deps for both setup steps.
+  config.vm.provision :shell, :inline => $setup_pre
+  
+  # Set up Java.
+  config.vm.provision :shell, :inline => $setup_java
+  
+  # Set up Python.
   config.vm.provision :shell, :inline => $setup_python
 
-  # Start tests after 'up'.
-  config.vm.provision :shell, :inline => $run_tests, run: "always"
+  # Start Python tests after 'up'.
+  config.vm.provision :shell, :inline => $run_python_tests, run: "always"
+  
+  # Start Java tests after 'up'.
+  config.vm.provision :shell, :inline => $run_java_tests, run: "always"
 
 end
