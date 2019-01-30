@@ -1,3 +1,4 @@
+package com.example;
 
 import jep.Jep;
 import jep.JepException;
@@ -6,7 +7,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 
-public class Example {
+public class JEPExample {
     public static void main(String[] args) throws IOException, JepException, InterruptedException {
 
         // Path of folder of Python V2AServer library.
