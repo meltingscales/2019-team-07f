@@ -6,6 +6,10 @@
     <groupId>com.example</groupId>
     <artifactId>jep-example</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -62,6 +66,5 @@
             <artifactId>onejar-maven-plugin</artifactId>
             <version>1.4.4</version>
         </dependency>
-
     </dependencies>
 </project>

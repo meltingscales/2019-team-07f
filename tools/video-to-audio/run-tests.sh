@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-pip install pipenv
-pipenv install
 pipenv run python test.py
+
+cd jep-example
+mvn package
+mvn exec:java
