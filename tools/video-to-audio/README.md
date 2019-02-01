@@ -1,11 +1,13 @@
 # What is this?
 
+See the nontechnical report in [this file](./report.md) if you're interested.
+
 This is a subcomponent of the project.
 
 It can be used however you want, though!
 
-It is a program that takes a stream of data from a pipe which encodes any video file, and returns a stream of data back
-that encodes a corresponding audio file.
+It is a program that takes a stream of data from a pipe which encodes any video
+file, and returns a stream of data back that encodes a corresponding audio file.
 
 # What does it use?
 
@@ -13,13 +15,38 @@ Python 3 as a language and `Pipenv` to manage Python dependencies.
 
 # Why pipes?
 
-To ensure as few side effects as possible (no reliance on command line tools), and also that you can run as many
-instances of this as you want to!
+To ensure as few side effects as possible (no reliance on command line tools),
+and also that you can run as many instances of this as you want to!
 
-Also, it's a flexible way to do inter-process communication. Pipes are ubiquitous.
+# How do I run the tests and build everything?
 
-# How do I run the tests?
+## Using vagrant
 
-1. Install Python 3.6 or greater.
-2. In this folder, run `setup.[bat|sh]`
-3. In this folder, run `run-tests.[bat|sh]`
+Run `vagrant up` in this folder.
+
+## Using your computer
+
+### Setup
+
+- Install Python 3.6 or greater.
+- Install maven.
+- Install JDK 8 or greater.
+- In this folder, run `pipenv install --deploy --system`
+
+#### jep setup
+- If using Windows, install Microsoft C++ Build tools.
+- If using Linux, install `python3.6-dev` with `apt`.
+- If using Mac, ask Google because I don't know.
+- Run `pip install jep` and pray.
+
+
+### Running Python tests
+- In this folder, run `run-tests.[bat|sh]`
+
+That file just runs `python test.py` for you.
+
+### Running Java/Python jep tests
+In `jep-example`, run:
+
+- `mvn package`
+- `mvn exec:java`
