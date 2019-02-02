@@ -3,9 +3,9 @@ Private team repo for ITMT 430
 
 # Building
 
-As of yet, there is no build instructions.
+There are build instructions for the webserver inside `/server`.
 
-The `tools` subfolder has tools which are self-contained and have their own
+The `/tools` subfolder has tools which are self-contained and have their own
 build instructions.
 
 # Communication
@@ -13,7 +13,6 @@ build instructions.
 [Slack](itmt-430-group.slack.com)
 
 [Trello](https://trello.com/b/03OdRjtq/2019-team-07f)
-
 
 # Team members
 
