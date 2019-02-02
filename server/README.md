@@ -96,6 +96,9 @@ Sourced from [here](https://www.baeldung.com/tomcat-deploy-war).
         </server>
         
   This tells Maven how to connect to our server.
+  
+  At this point, you can run `./build.[bat|sh]` as you have everything installed.
+  Or, you could do it manually.
 
 - Run `mvn clean install` to generate a WAR file, ready to be deployed.
 
