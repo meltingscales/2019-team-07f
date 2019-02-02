@@ -4,7 +4,7 @@
 # and also https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-8-on-ubuntu-16-04
 
 # Install Tomcat.
-apt-get install tomcat8
+apt-get install -y tomcat8 tomcat8-docs tomcat8-admin tomcat8-examples
 
 # Set up Tomcat's users.
 cp -f /vagrant/vagrant-config/config-files/tomcat-users.xml /var/lib/tomcat8/conf/tomcat-users.xml
