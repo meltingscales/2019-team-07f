@@ -69,19 +69,19 @@ Vagrant.configure("2") do |config|
   # SHELL
   
   # Set up general useful tools.
-  config.vm.provision :shell, path: "vagrant-config/scripts/setup-general.sh"
+#  config.vm.provision :shell, path: "vagrant-config/scripts/setup-general.sh"
 
   # Set up Java.
-  config.vm.provision :shell, path: "vagrant-config/scripts/setup-java.sh"
+#  config.vm.provision :shell, path: "vagrant-config/scripts/setup-java.sh"
 
   # Set up Python.
-  config.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
+#  config.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
 
   # Set up Tomcat.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-tomcat.sh"
   
   # Set up Maven.
-  config.vm.provision :shell, path: "vagrant-config/scripts/setup-maven.sh"
+#  config.vm.provision :shell, path: "vagrant-config/scripts/setup-maven.sh"
   
   # Refresh environment variables.
   config.vm.provision :shell, path: "vagrant-config/scripts/refresh-env.sh" #TODO does this actually work? Is a restart required?
@@ -89,10 +89,10 @@ Vagrant.configure("2") do |config|
   ## And now for the tests!
   
   # Test our Python libraries.
-  config.vm.provision :shell, path: "vagrant-config/scripts/test-python.sh", run: "always"
+#  config.vm.provision :shell, path: "vagrant-config/scripts/test-python.sh", run: "always"
 
   # Test jep.
-  config.vm.provision :shell, path: "vagrant-config/scripts/test-jep.sh", run: "always"
+#  config.vm.provision :shell, path: "vagrant-config/scripts/test-jep.sh", run: "always"
   
   # Deploy our app.
   config.vm.provision :shell, path: "vagrant-config/scripts/deploy-app.sh", run: "always"
