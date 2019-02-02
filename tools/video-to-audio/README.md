@@ -31,6 +31,8 @@ Run `vagrant up` in this folder.
 - Install Python 3.6 or greater.
 - Install maven.
 - Install JDK 8 or greater.
+- Install pip.
+- Install pipenv with `pip install pipenv`.
 - In this folder, run `pipenv install --deploy --system`
 
 #### jep setup
@@ -39,6 +41,13 @@ Run `vagrant up` in this folder.
 - If using Mac, ask Google because I don't know.
 - Run `pip install jep` and pray.
 
+After this, you'll need to add the folder that contains jep's DLL/SO file for linking to Java to an environment variable.
+
+`PATH` or `LD_LIBRARY_PATH` both work.
+
+For example, I added `C:\Python36\Lib\site-packages\jep` to my `PATH`.
+
+See [this link](https://github.com/ninia/jep) for details.
 
 ### Running Python tests
 - In this folder, run `run-tests.[bat|sh]`
@@ -46,7 +55,7 @@ Run `vagrant up` in this folder.
 That file just runs `python test.py` for you.
 
 ### Running Java/Python jep tests
-In `jep-example`, run:
+In the `jep-example` folder, run:
 
 - `mvn package`
 - `mvn exec:java`
