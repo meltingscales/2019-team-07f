@@ -11,6 +11,7 @@ apt-get install -y default-jdk
 
 # If JAVA_HOME isn't set, set it permanently.
 if [[ -z "${JAVA_HOME}" ]]; then
+    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
     echo 'JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64"' >> /etc/environment
 fi
 

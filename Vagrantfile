@@ -1,10 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$refresh_env = <<SCRIPT
-    for env in $( cat /etc/environment ); do export $(echo $env | sed -e 's/"//g'); done
-SCRIPT
-
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -32,7 +28,7 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+    config.vm.network "forwarded_port", guest: 8081, host: 8081, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -72,8 +68,14 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   
+  # Set up general useful tools.
+  config.vm.provision :shell, path: "vagrant-config/scripts/setup-general.sh"
+
   # Set up Java.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-java.sh"
+
+  # Set up Python.
+  config.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
 
   # Set up Tomcat.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-tomcat.sh"
@@ -82,9 +84,19 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-maven.sh"
   
   # Refresh environment variables.
-  config.vm.provision :shell, :inline => $refresh_env #TODO does this actually work? Is a restart required?
+  config.vm.provision :shell, path: "vagrant-config/scripts/refresh-env.sh" #TODO does this actually work? Is a restart required?
+  
+  ## And now for the tests!
+  
+  # Test our Python libraries.
+  config.vm.provision :shell, path: "vagrant-config/scripts/test-python.sh", run: "always"
+
+  # Test jep.
+  config.vm.provision :shell, path: "vagrant-config/scripts/test-jep.sh", run: "always"
   
   # Deploy our app.
-  config.vm.provision :shell, path: "vagrant-config/scripts/deploy-app.sh"
+  config.vm.provision :shell, path: "vagrant-config/scripts/deploy-app.sh", run: "always"
+  
+  # At this point, going to http://127.0.0.1:8081/searchable-video-library/index.jsp should yield some HTML page.
 
 end

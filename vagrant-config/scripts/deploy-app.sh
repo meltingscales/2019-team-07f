@@ -3,7 +3,8 @@
 cd /vagrant/server/
 
 # Make sure Tomcat is running.
-systemctl start tomcat
+sh /opt/tomcat/latest/bin/shutdown.sh
+sh /opt/tomcat/latest/bin/startup.sh
 
 # Generate WAR.
 mvn clean install
