@@ -5,99 +5,6 @@ $refresh_env = <<SCRIPT
     for env in $( cat /etc/environment ); do export $(echo $env | sed -e 's/"//g'); done
 SCRIPT
 
-$setup_pre = <<SCRIPT
-#!/usr/bin/env bash
-
-# Install add-apt-repository command.
-apt-get install -y software-properties-common
-
-# Add Python repo.
-add-apt-repository ppa:deadsnakes/ppa
-
-apt-get update
-
-SCRIPT
-
-$setup_java = <<SCRIPT
-#!/usr/bin/env bash
-
-# Pre-accept liscense.
-echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections 
-echo debconf shared/accepted-oracle-license-v1-1 seen   true | debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-2 select true | debconf-set-selections 
-echo debconf shared/accepted-oracle-license-v1-2 seen   true | debconf-set-selections
-
-# Install Java.
-apt-get install -y default-jdk
-
-# If JAVA_HOME isn't set, set it permanently.
-if [[ -z "${JAVA_HOME}" ]]; then
-    echo 'JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64"' >> /etc/environment
-fi
-
-# Install maven.
-apt-get install -y maven
-
-SCRIPT
-
-$setup_python = <<SCRIPT
-#!/usr/bin/env bash
-
-# Python dev for compiling tools for jep.
-apt-get -y install python3.6-dev
-
-# Install Python's pip
-apt-get install -y python3.6 python3-pip
-python3.6 -m pip install pipenv
-
-# Install Python dependencies from Pipfile to system Python
-cd /vagrant/
-python3.6 -m pipenv install --deploy --system
-
-# Install jep as it isn't included in Pipfile.
-python3.6 -m pip install jep
-
-# Set up paths for jep.
-JEP_PATH=/usr/local/lib/python3.6/dist-packages/jep/
-
-# Include jep's DLL/SO in the system PATH if it isn't already in it.
-if [[ -z "${LD_LIBRARY_PATH}" ]]; then
-  echo "LD_LIBRARY_PATH Env var is unset."
-  echo "Adding jep's DLL/SO folder to /etc/environment"
-    
-  echo LD_LIBRARY_PATH="$JEP_PATH" >> /etc/environment
-  tail /etc/environment -n 1
-else
-  echo "Path contains jep's DLL/SO folder."
-fi
-
-
-SCRIPT
-
-$run_python_tests = <<SCRIPT
-#!/usr/bin/env bash
-
-cd /vagrant/
-python3.6 test.py
-
-SCRIPT
-
-$run_java_tests = <<SCRIPT
-#!/usr/bin/env bash
-
-cd /vagrant/jep-example/
-
-# Check that java and javac exist.
-java -version
-javac -version
-
-# Use pom.xml to build our example Java jep app.
-mvn package
-
-mvn exec:java
-
-SCRIPT
-
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -106,7 +13,7 @@ Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
-  
+
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "bento/ubuntu-16.04"
@@ -125,7 +32,7 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
-  # config.vm.network "forwarded_port", guest: 5000, host: 5000, host_ip: "127.0.0.1"
+  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -149,7 +56,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
-  # 
+  #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
   # end
@@ -165,22 +72,19 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   
-  # Set up deps for both setup steps.
-  config.vm.provision :shell, :inline => $setup_pre
-  
   # Set up Java.
-  config.vm.provision :shell, :inline => $setup_java
-  
-  # Set up Python.
-  config.vm.provision :shell, :inline => $setup_python
+  config.vm.provision :shell, path: "vagrant-config/scripts/setup-java.sh"
 
+  # Set up Tomcat.
+  config.vm.provision :shell, path: "vagrant-config/scripts/setup-tomcat.sh"
+  
+  # Set up Maven.
+  config.vm.provision :shell, path: "vagrant-config/scripts/setup-maven.sh"
+  
   # Refresh environment variables.
   config.vm.provision :shell, :inline => $refresh_env #TODO does this actually work? Is a restart required?
   
-  # Start Python tests after 'up'.
-  config.vm.provision :shell, :inline => $run_python_tests, run: "always"
-  
-  # Start Java tests after 'up'.
-  config.vm.provision :shell, :inline => $run_java_tests, run: "always"
+  # Deploy our app.
+  config.vm.provision :shell, path: "vagrant-config/scripts/deploy-app.sh"
 
 end
