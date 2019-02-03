@@ -9,10 +9,10 @@ echo "Setting up Tomcat."
 apt-get install -y tomcat8 tomcat8-docs tomcat8-admin tomcat8-examples
 
 # Set up Tomcat's users.
-cp -f /vagrant/vagrant-config/config-files/tomcat-users.xml /var/lib/tomcat8/conf/tomcat-users.xml
+cp -f /vagrant/vagrant-config/config-files/tomcat/tomcat-users.xml /var/lib/tomcat8/conf/tomcat-users.xml
 
 # Set up Tomcat's configuration.
-cp -f /vagrant/vagrant-config/config-files/server.xml /var/lib/tomcat8/conf/server.xml
+cp -f /vagrant/vagrant-config/config-files/tomcat/server.xml /var/lib/tomcat8/conf/server.xml
 
 # If CATALINA_HOME isn't set, set it permanently.
 if [[ -z "${CATALINA_HOME}" ]]; then
