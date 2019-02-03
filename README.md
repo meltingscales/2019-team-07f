@@ -3,7 +3,11 @@ Private team repo for ITMT 430
 
 # Building
 
-There are build instructions for the webserver inside `/server`.
+## The easy way
+Just use `vagrant up` in this directory!
+
+## The manual way
+There are manual build instructions for the webserver inside `/server`.
 
 The `/tools` subfolder has tools which are self-contained and have their own
 build instructions.
