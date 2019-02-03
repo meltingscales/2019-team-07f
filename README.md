@@ -10,7 +10,7 @@ build instructions.
 
 # Communication
 
-[Slack](itmt-430-group.slack.com)
+[Slack](https://itmt-430-group.slack.com)
 
 [Trello](https://trello.com/b/03OdRjtq/2019-team-07f)
 
