@@ -3,7 +3,7 @@
 echo "Setting up Python."
 
 # Python dev for compiling tools for jep.
-apt-get -y install python3.6-dev
+apt-get install -y python3.6-dev
 
 # Install Python's pip
 apt-get install -y python3.6 python3-pip

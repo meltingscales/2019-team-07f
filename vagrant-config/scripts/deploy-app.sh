@@ -17,4 +17,3 @@ mvn tomcat7:redeploy
 curl http://127.0.0.1:8081/searchable-video-library/index.jsp
 
 echo "Hey buddy. Check out http://127.0.0.1:8081/searchable-video-library/index.jsp for some cool stuff."
-sleep 10
