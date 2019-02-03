@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Setting up Java."
+
 # Pre-accept liscense.
 echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections 
 echo debconf shared/accepted-oracle-license-v1-1 seen   true | debconf-set-selections

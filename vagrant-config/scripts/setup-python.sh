@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Setting up Python."
+
 # Python dev for compiling tools for jep.
 apt-get -y install python3.6-dev
 

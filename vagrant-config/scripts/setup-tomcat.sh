@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Setting up Tomcat."
+
 # Taken from https://linuxize.com/post/how-to-install-tomcat-9-on-ubuntu-18-04/#step-4-create-a-systemd-unit-file
 # and also https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-8-on-ubuntu-16-04
 

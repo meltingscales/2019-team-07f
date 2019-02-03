@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Testing jep."
+
 cd /vagrant/tools/video-to-audio/jep-example/
 
 # Check that java and javac exist.

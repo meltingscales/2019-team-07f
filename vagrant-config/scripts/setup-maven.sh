@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+Echo "Setting up Maven."
+
 # Install maven.
 apt-get install -y maven
 

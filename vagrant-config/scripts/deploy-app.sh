@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Deploying app."
+
 cd /vagrant/server/
 
 # Make sure Tomcat is running.
