@@ -11,7 +11,7 @@ It currently will serve a fun random number generator to the following URL:
 
 Using Vagrant:
 
-`vagrant up`
+`vagrant up` at the root directory (`/`) of this repository.
 
 Manually:
 
