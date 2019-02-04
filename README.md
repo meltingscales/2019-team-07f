@@ -4,6 +4,8 @@ Private team repo for ITMT 430
 # Building
 
 ## The easy way
+[Install vagrant.](https://www.vagrantup.com/intro/getting-started/install.html)
+
 Just use `vagrant up` in this directory!
 
 ## The manual way
