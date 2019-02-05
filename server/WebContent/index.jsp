@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@page import="java.util.Random"%>
+<%@page import="javax.servlet.jsp.JspWriter" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
@@ -19,7 +20,7 @@
 	<ul>
 		<%
 			for (int i = 0; i < 10; i++) {
-				out.print("<li>" + random.nextInt(100) + "</li>");
+				out.println("<li>" + random.nextInt(100) + "</li>");
 			}
 		%>
 
