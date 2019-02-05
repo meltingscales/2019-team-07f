@@ -3,14 +3,18 @@ Private team repo for ITMT 430
 
 # Building
 
-There are build instructions for the webserver inside `/server`.
+## The easy way
+Just use `vagrant up` in this directory!
+
+## The manual way
+There are manual build instructions for the webserver inside `/server`.
 
 The `/tools` subfolder has tools which are self-contained and have their own
 build instructions.
 
 # Communication
 
-[Slack](itmt-430-group.slack.com)
+[Slack](https://itmt-430-group.slack.com)
 
 [Trello](https://trello.com/b/03OdRjtq/2019-team-07f)
 

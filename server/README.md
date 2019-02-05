@@ -9,6 +9,12 @@ It currently will serve a fun random number generator to the following URL:
 
 # How do I build and run this?
 
+Using Vagrant:
+
+`vagrant up` at the root directory (`/`) of this repository.
+
+Manually:
+
 ## Universal requirements
 
 - Install Java.

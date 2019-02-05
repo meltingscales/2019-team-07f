@@ -22,7 +22,7 @@ and also that you can run as many instances of this as you want to!
 
 ## Using vagrant
 
-Run `vagrant up` in this folder.
+Run `vagrant up` in the repository's root folder.
 
 ## Using your computer
 
