@@ -5,7 +5,7 @@ finished webserver for our project.
 
 It currently will serve a fun random number generator to the following URL:
 
-    http://localhost:8081/searchable-video-library/index.jsp
+    http://localhost:8080/searchable-video-library/index.jsp
 
 # How do I build and run this?
 
@@ -82,7 +82,7 @@ Sourced from [here](https://www.baeldung.com/tomcat-deploy-war).
     Note that these are NOT secure settings.
     
   - If you feel like it, run `$CATALINA_HOME/bin/startup.[bat|sh]` to start Tomcat
-    and try to log in at `localhost:8081` with those credentials to test if
+    and try to log in at `localhost:8080` with those credentials to test if
     you've done it correctly.
     
     If it doesn't work, you've done something wrong.
