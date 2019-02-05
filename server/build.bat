@@ -1,4 +1,4 @@
-REM mvn clean install
+mvn clean install
 
 REM Starts Tomcat but silently exits if it is already running.
 cmd.exe /C "%CATALINA_HOME%\bin\startup.bat"
