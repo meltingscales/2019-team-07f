@@ -30,7 +30,39 @@ Manually:
   
     For reference, mine is `P:\lib\apache-tomcat-9.0.4`.
 
+## The easiest way (IntelliJ IDEA)
+
+- Install IntelliJ IDEA.
+
+- Import `/server/` as an Eclipse Project, using Maven as the model.
+
+- Check `Import Maven projects automatically`.
+
+- Make sure the Maven artifact called `searchable-video-library:searchable-video-library:0.0.1-SNAPSHOT` is selected.
+
+- Choose a Project SDK.
+
+- Click Finish.
+
+At this point, you won't be able to run the project. You need to add a build configuration!
+
+- In the upper-right, click on `Add Configuration...`.
+
+- Click on the `+` in the upper-left to add a run configuration from a template. Go to `Tomcat Server > Local`.
+
+  - `Application server:` should be set to your Tomcat server, configured in Intellij IDEA. If it doesn't show up, configure it with `Configure...`.
+  
+  - HTTP Port should be 8080.
+
+  - In the `Deployment` tab, go to the `+` and add an `Artifact` to be deployed.
+
+  - It should be an exploded WAR of our project, called `searchable-video-library:war`.
+  
+  - Change the application context of `searchable-video-library:war` is `/searchable-video-library`.
+  
 ## The easy way (Eclipse)
+
+Note: Eclipse may be hard to setup. I know it was for me, as other steps might be omitted or platform/configuration-dependent.
 
 ### Installation
 
