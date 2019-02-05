@@ -102,7 +102,7 @@ Vagrant.configure("2") do |config|
     # Deploy our app.
     config.vm.provision :shell, path: "vagrant-config/scripts/deploy-app.sh", run: "always"
   
-    # At this point, going to http://127.0.0.1:8081/searchable-video-library/index.jsp should yield some HTML page.
+    # At this point, going to http://127.0.0.1:8080/searchable-video-library/ should yield some HTML page.
   end
   
 end
