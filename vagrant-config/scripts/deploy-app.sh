@@ -14,6 +14,6 @@ mvn clean install
 mvn tomcat7:redeploy
 
 # Show our page!
-curl http://127.0.0.1:8081/searchable-video-library/index.jsp
+curl http://127.0.0.1:8080/searchable-video-library/index.jsp
 
-echo "Hey buddy. Check out http://127.0.0.1:8081/searchable-video-library/index.jsp for some cool stuff."
+echo "Hey buddy. Check out http://127.0.0.1:8080/searchable-video-library/index.jsp for some cool stuff."
