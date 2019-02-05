@@ -5,7 +5,7 @@ finished webserver for our project.
 
 It currently will serve a fun random number generator to the following URL:
 
-    http://localhost:8080/searchable-video-library/index.jsp
+    http://localhost:8080/searchable-video-library/
 
 # How do I build and run this?
 
