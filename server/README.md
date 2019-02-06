@@ -30,6 +30,13 @@ Manually:
   
     For reference, mine is `P:\lib\apache-tomcat-9.0.4`.
 
+- Install MariaDB.
+
+  Make sure you've got a user identified by:
+
+      username: root
+      password: <BLANK>
+    
 ## The easiest way (IntelliJ IDEA)
 
 - Install IntelliJ IDEA.
@@ -38,7 +45,9 @@ Manually:
 
 - Check `Import Maven projects automatically`.
 
-- Make sure the Maven artifact called `searchable-video-library:searchable-video-library:0.0.1-SNAPSHOT` is selected.
+- Make sure the Maven artifact called
+  `searchable-video-library:searchable-video-library:0.0.1-SNAPSHOT` is
+  selected.
 
 - Choose a Project SDK.
 
@@ -50,7 +59,8 @@ At this point, you won't be able to run the project. You need to add a build con
 
 - Click on the `+` in the upper-left to add a run configuration from a template. Go to `Tomcat Server > Local`.
 
-  - `Application server:` should be set to your Tomcat server, configured in Intellij IDEA. If it doesn't show up, configure it with `Configure...`.
+  - `Application server:` should be set to your Tomcat server, configured in
+    Intellij IDEA. If it doesn't show up, configure it with `Configure...`.
   
   - HTTP Port should be 8080.
 
@@ -59,10 +69,15 @@ At this point, you won't be able to run the project. You need to add a build con
   - It should be an exploded WAR of our project, called `searchable-video-library:war`.
   
   - Change the application context of `searchable-video-library:war` is `/searchable-video-library`.
+
+  There's a lot more configuration that IntelliJ IDEA does based off of your
+  `pom.xml` and framework file structures it detects, so it's super useful in
+  that regard.
   
 ## The easy way (Eclipse)
 
-Note: Eclipse may be hard to setup. I know it was for me, as other steps might be omitted or platform/configuration-dependent.
+Note: Eclipse may be hard to setup. I know it was for me, as other steps might
+be omitted or platform/configuration-dependent.
 
 ### Installation
 
