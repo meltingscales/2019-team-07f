@@ -25,7 +25,9 @@
             </li>
         </ui:repeat>
 
+        <p>Currently, there are <h:outputText value="#{personService.listPersons().size()}"/> users. </p>
+
     </ui:define>
-    
+
 </ui:composition>
 </html>
