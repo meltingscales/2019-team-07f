@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<footer>
-    I am a footer. Copyright 2019 Team Teem.
-</footer>
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+    <footer>
+        I am a footer. Copyright 2019 Team Teem.
+
+        <aside>
+            <pre><code><h:outputText value="#{randomMessage.message()}"/></code></pre>
+        </aside>
+    </footer>
+</ui:composition>
