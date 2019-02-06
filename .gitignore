@@ -1,5 +1,6 @@
 # JetBrains settings
 .idea/
+*.iml
 
 # Vagrant crust
 .vagrant/
