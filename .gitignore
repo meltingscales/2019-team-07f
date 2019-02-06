@@ -1,5 +1,6 @@
 # JetBrains settings
 .idea/
+*.iml
 
 # Vagrant crust
 .vagrant/
@@ -13,3 +14,5 @@ __pycache__/
 # Java builds
 target/
 out/
+
+.vs/
