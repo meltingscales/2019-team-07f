@@ -1,8 +1,8 @@
 
 # Empty password.
 # This also prevents any prompts from coming up.
-debconf-set-selections <<< 'mysql-server-5.6 mysql-server/root_password password'
-debconf-set-selections <<< 'mysql-server-5.6 mysql-server/root_password_again password'
+debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password'
+debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password_again password'
 
 apt-get install -y mysql-server mysql-client
 
