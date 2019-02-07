@@ -18,7 +18,7 @@ Manually:
 ## Universal requirements
 
 - Install Java.
-- 
+
   - Make sure the `JAVA_HOME` environment variable is set correctly.
     
     For reference, mine is `C:\Program Files\Java\jdk1.8.0_201`
@@ -30,7 +30,7 @@ Manually:
   
     For reference, mine is `P:\lib\apache-tomcat-9.0.4`.
 
-- Install MariaDB.
+- Install MySQL.
 
   Make sure you've got a user identified by:
 
