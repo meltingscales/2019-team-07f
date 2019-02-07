@@ -15,8 +15,10 @@ public class Person {
 
     private String name;
 
+    @Column(unique = true)
     private String username;
 
+    @Column(unique = true)
     private String email;
 
     private String country;
@@ -63,7 +65,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("id=%d, username=%s", id, username);
+        return String.format("id=%d, username=%s", getId(), getUsername());
     }
 
 

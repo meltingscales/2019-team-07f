@@ -1,8 +1,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-RUN_TESTS = false
-DEPLOY =    true
+# Build script settings.
+RUN_TESTS =         false # Run tests?
+DESTROY_DB =        false # Destroy the database?
+ENGAGE_CAKE =       true # Engage cake?
+DEPLOY =            true # Deploy the app?
+
+# Port/debug settings. These should all be false once deploy time comes.
+MYSQL_DEBUG =       true # Debug for MySQL. Opens MySQL port.
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -31,7 +37,17 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
-    config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
+  # config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"   
+
+  # Expose HTTP Port.
+  config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
+  
+  if MYSQL_DEBUG then
+  
+    # Expose MySQL Port.
+    config.vm.network "forwarded_port", guest: 3306, host: 3306, host_ip: "127.0.0.1"
+    
+  end
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -74,6 +90,7 @@ Vagrant.configure("2") do |config|
   # Set up general useful tools.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-general.sh"
 
+  
   # Set up Java.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-java.sh"
 
@@ -85,6 +102,9 @@ Vagrant.configure("2") do |config|
   
   # Set up Maven.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-maven.sh"
+
+  # Set up MariaDB.
+  config.vm.provision :shell, path: "vagrant-config/scripts/setup-mariadb.sh"
   
   # Refresh environment variables.
   config.vm.provision :shell, path: "vagrant-config/scripts/refresh-env.sh" #TODO does this actually work? Is a restart required?
@@ -96,6 +116,14 @@ Vagrant.configure("2") do |config|
 
     # Test jep.
     config.vm.provision :shell, path: "vagrant-config/scripts/test-jep.sh", run: "always"
+  end
+  
+  if DESTROY_DB then 
+    # Destroy database.
+    config.vm.provision :shell, path: "vagrant-config/scripts/destroy-db.sh", run: "always"
+
+    # Set up MariaDB.
+    config.vm.provision :shell, path: "vagrant-config/scripts/setup-mariadb.sh"
   end
   
   if DEPLOY then

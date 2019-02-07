@@ -36,6 +36,9 @@ Manually:
 
       username: root
       password: <BLANK>
+      
+  Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
+  Run those scripts. <!-- TODO Remove this manual step. I (-H) tried. -->
     
 ## The easiest way (IntelliJ IDEA)
 
