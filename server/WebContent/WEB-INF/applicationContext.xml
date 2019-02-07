@@ -30,9 +30,9 @@ my project doesn't suck!
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
-                  value="jdbc:mysql://127.0.0.1:3306/searchable-video-library"/>
+                  value="jdbc:mysql://localhost:3306/searchable-video-library"/>
         <property name="username" value="root"/>
-        <property name="password" value=""/>
+        <property name="password" value="password"/>
     </bean>
 
     <!-- Hibernate 4 SessionFactory Bean definition -->
@@ -42,12 +42,11 @@ my project doesn't suck!
         <property name="annotatedClasses">
             <list>
                 <value>com.teamteem.model.Person</value>
-                <value>com.teamteem.model.PersonID</value>
             </list>
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">

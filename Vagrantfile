@@ -8,7 +8,7 @@ ENGAGE_CAKE =       true # Engage cake?
 DEPLOY =            true # Deploy the app?
 
 # Port/debug settings. These should all be false once deploy time comes.
-MYSQL_DEBUG =       true # Debug for MySQL. Opens MySQL port.
+MYSQL_DEBUG =       false # Debug for MySQL. Opens MySQL port.
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -103,8 +103,8 @@ Vagrant.configure("2") do |config|
   # Set up Maven.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-maven.sh"
 
-  # Set up MariaDB.
-  config.vm.provision :shell, path: "vagrant-config/scripts/setup-mariadb.sh"
+  # Set up MySQL.
+  config.vm.provision :shell, path: "vagrant-config/scripts/setup-mysql.sh"
   
   # Refresh environment variables.
   config.vm.provision :shell, path: "vagrant-config/scripts/refresh-env.sh" #TODO does this actually work? Is a restart required?

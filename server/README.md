@@ -35,7 +35,7 @@ Manually:
   Make sure you've got a user identified by:
 
       username: root
-      password: <BLANK>
+      password: password
       
   Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
   Run those scripts. <!-- TODO Remove this manual step. I (-H) tried. -->
