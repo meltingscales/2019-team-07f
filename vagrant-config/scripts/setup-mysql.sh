@@ -1,10 +1,10 @@
 
 # Empty password.
 # This also prevents any prompts from coming up.
-debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password'
-debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password_again password'
+echo "mysql-server-5.7 mysql-server/root_password password root"        | sudo debconf-set-selections
+echo "mysql-server-5.7 mysql-server/root_password_again password root"  | sudo debconf-set-selections
 
-apt-get install -y mysql-server mysql-client
+apt-get install -y mysql-server-5.7 mysql-client
 
 service mysql start
 
