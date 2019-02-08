@@ -407,6 +407,15 @@ html {
     width: 33%;
   }
 
+.field {
+	margin-left: 225px;
+	margin-top: 10px;
+}
+
+.view {
+	margin-left: 225px;
+}
+
   @media only screen and (max-width: 375px) {
     #navigation-container {
     width: 375px;

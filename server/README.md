@@ -5,7 +5,7 @@ finished webserver for our project.
 
 It currently will serve a fun random number generator to the following URL:
 
-    http://localhost:8081/searchable-video-library/index.jsp
+    http://localhost:8080/searchable-video-library/
 
 # How do I build and run this?
 
@@ -18,7 +18,7 @@ Manually:
 ## Universal requirements
 
 - Install Java.
-- 
+
   - Make sure the `JAVA_HOME` environment variable is set correctly.
     
     For reference, mine is `C:\Program Files\Java\jdk1.8.0_201`
@@ -30,7 +30,57 @@ Manually:
   
     For reference, mine is `P:\lib\apache-tomcat-9.0.4`.
 
+- Install MySQL.
+
+  Make sure you've got a user identified by:
+
+      username: root
+      password: password
+      
+  Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
+  Run those scripts. <!-- TODO Remove this manual step. I (-H) tried. -->
+    
+## The easiest way (IntelliJ IDEA)
+
+- Install IntelliJ IDEA.
+
+- Import `/server/` as an Eclipse Project, using Maven as the model.
+
+- Check `Import Maven projects automatically`.
+
+- Make sure the Maven artifact called
+  `searchable-video-library:searchable-video-library:0.0.1-SNAPSHOT` is
+  selected.
+
+- Choose a Project SDK.
+
+- Click Finish.
+
+At this point, you won't be able to run the project. You need to add a build configuration!
+
+- In the upper-right, click on `Add Configuration...`.
+
+- Click on the `+` in the upper-left to add a run configuration from a template. Go to `Tomcat Server > Local`.
+
+  - `Application server:` should be set to your Tomcat server, configured in
+    Intellij IDEA. If it doesn't show up, configure it with `Configure...`.
+  
+  - HTTP Port should be 8080.
+
+  - In the `Deployment` tab, go to the `+` and add an `Artifact` to be deployed.
+
+  - It should be an exploded WAR of our project, called `searchable-video-library:war`.
+  
+  - Change the application context of `searchable-video-library:war` is `/searchable-video-library`.
+
+  There's a lot more configuration that IntelliJ IDEA does based off of your
+  `pom.xml` and framework file structures it detects, so it's super useful in
+  that regard.
+  
 ## The easy way (Eclipse)
+
+Note: Eclipse may be hard to setup. I know it was for me, as other steps might
+be omitted or platform/configuration-dependent.
 
 ### Installation
 
@@ -82,7 +132,7 @@ Sourced from [here](https://www.baeldung.com/tomcat-deploy-war).
     Note that these are NOT secure settings.
     
   - If you feel like it, run `$CATALINA_HOME/bin/startup.[bat|sh]` to start Tomcat
-    and try to log in at `localhost:8081` with those credentials to test if
+    and try to log in at `localhost:8080` with those credentials to test if
     you've done it correctly.
     
     If it doesn't work, you've done something wrong.
