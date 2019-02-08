@@ -16,3 +16,6 @@ target/
 out/
 
 .vs/
+
+# OSX Metadata
+.DS_Store
