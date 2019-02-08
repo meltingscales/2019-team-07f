@@ -10,9 +10,14 @@ html {
     color:black;
     /* text-align: center; */
   }
-  /* * {
-    box-sizing: border-box;
-  } */
+  
+  .logo{
+    padding-right: 850px;
+    float: left;
+    display: inline;
+    position: absolute;
+    padding-bottom: 50px;
+  }
   
   /* div{
     margin-bottom: 1.3em;
@@ -33,6 +38,7 @@ html {
     overflow: hidden;
     background-color: white;
     padding: 20px 10px;
+    
   }
   
   .Navigation a {
@@ -94,6 +100,10 @@ html {
 
   h3{
       text-align: center;
+  }
+
+  hr {
+    border: 1px solid rgb(5, 2, 2);
   }
 
   .Website_details li{
@@ -189,6 +199,14 @@ html {
     margin:auto;
     margin-top:-.5em;
   }
+
+  iframe {
+    display: block;
+    margin: 0 auto;
+  }
+
+  #copyright{
+    text-align: center;
 
   * {
     box-sizing: border-box;
