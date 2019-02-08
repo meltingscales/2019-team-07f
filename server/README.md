@@ -17,7 +17,7 @@ Manually:
 
 ## Universal requirements
 
-- Install Java.
+- Install Java 8 or above.
 
   - Make sure the `JAVA_HOME` environment variable is set correctly.
     
