@@ -313,33 +313,99 @@ html {
   /* Style the middle column */
   .middle {
     grid-area: middle;
-    margin-left: 200px;
+    margin-left: 255px;
+    margin-top: 50px;
     padding-left: 20px;
   }
 
   /* Style the side navigation */
-.sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  background-color: #666;
-  overflow-x: hidden;
-}
+  .sidenav {
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    z-index: 1;
+    background-color: #666;
+    overflow-x: hidden;
+  }
 
-/* Side navigation links */
-.sidenav a {
-  color: white;
-  padding: 12px;
-  text-decoration: none;
-  display: block;
-}
+  /* Side navigation links */
+  .sidenav a {
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+  }
 
-/* Change color on hover */
-.sidenav a:hover {
-  background-color: #ddd;
-  color: black;
-}
+  /* Change color on hover */
+  .sidenav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  /* Table style*/
+  table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 90%;
+    padding: 15px;
+    margin-bottom: 15px;;
+  }
+  #ticket1 .ticket_title{
+    text-align:center;
+    background-color: #dd4b39;
+  }
+  #ticket2 .ticket_title{
+    text-align: center;
+    background-color: #55ACEE;
+  }
+  #ticket3 .ticket_title{
+    text-align: center;
+    background-color: #4CAF50;
+  }
+  .user_id,
+  .issue_code{
+    width: 50%;
+    text-align: left;
+    background-color: #fff;
+  }
+  .issue_title,
+  .issue_statement{
+    text-align: left;
+    background-color: #fff;
+  }
+  .utable_title{
+    text-align: center;
+    background-color: #55ACEE;
+    margin-bottom: 0px;
+  }
+  .atable_title{
+    text-align: center;
+    background-color: #dd4b39;
+  }
+  .user_info,
+  .admin_info{
+    text-align: left;
+    background-color: #fff;
+  }
+  .user_info td:hover{
+    text-align: left;
+    background-color: #ddd;
+  }
+  .admin_info td:hover{
+    text-align: left;
+    background-color: #ddd;
+  }
+  .uname,
+  .upad,
+  .stat,
+  .cbox{
+    width: 25%;
+  }
+  .aname,
+  .pad,
+  .stat{
+    width: 33%;
+  }
 
   @media only screen and (max-width: 375px) {
     #navigation-container {

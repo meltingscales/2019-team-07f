@@ -19,10 +19,47 @@
   </div>
   <div class="left_panel">
     <nav class="sidenav">
-      <a herf="#">User accounts</a>
-      <a herf="#">Admin accounts</a>
+      <a herf="#user_acct">User accounts</a>
+      <a herf="#admin">Admin accounts</a>
     </nav>
   </div>
-
+  <div class="middle">
+    <table id="user_acct" class="user_acct">
+      <tr class="utable_title">
+        <th class="uname">User Name</th>
+        <th class="upad">User Password</th>
+        <th class="stat">Account status</th>
+        <th class="cbox">Modify</th>
+      </tr>
+    </table>
+    <table>
+      <tr class="user_info">
+        <td class="uname">User1</td>
+        <td class="upad">test1234</td>
+        <td class="stat">stander</td>
+        <td class="cbox"><input type="checkbox">&nbsp;</td>
+      </tr>
+    </table>
+    <table>
+      <tr class="user_info">
+        <td class="uname">User2</td>
+        <td class="upad">test5678</td>
+        <td class="stat">blocked</td>
+        <td class="cbox"><input type="checkbox">&nbsp;</td>
+      </tr>
+    </table>
+    <table id="admin" class="admin_acct">
+      <tr class="atable_title">
+        <th class="aname">Admin Name</th>
+        <th class="pad">Admin Password</th>
+        <th class="stat">Account status</th>
+      </tr>
+      <tr class="admin_info">
+        <td class="aname">Admin1</td>
+        <td class="pad">test1234</td>
+        <td class="stat">stander</td>
+      </tr>
+    </table>
+  </div>
 </body>
 </html>
