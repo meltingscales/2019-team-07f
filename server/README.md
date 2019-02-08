@@ -36,6 +36,8 @@ Manually:
 
       username: root
       password: password
+  
+  [Here's a guide](https://dev.mysql.com/doc/refman/8.0/en/resetting-permissions.html) on how to change passwords in MySQL. 
       
   Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
   Run those scripts. <!-- TODO Remove this manual step. I (-H) tried. -->
