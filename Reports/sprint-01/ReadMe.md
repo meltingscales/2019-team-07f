@@ -1,5 +1,12 @@
 # Report
 
+## Nihar Patel
+## Henry post
+## Divin Gregis Baniekona
+## Idris Fagbemi
+## Jimmy Tran
+## Yi-Ting Lin
+
 #### 1. Language and framework of your choice:
 a. Languages: Java, MySQL, bash, kotlin, python, HQL
 
