@@ -356,10 +356,6 @@ html {
   }
   #ticket2 .ticket_title{
     text-align: center;
-    background-color: #55ACEE;
-  }
-  #ticket3 .ticket_title{
-    text-align: center;
     background-color: #4CAF50;
   }
   .user_id,
