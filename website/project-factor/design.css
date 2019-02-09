@@ -1,10 +1,10 @@
-html { 
+html {
     background:#f1f1f1;
     font-family: 'Ubuntu', sans-serif;
      font: 1.3em sans-serif;
   }
-  
-  body { 
+
+  body {
     margin: 0;
     font-family: 'Ubuntu', sans-serif;
     color:black;
@@ -19,10 +19,14 @@ html {
     padding-bottom: 50px;
   }
   
+  /* * {
+    box-sizing: border-box;
+  } */
+
   /* div{
     margin-bottom: 1.3em;
   } */
-  
+
   #Top{
     text-align: right;
     font-size: 15px;
@@ -33,39 +37,39 @@ html {
   a{
     text-decoration: none;
   }
-  
+
   .Navigation {
     overflow: hidden;
     background-color: white;
     padding: 20px 10px;
     
   }
-  
+
   .Navigation a {
     float: left;
     color: black;
     text-align: center;
     padding: 12px;
-    font-size: 18px; 
+    font-size: 18px;
     line-height: 25px;
     border-radius: 4px;
   }
-  
+
   .Navigation a.logo {
     font-size: 25px;
     font-weight: bold;
   }
-  
+
   .Navigation a:hover {
     background-color: #ddd;
     color: black;
   }
-  
+
   .Navigation a.active {
     background-color: grey;
     color: white;
   }
-  
+
   nav {
     float: right;
   }
@@ -82,16 +86,16 @@ html {
     margin-right: auto;
     width: 50%;
   }
-  
+
   .index{
   padding-top: 0px;
   font-family: 'Ubuntu', sans-serif;
   }
-  
+
   /* h1 {
     font-size: 2em;
   }
-  
+
   h2 {
     padding-top: 1.5em;
     padding-bottom:.5em;
@@ -114,14 +118,14 @@ html {
   img, video{
       position: inherit;
   }
-  
+
   form {
     display: inline-grid;
     text-align: center;
     padding: 2%;
     border-radius: 1em;
   }
-  
+
   input {
     font: 1.3em sans-serif;
     border-radius: 5px;
@@ -130,12 +134,12 @@ html {
     padding-left: 2%;
     margin-top:2%;
   }
-  
+
   .button_group{
     margin: auto;
     width: 20%;
   }
-  
+
   .button {
     color:white;
     background-color: dodgerblue;
@@ -151,31 +155,31 @@ html {
     cursor: pointer;
     font-size:1.3em;
   }
-  
+
   .button:hover{
     background-color: #F3F4F4;
     color:dodgerblue;
   }
-  
-  .submit{ 
+
+  .submit{
     border: 2px solid dodgerblue;
     width: 85%;
     margin: auto;
     }
-  
-  .Navigation li a{ 
+
+  .Navigation li a{
     font-size: 1em;
     padding: 1px 1px;
   }
-  
+
   .title {
     text-align: center;
   }
-  
+
   .titleinfo{
     text-align: center;
   }
-  
+
   .about-container{
     width:70%;
     margin-left: auto;
@@ -184,7 +188,7 @@ html {
     line-height: 1.5em;
     border-radius: 1em;
   }
-  
+
   .list{
     margin-left: auto;
     margin-right: auto;
@@ -193,7 +197,7 @@ html {
     padding: 1.5em, 0em, 1.5em,0;
     border-radius: 1em;
   }
-  
+
   .about{
     max-width: 800px;
     margin:auto;
@@ -211,15 +215,15 @@ html {
   * {
     box-sizing: border-box;
   }
-  
+
   /* style the container */
   .container {
     position: relative;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px 0 30px 0;
-  } 
-  
+  }
+
   /* style inputs and link buttons */
   input,
   .btn {
@@ -234,39 +238,39 @@ html {
     line-height: 20px;
     text-decoration: none; /* remove underline from anchors */
   }
-  
+
   input:hover,
   .btn:hover {
     opacity: 1;
   }
-  
+
   /* add appropriate colors to fb, twitter and google buttons */
   .fb {
     background-color: #3B5998;
     color: white;
   }
-  
+
   .twitter {
     background-color: #55ACEE;
     color: white;
   }
-  
+
   .google {
     background-color: #dd4b39;
     color: white;
   }
-  
+
   /* style the submit button */
   input[type=submit] {
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
   }
-  
+
   input[type=submit]:hover {
     background-color: #45a049;
   }
-  
+
   /* Two-column layout */
   .col {
     float: left;
@@ -275,14 +279,14 @@ html {
     padding: 0 50px;
     margin-top: 6px;
   }
-  
+
   /* Clear floats after the columns */
   .row:after {
     content: "";
     display: table;
     clear: both;
   }
-  
+
   /* vertical line */
   .vl {
     position: absolute;
@@ -291,7 +295,7 @@ html {
     border: 2px solid #ddd;
     height: 175px;
   }
-  
+
   /* text inside the vertical line */
   .vl-innertext {
     position: absolute;
@@ -302,25 +306,83 @@ html {
     border-radius: 50%;
     padding: 8px 10px;
   }
-  
+
   /* hide some text on medium and large screens */
   .hide-md-lg {
     display: none;
   }
-  
+
   /* bottom container */
   .bottom-container {
     text-align: center;
     background-color: #666;
     border-radius: 0px 0px 4px 4px;
   }
-  
+
+  /* grid-container*/
+  .grid-container{
+    display: grid;
+    grid-template-areas:
+    'left middle middle middle middle middle';
+  }
+
+  /* Style the left column */
+  .left_panel {
+    grid-area: left;
+    background-color: #ddd;
+  }
+
+  /* Style the middle column */
+  .middle {
+    grid-area: middle;
+    margin-left: 200px;
+    padding-left: 20px;
+  }
+
+  /* Style the side navigation */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  background-color: #666;
+  overflow-x: hidden;
+}
+
+/* Side navigation links */
+.sidenav a {
+  color: white;
+  padding: 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.field {
+	margin-left: 225px;
+	margin-top: 10px;
+}
+
+.view {
+	margin-left: 225px;
+}
+
   @media only screen and (max-width: 375px) {
     #navigation-container {
     width: 375px;
     }
+    .grid-container{
+      display: grid;
+      grid-template-areas:
+      'left middle middle middle middle middle';
+    }
   }
-  
+
   @media screen and (max-width: 500px) {
     .Navigation a {
       float: none;
@@ -330,8 +392,8 @@ html {
     .Navigation-right {
       float: none;
     }
-  } 
-  
+  }
+
   @media screen and (max-width: 650px) {
     .col {
       width: 100%;

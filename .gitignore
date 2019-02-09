@@ -1,5 +1,6 @@
 # JetBrains settings
 .idea/
+*.iml
 
 # Vagrant crust
 .vagrant/
@@ -15,3 +16,6 @@ target/
 out/
 
 .vs/
+
+# OSX Metadata
+.DS_Store

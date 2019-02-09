@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Project Factor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../design.css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+
+<body>
+  	<div class="Navigation">
+  		<img src="projectfactor.jpg" width="75" height="50" alt="logo">
+    	<nav>
+    		<a href="user.html">Home</a>
+     		<a href="profile.html">Profile</a>
+      		<a href="support.html">Support</a>
+      		<a href="guest.html">Log Out</a>
+    	</nav>
+  	</div>
+  	<div class="left_panel">
+    	<nav class="sidenav">
+      		<a herf="pending.html">Pending</a>
+      		<a herf="completed.html">Completed</a>
+    	</nav>
+  	</div>
+  	<div class="field">
+		<input type="file" name="upload"/>&nbsp;
+		<button type="button" onclick="Preview();">Convert</button>
+		<button type="button" onclick="Preview();"disabled>Preview</button>
+		<button type="button" disabled>Download</button>
+  	</div>
+  	<div class="view">
+	    <iframe id="viewer" frameborder="0" scrolling="no" width="400" height="600"></iframe>
+	</div>
+  	<script type="text/javascript">
+        function Preview() {
+            file = document.getElementById("upload").files[0];
+            file_url = URL.createObjectURL(file);
+            $('#viewer').attr('src', file_url);
+        }
+    </script>
+</body>
+</html>
