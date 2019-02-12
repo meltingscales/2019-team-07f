@@ -9,13 +9,13 @@ It currently will serve a fun random number generator to the following URL:
 
 # How do I build and run this?
 
-Using Vagrant:
+## Using Vagrant:
 
 `vagrant up` at the root directory (`/`) of this repository.
 
-Manually:
+## Manually:
 
-## Universal requirements
+### Universal requirements
 
 - Install Java 8 or above.
 
@@ -39,10 +39,12 @@ Manually:
   
   [Here's a guide](https://dev.mysql.com/doc/refman/8.0/en/resetting-permissions.html) on how to change passwords in MySQL. 
       
-  Then, there will be setup scripts under `/server/src/main/resources/*`.sql`.
+  Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
   Run `setup.sql`. <!-- TODO Remove this manual step. I (-H) tried. -->
+  
+  [Here's a guide](https://dev.mysql.com/doc/refman/8.0/en/mysql-batch-commands.html) on how to run SQL files using the MySQL console.
     
-## The easiest way (IntelliJ IDEA)
+### The easiest way (IntelliJ IDEA)
 
 - Install IntelliJ IDEA.
 
@@ -79,14 +81,14 @@ At this point, you won't be able to run the project. You need to add a build con
   `pom.xml` and framework file structures it detects, so it's super useful in
   that regard.
   
-## The easy way (Eclipse)
+### The easy way (Eclipse)
 
 Note: Eclipse may be hard to setup. I know it was for me, as other steps might
 be omitted or platform/configuration-dependent.
 
 Recently, Eclipse has stopped working for me, so attempt this at your own risk.
 
-### Installation
+#### Installation
 
 - Install Eclipse.
 
@@ -125,7 +127,7 @@ Alternatively, you can right-click on `index.jsp` in the `Project Explorer` view
 and click on `Run as... > Run on Server` to see a preview of `index.jsp` on the
 server.
 
-## The *Cool and Totally Not Hard Way*™ (Maven and Tomcat via CLI)
+### The *Cool and Totally Not Hard Way*™ (Maven and Tomcat via CLI)
 
 Sourced from [here](https://www.baeldung.com/tomcat-deploy-war).
 
