@@ -84,6 +84,8 @@ At this point, you won't be able to run the project. You need to add a build con
 Note: Eclipse may be hard to setup. I know it was for me, as other steps might
 be omitted or platform/configuration-dependent.
 
+Recently, Eclipse has stopped working for me, so attempt this at your own risk.
+
 ### Installation
 
 - Install Eclipse.
@@ -131,9 +133,11 @@ Sourced from [here](https://www.baeldung.com/tomcat-deploy-war).
   - Add the following lines to allow remote access to the server to set up,
     configure, and deploy WAR (Web Archive) files:
 
-        <role rolename="manager-gui"/>
-        <role rolename="manager-script"/>
-        <user username="admin" password="password" roles="manager-gui, manager-script"/>
+		<role rolename="manager-gui"/>
+		<role rolename="manager-script"/>
+		<role rolename="admin-gui"/>
+		<role rolename="admin-script"/>
+		<user username="admin" password="password" roles="manager-gui, manager-script, admin-gui, admin-script"/>
         
     Note that these are NOT secure settings.
     
