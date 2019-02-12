@@ -91,13 +91,6 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-  
-  # Set up general useful tools.
-  config.vm.provision :shell, path: "vagrant-config/scripts/setup-general.sh"
-
-  
-  # Set up Java.
-  config.vm.provision :shell, path: "vagrant-config/scripts/setup-java.sh"
 
   # Set up Python.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
