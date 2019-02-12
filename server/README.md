@@ -23,8 +23,8 @@ Manually:
     
     For reference, mine is `C:\Program Files\Java\jdk1.8.0_201`
 
-
 - Install Apache Tomcat (no EXE/BIN, just an archive).
+
   - Set the `CATALINA_HOME` environment variable to the folder you installed
     Apache Tomcat to.
   
@@ -39,8 +39,8 @@ Manually:
   
   [Here's a guide](https://dev.mysql.com/doc/refman/8.0/en/resetting-permissions.html) on how to change passwords in MySQL. 
       
-  Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
-  Run those scripts. <!-- TODO Remove this manual step. I (-H) tried. -->
+  Then, there will be setup scripts under `/server/src/main/resources/*`.sql`.
+  Run `setup.sql`. <!-- TODO Remove this manual step. I (-H) tried. -->
     
 ## The easiest way (IntelliJ IDEA)
 
@@ -94,6 +94,10 @@ be omitted or platform/configuration-dependent.
   this folder, which contains important metadata that will reduce the amount of
   configuration you will need to do.
 
+- Install [the Kotlin Plugin from here](https://kotlinlang.org/docs/tutorials/getting-started-eclipse.html).
+  
+- Right-click your project and go to `Configure Kotlin > Add Kotlin nature...`.
+  
 - Go to `Window > Show View > Servers`.
 
 - Click on `Click this link to add a new server...`
