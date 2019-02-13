@@ -1,10 +1,6 @@
+#!/usr/bin/env bash
 
-# Empty password.
-# This also prevents any prompts from coming up.
-echo "mysql-server-5.7 mysql-server/root_password password password"        | sudo debconf-set-selections
-echo "mysql-server-5.7 mysql-server/root_password_again password password"  | sudo debconf-set-selections
-
-apt-get install -y mysql-server-5.7 mysql-client
+echo "Setting up MySQL."
 
 service mysql start
 
