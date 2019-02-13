@@ -29,7 +29,7 @@
             "<enter><wait>"
             ],
             "boot_wait": "10s",
-            "disk_size": 81920,
+            "disk_size": 10000,
             "guest_os_type": "Ubuntu_64",
             "headless": false,
             "http_directory": "http",
@@ -71,11 +71,6 @@
         },
         {
             "type": "shell",
-            "script": "scripts/cleanup.sh",
-            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
-        },
-        {
-            "type": "shell",
             "script": "scripts/install-general.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
         },
@@ -102,6 +97,11 @@
         {
             "type": "shell",
             "script": "scripts/install-tomcat.sh",
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/cleanup.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
         }
 	],
