@@ -5,11 +5,17 @@ import os
 This file is just a utility to calculate hashes of ISO files.
 """
 
+# Folder to get hashes of files in.
 isopath = "./iso/"
-file_ext = ".iso"
-hash_fn = hashlib.sha256
 
-print("Calculates all the {} hashes of '{}*{}'.".format(hash_fn.__name__, isopath, file_ext))
+# File extensions to hash.
+file_ext = ".iso"
+
+# List of hash functions.
+hash_fns = [hashlib.md5, hashlib.sha1, hashlib.sha256, hashlib.sha512]
+
+
+print("Calculates all the [{}] hashes of '{}*{}'.".format(",".join([fn.__name__ for fn in hash_fns]), isopath, file_ext))
 
 def hash_any(fname, hash_algorithm=hashlib.md5):
     """
@@ -33,13 +39,16 @@ if __name__ == "__main__":
     print(isopath)
     
     for file in os.listdir(isopath):
-
+    
         filename = os.fsdecode(file)
         filepath = os.path.join(isopath, filename)
-
+        
+        # If it ends with what we want it to,
         if filename.endswith(file_ext):
             print(filename+":")
-
-            print(hash_any(filepath, hash_algorithm=hashlib.sha256))
-
+            
+            # For all hash functions,
+            for hash_fn in hash_fns:
+                print("{type:20s} = {digest}".format(digest=hash_any(filepath, hash_algorithm=hash_fn), type=hash_fn.__name__))
+            
             print()
