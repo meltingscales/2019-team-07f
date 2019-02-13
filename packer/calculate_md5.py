@@ -1,11 +1,15 @@
 import hashlib
 import os
 
+"""
+This file is just a utility to calculate hashes of ISO files.
+"""
+
 isopath = "./iso/"
 file_ext = ".iso"
 hash_fn = hashlib.sha256
 
-print("Calculate all the {} hashes of '{}{}'.".format(hash_fn.__name__, isopath, file_ext))
+print("Calculates all the {} hashes of '{}*{}'.".format(hash_fn.__name__, isopath, file_ext))
 
 def hash_any(fname, hash_algorithm=hashlib.md5):
     """
