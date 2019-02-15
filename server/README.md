@@ -9,13 +9,13 @@ It currently will serve a fun random number generator to the following URL:
 
 # How do I build and run this?
 
-Using Vagrant:
+## Using Vagrant:
 
 `vagrant up` at the root directory (`/`) of this repository.
 
-Manually:
+## Manually:
 
-## Universal requirements
+### Universal requirements
 
 - Install Java 8 or above.
 
@@ -23,8 +23,8 @@ Manually:
     
     For reference, mine is `C:\Program Files\Java\jdk1.8.0_201`
 
-
 - Install Apache Tomcat (no EXE/BIN, just an archive).
+
   - Set the `CATALINA_HOME` environment variable to the folder you installed
     Apache Tomcat to.
   
@@ -40,9 +40,11 @@ Manually:
   [Here's a guide](https://dev.mysql.com/doc/refman/8.0/en/resetting-permissions.html) on how to change passwords in MySQL. 
       
   Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
-  Run those scripts. <!-- TODO Remove this manual step. I (-H) tried. -->
+  Run `setup.sql`. <!-- TODO Remove this manual step. I (-H) tried. -->
+  
+  [Here's a guide](https://dev.mysql.com/doc/refman/8.0/en/mysql-batch-commands.html) on how to run SQL files using the MySQL console.
     
-## The easiest way (IntelliJ IDEA)
+### The easiest way (IntelliJ IDEA)
 
 - Install IntelliJ IDEA.
 
@@ -79,12 +81,14 @@ At this point, you won't be able to run the project. You need to add a build con
   `pom.xml` and framework file structures it detects, so it's super useful in
   that regard.
   
-## The easy way (Eclipse)
+### The easy way (Eclipse)
 
 Note: Eclipse may be hard to setup. I know it was for me, as other steps might
 be omitted or platform/configuration-dependent.
 
-### Installation
+Recently, Eclipse has stopped working for me, so attempt this at your own risk.
+
+#### Installation
 
 - Install Eclipse.
 
@@ -94,6 +98,10 @@ be omitted or platform/configuration-dependent.
   this folder, which contains important metadata that will reduce the amount of
   configuration you will need to do.
 
+- Install [the Kotlin Plugin from here](https://kotlinlang.org/docs/tutorials/getting-started-eclipse.html).
+  
+- Right-click your project and go to `Configure Kotlin > Add Kotlin nature...`.
+  
 - Go to `Window > Show View > Servers`.
 
 - Click on `Click this link to add a new server...`
@@ -119,7 +127,7 @@ Alternatively, you can right-click on `index.jsp` in the `Project Explorer` view
 and click on `Run as... > Run on Server` to see a preview of `index.jsp` on the
 server.
 
-## The *Cool and Totally Not Hard Way*™ (Maven and Tomcat via CLI)
+### The *Cool and Totally Not Hard Way*™ (Maven and Tomcat via CLI)
 
 Sourced from [here](https://www.baeldung.com/tomcat-deploy-war).
 
@@ -127,9 +135,11 @@ Sourced from [here](https://www.baeldung.com/tomcat-deploy-war).
   - Add the following lines to allow remote access to the server to set up,
     configure, and deploy WAR (Web Archive) files:
 
-        <role rolename="manager-gui"/>
-        <role rolename="manager-script"/>
-        <user username="admin" password="password" roles="manager-gui, manager-script"/>
+		<role rolename="manager-gui"/>
+		<role rolename="manager-script"/>
+		<role rolename="admin-gui"/>
+		<role rolename="admin-script"/>
+		<user username="admin" password="password" roles="manager-gui, manager-script, admin-gui, admin-script"/>
         
     Note that these are NOT secure settings.
     

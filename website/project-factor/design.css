@@ -10,6 +10,15 @@ html {
     color:black;
     /* text-align: center; */
   }
+  
+  .logo{
+    padding-right: 850px;
+    float: left;
+    display: inline;
+    position: absolute;
+    padding-bottom: 50px;
+  }
+  
   /* * {
     box-sizing: border-box;
   } */
@@ -33,6 +42,7 @@ html {
     overflow: hidden;
     background-color: white;
     padding: 20px 10px;
+    
   }
 
   .Navigation a {
@@ -94,6 +104,10 @@ html {
 
   h3{
       text-align: center;
+  }
+
+  hr {
+    border: 1px solid rgb(5, 2, 2);
   }
 
   .Website_details li{
@@ -189,6 +203,14 @@ html {
     margin:auto;
     margin-top:-.5em;
   }
+
+  iframe {
+    display: block;
+    margin: 0 auto;
+  }
+
+  #copyright{
+    text-align: center;
 
   * {
     box-sizing: border-box;
@@ -313,33 +335,95 @@ html {
   /* Style the middle column */
   .middle {
     grid-area: middle;
-    margin-left: 200px;
+    margin-left: 255px;
+    margin-top: 50px;
     padding-left: 20px;
   }
 
   /* Style the side navigation */
-.sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  background-color: #666;
-  overflow-x: hidden;
-}
+  .sidenav {
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    z-index: 1;
+    background-color: #666;
+    overflow-x: hidden;
+  }
 
-/* Side navigation links */
-.sidenav a {
-  color: white;
-  padding: 12px;
-  text-decoration: none;
-  display: block;
-}
+  /* Side navigation links */
+  .sidenav a {
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+  }
 
-/* Change color on hover */
-.sidenav a:hover {
-  background-color: #ddd;
-  color: black;
-}
+  /* Change color on hover */
+  .sidenav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  /* Table style*/
+  table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 90%;
+    padding: 15px;
+    margin-bottom: 15px;;
+  }
+  #ticket1 .ticket_title{
+    text-align:center;
+    background-color: #dd4b39;
+  }
+  #ticket2 .ticket_title{
+    text-align: center;
+    background-color: #4CAF50;
+  }
+  .user_id,
+  .issue_code{
+    width: 50%;
+    text-align: left;
+    background-color: #fff;
+  }
+  .issue_title,
+  .issue_statement{
+    text-align: left;
+    background-color: #fff;
+  }
+  .utable_title{
+    text-align: center;
+    background-color: #55ACEE;
+    margin-bottom: 0px;
+  }
+  .atable_title{
+    text-align: center;
+    background-color: #dd4b39;
+  }
+  .user_info,
+  .admin_info{
+    text-align: left;
+    background-color: #fff;
+  }
+  .user_info td:hover{
+    text-align: left;
+    background-color: #ddd;
+  }
+  .admin_info td:hover{
+    text-align: left;
+    background-color: #ddd;
+  }
+  .uname,
+  .upad,
+  .stat,
+  .cbox{
+    width: 25%;
+  }
+  .aname,
+  .pad,
+  .stat{
+    width: 33%;
+  }
 
 .field {
 	margin-left: 225px;

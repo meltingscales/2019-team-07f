@@ -3,10 +3,21 @@ Private team repo for ITMT 430
 
 # Building
 
-## The easy way
-[Install vagrant.](https://www.vagrantup.com/intro/getting-started/install.html)
+## Requirements
 
-Just use `vagrant up` in this directory!
+[Install Vagrant.](https://www.vagrantup.com/intro/getting-started/install.html)
+
+[Install Packer.](https://packer.io/)
+
+## The easy way
+
+### Build the Packer image 
+
+- Go into `/packer/` and follow the build directions.
+
+### Run the server
+
+- Run `vagrant up` in this directory!
 
 ## The manual way
 There are manual build instructions for the webserver inside `/server`.
