@@ -11,12 +11,12 @@ html {
     /* text-align: center; */
   }
   
+  .center {
+	  text-align: center;
+  }
+  
   .logo{
-    padding-right: 850px;
-    float: left;
-    display: inline;
     position: absolute;
-    padding-bottom: 50px;
   }
   
   /* * {
@@ -120,19 +120,18 @@ html {
   }
 
   form {
-    display: inline-grid;
     text-align: center;
-    padding: 2%;
     border-radius: 1em;
   }
 
   input {
-    font: 1.3em sans-serif;
-    border-radius: 5px;
-    border: 1px solid #999;
+	padding: 0;
+	margin: 0;
+	border: 0;
     width: 100%;
-    padding-left: 2%;
-    margin-top:2%;
+	height: 2em;
+	font-size: 1em;
+    margin-top: 1em;
   }
 
   .button_group{
@@ -143,19 +142,19 @@ html {
   .button {
     color:white;
     background-color: dodgerblue;
-    border-radius: 10px;
+    border-radius: 0.25em;
     border: none;
-    padding: 16px 32px;
+    padding: 0.5em 0;
     text-align: center;
     text-decoration: none;
     display: grid;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 1em;
+    margin: 0.25em;
     transition-duration: 0.4s;
     cursor: pointer;
     font-size:1.3em;
   }
-
+  
   .button:hover{
     background-color: #F3F4F4;
     color:dodgerblue;
@@ -194,7 +193,7 @@ html {
     margin-right: auto;
     width: 50%;
     line-height: 2em;
-    padding: 1.5em, 0em, 1.5em,0;
+    padding: 1.5em 0em 1.5em 0em;
     border-radius: 1em;
   }
 
@@ -209,8 +208,9 @@ html {
     margin: 0 auto;
   }
 
-  #copyright{
+  #copyright {
     text-align: center;
+  }
 
   * {
     box-sizing: border-box;
@@ -276,6 +276,7 @@ html {
     float: left;
     width: 50%;
     margin: auto;
+	text-align: center;
     padding: 0 50px;
     margin-top: 6px;
   }
