@@ -6,6 +6,6 @@ other prerequisites for our project like Apache Tomcat, etc.
 
 # How do I build the packer image?
 
-`packer build ubuntu-vagrant.json`.
+`packer build -force ubuntu-vagrant.json`.
 
 That generates a file at `/packer/output/ubuntu-vagrant.box`.
