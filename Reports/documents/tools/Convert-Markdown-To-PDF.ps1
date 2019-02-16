@@ -10,5 +10,5 @@ ForEach ($File In $Files) {
     Write-Host($File.ToString() + " -> " + $PDFFilePath)
 
     # TODO This path is hard-coded as well. Fix that.
-    Invoke-Expression("pandoc --toc '$File' --pdf-engine=xelatex -o '../$PDFFilePath'")
+    Invoke-Expression("pandoc --toc --variable urlcolor=cyan '$File' --pdf-engine=xelatex -o '../$PDFFilePath'")
 }
