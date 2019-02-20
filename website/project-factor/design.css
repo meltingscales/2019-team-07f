@@ -19,13 +19,9 @@ html {
     position: absolute;
   }
   
-  /* * {
-    box-sizing: border-box;
-  } */
-
-  /* div{
-    margin-bottom: 1.3em;
-  } */
+  .form-gap {
+    padding-top: 70px;
+}
 
   #Top{
     text-align: right;

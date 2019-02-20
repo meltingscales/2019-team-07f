@@ -18,36 +18,15 @@
         <nav>
             <a href="/index.html">Home</a>
             <a href="/login.html">Login</a>
-            <a href="/user/user.html">User</a>
+            <!-- <a href="/user/user.html">User</a>
             <a href="/user/guest.html">Guest</a>
             <a href="/admin/admin.html">Admin</a>
-            <a href="/admin/account_modi.html">Account Modification</a>
+            <a href="/admin/account_modi.html">Account Modification</a> -->
             <a href="/index.html#Website_details">Website Features</a>
             <a href="/index.html#developers">Developers</a>
             <a href="/index.html#contact">Contact</a>
         </nav>
     </div>
-    <div class="left_panel">
-        <nav class="sidenav">
-            <a href="pending.html">Pending</a>
-            <a href="completed.html">Completed</a>
-        </nav>
-    </div>
-    <div class="field">
-        <input type="file" name="upload"/>&nbsp;
-        <button type="button" onclick="Preview();">Convert</button>
-        <button type="button" onclick="Preview();"disabled>Preview</button>
-        <button type="button" disabled>Download</button>
-    </div>
-    <div>
-        <iframe id="viewer" frameborder="0" scrolling="no" width="400" height="600"></iframe>
-    </div>
-    <script type="text/javascript">
-        function Preview() {
-            file = document.getElementById("upload").files[0];
-            file_url = URL.createObjectURL(file);
-            $('#viewer').attr('src', file_url);
-        }
-    </script>
+
 </body>
 </html>
