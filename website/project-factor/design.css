@@ -223,6 +223,7 @@ html {
   /* style inputs and link buttons */
   input,
   .btn {
+    text-align: center;
     width: 100%;
     padding: 12px;
     border: none;
@@ -266,6 +267,47 @@ html {
   input[type=submit]:hover {
     background-color: #45a049;
   }
+
+  input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+    display: grid;
+  }
+  
+  
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+
+  /* Extra styles for the cancel and sign-up button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+  border-radius: 50px;
+  font-size: large;
+}
+
+.signupbtn {
+  padding: 14px 20px;
+  background-color: #118cc5;
+  border-radius: 50px;
+  font-size: large;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 
   /* Two-column layout */
   .col {
@@ -466,5 +508,11 @@ html {
     .hide-md-lg {
       display: block;
       text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+      width: 100%;
     }
   }
