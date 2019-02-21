@@ -43,11 +43,11 @@
           <label for="email"><b>Email</b></label>
           <input type="text" placeholder="Enter Email" name="email" required>
     
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
+          <label for="password"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" required>
     
-          <label for="psw-repeat"><b>Repeat Password</b></label>
-          <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+          <label for="confirm_password"><b>Repeat Password</b></label>
+          <input type="password" placeholder="Repeat Password" name="confirm_password" required>
           
           <label>
             <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
@@ -63,7 +63,7 @@
       </form>
     </div>
     
-    <script>
+<script>
     // Get the modal
     var modal = document.getElementById('id01');
     
@@ -73,7 +73,20 @@
         modal.style.display = "none";
       }
     }
-    </script>
+    var password = document.getElementsByName("password"), 
+    confirm_password = document.getElementByName("confirm_password");
+
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
     
 </body>
 
