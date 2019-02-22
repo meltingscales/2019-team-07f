@@ -39,6 +39,12 @@ It currently will serve a fun random number generator to the following URL:
   
   [Here's a guide](https://dev.mysql.com/doc/refman/8.0/en/resetting-permissions.html) on how to change passwords in MySQL. 
       
+   A command like 
+   
+        ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+        
+   Would work.
+      
   Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
   Run `setup.sql`. <!-- TODO Remove this manual step. I (-H) tried. -->
   
