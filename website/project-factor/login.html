@@ -5,13 +5,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
+
+    <meta name="google-signin-client_id" content="1084248431791-ljree13ckr43i5jm2qfmonogn83pfv6k.apps.googleusercontent.com">
+
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
     <link rel="stylesheet" media="screen" href="/design.css" />
-    <script type="text/javascript" src="/fb_script.js"></script>
+
+    <script type="text/javascript" src="/js/fb_script.js"></script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <title>Project Factor</title>
 </head>
 
 <body>
+
+<!--
+    Facebook Javascript library-loading tags.
+    Taken from https://developers.facebook.com/docs/facebook-login/web/login-button/
+-->
+<div id="fb-root"></div>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+
+
     <div class="Navigation">
         <div class="logo">
             <img src="/images/logo.jpg" height="70px" width="60px" alt="logo">
@@ -33,8 +48,12 @@
             <div class="row">
                 <h2>Log in</h2>
                 <div class="col">
-                    <a href="/facebook.html" target="_blank" class="fb button">Log in with Facebook</a>
-                    <a href="/google.html" target="_blank" class="google button">Log in with Google+</a>
+                    <!-- This is a Facebook login button -->
+                    <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+
+                    <!-- This is a Google login button script and button. -->
+                    <script src="/js/googleButton.js"></script>
+                    <div id="google-signin"></div>
                 </div>
 
                 <div class="col">

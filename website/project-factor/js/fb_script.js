@@ -1,4 +1,3 @@
-<script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -37,7 +36,7 @@
     });
 
     FB.Event.subscribe('auth.login', function () {
-          window.location = "/user/user.html";
+          window.location = "../user/user.html";
       });
 
     // Now that we've initialized the JavaScript SDK, we call 
@@ -77,4 +76,3 @@
         'Thanks for logging in, ' + response.name + '!';
     });
   }
-</script>
