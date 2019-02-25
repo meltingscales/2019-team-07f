@@ -214,7 +214,8 @@ Then, run
 
     git clone https://github.com/JoeSchmoe/2019-team-07f/
 
-If all goes well, you should have 
+If all goes well, you should have a folder called `2019-team-07f` in the same
+directory as the one you executed the command in.
 
 ## Adding the team repository as a remote
 
