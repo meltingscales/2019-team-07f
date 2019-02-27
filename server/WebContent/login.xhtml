@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://www.w3.org/2001/XMLSchema-instance"
+      p:schemaLocation="http://primefaces.org/ui ">
+
+<h:head>
+    <title>Login</title>
+    <f:metadata>
+        <p:viewAction action="#{userManager.isLoggedInForwardHome()}" />
+    </f:metadata>
+</h:head>
+
+<h:body>
+
+    <h:form id="login-form">
+        <h:messages id="messages" showDetail="false" />
+
+        <p:panel id="panel" header="Login">
+            <h:panelGrid columns="3" cellpadding="5">
+                <h:outputLabel for="user-name" value="User Name:" />
+                <h:inputText id="user-name" value="#{userManager.userId}"
+                             required="true" label="User name">
+                </h:inputText>
+                <h:message for="user-name" display="icon" />
+
+                <h:outputLabel for="password" value="Password:" />
+                <h:inputSecret id="password" value="#{userManager.userPassword}"
+                            required="true" label="Password">
+                </h:inputSecret>
+                <h:message for="password" display="icon" />
+            </h:panelGrid>
+
+            <h:commandButton id="login" value="Login"
+                             update="panel messages" action="#{userManager.login()}" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
