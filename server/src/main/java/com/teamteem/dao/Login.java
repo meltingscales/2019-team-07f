@@ -19,6 +19,8 @@ public class Login implements Serializable {
 
   private User currentUser;
 
+  //private SessionFactory sessionFactory;
+
   public String login() {
     currentUser = validate(username, password);
 
@@ -36,11 +38,23 @@ public class Login implements Serializable {
     return "/login.xhtml?faces-redirect=true";
   }
 
+  // check if current user is logged in
   public boolean isLoggedIn() {
     return currentUser != null;
   }
 
-  private User validate(String username, String password) {
+  /*public boolean validate(String username, String password) {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM Person WHERE username = ? AND password = ?").setParameter(0, person.getUsername(), person.getPassword());
+
+    if (query.getResultList().size() > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }*/
+
+   private User validate(String username, String password) {
     User result = null;
 
     if (username.equals("admin") && password.equals("admin")) {
