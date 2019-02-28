@@ -4,43 +4,25 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-  private static final long serialVersionUID = -1389546558353914770L;
+  private static final long serialVersionUID = -3698877761649437462L;
 
-  private String userId;
-  private String firstName;
-  private String lastName;
+  private String username;
+  private String fullName;
 
-  public User(String userId, String firstName, String lastName) {
-    this.userId = userId;
-    this.firstName = firstName;
-    this.lastName = lastName;
+  public User(String username, String fullName) {
+    this.username = username;
+    this.fullName = fullName;
   }
 
-  public String getUserId() {
-    return userId;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserId(String userId) {
-    this.userId = userId;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getName() {
-    return firstName + " " + lastName;
+    return fullName;
   }
 }

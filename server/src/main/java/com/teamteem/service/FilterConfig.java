@@ -8,11 +8,10 @@ import org.springframework.context.annotation.Configuration;
 public class FilterConfig {
 
   @Bean
-  public FilterRegistrationBean loginFilter() {
-    FilterRegistrationBean registration =
-        new FilterRegistrationBean();
-    registration.setFilter(new LoginFilter());
-    registration.addUrlPatterns("/secured/*");
-    return registration;
+  public FilterRegistrationBean Filter() {
+    FilterRegistrationBean filter = new FilterRegistrationBean();
+    filter.setFilter(new AuthFilter());
+    filter.addUrlPatterns("/logged_in/*");
+    return filter;
   }
 }

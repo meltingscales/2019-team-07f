@@ -4,38 +4,31 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://www.w3.org/2001/XMLSchema-instance"
-      p:schemaLocation="http://primefaces.org/ui ">
+      p:schemaLocation="http://primefaces.org/ui">
 
 <h:head>
     <title>Login</title>
     <f:metadata>
-        <p:viewAction action="#{userManager.isLoggedInForwardHome()}" />
+        <p:viewAction action="#{login.login()}" />
     </f:metadata>
 </h:head>
 
+    <ul>
+        <li><a href="#{request.contextPath}/index.xhtml">Home</a></li>
+        <li><a href="#{request.contextPath}/person.xhtml">Person Hibernate/Spring JSF Demo</a></li>
+        <li><a href="#{request.contextPath}/login.xhtml">Login</a></li>
+    </ul>
+
 <h:body>
+    <h:form>
+        <h:outputLabel value="Username: " />
+        <h:inputText value="#{login.username}"></h:inputText>
 
-    <h:form id="login-form">
-        <h:messages id="messages" showDetail="false" />
+        <h:outputLabel value="Password: " />
+        <h:inputSecret value="#{login.password}"></h:inputSecret>
 
-        <p:panel id="panel" header="Login">
-            <h:panelGrid columns="3" cellpadding="5">
-                <h:outputLabel for="user-name" value="User Name:" />
-                <h:inputText id="user-name" value="#{userManager.userId}"
-                             required="true" label="User name">
-                </h:inputText>
-                <h:message for="user-name" display="icon" />
-
-                <h:outputLabel for="password" value="Password:" />
-                <h:inputSecret id="password" value="#{userManager.userPassword}"
-                            required="true" label="Password">
-                </h:inputSecret>
-                <h:message for="password" display="icon" />
-            </h:panelGrid>
-
-            <h:commandButton id="login" value="Login"
-                             update="panel messages" action="#{userManager.login()}" />
-        </p:panel>
+        <h:commandButton value="Login" action="#{login.login()}" />
     </h:form>
 </h:body>
+
 </html>

@@ -7,21 +7,13 @@
       p:schemaLocation="http://primefaces.org/ui ">
 
 <h:head>
-    <title>Logout</title>
+    <title>Home</title>
 </h:head>
 
 <h:body>
-
     <h:form>
-        <p:panel header="Logout" rendered="#{!userManager.isLoggedIn()}">
-            <p>You are logged out.</p>
-        </p:panel>
-
-        <p:panel header="Logout" rendered="#{userManager.isLoggedIn()}">
-            <p>You are still logged in, click below button to log out!</p>
-            <h:commandButton value="Logout" action="#{userManager.logout()}"/>
-        </p:panel>
+        <p><h:outputText value="Welcome, #{login.currentUser.getName()}!"/></p>
+        <h:commandButton value="Logout" action="#{login.logout()}"/>
     </h:form>
-
 </h:body>
 </html>
