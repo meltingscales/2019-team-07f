@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Project Factor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no"/>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" media="screen" href="/design.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="Navigation">
+        <div class="logo">
+            <img src="/images/logo.jpg" height="70px" width="60px" alt="logo">
+        </div>
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/login.html">Login</a>
+            <!-- <a href="/user/user.html">User</a>
+            <a href="/user/guest.html">Guest</a> -->
+            <a href="/admin/account_modi.html">Account Modification</a>
+            <a herf="/aboutus.html">About us</a>
+        </nav>
+    </div>
+  	<div class="left_panel">
+    	<nav class="sidenav">
+          <a href="">History</a>
+      		<a href="pending.html">Pending</a>
+      		<a href="completed.html">Completed</a>
+    	</nav>
+  	</div>
+  	<div class="field">
+		<input type="file" name="upload"/>&nbsp;
+		<button type="button" onclick="Preview();">Convert</button>
+		<button type="button" onclick="Preview();"disabled>Preview</button>
+		<button type="button" disabled>Download</button>
+  	</div>
+  	<div class="view">
+	    <iframe id="viewer" frameborder="0" scrolling="no" width="400" height="600"></iframe>
+	</div>
+  	<!--script type="text/javascript">
+        function Preview() {
+            file = document.getElementById("upload").files[0];
+            file_url = URL.createObjectURL(file);
+            $('#viewer').attr('src', file_url);
+        }
+    </script-->
+</body>
+</html>
