@@ -31,7 +31,7 @@ Data is currently stored in plaintext in the MySQL database.
 Data encryption at rest is planned. (Right now we don't have it)
 
 #### 5. Database makes use of master/slave replication:
-Testing on this line... bc there is a question mark shown on the Giuhub page.
+A single schema, there is currently no caching layer, and we use a single MySQL database.
 
 #### 6. Use of Responsive design:
 Using CSS to build multi platform of different scale monitor screens for clients.
