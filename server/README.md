@@ -38,6 +38,14 @@ It currently will serve a fun random number generator to the following URL:
       password: password
   
   [Here's a guide](https://dev.mysql.com/doc/refman/8.0/en/resetting-permissions.html) on how to change passwords in MySQL. 
+  
+  If you encounter issues authenticating, specifically for MySQL Server 8.* or get this error:
+  
+        Unable to load authentication plugin 'caching_sha2_password'
+
+  Then executing this command might help.       
+  
+        ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
       
   Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
   Run `setup.sql`. <!-- TODO Remove this manual step. I (-H) tried. -->
