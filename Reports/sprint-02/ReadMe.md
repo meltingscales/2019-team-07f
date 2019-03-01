@@ -7,7 +7,7 @@
 ### UI/UX: Nihar Patel and Idris Fagbemi
 
 #### 1. Language and framework of your choice:
-Java and Kotlin as our languages for developing the web server logic in
+Java and Kotlin as our languages for developing the web server logic
 Java Server Faces (JSF) for presenting our web application logic
 Spring Boot as an ‘inversion of control’ framework to simplify configuration
 Hibernate as an ORM engine to simplify CRUD operations. We use JDBC as the connection driver for Hibernate
@@ -17,7 +17,7 @@ The OS is Ubuntu server 16.04.
 We use Apache Tomcat, Java 9, and MySQL Server.
 Currently, there is no secret management.
 However, all passwords and other information is easy-to-locate, standardized, and will be easy to change.
-There is also no application metrics capture yet
+There is also no application metrics capture yet.
 
 #### 3. Use of Data Store/Storage:
 Using MySQL to store user information, names, emails, etc.
@@ -31,7 +31,7 @@ Data is currently stored in plaintext in the MySQL database.
 Data encryption at rest is planned. (Right now we don't have it)
 
 #### 5. Database makes use of master/slave replication:
-A single schema,there is currently no caching layer, and we use a single database.
+A single schema, there is currently no caching layer, and we use a single MySQL database.
 
 #### 6. Use of Responsive design:
 Using CSS to build multi platform of different scale monitor screens for clients.
@@ -47,7 +47,7 @@ We do not seed the database currently
 
 #### 8. Use of user authentication:
 We do not currently use HTTPS.
-There is a session in the form of cookies, but no logic to differentiate users as sessions yet. but is currently being configured by pairing UserID with SessionID.
+There is a session in the form of cookies, but no logic to differentiate users as sessions yet, but is currently being configured by pairing UserID with SessionID.
 Hibernate query is used to validate username and password from MySQL Database to allow user authentication.
 The UI could easily be modified for authentication / un authentication users via CSS selectors.
 
