@@ -23,6 +23,8 @@ public class Person {
 
     private String country;
 
+    private String password;
+
     public int getId() {
         return id;
     }
@@ -61,6 +63,14 @@ public class Person {
 
     public String getUsername() {
         return this.username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
