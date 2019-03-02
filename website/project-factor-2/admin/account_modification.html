@@ -20,49 +20,55 @@
         </ul>
     </nav>
 </header>
-<div class="left_panel">
-    <nav class="sidenav">
-        <a href="#user_acct">User accounts</a>
-        <a href="#admin">Admin accounts</a>
-    </nav>
-</div>
-<div class="middle">
-    <table id="user_acct" class="user_acct">
-        <tr class="utable_title">
-            <th>User Name</th>
-            <th>User Password</th>
-            <th>Account Status</th>
-            <th>Modify</th>
-        </tr>
-    </table>
-    <table>
-        <tr class="user_info">
-            <td>User1</td>
-            <td>test1234</td>
-            <td>standard</td>
-            <td><input type="checkbox"></td>
-        </tr>
-    </table>
-    <table>
-        <tr class="user_info">
-            <td>User2</td>
-            <td>test5678</td>
-            <td>blocked</td>
-            <td><input type="checkbox"></td>
-        </tr>
-    </table>
-    <table id="admin" class="admin_acct">
-        <tr>
-            <th>Admin Name</th>
-            <th>Admin Password</th>
-            <th>Account status</th>
-        </tr>
-        <tr>
-            <td>Admin1</td>
-            <td>test1234</td>
-            <td>stander</td>
-        </tr>
-    </table>
-</div>
+<main>
+    <section class="sidenav">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/admin/account_modification.html">Account Modification</a>
+                </li>
+                <li>
+                    <a href="/admin/trouble_tickets.html">Pending trouble tickets</a>
+                </li>
+                <li>
+                    <a href="/admin/trouble_tickets_complete.html">Completed trouble tickets</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+    <section class="account-modification">
+        <table class="users-table">
+            <tr>
+                <th>User Name</th>
+                <th>Account Status</th>
+                <th>Modify?</th>
+            </tr>
+            <tr>
+                <td>jtron82</td>
+                <td>normal</td>
+                <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>HenryFBP</td>
+                <td>blocked</td>
+                <td><input type="checkbox"></td>
+            </tr>
+        </table>
+        <table class="admins-table">
+            <tr>
+                <th>Admin Name</th>
+                <th>Account Status</th>
+            </tr>
+            <tr>
+                <td>ifagbemi</td>
+                <td>normal</td>
+            </tr>
+            <tr>
+                <td>ifagbemi</td>
+                <td>normal</td>
+            </tr>
+        </table>
+    </section>
+</main>
 </body>
 </html>

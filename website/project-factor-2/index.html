@@ -21,21 +21,31 @@
         </ul>
     </nav>
 </header>
-<div id="left_panel">
-    <nav class="sidenav">
-        <a href="">History</a>
-        <a href="pending.html">Pending</a>
-        <a href="completed.html">Completed</a>
-    </nav>
-</div>
-<div class="field">
-    <input type="file" name="upload"/>
-    <button type="button" onclick="Preview();">Convert</button>
-    <button type="button" onclick="Preview();" disabled>Preview</button>
-    <button type="button" disabled>Download</button>
-</div>
-<div class="view">
-    <iframe id="viewer" frameborder="0" scrolling="no" width="400" height="600"></iframe>
-</div>
+<main>
+    <section class="conversion-controls">
+        <input type="file" name="upload"/>
+        <button type="button" onclick="Preview();">Convert</button>
+        <button type="button" onclick="Preview();" disabled>Preview</button>
+        <button type="button" disabled>Download</button>
+    </section>
+
+    <section class="videos-grid"> <!-- I know using width and height is garbage. This is temporary. -->
+        <h1>Videos</h1>
+        <ul>
+            <li>
+                <article>
+                    <img src="/images/videos/cat-1.jpg" alt="Cat outdoors" style="max-width: 100px"/>
+                    <a href="/videos/cat-1.html"><p>Cat outdoors</p></a>
+                </article>
+            </li>
+            <li>
+                <article>
+                    <img src="/images/videos/cat-2.jpg" alt="The lives of savannah cats" style="max-width: 100px"/>
+                    <a href="/videos/cat-2.html"><p>The lives of savannah cats</p></a>
+                </article>
+            </li>
+        </ul>
+    </section>
+</main>
 </body>
 </html>

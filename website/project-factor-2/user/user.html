@@ -21,26 +21,29 @@
         </ul>
     </nav>
 </header>
-<nav class="sidenav">
-    <a href="/admin/account_modification.html">Account Modification</a>
-    <a href="/admin/trouble_tickets.html">Pending trouble tickets</a>
-    <a href="/admin/trouble_tickets_complete.html">Completed trouble tickets</a>
-</nav>
-<div class="field">
-    <input type="file" name="upload"/>
-    <button type="button" onclick="Preview();">Convert</button>
-    <button type="button" onclick="Preview();">Preview</button>
-    <button type="button" disabled>Download</button>
-</div>
-<div class="view">
-    <iframe id="viewer" frameborder="0" scrolling="no" width="400" height="600"></iframe>
-</div>
-<script type="text/javascript">
-    function Preview() {
-        file = document.getElementById("upload").files[0];
-        file_url = URL.createObjectURL(file);
-        $('#viewer').attr('src', file_url);
-    }
-</script>
+<main>
+    <section class="sidenav">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/admin/account_modification.html">Account Modification</a>
+                </li>
+                <li>
+                    <a href="/admin/trouble_tickets.html">Pending trouble tickets</a>
+                </li>
+                <li>
+                    <a href="/admin/trouble_tickets_complete.html">Completed trouble tickets</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+    <nav class="buttons">
+        <input type="file" name="upload"/>
+        <button type="button" onclick="Preview();">Convert</button>
+        <button type="button" onclick="Preview();">Preview</button>
+        <button type="button" disabled>Download</button>
+    </nav>
+
+</main>
 </body>
 </html>

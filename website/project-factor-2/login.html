@@ -37,44 +37,43 @@
         </ul>
     </nav>
 </header>
-<div class="container">
-    <form action="/user/user.html">
-        <div class="row">
+<main>
+    <section class="login">
+        <aside>
+            <!-- This is a Facebook login button -->
+            <div class="fb-login-button" data-size="large" data-button-type="continue_with"
+                 data-auto-logout-link="false" data-use-continue-as="false"></div>
+
+            <!-- This is a Google login button script and button. -->
+            <script src="/js/googleButton.js"></script>
+            <div id="google-signin"></div>
+        </aside>
+
+        <form action="/user/user.html">
             <h2>Log in</h2>
-            <div class="col">
-                <!-- This is a Facebook login button -->
-                <div class="fb-login-button" data-size="large" data-button-type="continue_with"
-                     data-auto-logout-link="false" data-use-continue-as="false"></div>
+            <ul>
+                <li>
+                    <input type="text" name="username" placeholder="Username" required/>
+                </li>
+                <li>
+                    <input type="password" name="password" placeholder="Password" required/>
+                </li>
+                <li>
+                    <input type="submit" value="Login"/>
+                </li>
+            </ul>
+        </form>
+    </section>
+    <section class="signup-controls">
+        <nav>
+            <ul>
+                <li><a href="/signup.html" target="_blank">Sign up</a></li>
+                <li><a href="/forgotpassword.html" target="_blank">Forgot password?</a></li>
+            </ul>
+        </nav>
+    </section>
+</main>
 
-                <!-- This is a Google login button script and button. -->
-                <script src="/js/googleButton.js"></script>
-                <div id="google-signin"></div>
-            </div>
-
-            <div class="col">
-                <div class="hide-md-lg">
-                    <p>Or sign in manually:</p>
-                </div>
-
-                <input type="text" name="username" placeholder="Username" required/>
-                <input type="password" name="password" placeholder="Password" required/>
-                <input type="submit" value="Login"/>
-            </div>
-
-        </div>
-    </form>
-</div>
-
-<div class="bottom-container">
-    <div class="row">
-        <div class="col center">
-            <a href="/signup.html" target="_blank">Sign up</a>
-        </div>
-        <div class="col center">
-            <a href="/forgetPassword.html" target="_blank">Forgot password?</a>
-        </div>
-    </div>
-</div>
 <footer>
     <p id="copyright">&copy; 2019 Project Factor</p>
 </footer>
