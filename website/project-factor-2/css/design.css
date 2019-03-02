@@ -1,0 +1,20 @@
+header nav ul {
+    display: table-row;
+    list-style-type: none;
+}
+
+header nav ul li {
+    display: table-cell;
+    width: 1%;
+}
+
+header nav ul li a {
+    padding: 1em 0 1em 0;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+header nav ul li a:hover {
+    background-color: lightgray;
+}
