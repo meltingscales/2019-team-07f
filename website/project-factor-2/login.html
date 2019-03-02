@@ -2,14 +2,15 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no"/>
 
-    <meta name="google-signin-client_id" content="1084248431791-ljree13ckr43i5jm2qfmonogn83pfv6k.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+          content="1084248431791-ljree13ckr43i5jm2qfmonogn83pfv6k.apps.googleusercontent.com">
 
-    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" media="screen" href="/design.css" />
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon"/>
+    <link rel="stylesheet" media="screen" href="/design.css"/>
 
     <script type="text/javascript" src="/js/fb_script.js"></script>
 
@@ -27,55 +28,56 @@
 <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
 
 
-   <header>
-       <nav>
-           <ul>
-               <li><a href="/index.html">Home</a></li>
-               <li><a href="/login.html">Login</a></li>
-               <li><a href="/aboutus.html">About us</a></li>
-           </ul>
-       </nav>
-   </header>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/login.html">Login</a></li>
+            <li><a href="/aboutus.html">About us</a></li>
+        </ul>
+    </nav>
+</header>
 <div class="container">
-        <form action="/user/user.html">
-            <div class="row">
-                <h2>Log in</h2>
-                <div class="col">
-                    <!-- This is a Facebook login button -->
-                    <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
-
-                    <!-- This is a Google login button script and button. -->
-                    <script src="/js/googleButton.js"></script>
-                    <div id="google-signin"></div>
-                </div>
-
-                <div class="col">
-                    <div class="hide-md-lg">
-                        <p>Or sign in manually:</p>
-                    </div>
-
-                    <input type="text" name="username" placeholder="Username" required />
-                    <input type="password" name="password" placeholder="Password" required />
-                    <input type="submit" value="Login" />
-                </div>
-
-            </div>
-        </form>
-    </div>
-
-    <div class="bottom-container">
+    <form action="/user/user.html">
         <div class="row">
-            <div class="col center">
-                <a href="/signup.html" target="_blank">Sign up</a>
+            <h2>Log in</h2>
+            <div class="col">
+                <!-- This is a Facebook login button -->
+                <div class="fb-login-button" data-size="large" data-button-type="continue_with"
+                     data-auto-logout-link="false" data-use-continue-as="false"></div>
+
+                <!-- This is a Google login button script and button. -->
+                <script src="/js/googleButton.js"></script>
+                <div id="google-signin"></div>
             </div>
-            <div class="col center">
-                <a href="/forgetPassword.html" target="_blank">Forgot password?</a>
+
+            <div class="col">
+                <div class="hide-md-lg">
+                    <p>Or sign in manually:</p>
+                </div>
+
+                <input type="text" name="username" placeholder="Username" required/>
+                <input type="password" name="password" placeholder="Password" required/>
+                <input type="submit" value="Login"/>
             </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="bottom-container">
+    <div class="row">
+        <div class="col center">
+            <a href="/signup.html" target="_blank">Sign up</a>
+        </div>
+        <div class="col center">
+            <a href="/forgetPassword.html" target="_blank">Forgot password?</a>
         </div>
     </div>
-    <footer>
-        <p id="copyright">&copy; 2019 Project Factor</p>
-	</footer>
+</div>
+<footer>
+    <p id="copyright">&copy; 2019 Project Factor</p>
+</footer>
 </body>
 
 </html>
