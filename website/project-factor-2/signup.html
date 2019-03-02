@@ -11,17 +11,16 @@
 </head>
 
 <body>
-    <div class="Navigation">
-        <div class="logo">
-            <img src="/images/logo.jpg" height="70px" width="60px" alt="logo">
-        </div>
-        <nav>
-            <a href="/index.html">Home</a>
-            <a href="/login.html">Login</a>
-            <a href="/aboutus.html">About us</a>
-        </nav>
-    </div>
-    
+   <header>
+       <nav>
+           <ul>
+               <li><a href="/index.html">Home</a></li>
+               <li><a href="/login.html">Login</a></li>
+               <li><a href="/aboutus.html">About us</a></li>
+           </ul>
+       </nav>
+   </header>
+
     <div id="id01" class="modal">
       <form class="modal-content" method="POST" data-netlify = "true">
         <div class="container">
@@ -29,25 +28,25 @@
           <p>Please fill in this form to create an account.</p>
           <hr>
           <label for="firstName"><b>First Name</b></label>
-          <input type="text" placeholder="Enter your First Name" name="firstName" required>
+          <input type="text" placeholder="Enter your First Name" id="firstName" required>
 
           <label for="lastName"><b>Last Name</b></label>
-          <input type="text" placeholder="Enter your Last Name" name="lastName" required>
+          <input type="text" placeholder="Enter your Last Name" id="lastName" required>
 
           <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" required>
+          <input type="text" placeholder="Enter Email" id="email" required>
     
           <label for="password"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" required>
+          <input type="password" placeholder="Enter Password" id="password" required>
     
           <label for="confirm_password"><b>Repeat Password</b></label>
-          <input type="password" placeholder="Repeat Password" name="confirm_password" required>
+          <input type="password" placeholder="Repeat Password" id="confirm_password" required>
           
           <label>
             <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
           </label>
     
-          <p>By creating an account you agree to our <a href="/termsandcondittions.html" style="color:dodgerblue">Terms & Privacy</a>.</p>
+          <p>By creating an account you agree to our <a href="/termsandconditions.html" style="color:dodgerblue">Terms & Privacy</a>.</p>
     
           <div class="clearfix">
             <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
