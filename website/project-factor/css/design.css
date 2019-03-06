@@ -1,0 +1,29 @@
+header nav ul li a:hover {
+    background-color: lightgray;
+}
+
+header nav ul {
+    padding: 0;
+}
+
+header nav ul li a {
+    padding: 1em 0 1em 0;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Screen is greater than 425px. */
+@media (min-width: 425px) {
+
+    header nav ul {
+        display: table-row;
+        list-style-type: none;
+    }
+
+    header nav ul li {
+        display: table-cell;
+        width: 1%;
+    }
+
+}

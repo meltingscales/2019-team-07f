@@ -19,3 +19,8 @@ out/
 
 # OSX Metadata
 .DS_Store
+
+# Public and private keys
+id_rsa.pub
+id_rsa.ppk
+id_rsa

@@ -27,13 +27,24 @@ public class PersonDAO implements PersonDAOI {
         this.sessionFactory = sf;
     }
 
+    /*public boolean validate(String username, String password) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Person WHERE username = ? AND password = ?").setParameter(0, person.getUsername(), person.getPassword());
+
+        if (query.getResultList().size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }*/
+
     @Override
     public void addPerson(@NotNull Person person) {
         Session session = this.sessionFactory.getCurrentSession();
         List<FacesMessage> problems = new ArrayList<>();
 
         // Anyone using that username?
-        Query query = session.createQuery("from Person where username = ?")
+        Query query = session.createQuery("FROM Person WHERE username = ?")
                 .setParameter(0, person.getUsername());
 
         if (query.getResultList().size() > 0) {
@@ -41,7 +52,7 @@ public class PersonDAO implements PersonDAOI {
         }
 
         // Anyone using that email?
-        query = session.createQuery("from Person where email = ?")
+        query = session.createQuery("FROM Person WHERE email = ?")
                 .setParameter(0, person.getEmail());
 
         if (query.getResultList().size() > 0) {

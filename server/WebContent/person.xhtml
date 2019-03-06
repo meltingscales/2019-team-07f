@@ -9,12 +9,11 @@
 
 <ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:define name="content">
-        <h1>Add a Person</h1>
+        <h1>Registration</h1>
         <h:form>
             <table>
                 <tr>
@@ -23,7 +22,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Name</label></td>
+                    <td><label>Full Name</label></td>
                     <td><h:inputText id="name" value="#{person.name}"/>
                     </td>
                 </tr>
@@ -38,7 +37,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><h:commandButton action="#{personService.addPerson(person)}" value="Add Person"/>
+                    <td><label>Password</label></td>
+                    <td><h:inputText id="password" value="#{person.password}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><h:commandButton action="#{personService.addPerson(person)}" value="Register"/>
                     </td>
                 </tr>
 
@@ -46,16 +50,17 @@
 
         </h:form>
 
-        <h3>Persons List</h3>
+        <h3>Registered Users</h3>
 
         <c:if test="${!empty personService.listPersons()}">
             <table class="tg">
                 <tr>
-                    <th width="80">Person ID</th>
-                    <th width="120">Person Username</th>
-                    <th width="120">Person Name</th>
-                    <th width="120">Person Email</th>
-                    <th width="120">Person Country</th>
+                    <th width="80">User ID</th>
+                    <th width="120">Username</th>
+                    <th width="120">Full Name</th>
+                    <th width="120">Email Address</th>
+                    <th width="120">Country</th>
+                    <th width="120">Password</th>
                 </tr>
                 <ui:repeat value="${personService.listPersons()}" var="person">
                     <tr>
@@ -64,6 +69,7 @@
                         <td>${person.name}</td>
                         <td>${person.email}</td>
                         <td>${person.country}</td>
+                        <td>${person.password}</td>
                     </tr>
                 </ui:repeat>
             </table>
