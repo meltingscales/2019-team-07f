@@ -7,6 +7,9 @@ apt-get install -y software-properties-common
 
 apt-get install -y debconf-utils
 
+# Install curl, a way to send HTTP requests.
+apt-get install -y curl
+
 # Install terminal web browser.
 apt-get install -y lynx
 
