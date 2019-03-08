@@ -6,6 +6,7 @@ RUN_TESTS =         false # Run tests?
 DESTROY_DB =        false # Destroy the database?
 ENGAGE_CAKE =       true # Engage cake?
 DEPLOY =            true # Deploy the app?
+INSERT_TEST_DATA =  true # Insert test data upon provision step?
 
 # Port/debug settings. These should all be false once deploy time comes.
 MYSQL_DEBUG =       false # Debug for MySQL. Opens MySQL port.
@@ -129,6 +130,12 @@ Vagrant.configure("2") do |config|
     config.vm.provision :shell, path: "vagrant-config/scripts/deploy-app.sh", run: "always"
   
     # At this point, going to http://127.0.0.1:8080/searchable-video-library/ should yield some HTML page.
+  end
+  
+  if INSERT_TEST_DATA then
+
+      config.vm.provision :shell, path: "vagrant-config/scripts/insert-test-users.sh"
+
   end
   
 end

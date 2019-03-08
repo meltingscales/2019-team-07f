@@ -30,7 +30,7 @@ It currently will serve a fun random number generator to the following URL:
   
     For reference, mine is `P:\lib\apache-tomcat-9.0.4`.
 
-- Install MySQL.
+- Install MySQL 5.7 or MariaDB 10.3.
 
   Make sure you've got a user identified by:
 
