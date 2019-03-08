@@ -21,8 +21,9 @@ Private team repo for ITMT 430
 
   For example, mine is stored at `C:\Users\henryfbp\.ssh\id_rsa`.
 
-  Then, add the public key to this GitHub repository by clicking on
-  `Settings > Deploy keys > Add deploy key`.
+  Then, add the PUBLIC key to this GitHub repository by clicking on
+  `Settings > Deploy keys > Add deploy key` and copy-pasting the
+  contents of ~/.ssh/id_rsa.pub` into the text box.
   
   If your private key isn't in the place it's expected to be, then
   `vagrant up` will error.
