@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "./packer/output/ubuntu-vagrant.box"
+  config.vm.box = "./packer/output/ubuntu-webserver.box"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
