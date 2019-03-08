@@ -10,6 +10,9 @@ apt-get install -y debconf-utils
 # Install curl, a way to send HTTP requests.
 apt-get install -y curl
 
+# Install git, a version control system.
+apt-get install -y git
+
 # Install terminal web browser.
 apt-get install -y lynx
 
