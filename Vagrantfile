@@ -94,7 +94,7 @@ Vagrant.configure("2") do |config|
   # SHELL
   
   # Copy SSH private key
-  config.vm.provision "file", source: "~/id_rsa", destination: "~/id_rsa"
+  config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
   
   # Clone from git repository
   #TODO
