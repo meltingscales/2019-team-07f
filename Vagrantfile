@@ -92,6 +92,13 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+  
+  # Copy SSH private key
+  config.vm.provision "file", source: "~/id_rsa", destination: "~/id_rsa"
+  
+  # Clone from git repository
+  #TODO
+  
 
   # Set up Python.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
