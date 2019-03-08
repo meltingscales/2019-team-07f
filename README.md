@@ -17,6 +17,16 @@ Private team repo for ITMT 430
 
 ### Run the server
 
+- Create an SSH deploy key and put it into `~/.ssh/id_rsa`.
+
+  For example, mine is stored at `C:\Users\henryfbp\.ssh\id_rsa`.
+
+  Then, add the public key to this GitHub repository by clicking on
+  `Settings > Deploy keys > Add deploy key`.
+  
+  If your private key isn't in the place it's expected to be, then
+  `vagrant up` will error.
+
 - Run `vagrant up` in this directory!
 
 ## The manual way
