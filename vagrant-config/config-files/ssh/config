@@ -1,0 +1,6 @@
+Host   github.com
+    StrictHostKeyChecking no
+    Hostname github.com
+    User git
+    PubkeyAuthentication yes
+    IdentityFile  /home/vagrant/.ssh/id_rsa

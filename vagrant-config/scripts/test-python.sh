@@ -2,5 +2,5 @@
 
 echo "Testing Python."
 
-cd /vagrant/tools/video-to-audio/
+cd /home/vagrant/2019-team-07f/tools/video-to-audio/
 python3.6 test.py

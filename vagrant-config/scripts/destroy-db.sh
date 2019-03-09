@@ -1,3 +1,3 @@
 service mysql start
 
-mysql -uroot -ppassword < "/vagrant/server/src/main/resources/destroy-db.sql"
+mysql -uroot -ppassword < "/home/vagrant/2019-team-07f/server/src/main/resources/destroy-db.sql"

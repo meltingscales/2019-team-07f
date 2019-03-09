@@ -70,6 +70,9 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
+  # Disable synced folder by default to enforce cloning from git.
+   config.vm.synced_folder '.', '/vagrant', disabled: true
+
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
@@ -93,12 +96,42 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   
-  # Copy SSH private key
-  config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
+  # Copy SSH private key.
+  config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/home/vagrant/id_rsa"
+
+  # Copy SSH config.
+  config.vm.provision "file", source: "./vagrant-config/config-files/ssh/config", destination: "/home/vagrant/config"
   
-  # Clone from git repository
-  #TODO
+  # Clone from git repository.
+  config.vm.provision "shell", inline: <<-SCRIPT
+	
+	# Make ssh folders if they don't exist.
+	[ -d /home/vagrant/.ssh ] || 	 mkdir -p /home/vagrant/.ssh
+	[ -d /root/.ssh ] ||           mkdir -p /root/.ssh
+
+    # Copy key.
+	cp -v /home/vagrant/id_rsa /home/vagrant/.ssh/
+        
+	# Set up read/write access.
+	chmod 700 "/home/vagrant/.ssh"
+	chmod 600 "/home/vagrant/.ssh/id_rsa"
+
+	# Copy config.
+	cp -v /home/vagrant/config /home/vagrant/.ssh/config
+	cp -v /home/vagrant/config /root/.ssh/config
+		
+	# Delete cloned repo if it exists
+	if [ -d /home/vagrant/2019-team-07f/ ]; then
+		rm -rf /home/vagrant/2019-team-07f/
+	fi	
+	
+	# Clone team repo into /home/vagrant/2019-team-07f/
+	sudo git clone git@github.com:illinoistech-itm/2019-team-07f.git /home/vagrant/2019-team-07f/
+
+  # Give vagrant user ownership of git repo
+  sudo chown vagrant:vagrant /home/vagrant/2019-team-07f/
   
+  SCRIPT
 
   # Set up Python.
   config.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
