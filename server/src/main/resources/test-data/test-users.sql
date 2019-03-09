@@ -12,3 +12,7 @@ VALUES ('USA', 'hpost@hawk.iit.edu', 'Henry Post', 'forkbomb123', 'hpost'),
        ('Albania', 'vgoj@gmail.com', 'Victor Gojcaj', 'nycisforme', 'vgoj'),
        ('UK', 'tscottt3@gmail.com', 'Tony Scott', 'tynm0uThUK!', 'tscott'),
        ('Marshall Islands', 'annmarieswims@gmail.com', 'Ann-Marie Hepler', 'sc\\/bad1v3r$!!!', 'ahepler')
+       ('United States', 'nlaybournd@gmail.com', 'Nora Laybourn' , 'N0r@westin', 'nlaybournd')
+	   ('United States', 'srafflese43@yahoo.com' , 'Silvester Raffles', 'SurferRAol^', 'srafflese')
+	   ('Mexico', 'drobathamc@gmail.com', 'Darlene Robatham', 'P09DrobathMAC', 'drobatham')
+	   ('United Arab Emirates', 'mardling0@gmail.com', 'Rozalin Mardling', 'RoxzaalQir', 'rmardling0')
