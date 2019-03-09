@@ -71,7 +71,7 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder "../data", "/vagrant_data"
 
   # Disable synced folder by default to enforce cloning from git.
-#   config.vm.synced_folder ".", "/vagrant", disabled: true
+   config.vm.synced_folder '.', '/vagrant', disabled: true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -121,12 +121,15 @@ Vagrant.configure("2") do |config|
 	cp -v /home/vagrant/config /root/.ssh/config
 		
 	# Delete cloned repo if it exists
-	if [ -d /tmp/testing ]; then
-		rm -rf /tmp/testing
+	if [ -d /home/vagrant/2019-team-07f/ ]; then
+		rm -rf /home/vagrant/2019-team-07f/
 	fi	
 	
-	# Clone team repo into temp folder to test.
-	sudo git clone git@github.com:illinoistech-itm/2019-team-07f.git /tmp/testing
+	# Clone team repo into /home/vagrant/2019-team-07f/
+	sudo git clone git@github.com:illinoistech-itm/2019-team-07f.git /home/vagrant/2019-team-07f/
+
+  # Give vagrant user ownership of git repo
+  sudo chown vagrant:vagrant /home/vagrant/2019-team-07f/
   
   SCRIPT
 

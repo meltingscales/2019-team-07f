@@ -2,7 +2,7 @@
 
 echo "Testing jep."
 
-cd /vagrant/tools/video-to-audio/jep-example/
+cd /home/vagrant/2019-team-07f/tools/video-to-audio/jep-example/
 
 # Check that java and javac exist.
 java -version
