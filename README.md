@@ -13,20 +13,52 @@ Private team repo for ITMT 430
 
 ### Build the Packer image 
 
-- Go into `/packer/` and follow the build directions.
+- Go into `/packer/` and follow the build directions for each box.
 
-### Run the server
+### Set up deploy keys
 
-- Create an SSH deploy key and put it into `~/.ssh/id_rsa`.
-
-  For example, mine is stored at `C:\Users\henryfbp\.ssh\id_rsa`.
-
-  Then, add the PUBLIC key to this GitHub repository by clicking on
-  `Settings > Deploy keys > Add deploy key` and copy-pasting the
-  contents of ~/.ssh/id_rsa.pub` into the text box.
+- Create an RSA keypair and put them into `~/.ssh/` on your host machine. See
+  [this
+  guide](https://confluence.atlassian.com/bitbucketserver054/creating-ssh-keys-939508421.html)
+  for a good overview of how to do it.
   
-  If your private key isn't in the place it's expected to be, then
-  `vagrant up` will error.
+  The private key will be called `id_rsa` and the public key will be called
+  `id_rsa.pub`.
+
+  For example, my keys are stored at `C:\Users\henryfbp\.ssh\`.
+
+- Add the PUBLIC key to this GitHub repository by clicking on `Settings > Deploy
+  keys > Add deploy key` and copy-pasting the contents of `~/.ssh/id_rsa.pub`
+  into the text box.
+
+If your private key isn't in the place it's expected to be, then `vagrant up`
+will error.
+
+The key file (`id_rsa`) should look something like this:
+
+    -----BEGIN RSA PRIVATE KEY-------
+    SGFzIGFueW9uZSByZWFsbHkgYmVlbiBmYXIgYXMgZGVjaWRlZCB0byB1c2UgZXZl
+    biBnbyB3YW50IHRvIGRvIGxvb2sgbW9yZSBsaWtlPyAKCllvdSd2ZSBnb3QgdG8g
+    YmUga2lkZGluZyBtZS4gSSd2ZSBiZWVuIGZ1cnRoZXIgZXZlbiBtb3JlIGRlY2lk
+    ZWQgdG8gdXNlIGV2ZW4gZ28gbmVlZCB0byBkbyBsb29rIG1vcmUgYXMgYW55b25l
+    IGNhbi4gQ2FuIHlvdSByZWFsbHkgYmUgZmFyIGV2ZW4gYXMgZGVjaWRlZCBoYWxm
+    IGFzIG11Y2ggdG8gdXNlIGdvIHdpc2ggZm9yIHRoYXQIE15IGd1ZXNzIGlzIHRoY
+    XQgd2hlbiBvbmUgcmVhbGx5IGJlZW4gZmFyIGV2ZW4gYXMgZGVjaWRlZCBvbmNlI
+    HRvIHVzZSBldmVuIGdvIHdhbnQsIGl0IGlzIHRoZW4gdGhhdCBoZSBoYXMgcmVhb
+    Gx5IGJlZW4gZmFyIGV2ZW4gYXMgZGVjaWRlZCB0byB1c2UgZXZlbiBnbyB3YW50I
+    HRvIGRvIGxvb2sgbW9yZSBsaWtlLiBJdCdzIGp1c3QgY29tbW9uIHNlbnNlLgo=
+    -----END RSA PRIVATE KEY----- 
+    
+<!-- No, this is not a real private key. It is a copypasta of a Yahoo question. -->
+
+NOTE: If you are using `puttygen.exe` on Windows, you [MUST convert the
+key](https://help.cloudforge.com/hc/en-us/articles/215242303-Converting-PuTTY-private-keys-to-OpenSSH-format)
+to OpenSSH format from `puttygen.exe`'s own format.
+
+`puttygen.exe` uses its own format and is not compatible with the OpenSSH
+format.
+va
+### Run the server
 
 - Run `vagrant up` in this directory!
 
