@@ -205,9 +205,6 @@ Vagrant.configure("2") do |config|
     if DESTROY_DB
       # Destroy database.
       web.vm.provision :shell, path: "vagrant-config/scripts/destroy-db.sh", run: "always"
-
-      # Set up MariaDB.
-      web.vm.provision :shell, path: "vagrant-config/scripts/setup-mariadb.sh"
     end
 
     if DEPLOY
