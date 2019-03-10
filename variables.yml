@@ -1,0 +1,19 @@
+---
+
+# This file stores IP addresses that Vagrant will use to assign networking information to virtual machines.
+#
+# It exists because editing/viewing this file is easier than hunting for strings in a really long Ruby source code file.
+
+# Hostname of database.
+db_hostname: db
+
+# IP address of database.
+db_ip: 10.0.0.10
+
+# Hostname of web server.
+web_hostname: web
+
+# IP address of web server.
+web_ip: 10.0.0.11
+
+...
