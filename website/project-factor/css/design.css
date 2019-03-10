@@ -13,6 +13,45 @@ header nav ul li a {
     text-align: center;
 }
 
+/* Login page */
+/* Responsive Media */
+img, audio, video {
+  display: block;
+  max-width: 100%;
+}
+/* ===== BASE STYLES ===== */
+.login {
+  text-align:center;
+}
+
+.login fieldset {
+  display:inline;
+  width: 25%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+  border-radius: 0.4em;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,1), 0 6px 20px 0 rgba(0,0,0,1);
+}
+
+img{
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  top: 60px;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.login h1 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.login p {
+  text-align: center;
+  width: 50%;
+}
 /* Screen is greater than 425px. */
 @media (min-width: 425px) {
 

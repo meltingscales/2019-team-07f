@@ -37,45 +37,39 @@
         </ul>
     </nav>
 </header>
-<main>
-    <section class="login">
+
+  <section class="login">
+    <form method="GET" action="#null">
+      <img id = "login-bg" src="images/logo/audio.png" alt="image">
+      <fieldset>
+	       <h1> Log in </h1>
+	        <p><input type="text" name="username" placeholder="Username" required/></p>
+          <p><input type="password" name="password" placeholder="Password" required/></p>
+        <button class="login-button"> --> </button>
+        <section class="signup-controls">
+            <nav>
+                <ul>
+                    <li><a href="/signup.html" target="_blank">Sign up</a></li>
+                    <li><a href="/forgotpassword.html" target="_blank">Forgot password?</a></li>
+                </ul>
+            </nav>
+        </section>
+
         <aside class="social-media-login">
             <!-- This is a Facebook login button -->
-            <div class="fb-login-button" data-size="large" data-button-type="continue_with"
+            <div class="fb-login-button" data-size="medium" data-button-type="continue_with"
                  data-auto-logout-link="false" data-use-continue-as="false"></div>
 
             <!-- This is a Google login button script and button. -->
             <script src="/js/googleButton.js"></script>
             <div id="google-signin"></div>
         </aside>
-
-        <form action="/user/user.html">
-            <h2>Log in</h2>
-            <ul>
-                <li>
-                    <input type="text" name="username" placeholder="Username" required/>
-                </li>
-                <li>
-                    <input type="password" name="password" placeholder="Password" required/>
-                </li>
-                <li>
-                    <input type="submit" value="Login"/>
-                </li>
-            </ul>
-        </form>
-    </section>
-    <section class="signup-controls">
-        <nav>
-            <ul>
-                <li><a href="/signup.html" target="_blank">Sign up</a></li>
-                <li><a href="/forgotpassword.html" target="_blank">Forgot password?</a></li>
-            </ul>
-        </nav>
-    </section>
-</main>
+      </fieldset>
+    </form>
+  </section>
 
 <footer>
-    <p id="copyright">&copy; 2019 Project Factor</p>
+    <p style="text-align:center;">&copy; 2019 Project Factor</p>
 </footer>
 </body>
 
