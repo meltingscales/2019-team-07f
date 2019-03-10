@@ -85,9 +85,22 @@ Vagrant.configure("2") do |config|
     web.vm.hostname = variables['web_hostname']
 
     # Test that the webserver can ping the database server.
-    web.vm.provision "shell", run: "always", inline: <<-SCRIPT
-      echo "TODO test webserver <--> db connection"
-    SCRIPT
+    web.vm.provision "shell", run: "always", env: {:DB_IP_ADDR => variables['db_ip']},
+                     inline: <<-SCRIPT
+      
+    # Ping DB once.
+    ping -c1 $DB_IP_ADDR
+    
+    # If last error code is zero (success), then...
+    if [ "$?" = 0 ]; then
+        echo "MySQL server at $DB_IP_ADDR is ping-able!"
+    else
+        echo "MySQL server at $DB_IP_ADDR could not be pinged! Halting!"
+
+        false # This will force an error.
+    fi
+
+  SCRIPT
 
 
     # Create a private network, which allows host-only access to the machine
