@@ -56,8 +56,8 @@ Vagrant.configure("2") do |config|
 
     # Sourced from https://stackoverflow.com/questions/24867252/allow-two-or-more-vagrant-vms-to-communicate-on-their-own-network
     # This creates a private network specified in a configuration file.
-    db.vm.network "private_network", ip: variables['db_ip']
-    db.vm.hostname = variables['db_hostname']
+    db.vm.network "private_network", ip: variables['db']['ip']
+    db.vm.hostname = variables['db']['hostname']
 
     # Copy my.cnf to MySQL server.
     db.vm.provision "file", source: "./vagrant-config/config-files/mysql/my.cnf", destination: "/tmp/my.cnf"
@@ -72,10 +72,10 @@ Vagrant.configure("2") do |config|
 
     # Set up MySQL users to allow web box to connect to db box's MySQL server.
     db.vm.provision :shell, env: {
-        :WEB_IP_ADDR => variables['web_ip'],
-        :USERNAME => variables['db_username'],
-        :PASSWORD => variables['db_password'],
-        :DB_SCHEMA => variables['db_schema']
+        :WEB_IP_ADDR => variables['web']['ip'],
+        :USERNAME => variables['db']['username'],
+        :PASSWORD => variables['db']['password'],
+        :DB_SCHEMA => variables['db']['schema']
     },
                     path: "vagrant-config/scripts/setup-mysql-users.sh"
 
@@ -109,11 +109,11 @@ Vagrant.configure("2") do |config|
     web.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
 
     # Add webserver to a private network.
-    web.vm.network "private_network", ip: variables['web_ip']
-    web.vm.hostname = variables['web_hostname']
+    web.vm.network "private_network", ip: variables['web']['ip']
+    web.vm.hostname = variables['web']['hostname']
 
     # Test that the webserver can ping the database server.
-    web.vm.provision "shell", run: "always", env: {:DB_IP_ADDR => variables['db_ip']},
+    web.vm.provision "shell", run: "always", env: {:DB_IP_ADDR => variables['db']['ip']},
                      inline: <<-SCRIPT
       
     # Ping DB once.
@@ -132,10 +132,10 @@ Vagrant.configure("2") do |config|
 
     # Test that the web box can connect to the MySQL server running on the database box.
     web.vm.provision "shell", run: "always", env: {
-        :DB_IP_ADDR => variables['db_ip'],
-        :USERNAME => variables['db_username'],
-        :PASSWORD => variables['db_password'],
-        :DB_SCHEMA => variables['db_schema']
+        :DB_IP_ADDR => variables['db']['ip'],
+        :USERNAME => variables['db']['username'],
+        :PASSWORD => variables['db']['password'],
+        :DB_SCHEMA => variables['db']['schema']
     }, inline: <<-SCRIPT
       
     # Ping DB once.
