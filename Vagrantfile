@@ -61,7 +61,7 @@ Vagrant.configure("2") do |config|
 
     # Copy my.cnf to MySQL server.
     db.vm.provision "file", source: "./vagrant-config/config-files/mysql/my.cnf", destination: "/tmp/my.cnf"
-    db.vm.provision "shell", run: "always", inline: <<-SCRIPT
+    db.vm.provision "shell", inline: <<-SCRIPT
       
       sudo mv /tmp/my.cnf /etc/mysql/my.cnf
 
