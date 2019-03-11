@@ -6,5 +6,7 @@ other prerequisites for our project like Apache Tomcat, etc.
 
 # How do I build the packer images?
 
+Do NOT run these in parallel, as they (can) break each other. <!-- TODO can this be fixed? -->
+
 `packer build -force ubuntu-webserver.json` will build the webserver.
 `packer build -force ubuntu-mysql.json` will build the MySQL box.
