@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+apt-get -y install git #TODO this shouldn't be needed, git should be installed in the packer build step. Fix this.
+
 # Make ssh folders if they don't exist.
 [[ -d /home/vagrant/.ssh ]] || 	 mkdir -p /home/vagrant/.ssh
 [[ -d /root/.ssh ]] ||           mkdir -p /root/.ssh

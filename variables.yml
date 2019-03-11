@@ -1,26 +1,33 @@
 ---
 
-# This file stores IP addresses that Vagrant will use to assign networking information to virtual machines.
+# This file stores IP addresses, passwords, and usernames that Vagrant will use to assign networking/auth information to
+# virtual machines.
 #
 # It exists because editing/viewing this file is easier than hunting for strings in a really long Ruby source code file.
 
-# Hostname of database.
-db_hostname: db
 
-# IP address of database.
-db_ip: 10.0.0.10
+# Config for db box.
+db:
 
-# Username and password to the database, accessible only by the web IP address.
-db_username: webserver
-db_password: password
+  # Hostname of database.
+  hostname: db
 
-# Schema to use for the database.
-db_schema: searchable-video-library
+  # IP address of database.
+  ip: 10.0.0.10
 
-# Hostname of web server.
-web_hostname: web
+  # Username and password to the database, accessible only by the web IP address.
+  username: webserver
+  password: password
 
-# IP address of web server.
-web_ip: 10.0.0.11
+  # Schema to use for the database.
+  schema: searchable-video-library
+
+# Config for web box.
+web:
+  # Hostname of web server.
+  hostname: web
+
+  # IP address of web server.
+  ip: 10.0.0.11
 
 ...
