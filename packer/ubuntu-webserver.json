@@ -91,6 +91,11 @@
         },
         {
             "type": "shell",
+            "script": "scripts/install-mysql-client.sh",
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+        },
+        {
+            "type": "shell",
             "script": "scripts/install-python.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
         },

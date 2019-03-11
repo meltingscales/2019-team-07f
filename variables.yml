@@ -10,6 +10,13 @@ db_hostname: db
 # IP address of database.
 db_ip: 10.0.0.10
 
+# Username and password to the database, accessible only by the web IP address.
+db_username: webserver
+db_password: password
+
+# Schema to use for the database.
+db_schema: searchable-video-library
+
 # Hostname of web server.
 web_hostname: web
 

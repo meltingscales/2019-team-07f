@@ -43,13 +43,41 @@ Vagrant.configure("2") do |config|
       vb.memory = "1024"
     end
 
-
     db.vm.provision "shell", inline: "echo \"Hey! I'm the mySQL server! I currently do NOTHING!\"", run: "always"
+
+    # Copy SSH private key.
+    db.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/home/vagrant/id_rsa"
+
+    # Copy SSH config.
+    db.vm.provision "file", source: "./vagrant-config/config-files/ssh/config", destination: "/home/vagrant/config"
+
+    # Clone from git repository.
+    db.vm.provision :shell, path: "vagrant-config/scripts/clone-repo.sh"
 
     # Sourced from https://stackoverflow.com/questions/24867252/allow-two-or-more-vagrant-vms-to-communicate-on-their-own-network
     # This creates a private network specified in a configuration file.
     db.vm.network "private_network", ip: variables['db_ip']
     db.vm.hostname = variables['db_hostname']
+
+    # Copy my.cnf to MySQL server.
+    db.vm.provision "file", source: "./vagrant-config/config-files/mysql/my.cnf", destination: "/tmp/my.cnf"
+    db.vm.provision "shell", run: "always", inline: <<-SCRIPT
+      
+      sudo mv /tmp/my.cnf /etc/mysql/my.cnf
+
+    SCRIPT
+
+    # Set up MySQL.
+    db.vm.provision :shell, path: "vagrant-config/scripts/setup-mysql.sh"
+
+    # Set up MySQL users to allow web box to connect to db box's MySQL server.
+    db.vm.provision :shell, env: {
+        :WEB_IP_ADDR => variables['web_ip'],
+        :USERNAME => variables['db_username'],
+        :PASSWORD => variables['db_password'],
+        :DB_SCHEMA => variables['db_schema']
+    },
+                    path: "vagrant-config/scripts/setup-mysql-users.sh"
 
 
   end
@@ -99,6 +127,30 @@ Vagrant.configure("2") do |config|
 
         false # This will force an error.
     fi
+
+    SCRIPT
+
+    # Test that the web box can connect to the MySQL server running on the database box.
+    web.vm.provision "shell", run: "always", env: {
+        :DB_IP_ADDR => variables['db_ip'],
+        :USERNAME => variables['db_username'],
+        :PASSWORD => variables['db_password'],
+        :DB_SCHEMA => variables['db_schema']
+    }, inline: <<-SCRIPT
+      
+    # Ping DB once.
+    ping -c1 $DB_IP_ADDR
+
+    # Show all tables to verify connection.
+    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "SHOW TABLES;"
+
+    # Create a test table.
+    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "CREATE TABLE test (id integer);"
+
+    # Drop that table.
+    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "DROP TABLE test;"
+
+    echo "MySQL connection OK!"
 
     SCRIPT
 
