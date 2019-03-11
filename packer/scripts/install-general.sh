@@ -2,6 +2,8 @@
 
 echo "Doing general setup."
 
+apt-get update
+
 # Install add-apt-repository command.
 apt-get install -y software-properties-common
 

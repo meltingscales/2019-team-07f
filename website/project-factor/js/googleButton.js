@@ -9,8 +9,8 @@ function onFailure(error) {
 function renderButton() {
     gapi.signin2.render('google-signin', {
         'scope': 'profile email',
-        'width': 240,
-        'height': 50,
+        'width': 180,
+        'height': 30,
         'longtitle': true,
         'theme': 'dark',
         'onsuccess': onSuccess,

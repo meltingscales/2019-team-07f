@@ -52,13 +52,13 @@
                 "modifyvm",
                 "{{.Name}}",
                 "--memory",
-                "2048"
+                "4096"
             ],
             [
                 "modifyvm",
                 "{{.Name}}",
                 "--cpus",
-                "2"
+                "4"
             ]
             ]
         }
@@ -87,6 +87,11 @@
         {
             "type": "shell",
             "script": "scripts/install-mysql.sh",
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install-mysql-client.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
         },
         {

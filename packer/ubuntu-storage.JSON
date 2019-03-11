@@ -46,19 +46,19 @@
             "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
             "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
             "virtualbox_version_file": ".vbox_version",
-            "vm_name": "packer-ubuntu-16.04.6-amd64_mysql",
+            "vm_name": "packer-ubuntu-16.04.6-amd64_storage",
             "vboxmanage": [
             [
                 "modifyvm",
                 "{{.Name}}",
                 "--memory",
-                "4096"
+                "2048"
             ],
             [
                 "modifyvm",
                 "{{.Name}}",
                 "--cpus",
-                "4"
+                "2"
             ]
             ]
         }
@@ -76,7 +76,23 @@
         },
         {
             "type": "shell",
-            "script": "scripts/install-mysql.sh",
+            "script": "scripts/install-java.sh",
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install-maven.sh",
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+        },
+        
+        {
+            "type": "shell",
+            "script": "scripts/install-python.sh",
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install-tomcat.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
         },
         {
@@ -88,6 +104,6 @@
     "post-processors": [{
       "type": "vagrant",
       "compression_level": "8",
-      "output": "output/ubuntu-mysql.box"
+      "output": "output/ubuntu-storage.box"
     }]
   }
