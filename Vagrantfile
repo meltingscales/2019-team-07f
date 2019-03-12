@@ -203,7 +203,7 @@ Vagrant.configure("2") do |config|
     web.vm.provision :shell, path: "vagrant-config/scripts/clone-repo.sh"
 
     # Set up Python.
-#    web.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
+    web.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
 
     # Set up Tomcat.
     web.vm.provision :shell, path: "vagrant-config/scripts/setup-tomcat.sh"
