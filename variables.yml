@@ -14,6 +14,9 @@ db:
 
   # IP address of database.
   ip: 10.0.0.10
+  
+  # (outwards-facing) port of database.
+  port: 3306
 
   # Username and password to the database, accessible only by the web IP address.
   username: webserver
@@ -29,5 +32,9 @@ web:
 
   # IP address of web server.
   ip: 10.0.0.11
+
+
+# Location the GitHub repository is cloned to.
+repo_location: "/vagrant/home/2019-team-07f/server/"
 
 ...

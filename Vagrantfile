@@ -203,7 +203,7 @@ Vagrant.configure("2") do |config|
     web.vm.provision :shell, path: "vagrant-config/scripts/clone-repo.sh"
 
     # Set up Python.
-    web.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
+#    web.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
 
     # Set up Tomcat.
     web.vm.provision :shell, path: "vagrant-config/scripts/setup-tomcat.sh"
@@ -211,8 +211,35 @@ Vagrant.configure("2") do |config|
     # Set up Maven.
     web.vm.provision :shell, path: "vagrant-config/scripts/setup-maven.sh"
 
-    # Set up MySQL.
-    web.vm.provision :shell, path: "vagrant-config/scripts/setup-mysql.sh"
+	# Modify database.properties to make web box's app use db box's database
+    web.vm.provision :shell, env: {
+        :DB_IP_ADDR => variables['db']['ip'],
+		:DB_PORT => variables['db']['port'],
+        :DB_USERNAME => variables['db']['username'],
+        :DB_PASSWORD => variables['db']['password'],
+        :DB_SCHEMA => variables['db']['schema'],
+    },
+    inline: <<-SCRIPT
+	
+		# Go to where database.properties file is.
+		cd /home/vagrant/2019-team-07f/server/WebContent/META-INF/
+		
+		# Delete it!
+		rm database.properties
+		
+		# Make an empty one.
+		touch database.properties
+		
+		# Populate it with the correct information.
+		echo "host=$DB_IP_ADDR:$DB_PORT" >> database.properties
+		echo "database=$DB_SCHEMA" >> database.properties
+		echo "user=$DB_USERNAME" >> database.properties
+		echo "password=$DB_PASSWORD" >> database.properties
+		
+		# Show the contents of the file.
+		cat database.properties
+		
+	SCRIPT
 
     # Refresh environment variables.
     web.vm.provision :shell, path: "vagrant-config/scripts/refresh-env.sh" #TODO does this actually work? Is a restart required?
@@ -238,9 +265,16 @@ Vagrant.configure("2") do |config|
       # At this point, going to http://127.0.0.1:8080/searchable-video-library/ should yield some HTML page.
     end
 
+	# If we want to insert test data like test users,
     if INSERT_TEST_DATA
 
-      web.vm.provision :shell, path: "vagrant-config/scripts/insert-test-users.sh"
+      web.vm.provision :shell, path: "vagrant-config/scripts/insert-test-users.sh", env: {
+        :DB_IP_ADDR => variables['db']['ip'],
+		:DB_PORT => variables['db']['port'],
+        :DB_USERNAME => variables['db']['username'],
+        :DB_PASSWORD => variables['db']['password'],
+        :DB_SCHEMA => variables['db']['schema'],
+	  }
 
     end
 
