@@ -12,13 +12,13 @@ INSERT_TEST_DATA = true # Insert test data upon provision step?
 
 
 # Load YAML file containing IP addresses.
-variables = YAML.load_file("variables.yml")
+variables = YAML.load_file('variables.yml')
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure("2") do |config|
+Vagrant.configure('2') do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
@@ -29,59 +29,46 @@ Vagrant.configure("2") do |config|
 
   # SSH settings.
   config.ssh.insert_key = false
-  config.ssh.username = "vagrant"
-  config.ssh.password = "vagrant"
-  
-  #iSCSI box.
-  config.vm.define "iscsitarget" do |iscsitarget|
-
-    iscsitarget.vm.box = "./packer/output/ubuntu-storage.box"
-	
-    #iscsitarget.vm.hostname = "iscsitarget"
-	iscsitarget.vm.provider "virtualbox" do |vb|
-      vb.gui = false
-
-      vb.memory = "1024"
-    end
-end	
+  config.ssh.username = 'vagrant'
+  config.ssh.password = 'vagrant'
 
   # MySQL box.
-  config.vm.define "db" do |db|
+  config.vm.define 'db' do |db|
 
-    db.vm.box = "./packer/output/ubuntu-mysql.box"
+    db.vm.box = './packer/output/ubuntu-mysql.box'
 
-    db.vm.provider "virtualbox" do |vb|
+    db.vm.provider 'virtualbox' do |vb|
       vb.gui = false
 
-      vb.memory = "1024"
+      vb.memory = '1024'
     end
 
-    db.vm.provision "shell", inline: "echo \"Hey! I'm the mySQL server! I currently do NOTHING!\"", run: "always"
+    db.vm.provision 'shell', inline: "echo \"Hey! I'm the mySQL server! I currently do NOTHING!\"", run: 'always'
 
     # Copy SSH private key.
-    db.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/home/vagrant/id_rsa"
+    db.vm.provision 'file', source: '~/.ssh/id_rsa', destination: '/home/vagrant/id_rsa'
 
     # Copy SSH config.
-    db.vm.provision "file", source: "./vagrant-config/config-files/ssh/config", destination: "/home/vagrant/config"
+    db.vm.provision 'file', source: './vagrant-config/config-files/ssh/config', destination: '/home/vagrant/config'
 
     # Clone from git repository.
-    db.vm.provision :shell, path: "vagrant-config/scripts/clone-repo.sh"
+    db.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh'
 
     # Sourced from https://stackoverflow.com/questions/24867252/allow-two-or-more-vagrant-vms-to-communicate-on-their-own-network
     # This creates a private network specified in a configuration file.
-    db.vm.network "private_network", ip: variables['db']['ip']
+    db.vm.network 'private_network', ip: variables['db']['ip']
     db.vm.hostname = variables['db']['hostname']
 
     # Copy my.cnf to MySQL server.
-    db.vm.provision "file", source: "./vagrant-config/config-files/mysql/my.cnf", destination: "/tmp/my.cnf"
-    db.vm.provision "shell", inline: <<-SCRIPT
-      
+    db.vm.provision 'file', source: './vagrant-config/config-files/mysql/my.cnf', destination: '/tmp/my.cnf'
+    db.vm.provision 'shell', inline: <<-SCRIPT
+
       sudo mv /tmp/my.cnf /etc/mysql/my.cnf
 
     SCRIPT
 
     # Set up MySQL.
-    db.vm.provision :shell, path: "vagrant-config/scripts/setup-mysql.sh"
+    db.vm.provision :shell, path: 'vagrant-config/scripts/setup-mysql.sh'
 
     # Set up MySQL users to allow web box to connect to db box's MySQL server.
     db.vm.provision :shell, env: {
@@ -90,20 +77,20 @@ end
         :PASSWORD => variables['db']['password'],
         :DB_SCHEMA => variables['db']['schema']
     },
-                    path: "vagrant-config/scripts/setup-mysql-users.sh"
+                    path: 'vagrant-config/scripts/setup-mysql-users.sh'
 
 
   end
 
   # Webserver box.
-  config.vm.define "web" do |web|
+  config.vm.define 'web' do |web|
 
-    web.vm.box = "./packer/output/ubuntu-webserver.box"
+    web.vm.box = './packer/output/ubuntu-webserver.box'
 
-    web.vm.provider "virtualbox" do |vb|
+    web.vm.provider 'virtualbox' do |vb|
       vb.gui = false
 
-      vb.memory = "1024"
+      vb.memory = '1024'
     end
 
 
@@ -119,19 +106,19 @@ end
     # config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
 
     # Expose HTTP Port to host computer.
-    web.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
+    web.vm.network 'forwarded_port', guest: 8080, host: 8080, host_ip: '127.0.0.1'
 
     # Add webserver to a private network.
-    web.vm.network "private_network", ip: variables['web']['ip']
+    web.vm.network 'private_network', ip: variables['web']['ip']
     web.vm.hostname = variables['web']['hostname']
 
     # Test that the webserver can ping the database server.
-    web.vm.provision "shell", run: "always", env: {:DB_IP_ADDR => variables['db']['ip']},
+    web.vm.provision 'shell', run: 'always', env: {:DB_IP_ADDR => variables['db']['ip']},
                      inline: <<-SCRIPT
-      
+
     # Ping DB once.
     ping -c1 $DB_IP_ADDR
-    
+
     # If last error code is zero (success), then...
     if [ "$?" = 0 ]; then
         echo "MySQL server at $DB_IP_ADDR is ping-able!"
@@ -139,18 +126,18 @@ end
         echo "MySQL server at $DB_IP_ADDR could not be pinged! Halting!"
 
         false # This will force an error.
-
+    fi
 
     SCRIPT
 
     # Test that the web box can connect to the MySQL server running on the database box.
-    web.vm.provision "shell", run: "always", env: {
+    web.vm.provision 'shell', run: 'always', env: {
         :DB_IP_ADDR => variables['db']['ip'],
         :USERNAME => variables['db']['username'],
         :PASSWORD => variables['db']['password'],
         :DB_SCHEMA => variables['db']['schema']
     }, inline: <<-SCRIPT
-      
+
     # Ping DB once.
     ping -c1 $DB_IP_ADDR
 
@@ -207,53 +194,87 @@ end
     # SHELL
 
     # Copy SSH private key.
-    web.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/home/vagrant/id_rsa"
+    web.vm.provision 'file', source: '~/.ssh/id_rsa', destination: '/home/vagrant/id_rsa'
 
     # Copy SSH config.
-    web.vm.provision "file", source: "./vagrant-config/config-files/ssh/config", destination: "/home/vagrant/config"
+    web.vm.provision 'file', source: './vagrant-config/config-files/ssh/config', destination: '/home/vagrant/config'
 
     # Clone from git repository.
-    web.vm.provision :shell, path: "vagrant-config/scripts/clone-repo.sh"
+    web.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh'
 
     # Set up Python.
-    web.vm.provision :shell, path: "vagrant-config/scripts/setup-python.sh"
+    web.vm.provision :shell, path: 'vagrant-config/scripts/setup-python.sh'
 
     # Set up Tomcat.
-    web.vm.provision :shell, path: "vagrant-config/scripts/setup-tomcat.sh"
+    web.vm.provision :shell, path: 'vagrant-config/scripts/setup-tomcat.sh'
 
     # Set up Maven.
-    web.vm.provision :shell, path: "vagrant-config/scripts/setup-maven.sh"
+    web.vm.provision :shell, path: 'vagrant-config/scripts/setup-maven.sh'
 
-    # Set up MySQL.
-    web.vm.provision :shell, path: "vagrant-config/scripts/setup-mysql.sh"
+    # Modify database.properties to make web box's app use db box's database
+    web.vm.provision :shell, env: {
+        :DB_IP_ADDR => variables['db']['ip'],
+        :DB_PORT => variables['db']['port'],
+        :DB_USERNAME => variables['db']['username'],
+        :DB_PASSWORD => variables['db']['password'],
+        :DB_SCHEMA => variables['db']['schema'],
+    },
+                     inline: <<-SCRIPT
+
+		# Go to where database.properties file is.
+		cd /home/vagrant/2019-team-07f/server/WebContent/META-INF/
+
+		# Delete it!
+		rm database.properties
+
+		# Make an empty one.
+		touch database.properties
+
+		# Populate it with the correct information.
+		echo "host=$DB_IP_ADDR:$DB_PORT" >> database.properties
+		echo "database=$DB_SCHEMA" >> database.properties
+		echo "user=$DB_USERNAME" >> database.properties
+		echo "password=$DB_PASSWORD" >> database.properties
+
+		# Show the contents of the file.
+		cat database.properties
+
+    SCRIPT
 
     # Refresh environment variables.
-    web.vm.provision :shell, path: "vagrant-config/scripts/refresh-env.sh" #TODO does this actually work? Is a restart required?
+    web.vm.provision :shell, path: 'vagrant-config/scripts/refresh-env.sh' #TODO does this actually work? Is a restart required?
 
     # Run tests.
     if RUN_TESTS
       # Test our Python libraries.
-      web.vm.provision :shell, path: "vagrant-config/scripts/test-python.sh", run: "always"
+      web.vm.provision :shell, path: 'vagrant-config/scripts/test-python.sh', run: 'always'
 
       # Test jep.
-      web.vm.provision :shell, path: "vagrant-config/scripts/test-jep.sh", run: "always"
+      web.vm.provision :shell, path: 'vagrant-config/scripts/test-jep.sh', run: 'always'
     end
 
     if DESTROY_DB
       # Destroy database.
-      web.vm.provision :shell, path: "vagrant-config/scripts/destroy-db.sh", run: "always"
+      web.vm.provision :shell, path: 'vagrant-config/scripts/destroy-db.sh', run: 'always'
     end
 
     if DEPLOY
       # Deploy our app.
-      web.vm.provision :shell, path: "vagrant-config/scripts/deploy-app.sh", run: "always"
+      web.vm.provision :shell, path: 'vagrant-config/scripts/deploy-app.sh', run: 'always'
 
       # At this point, going to http://127.0.0.1:8080/searchable-video-library/ should yield some HTML page.
     end
 
+    # If we want to insert test data like test users,
     if INSERT_TEST_DATA
 
-      web.vm.provision :shell, path: "vagrant-config/scripts/insert-test-users.sh"
+      web.vm.provision :shell, path: 'vagrant-config/scripts/insert-test-users.sh', env: {
+          :DB_IP_ADDR => variables['db']['ip'],
+          :DB_PORT => variables['db']['port'],
+          :DB_USERNAME => variables['db']['username'],
+          :DB_PASSWORD => variables['db']['password'],
+          :DB_SCHEMA => variables['db']['schema'],
+      }
 
     end
 
