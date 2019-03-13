@@ -11,7 +11,7 @@ DEPLOY = true # Deploy the app?
 INSERT_TEST_DATA = true # Insert test data upon provision step?
 
 
-# Load YAML file containing IP addresses.
+# Load YAML file containing IP addresses, as well as other variables.
 variables = YAML.load_file('variables.yml')
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -32,10 +32,32 @@ Vagrant.configure('2') do |config|
   config.ssh.username = 'vagrant'
   config.ssh.password = 'vagrant'
 
+  # iSCSI box.
+  config.vm.define 'iscsi' do |iscsi|
+
+    iscsi.vm.box = './packer/output/ubuntu-storage.box'
+
+    iscsi.vm.network 'private_network', ip: variables['iscsi']['ip']
+    iscsi.vm.hostname = variables['iscsi']['hostname']
+
+    iscsi.vm.provider 'virtualbox' do |vb|
+      vb.gui = false
+
+      vb.memory = '512'
+    end
+  end
+
+
   # MySQL box.
   config.vm.define 'db' do |db|
 
     db.vm.box = './packer/output/ubuntu-mysql.box'
+
+    # Sourced from https://stackoverflow.com/questions/24867252/allow-two-or-more-vagrant-vms-to-communicate-on-their-own-network
+    # This creates a private network specified in a configuration file.
+    db.vm.network 'private_network', ip: variables['db']['ip']
+    db.vm.hostname = variables['db']['hostname']
+
 
     db.vm.provider 'virtualbox' do |vb|
       vb.gui = false
@@ -43,7 +65,6 @@ Vagrant.configure('2') do |config|
       vb.memory = '1024'
     end
 
-    db.vm.provision 'shell', inline: "echo \"Hey! I'm the mySQL server! I currently do NOTHING!\"", run: 'always'
 
     # Copy SSH private key.
     db.vm.provision 'file', source: '~/.ssh/id_rsa', destination: '/home/vagrant/id_rsa'
@@ -53,11 +74,6 @@ Vagrant.configure('2') do |config|
 
     # Clone from git repository.
     db.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh'
-
-    # Sourced from https://stackoverflow.com/questions/24867252/allow-two-or-more-vagrant-vms-to-communicate-on-their-own-network
-    # This creates a private network specified in a configuration file.
-    db.vm.network 'private_network', ip: variables['db']['ip']
-    db.vm.hostname = variables['db']['hostname']
 
     # Copy my.cnf to MySQL server.
     db.vm.provision 'file', source: './vagrant-config/config-files/mysql/my.cnf', destination: '/tmp/my.cnf'
@@ -124,6 +140,25 @@ Vagrant.configure('2') do |config|
         echo "MySQL server at $DB_IP_ADDR is ping-able!"
     else
         echo "MySQL server at $DB_IP_ADDR could not be pinged! Halting!"
+
+        false # This will force an error.
+    fi
+
+    SCRIPT
+
+
+    # Test that the webserver can ping the iSCSI server.
+    web.vm.provision 'shell', run: 'always', env: {:ISCSI_IP_ADDR => variables['iscsi']['ip']},
+                     inline: <<-SCRIPT
+
+    # Ping iSCSI box once.
+    ping -c1 $ISCSI_IP_ADDR
+
+    # If last error code is zero (success), then...
+    if [ "$?" = 0 ]; then
+        echo "iSCSI box at $ISCSI_IP_ADDR is ping-able!"
+    else
+        echo "iSCSI server at $ISCSI_IP_ADDR could not be pinged! Halting!"
 
         false # This will force an error.
     fi
