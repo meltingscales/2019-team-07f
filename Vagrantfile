@@ -31,6 +31,19 @@ Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
+  
+  #iSCSI box.
+  config.vm.define "iscsitarget" do |iscsitarget|
+
+    iscsitarget.vm.box = "./packer/output/ubuntu-storage.box"
+	
+    #iscsitarget.vm.hostname = "iscsitarget"
+	iscsitarget.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+
+      vb.memory = "1024"
+    end
+end	
 
   # MySQL box.
   config.vm.define "db" do |db|
@@ -126,7 +139,7 @@ Vagrant.configure("2") do |config|
         echo "MySQL server at $DB_IP_ADDR could not be pinged! Halting!"
 
         false # This will force an error.
-    fi
+
 
     SCRIPT
 

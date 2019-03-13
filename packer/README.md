@@ -6,5 +6,11 @@ other prerequisites for our project like Apache Tomcat, etc.
 
 # How do I build the packer images?
 
+If you have ruby, run `ruby build-missing.rb` and all missing images will be built, in serial.
+
+Do NOT run these in parallel, as they (can) break each other. <!-- TODO can this be fixed? -->
+
 `packer build -force ubuntu-webserver.json` will build the webserver.
 `packer build -force ubuntu-mysql.json` will build the MySQL box.
+...
+Repeat the above.

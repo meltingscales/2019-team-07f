@@ -86,12 +86,12 @@
         },
         {
             "type": "shell",
-            "script": "scripts/install-mysql.sh",
+            "script": "scripts/install-mysql-client.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
         },
         {
             "type": "shell",
-            "script": "scripts/install-mysql-client.sh",
+            "script": "scripts/remove-mysql-server.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
         },
         {

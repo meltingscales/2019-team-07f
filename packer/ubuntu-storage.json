@@ -81,22 +81,6 @@
         },
         {
             "type": "shell",
-            "script": "scripts/install-maven.sh",
-            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
-        },
-        
-        {
-            "type": "shell",
-            "script": "scripts/install-python.sh",
-            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
-        },
-        {
-            "type": "shell",
-            "script": "scripts/install-tomcat.sh",
-            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
-        },
-        {
-            "type": "shell",
             "script": "scripts/cleanup.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
         }
