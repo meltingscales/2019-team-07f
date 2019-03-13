@@ -76,6 +76,11 @@
     },
     {
       "type": "shell",
+      "script": "scripts/install-iscsi-server.sh",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+    },
+    {
+      "type": "shell",
       "script": "scripts/cleanup.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     }
