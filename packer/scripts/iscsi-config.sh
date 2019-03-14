@@ -24,4 +24,5 @@ cd iqn.2019-03.localdomain.iscsi:www.initiator01
 set auth userid=vagrant 
 set auth password=vagrant 
 exit 
+echo "Finish configuring iscsi target"
 		
