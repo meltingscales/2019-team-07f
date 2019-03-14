@@ -65,7 +65,7 @@
   ],
   "provisioners": [
     {
-      "type": "shell",
+      "type": "shell",virt
       "script": "scripts/init.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     },
@@ -79,11 +79,16 @@
       "script": "scripts/install-iscsi-server.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     },
+	{
+      "type": "shell",
+      "script": "scripts/iscsi-config.sh",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+    },
     {
       "type": "shell",
       "script": "scripts/cleanup.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
-    }
+    },
   ],
   "post-processors": [
     {
