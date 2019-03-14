@@ -65,7 +65,7 @@
   ],
   "provisioners": [
     {
-      "type": "shell",virt
+      "type": "shell",
       "script": "scripts/init.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     },
