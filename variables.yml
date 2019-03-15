@@ -6,6 +6,9 @@
 # It exists because editing/viewing this file is easier than hunting for strings in a really long Ruby source code file.
 
 
+ssl-cert:
+  team-name:　potato
+
 # Config for db box.
 db:
 
