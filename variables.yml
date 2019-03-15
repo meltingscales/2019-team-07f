@@ -13,7 +13,7 @@ db:
   hostname: db
 
   # IP address of database.
-  ip: 10.0.0.10
+  ip: 10.3.0.10
 
   # (outwards-facing) port of database.
   port: 3306
@@ -31,7 +31,7 @@ web:
   hostname: web
 
   # IP address of web server.
-  ip: 10.0.0.11
+  ip: 10.3.0.11
 
 # Config for iSCSI box.
 iscsi:
@@ -39,7 +39,7 @@ iscsi:
   hostname: iscsi
 
   # IP address of web server.
-  ip: 10.0.0.12
+  ip: 10.3.0.12
 
 
 # Location the GitHub repository is cloned to.

@@ -79,9 +79,20 @@
       "script": "scripts/install-iscsi-server.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     },
-	{
+    {
+      "type": "file",
+      "source": "config-files/target01.conf",
+      "destination": "/tmp/target01.conf"
+    },
+    {
       "type": "shell",
-      "script": "scripts/iscsi-config.sh",
+      "inline": [
+        "sudo mv /tmp/target01.conf /etc/tgt/conf.d/target01.conf"
+      ]
+    },
+    {
+      "type": "shell",
+      "script": "scripts/configure-iscsi-server.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     },
     {
@@ -89,7 +100,7 @@
       "script": "scripts/cleanup.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     }
-  ],	
+  ],
   "post-processors": [
     {
       "type": "vagrant",
