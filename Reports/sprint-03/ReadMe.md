@@ -105,3 +105,14 @@ We currently have 15 test users.
 There are connection self-tests that the web box will perform with both the database box and storage box.
 These are performed each time
 ![test_user](img/test_user.PNG "test_user")
+
+
+# Individual reflections
+
+## Henry Post
+
+TODO
+
+## Idris Fagbemi
+
+TODO
