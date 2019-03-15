@@ -9,6 +9,7 @@ DESTROY_DB = false # Destroy the database?
 ENGAGE_CAKE = true # Engage cake? yes
 DEPLOY = true # Deploy the app?
 INSERT_TEST_DATA = true # Insert test data upon provision step?
+CREATE_SSL = false # Create an SSL Certificate
 
 
 # Load YAML file containing IP addresses, as well as other variables.
@@ -286,6 +287,13 @@ Vagrant.configure('2') do |config|
 
       # Test jep.
       web.vm.provision :shell, path: 'vagrant-config/scripts/test-jep.sh', run: 'always'
+    end
+
+    if CREATE_SSL
+      # Try to create SSL Certificate
+      web.vm.provision :shell, path: 'vagrant-config/scripts/create_ssl_cert.sh', run: 'always', env: {
+          :WEB_IP_ADDR => variables['web']['ip']
+      }
     end
 
     if DESTROY_DB
