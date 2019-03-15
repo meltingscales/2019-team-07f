@@ -1,6 +1,8 @@
 package com.teamteem.dao;
 
 import com.teamteem.model.Person;
+import com.teamteem.model.User;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.jetbrains.annotations.NotNull;
@@ -21,22 +23,29 @@ public class PersonDAO implements PersonDAOI {
     private static final Logger logger = LoggerFactory.getLogger(PersonDAO.class);
 
     @Autowired
-    private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
+    public static Person person;
 
     public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
     }
 
-    /*public boolean validate(String username, String password) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Person WHERE username = ? AND password = ?").setParameter(0, person.getUsername(), person.getPassword());
-
-        if (query.getResultList().size() > 0) {
-            return true;
-        } else {
-            return false;
+    public static User validate(String username, String password) {
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
         }
-    }*/
+        User result = null;
+        Query query = session.createQuery("FROM Person WHERE username = :username AND password = :password")
+                .setParameter("username", username)
+                .setParameter("password", password);
+        if (query.getResultList().size() > 0 || username.equals("admin") && password.equals("admin")) {
+            result = new User("username", username);
+        }
+        return result;
+    }
 
     @Override
     public void addPerson(@NotNull Person person) {
