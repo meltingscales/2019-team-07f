@@ -19,10 +19,8 @@ public class Login implements Serializable {
 
     private User currentUser;
 
-    //private SessionFactory sessionFactory;
-
     public String login() {
-        currentUser = validate(username, password);
+        currentUser = PersonDAO.validate(username, password);
 
         if (currentUser != null) {
             return "/logged_in/home.xhtml?faces-redirect=true";
@@ -42,38 +40,6 @@ public class Login implements Serializable {
     public boolean isLoggedIn() {
         return currentUser != null;
     }
-
-    /*public boolean validate(String username, String password) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM Person WHERE username = ? AND password = ?").setParameter(0, person.getUsername(), person.getPassword());
-
-        if (query.getResultList().size() > 0) {
-          return true;
-        } else {
-          return false;
-        }
-    }*/
-
-    private User validate(String username, String password) {
-        User result = null;
-
-        if (username.equals("admin") && password.equals("admin")) {
-            result = new User(username, "Hardcoded User");
-        }
-
-        /*try {
-            SessionFactory sf = new Configuration().configure().buildSessionFactory();
-            Session session = sf.openSession();
-            session.beginTransaction();
-            Query query = session.createQuery("FROM person WHERE username = ? AND password = ?");
-            query.setString("username", "username");
-            query.setString("password", "password");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
-            return result;
-        }
 
     public String getUsername() {
         return username;
