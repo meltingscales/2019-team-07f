@@ -9,9 +9,7 @@ install:
   - ps: Write-Host "I'm windows!"
 
   - ps: choco install -y ruby virtualbox packer vagrant
-  
-  - ps: cd %APPVEYOR_BUILD_FOLDER%
-  
+    
   # Build all missing boxes.
   - ps: cd %APPVEYOR_BUILD_FOLDER%/packer
   - ps: packer build ubuntu-mysql.json
