@@ -18,5 +18,18 @@ sudo apt -y install virtualbox
 # Pre-accept virtualbox-ext-pack license.
 echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-set-selections
 
-# Install virtualbox-ext-pack
-sudo apt -y install virtualbox-ext-pack
+# Try to install virtualbox-ext-pack
+{
+    sudo apt -y install virtualbox-ext-pack
+} || {
+    if [[ $? -eq "100" ]]; then
+        echo "Error 100! Could not find virtualbox-ext-pack...Installing with wget."
+
+        # Download it.
+        wget "https://download.virtualbox.org/virtualbox/6.0.4/Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack" /tmp/vboxextpack.vbox-extpack
+
+        # Install it.
+        VBoxManage extpack install/tmp/vboxextpack.vbox-extpack
+
+    fi
+}
