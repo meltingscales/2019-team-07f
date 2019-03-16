@@ -1,3 +1,6 @@
+<img src="https://travis-ci.org/HenryFBP/2019-team-07f-mirror.svg?branch=master" alt="build:created">
+<!-- TODO: Make this not the cloned test repo. -->
+
 # 2019-team-07f
 Private team repo for ITMT 430
 
