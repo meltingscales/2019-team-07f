@@ -1,4 +1,5 @@
-image: ubuntu
+version: 1.0.{build}
+image: Ubuntu1804
 
 install:
   - echo "Potato!"
@@ -32,4 +33,3 @@ install:
   # Vagrant up!
   - cd ${APPVEYOR_BUILD_FOLDER}/
   - vagrant up
-  
