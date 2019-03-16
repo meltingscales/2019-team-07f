@@ -7,7 +7,7 @@ sudo apt -y install ruby
 sudo apt autoremove virtualbox-dkms
 
 # Install VirtualBox tools.
-sudo apt -y install build-essential linux-headers-`uname -r` dkms virtualbox-dkms
+sudo apt -y install build-essential linux-headers-$(uname -r) dkms virtualbox-dkms
 
 # Install Vagrant.
 sudo apt -y install vagrant
@@ -19,17 +19,17 @@ sudo apt -y install virtualbox
 echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-set-selections
 
 # Try to install virtualbox-ext-pack
-{
+(
     sudo apt -y install virtualbox-ext-pack
-} || {
-    if [[ $? -eq "100" ]]; then
-        echo "Error 100! Could not find virtualbox-ext-pack...Installing with wget."
+)
 
-        # Download it.
-        wget "https://download.virtualbox.org/virtualbox/6.0.4/Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack" /tmp/vboxextpack.vbox-extpack
+if [[ $? = 100 ]]; then
+    echo "Error 100! Could not find virtualbox-ext-pack...Installing with wget."
 
-        # Install it.
-        VBoxManage extpack install/tmp/vboxextpack.vbox-extpack
+    # Download it.
+    wget "https://download.virtualbox.org/virtualbox/6.0.4/Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack" /tmp/vboxextpack.vbox-extpack
 
-    fi
-}
+    # Install it.
+    VBoxManage extpack install/tmp/vboxextpack.vbox-extpack
+
+fi
