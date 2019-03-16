@@ -10,7 +10,7 @@ script:
 
   # Install deps.
   - sudo apt update
-  - cd ${TRAVIS_REPO_SLUG}
+  - cd ${TRAVIS_BUILD_DIR}
   - sh ci-scripts/linux/install-deps.sh
 
   # Build all missing boxes.
@@ -20,7 +20,7 @@ script:
   - packer build ubuntu-webserver.json
 
   # Vagrant up!
-  - cd ${TRAVIS_REPO_SLUG}/
+  - cd ${TRAVIS_BUILD_DIR}/
   - vagrant up
 
 after_success:
