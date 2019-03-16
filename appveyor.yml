@@ -1,3 +1,8 @@
+# Currently, appveyor does not seem to support VT-x. Without this, this will always fail at the packer step.
+#
+# You can consider this appveyor yml file useless until they add it.
+
+
 version: 1.0.{build}
 image: 
   - Visual Studio 2019 Preview
