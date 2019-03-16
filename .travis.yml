@@ -14,7 +14,7 @@ script:
   - bash ci-scripts/linux/install-deps.sh
 
   # Build all missing boxes.
-  - cd ${TRAVIS_REPO_SLUG}/packer
+  - cd ${TRAVIS_BUILD_DIR}/packer
   - packer build ubuntu-mysql.json
   - packer build ubuntu-storage.json
   - packer build ubuntu-webserver.json
