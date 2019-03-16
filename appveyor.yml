@@ -9,7 +9,7 @@ install:
   - ps: Write-Host "I'm windows!"
 
 # Linux instructions
-  - sh: echo "Potato!"
+  - sh: echo "I'm Linux!"
   
   - sh: sudo apt update
   
