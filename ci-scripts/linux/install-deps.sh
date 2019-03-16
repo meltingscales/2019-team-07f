@@ -26,10 +26,12 @@ echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-
 if [[ $? = 100 ]]; then
     echo "Error 100! Could not find virtualbox-ext-pack...Installing with wget."
 
+    VBOX_EXT_FILENAME=Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack
+
     # Download it.
-    curl https://download.virtualbox.org/virtualbox/6.0.4/Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack --output /tmp/Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack
+    curl https://download.virtualbox.org/virtualbox/6.0.4/${VBOX_EXT_FILENAME} --output /tmp/${VBOX_EXT_FILENAME}
 
     # Install it.
-    VBoxManage extpack install /tmp/Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack
+    VBoxManage extpack install /tmp/${VBOX_EXT_FILENAME}
 
 fi
