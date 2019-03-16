@@ -2,15 +2,26 @@ sudo: required
 
 language: ruby
 
-services:
-- packer
-- vagrant
-
 before_install:
-    - echo "before install"
+  - echo "before install"
 
 script:
-    - echo "test"
-    
+  - echo "test"
+
+  # Install deps.
+  - sudo apt update
+  - cd ${TRAVIS_REPO_SLUG}
+  - sh ci-scripts/linux/install-deps.sh
+
+  # Build all missing boxes.
+  - cd ${TRAVIS_REPO_SLUG}/packer
+  - packer build ubuntu-mysql.json
+  - packer build ubuntu-storage.json
+  - packer build ubuntu-webserver.json
+
+  # Vagrant up!
+  - cd ${TRAVIS_REPO_SLUG}/
+  - vagrant up
+
 after_success:
-    - echo "after success"
+  - echo "after success"
