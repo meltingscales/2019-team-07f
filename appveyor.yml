@@ -14,7 +14,9 @@ install:
   
   # Build all missing boxes.
   - cd ${APPVEYOR_BUILD_FOLDER}/packer
-  - ruby build-missing.rb
+  - packer build ubuntu-mysql.json
+  - packer build ubuntu-storage.json
+  - packer build ubuntu-webserver.json
   
   # Vagrant up!
   - cd ${APPVEYOR_BUILD_FOLDER}/
