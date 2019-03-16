@@ -6,7 +6,7 @@ image:
 install:
 
 # Windows instructions
-  - ps: echo "I'm windows!"
+  - ps: Write-Host "I'm windows!"
 
 # Linux instructions
   - sh: echo "Potato!"
