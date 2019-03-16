@@ -4,15 +4,15 @@
 
 
 version: 1.0.{build}
-image: 
+image:
   - Visual Studio 2019 Preview
   - Ubuntu1804
 
 install:
 
-# Windows instructions
+  # Windows instructions
   - ps: Write-Host "I'm windows!"
-  
+
   # Install vagrant from separate script as it throws 3010 error code to make ya reboot.
   - ps: cd $env:APPVEYOR_BUILD_FOLDER/ci-scripts/windows/
   - ps: powershell ./try-install-vagrant.ps1
@@ -22,10 +22,10 @@ install:
 
   # Refresh environment variables.
   - ps: refreshenv
-  
+
   # Append vbox command-line tools to PATH.
   - ps: $env:Path += ";C:\Program Files\Oracle\VirtualBox"
-  
+
   # Print all env vars for debug.
   - cmd: env
 
@@ -34,26 +34,26 @@ install:
   - ps: packer build ubuntu-mysql.json
   - ps: packer build ubuntu-storage.json
   - ps: packer build ubuntu-webserver.json
-  
+
   # Vagrant up!
   - ps: cd $env:APPVEYOR_BUILD_FOLDER
   - ps: vagrant up
 
-  
-# Linux instructions
+
+  # Linux instructions
   - sh: echo "I'm Linux!"
-  
+
   - sh: sudo apt update
-  
+
   - sh: cd ${APPVEYOR_BUILD_FOLDER}/
   - sh: sh ci-scripts/linux/install-deps.sh
-  
+
   # Build all missing boxes.
   - sh: cd ${APPVEYOR_BUILD_FOLDER}/packer
   - sh: packer build ubuntu-mysql.json
   - sh: packer build ubuntu-storage.json
   - sh: packer build ubuntu-webserver.json
-  
+
   # Vagrant up!
   - sh: cd ${APPVEYOR_BUILD_FOLDER}/
   - sh: vagrant up
