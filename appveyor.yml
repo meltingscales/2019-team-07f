@@ -32,23 +32,8 @@ install:
   
   - sh: sudo apt update
   
-  # Install normal deps
-  - sh: sudo apt -y install ruby
-  
-  # Purge existing vbox for proper installation
-  - sh: sudo apt autoremove virtualbox-dkms
-  
-  # Install VirtualBox.
-  - sh: sudo apt -y install build-essential linux-headers-`uname -r` dkms virtualbox-dkms
-
-  # Install Vagrant.
-  - sh: sudo apt -y install vagrant virtualbox
-
-  # Pre-accept virtualbox-ext-pack license.
-  - sh: echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-set-selections
-  
-  # Install virtualbox-ext-pack
-  - sh: sudo apt -y install virtualbox-ext-pack
+  - sh: cd ${APPVEYOR_BUILD_FOLDER}/
+  - sh: sh ci-scripts/linux/install-deps.sh
   
   # Build all missing boxes.
   - sh: cd ${APPVEYOR_BUILD_FOLDER}/packer
