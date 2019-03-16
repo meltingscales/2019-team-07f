@@ -17,6 +17,12 @@ install:
 
   # Refresh environment variables.
   - ps: refreshenv
+  
+  # Append vbox command-line tools to PATH.
+  - ps: $env:Path += ";C:\Program Files\Oracle\VirtualBox"
+  
+  # Print all env vars for debug.
+  - cmd: env
 
   # Build all missing boxes.
   - ps: cd $env:APPVEYOR_BUILD_FOLDER/packer
