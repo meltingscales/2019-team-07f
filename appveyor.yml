@@ -2,6 +2,16 @@ image: ubuntu
 
 install:
   - echo "Potato!"
+  
   - sudo apt update
-  - sudo apt -y install vagrant virtualbox virtualbox-ext-pack
+  
+  - sudo apt -y install vagrant virtualbox
+
+  # Pre-accept virtualbox-ext-pack license.
+  - echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-set-selections
+  
+  - sudo apt -y install virtualbox-ext-pack
+
+  - ls
+
   - cd "POTATO LAND"
