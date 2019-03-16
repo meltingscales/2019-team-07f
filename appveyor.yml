@@ -19,8 +19,10 @@ install:
   - ps: packer build ubuntu-webserver.json
   
   # Vagrant up!
-  - sh: cd ${APPVEYOR_BUILD_FOLDER}/
-  - sh: vagrant up
+  - ps: cd ${APPVEYOR_BUILD_FOLDER}/
+  - ps: vagrant up
+
+  
 # Linux instructions
   - sh: echo "I'm Linux!"
   
