@@ -13,7 +13,7 @@ install:
   - ps: choco install -y packer
 
   # This ignores any exit codes that choco(...)vagrant may throw.
-  - ps: choco install -y vagrant && exit 0
+  - cmd: choco install -y vagrant && exit 0
     
   # Build all missing boxes.
   - ps: cd %APPVEYOR_BUILD_FOLDER%/packer
