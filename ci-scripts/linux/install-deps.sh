@@ -41,6 +41,6 @@ if [[ $? = 100 ]]; then
 
 
     # Install it.
-    VBoxManage extpack install /tmp/${VBOX_EXT_FILENAME} --accept-license=${LICENSE_KEY}
+    echo "y" | sudo VBoxManage extpack install /tmp/${VBOX_EXT_FILENAME}
 
 fi
