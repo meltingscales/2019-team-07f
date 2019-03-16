@@ -17,7 +17,7 @@ install:
   - ps: choco install -y packer
 
   # Build all missing boxes.
-  - ps: cd %APPVEYOR_BUILD_FOLDER%/packer
+  - ps: cd $env:APPVEYOR_BUILD_FOLDER/packer
   - ps: packer build ubuntu-mysql.json
   - ps: packer build ubuntu-storage.json
   - ps: packer build ubuntu-webserver.json
