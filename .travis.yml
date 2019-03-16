@@ -11,7 +11,7 @@ script:
   # Install deps.
   - sudo apt update
   - cd ${TRAVIS_BUILD_DIR}
-  - sh ci-scripts/linux/install-deps.sh
+  - bash ci-scripts/linux/install-deps.sh
 
   # Build all missing boxes.
   - cd ${TRAVIS_REPO_SLUG}/packer
