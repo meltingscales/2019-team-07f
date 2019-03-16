@@ -30,6 +30,6 @@ if [[ $? = 100 ]]; then
     curl https://download.virtualbox.org/virtualbox/6.0.4/Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack --output /tmp/vboxextpack.vbox-extpack
 
     # Install it.
-    VBoxManage extpack install/tmp/vboxextpack.vbox-extpack
+    VBoxManage extpack install /tmp/vboxextpack.vbox-extpack
 
 fi
