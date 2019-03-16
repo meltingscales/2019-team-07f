@@ -5,13 +5,18 @@ install:
   
   - sudo apt update
   
-  - sudo apt -y install vagrant virtualbox
+  - sudo apt -y install vagrant virtualbox ruby
 
   # Pre-accept virtualbox-ext-pack license.
   - echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-set-selections
   
   - sudo apt -y install virtualbox-ext-pack
-
-  - ls
-
-  - cd "POTATO LAND"
+  
+  # Build all missing boxes.
+  - cd ${APPVEYOR_BUILD_FOLDER}/packer
+  - ruby build-missing.rb
+  
+  # Vagrant up!
+  - cd ${APPVEYOR_BUILD_FOLDER}/
+  - vagrant up
+  
