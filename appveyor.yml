@@ -1,3 +1,5 @@
+image: ubuntu
+
 install:
   - echo "Potato!"
-  - apt-get -y install vagrant virtualbox virtualbox-ext-pack
+  - apt -y install vagrant virtualbox virtualbox-ext-pack
