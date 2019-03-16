@@ -1,35 +1,42 @@
 version: 1.0.{build}
-image: Ubuntu1804
+image: 
+  - Ubuntu1804
+  - Visual Studio 2019 Preview
 
 install:
-  - echo "Potato!"
+
+# Windows instructions
+  - ps: echo "I'm windows!"
+
+# Linux instructions
+  - sh: echo "Potato!"
   
-  - sudo apt update
+  - sh: sudo apt update
   
   # Install normal deps
-  - sudo apt -y install ruby
+  - sh: sudo apt -y install ruby
   
   # Purge existing vbox for proper installation
-  - sudo apt autoremove virtualbox-dkms
+  - sh: sudo apt autoremove virtualbox-dkms
   
   # Install VirtualBox.
-  - sudo apt -y install build-essential linux-headers-`uname -r` dkms virtualbox-dkms
+  - sh: sudo apt -y install build-essential linux-headers-`uname -r` dkms virtualbox-dkms
 
   # Install Vagrant.
-  - sudo apt -y install vagrant virtualbox
+  - sh: sudo apt -y install vagrant virtualbox
 
   # Pre-accept virtualbox-ext-pack license.
-  - echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-set-selections
+  - sh: echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-set-selections
   
   # Install virtualbox-ext-pack
-  - sudo apt -y install virtualbox-ext-pack
+  - sh: sudo apt -y install virtualbox-ext-pack
   
   # Build all missing boxes.
-  - cd ${APPVEYOR_BUILD_FOLDER}/packer
-  - packer build ubuntu-mysql.json
-  - packer build ubuntu-storage.json
-  - packer build ubuntu-webserver.json
+  - sh: cd ${APPVEYOR_BUILD_FOLDER}/packer
+  - sh: packer build ubuntu-mysql.json
+  - sh: packer build ubuntu-storage.json
+  - sh: packer build ubuntu-webserver.json
   
   # Vagrant up!
-  - cd ${APPVEYOR_BUILD_FOLDER}/
-  - vagrant up
+  - sh: cd ${APPVEYOR_BUILD_FOLDER}/
+  - sh: vagrant up
