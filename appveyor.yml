@@ -19,7 +19,7 @@ install:
   - ps: packer build ubuntu-webserver.json
   
   # Vagrant up!
-  - ps: cd ${APPVEYOR_BUILD_FOLDER}/
+  - ps: cd %APPVEYOR_BUILD_FOLDER%
   - ps: vagrant up
 
   
