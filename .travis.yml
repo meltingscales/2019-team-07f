@@ -1,0 +1,16 @@
+sudo: required
+
+language: ruby
+
+services:
+- packer
+- vagrant
+
+before_install:
+    - echo "before install"
+
+script:
+    - echo "test"
+    
+after_success:
+    - echo "after success"
