@@ -4,7 +4,7 @@
 sudo apt -y install ruby
 
 # Purge existing vbox for proper installation
-sudo apt autoremove virtualbox-dkms
+sudo apt -y autoremove virtualbox-dkms
 
 # Install VirtualBox tools.
 sudo apt -y install build-essential linux-headers-$(uname -r) dkms virtualbox-dkms
@@ -24,14 +24,18 @@ echo virtualbox-ext-pack virtualbox-ext-pack/license select true | sudo debconf-
 )
 
 if [[ $? = 100 ]]; then
-    echo "Error 100! Could not find virtualbox-ext-pack...Installing with wget."
+    echo "Error 100! Could not find virtualbox-ext-pack...Installing with curl."
 
     VBOX_EXT_FILENAME=Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack
+    LICENSE_KEY=56be48f923303c8cababb0bb4c478284b688ed23f16d775d729b89a2e8e5f9e
 
-    # Download it.
-    curl https://download.virtualbox.org/virtualbox/6.0.4/${VBOX_EXT_FILENAME} --output /tmp/${VBOX_EXT_FILENAME}
+    if [[ ! -f /tmp/${VBOX_EXT_FILENAME} ]]; then
+        # Download it.
+        curl https://download.virtualbox.org/virtualbox/6.0.4/${VBOX_EXT_FILENAME} --output /tmp/${VBOX_EXT_FILENAME}
+    fi
+
 
     # Install it.
-    VBoxManage extpack install /tmp/${VBOX_EXT_FILENAME}
+    VBoxManage extpack install /tmp/${VBOX_EXT_FILENAME} --accept-license=${LICENSE_KEY}
 
 fi
