@@ -8,7 +8,10 @@ install:
 # Windows instructions
   - ps: Write-Host "I'm windows!"
 
-  - ps: choco install -y ruby virtualbox packer vagrant
+  - ps: choco install -y ruby
+  - ps: choco install -y virtualbox
+  - ps: choco install -y packer
+  - ps: choco install -y vagrant
     
   # Build all missing boxes.
   - ps: cd %APPVEYOR_BUILD_FOLDER%/packer
