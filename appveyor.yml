@@ -15,6 +15,9 @@ install:
   # Install general deps.
   - ps: powershell ./install-deps.ps1
 
+  # Refresh environment variables.
+  - ps: refreshenv
+
   # Build all missing boxes.
   - ps: cd $env:APPVEYOR_BUILD_FOLDER/packer
   - ps: packer build ubuntu-mysql.json
