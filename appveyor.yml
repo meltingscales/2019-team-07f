@@ -9,7 +9,8 @@ install:
   - ps: Write-Host "I'm windows!"
   
   # Install vagrant from separate script as it throws 3010 error code to make ya reboot.
-  - ps: powershell $env:APPVEYOR_BUILD_FOLDER/ci-scripts/windows/try-install-vagrant.ps1
+  - ps: cd $env:APPVEYOR_BUILD_FOLDER/ci-scripts/windows/
+  - ps: powershell ./try-install-vagrant.ps1
 
   - ps: choco install -y ruby
   - ps: choco install -y virtualbox
