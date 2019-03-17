@@ -28,6 +28,7 @@ if [[ $? = 100 ]]; then
 
     # Filename of the extpack.
     VBOX_EXT_FILENAME=Oracle_VM_VirtualBox_Extension_Pack-6.0.4.vbox-extpack
+    VBOX_EXT_VERSION=6.0.4
 
     # License key for unattended installations.
     # This is not a security risk, just proof I've accepted the license once.
@@ -36,7 +37,7 @@ if [[ $? = 100 ]]; then
     # If the extpack doesn't exist, then
     if [[ ! -f /tmp/${VBOX_EXT_FILENAME} ]]; then
         # Download it.
-        curl https://download.virtualbox.org/virtualbox/6.0.4/${VBOX_EXT_FILENAME} --output /tmp/${VBOX_EXT_FILENAME}
+        curl https://download.virtualbox.org/virtualbox/${VBOX_EXT_VERSION}/${VBOX_EXT_FILENAME} --output /tmp/${VBOX_EXT_FILENAME}
     fi
 
 
