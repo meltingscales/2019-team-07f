@@ -317,6 +317,9 @@ Vagrant.configure('2') do |config|
       web.vm.provision :shell, path: 'vagrant-config/scripts/create_ssl_cert.sh', run: 'always', env: {
           :WEB_IP_ADDR => VARIABLES['web']['ip'],
           :TEAM_NAME => VARIABLES['ssl-cert']['team-name'],
+          :TEAM_ORG => VARIABLES['ssl-cert']['team-org'],
+          :COUNTRY => VARIABLES['ssl-cert']['country'],
+          :STATE => VARIABLES['ssl-cert']['state'],
       }
     end
 

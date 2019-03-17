@@ -13,7 +13,11 @@ private-repo-url: git@github.com:illinoistech-itm/2019-team-07f.git
 public-repo-url: https://github.com/HenryFBP/2019-team-07f-mirror.git
 
 ssl-cert:
-  team-name:　potato
+  team-name: Team Teem
+  team-org: Illinois Institute of Technology
+  country: US
+  state: Illinois
+  city: Chicago
 
 # Config for db box.
 db:
