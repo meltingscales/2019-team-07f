@@ -11,9 +11,41 @@ DEPLOY = true # Deploy the app?
 INSERT_TEST_DATA = true # Insert test data upon provision step?
 CREATE_SSL = true # Create an SSL Certificate
 
+USE_PUBLIC_REPO = false # Use a public repository URL in case the private one is no more or inaccessible?
+
 
 # Load YAML file containing IP addresses, as well as other variables.
-variables = YAML.load_file('variables.yml')
+VARIABLES = YAML.load_file('variables.yml')
+
+# Clones the Github repo into a box.
+def clone_repo(box, vars = VARIABLES, public_repo = USE_PUBLIC_REPO)
+
+  if public_repo
+
+    # Clone repo.
+    box.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh', env: {
+        :REPO_URL => vars['public-repo-url']
+    }
+
+  else
+
+    # Copy SSH private key.
+    box.vm.provision 'file', source: vars['ssh-key-location'], destination: '/home/vagrant/id_rsa'
+
+    # Copy SSH config.
+    box.vm.provision 'file', source: './vagrant-config/config-files/ssh/config', destination: '/home/vagrant/config'
+
+    # Set up SSH keys.
+    box.vm.provision :shell, path: 'vagrant-config/scripts/setup-ssh-keys.sh'
+
+    # Clone repo.
+    box.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh', env: {
+        :REPO_URL => vars['private-repo-url']
+    }
+
+  end
+
+end
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -24,6 +56,20 @@ Vagrant.configure('2') do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
+  # SSH key doesn't exist on host?
+  unless File.exist? File.expand_path(VARIABLES['ssh-key-location'])
+
+    # They want to use a private repo?
+    unless USE_PUBLIC_REPO
+      puts "SSH key located at #{File.expand_path(VARIABLES['ssh-key-location'])} does not exist, yet you want to use a private repository."
+
+      puts "`vagrant up` will surely fail due to the `git clone` command failing."
+
+      puts "Halting!"
+
+      exit(1)
+    end
+  end
   # Disable synced folder by default to enforce cloning from git!
   config.vm.synced_folder '.', '/vagrant', disabled: true
 
@@ -38,8 +84,8 @@ Vagrant.configure('2') do |config|
 
     iscsi.vm.box = './packer/output/ubuntu-storage.box'
 
-    iscsi.vm.network 'private_network', ip: variables['iscsi']['ip']
-    iscsi.vm.hostname = variables['iscsi']['hostname']
+    iscsi.vm.network 'private_network', ip: VARIABLES['iscsi']['ip']
+    iscsi.vm.hostname = VARIABLES['iscsi']['hostname']
 
     iscsi.vm.provider 'virtualbox' do |vb|
       vb.gui = false
@@ -56,8 +102,8 @@ Vagrant.configure('2') do |config|
 
     # Sourced from https://stackoverflow.com/questions/24867252/allow-two-or-more-vagrant-vms-to-communicate-on-their-own-network
     # This creates a private network specified in a configuration file.
-    db.vm.network 'private_network', ip: variables['db']['ip']
-    db.vm.hostname = variables['db']['hostname']
+    db.vm.network 'private_network', ip: VARIABLES['db']['ip']
+    db.vm.hostname = VARIABLES['db']['hostname']
 
 
     db.vm.provider 'virtualbox' do |vb|
@@ -66,15 +112,8 @@ Vagrant.configure('2') do |config|
       vb.memory = '1024'
     end
 
-
-    # Copy SSH private key.
-    db.vm.provision 'file', source: '~/.ssh/id_rsa', destination: '/home/vagrant/id_rsa'
-
-    # Copy SSH config.
-    db.vm.provision 'file', source: './vagrant-config/config-files/ssh/config', destination: '/home/vagrant/config'
-
-    # Clone from git repository.
-    db.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh'
+    # Clone GitHub repo.
+    clone_repo(db)
 
     # Copy my.cnf to MySQL server.
     db.vm.provision 'file', source: './vagrant-config/config-files/mysql/my.cnf', destination: '/tmp/my.cnf'
@@ -89,10 +128,10 @@ Vagrant.configure('2') do |config|
 
     # Set up MySQL users to allow web box to connect to db box's MySQL server.
     db.vm.provision :shell, env: {
-        :WEB_IP_ADDR => variables['web']['ip'],
-        :USERNAME => variables['db']['username'],
-        :PASSWORD => variables['db']['password'],
-        :DB_SCHEMA => variables['db']['schema']
+        :WEB_IP_ADDR => VARIABLES['web']['ip'],
+        :USERNAME => VARIABLES['db']['username'],
+        :PASSWORD => VARIABLES['db']['password'],
+        :DB_SCHEMA => VARIABLES['db']['schema']
     },
                     path: 'vagrant-config/scripts/setup-mysql-users.sh'
 
@@ -126,11 +165,11 @@ Vagrant.configure('2') do |config|
     web.vm.network 'forwarded_port', guest: 8080, host: 8080, host_ip: '127.0.0.1'
 
     # Add webserver to a private network.
-    web.vm.network 'private_network', ip: variables['web']['ip']
-    web.vm.hostname = variables['web']['hostname']
+    web.vm.network 'private_network', ip: VARIABLES['web']['ip']
+    web.vm.hostname = VARIABLES['web']['hostname']
 
     # Test that the webserver can ping the database server.
-    web.vm.provision 'shell', run: 'always', env: {:DB_IP_ADDR => variables['db']['ip']},
+    web.vm.provision 'shell', run: 'always', env: {:DB_IP_ADDR => VARIABLES['db']['ip']},
                      inline: <<-SCRIPT
 
     # Ping DB once.
@@ -149,7 +188,7 @@ Vagrant.configure('2') do |config|
 
 
     # Test that the webserver can ping the iSCSI server.
-    web.vm.provision 'shell', run: 'always', env: {:ISCSI_IP_ADDR => variables['iscsi']['ip']},
+    web.vm.provision 'shell', run: 'always', env: {:ISCSI_IP_ADDR => VARIABLES['iscsi']['ip']},
                      inline: <<-SCRIPT
 
     # Ping iSCSI box once.
@@ -168,10 +207,10 @@ Vagrant.configure('2') do |config|
 
     # Test that the web box can connect to the MySQL server running on the database box.
     web.vm.provision 'shell', run: 'always', env: {
-        :DB_IP_ADDR => variables['db']['ip'],
-        :USERNAME => variables['db']['username'],
-        :PASSWORD => variables['db']['password'],
-        :DB_SCHEMA => variables['db']['schema']
+        :DB_IP_ADDR => VARIABLES['db']['ip'],
+        :USERNAME => VARIABLES['db']['username'],
+        :PASSWORD => VARIABLES['db']['password'],
+        :DB_SCHEMA => VARIABLES['db']['schema']
     }, inline: <<-SCRIPT
 
     # Ping DB once.
@@ -229,31 +268,15 @@ Vagrant.configure('2') do |config|
     #   apt-get install -y apache2
     # SHELL
 
-    # Copy SSH private key.
-    web.vm.provision 'file', source: '~/.ssh/id_rsa', destination: '/home/vagrant/id_rsa'
-
-    # Copy SSH config.
-    web.vm.provision 'file', source: './vagrant-config/config-files/ssh/config', destination: '/home/vagrant/config'
-
-    # Clone from git repository.
-    web.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh'
-
-    # Set up Python.
-    web.vm.provision :shell, path: 'vagrant-config/scripts/setup-python.sh'
-
-    # Set up Tomcat.
-    web.vm.provision :shell, path: 'vagrant-config/scripts/setup-tomcat.sh'
-
-    # Set up Maven.
-    web.vm.provision :shell, path: 'vagrant-config/scripts/setup-maven.sh'
+    clone_repo(web)
 
     # Modify database.properties to make web box's app use db box's database
     web.vm.provision :shell, env: {
-        :DB_IP_ADDR => variables['db']['ip'],
-        :DB_PORT => variables['db']['port'],
-        :DB_USERNAME => variables['db']['username'],
-        :DB_PASSWORD => variables['db']['password'],
-        :DB_SCHEMA => variables['db']['schema'],
+        :DB_IP_ADDR => VARIABLES['db']['ip'],
+        :DB_PORT => VARIABLES['db']['port'],
+        :DB_USERNAME => VARIABLES['db']['username'],
+        :DB_PASSWORD => VARIABLES['db']['password'],
+        :DB_SCHEMA => VARIABLES['db']['schema'],
     },
                      inline: <<-SCRIPT
 
@@ -292,8 +315,8 @@ Vagrant.configure('2') do |config|
     if CREATE_SSL
       # Try to create SSL Certificate
       web.vm.provision :shell, path: 'vagrant-config/scripts/create_ssl_cert.sh', run: 'always', env: {
-          :WEB_IP_ADDR => variables['web']['ip'],
-          :TEAM_NAME => variables['ssl-cert']['team-name'],
+          :WEB_IP_ADDR => VARIABLES['web']['ip'],
+          :TEAM_NAME => VARIABLES['ssl-cert']['team-name'],
       }
     end
 
@@ -313,11 +336,11 @@ Vagrant.configure('2') do |config|
     if INSERT_TEST_DATA
 
       web.vm.provision :shell, path: 'vagrant-config/scripts/insert-test-users.sh', env: {
-          :DB_IP_ADDR => variables['db']['ip'],
-          :DB_PORT => variables['db']['port'],
-          :DB_USERNAME => variables['db']['username'],
-          :DB_PASSWORD => variables['db']['password'],
-          :DB_SCHEMA => variables['db']['schema'],
+          :DB_IP_ADDR => VARIABLES['db']['ip'],
+          :DB_PORT => VARIABLES['db']['port'],
+          :DB_USERNAME => VARIABLES['db']['username'],
+          :DB_PASSWORD => VARIABLES['db']['password'],
+          :DB_SCHEMA => VARIABLES['db']['schema'],
       }
 
     end

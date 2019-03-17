@@ -20,6 +20,8 @@ Private team repo for ITMT 430
 
 ### Set up deploy keys
 
+NOTE: This is not required if you edit the `Vagrantfile` and change the `USE_PUBLIC_REPO` flag to `true`.
+
 - Create an RSA keypair and put them into `~/.ssh/` on your host machine. See
   [this
   guide](https://confluence.atlassian.com/bitbucketserver054/creating-ssh-keys-939508421.html)
