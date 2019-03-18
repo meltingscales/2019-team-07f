@@ -32,29 +32,34 @@ pipeline {
 
                 dir("${WORKSPACE}/packer") {
 
-
-                    if (! fileExists('./output/ubuntu-mysql.box')) {
-                        
-                        print 'Building mySQL box as it does not exist.'
-                        powershell "packer build ubuntu-mysql.json"
-                    } else {
-                        print 'MySQL box exists.'
+                    script {
+                        if (! fileExists('./output/ubuntu-mysql.box')) {
+                            
+                            print 'Building mySQL box as it does not exist.'
+                            powershell "packer build ubuntu-mysql.json"
+                        } else {
+                            print 'MySQL box exists.'
+                        }
+                    }
+                    
+                    script {
+                        if (! fileExists('./output/ubuntu-storage.box')) {
+                            
+                            print 'Building storage box as it does not exist.'
+                            powershell "packer build ubuntu-storage.json"
+                        } else {
+                            print 'storage box exists.'
+                        }
                     }
 
-                    if (! fileExists('./output/ubuntu-storage.box')) {
-                        
-                        print 'Building storage box as it does not exist.'
-                        powershell "packer build ubuntu-storage.json"
-                    } else {
-                        print 'storage box exists.'
-                    }
-
-                    if (! fileExists('./output/ubuntu-webserver.box')) {
-                        
-                        print 'Building webserver box as it does not exist.'
-                        powershell "packer build ubuntu-webserver.json"
-                    } else {
-                        print 'webserver box exists.'
+                    script {
+                        if (! fileExists('./output/ubuntu-webserver.box')) {
+                            
+                            print 'Building webserver box as it does not exist.'
+                            powershell "packer build ubuntu-webserver.json"
+                        } else {
+                            print 'webserver box exists.'
+                        }
                     }
 
                 }
