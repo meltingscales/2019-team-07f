@@ -16,13 +16,15 @@ pipeline {
                 powershell "'${WORKSPACE}/ci-scripts/install-deps.ps1'"
                 powershell "'${WORKSPACE}/ci-scripts/try-install-vagrant.ps1'"
 
-                powershell "cd '${WORKSPACE}/packer'"
-                powershell "packer build ubuntu-mysql.json"
-                powershell "packer build ubuntu-storage.json"
-                powershell "packer build ubuntu-webserver.json"
-                
-                powershell "cd ${WORKSPACE}/"
-                powershell "vagrant up"
+                dir("${WORKSPACE}/packer") {
+                    powershell "packer build ubuntu-mysql.json"
+                    powershell "packer build ubuntu-storage.json"
+                    powershell "packer build ubuntu-webserver.json"
+                }
+
+                dir("${WORKSPACE}/"){
+                    powershell "vagrant up"
+                }
             }
         }
         stage("Test") {
