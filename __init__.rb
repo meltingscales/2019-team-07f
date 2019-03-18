@@ -1,3 +1,8 @@
+#
+# This file is for helping other files use the root path of the
+# Git repository, and open `variables.yml`.
+#
+
 require 'yaml'
 
 # Get the absolute path of the repo, for convenience purposes.
