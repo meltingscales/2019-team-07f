@@ -50,8 +50,10 @@ pipeline {
             }
         }
         stage("Shutdown") {
-            dir("${WORKSPACE}/") {
-                powershell "vagrant halt"
+            steps {
+                dir("${WORKSPACE}/") {
+                    powershell "vagrant halt"
+                }
             }
         }
         post {
