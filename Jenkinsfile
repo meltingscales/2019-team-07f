@@ -32,9 +32,15 @@ pipeline {
                     powershell "ruby build-missing.rb"
                 }
 
+            }
+        }
+        stage("Deploy") {
+            steps {
+                echo "Deploying...."
                 dir("${WORKSPACE}/") {
                     powershell "vagrant up"
                 }
+
             }
         }
         stage("Test") {
@@ -43,9 +49,9 @@ pipeline {
                 powershell "throw 'Error: Software is way too good. Also, testing Jenkins.'"
             }
         }
-        stage("Deploy") {
-            steps {
-                echo "Deploying...."
+        stage("Shutdown") {
+            dir("${WORKSPACE}/") {
+                powershell "vagrant halt"
             }
         }
         post {
@@ -54,7 +60,7 @@ pipeline {
                     steps {
                         echo "Cleaning..."
                         dir("${WORKSPACE}/") {
-                            powershell "vagrant destroy"
+                            powershell "vagrant destroy -f"
                         }
                     }
                 }
