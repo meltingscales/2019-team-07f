@@ -67,6 +67,8 @@ va
 
 - Run `vagrant up` in this directory!
 
+The web application will be accessible at `localhost:8080/searchable-video-library/`.
+
 ## The manual way
 There are manual build instructions for the webserver inside `/server`.
 
