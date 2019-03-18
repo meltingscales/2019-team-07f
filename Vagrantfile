@@ -9,7 +9,7 @@ DESTROY_DB = false # Destroy the database?
 ENGAGE_CAKE = true # Engage cake? yes
 DEPLOY = true # Deploy the app?
 INSERT_TEST_DATA = true # Insert test data upon provision step?
-CREATE_SSL = true # Create an SSL Certificate
+CREATE_SSL = false # Create an SSL Certificate
 
 USE_PUBLIC_REPO = false # Use a public repository URL in case the private one is no more or inaccessible?
 
@@ -317,6 +317,9 @@ Vagrant.configure('2') do |config|
       web.vm.provision :shell, path: 'vagrant-config/scripts/create_ssl_cert.sh', run: 'always', env: {
           :WEB_IP_ADDR => VARIABLES['web']['ip'],
           :TEAM_NAME => VARIABLES['ssl-cert']['team-name'],
+          :TEAM_ORG => VARIABLES['ssl-cert']['team-org'],
+          :COUNTRY => VARIABLES['ssl-cert']['country'],
+          :STATE => VARIABLES['ssl-cert']['state'],
       }
     end
 

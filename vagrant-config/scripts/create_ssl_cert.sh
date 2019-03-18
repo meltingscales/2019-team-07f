@@ -3,7 +3,7 @@
 # Create the SSL Certificate.
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt \
--subj "/C=US/ST=Illinois/L=Chicago/O=Illinois Institute of Technology/OU=$TEAM_NAME/CN=$WEB_IP_ADDR" 2>/dev/null
+-subj "/C=$COUNTRY/ST=$STATE/L=$CITY/O=$TEAM_ORG/OU=$TEAM_NAME/CN=$WEB_IP_ADDR" 2>/dev/null
 
 # Create Diffie-Hellman group
 sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
