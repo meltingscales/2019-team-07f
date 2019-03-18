@@ -8,12 +8,12 @@ other prerequisites for our project like Apache Tomcat, etc.
 
 If you have ruby, run `ruby build-missing.rb` and all missing images will be built, in serial.
 
+If not, you can run the below commands:
+
 Do NOT run these in parallel, as they (can) break each other. <!-- TODO can this be fixed? -->
 
-`packer build -force ubuntu-webserver.json` will build the webserver.
+`packer build ubuntu-storage.json` will build the iSCSI box.
 
-`packer build -force ubuntu-mysql.json` will build the MySQL box.
+`packer build ubuntu-webserver.json` will build the webserver.
 
-(...)
-
-Repeat the above to build all boxes.
+`packer build ubuntu-mysql.json` will build the MySQL box.
