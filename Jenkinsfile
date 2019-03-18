@@ -56,14 +56,14 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                stage("Clean") {
-                    steps {
-                        echo "Cleaning..."
-                        dir("${WORKSPACE}/") {
-                            powershell "vagrant destroy -f"
-                        }
+    }
+    post {
+        always {
+            stage("Clean") {
+                steps {
+                    echo "Cleaning..."
+                    dir("${WORKSPACE}/") {
+                        powershell "vagrant destroy -f"
                     }
                 }
             }
