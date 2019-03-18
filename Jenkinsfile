@@ -18,44 +18,21 @@ pipeline {
             steps {
                 echo "Building.."
 
-                powershell "'${WORKSPACE}/ci-scripts/install-deps.ps1'"
-                powershell "'${WORKSPACE}/ci-scripts/try-install-vagrant.ps1'"
+                // Install dependencies.
+                powershell "'${WORKSPACE}/ci-scripts/windows/install-deps.ps1'"
+                powershell "'${WORKSPACE}/ci-scripts/windows/try-install-vagrant.ps1'"
 
-                dir("${WORKSPACE}/packer") {
-
-                    script {
-                        if (! fileExists('./output/ubuntu-mysql.box')) {
-                            
-                            print 'Building mySQL box as it does not exist.'
-                            powershell "packer build ubuntu-mysql.json"
-                        } else {
-                            print 'MySQL box exists.'
-                        }
-                    }
-                    
-                    script {
-                        if (! fileExists('./output/ubuntu-storage.box')) {
-                            
-                            print 'Building storage box as it does not exist.'
-                            powershell "packer build ubuntu-storage.json"
-                        } else {
-                            print 'storage box exists.'
-                        }
-                    }
-
-                    script {
-                        if (! fileExists('./output/ubuntu-webserver.box')) {
-                            
-                            print 'Building webserver box as it does not exist.'
-                            powershell "packer build ubuntu-webserver.json"
-                        } else {
-                            print 'webserver box exists.'
-                        }
-                    }
-
+                dir("${WORKSPACE}/") {
+                    // Remove box files if they were changed in the most recent commit.
+                    powershell "'ci-scripts/windows/remove-boxes-if-changed-in-most-recent-commit.ps1'"
                 }
 
-                dir("${WORKSPACE}/"){
+                dir("${WORKSPACE}/packer") {
+                    // Create all missing packer box files.
+                    powershell "ruby build-missing.rb"
+                }
+
+                dir("${WORKSPACE}/") {
                     powershell "vagrant up"
                 }
             }
