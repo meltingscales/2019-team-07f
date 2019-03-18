@@ -49,17 +49,15 @@ pipeline {
                 powershell "throw 'Error: Software is way too good. Also, testing Jenkins.'"
             }
         }
-        stage("Shutdown") {
-            steps {
-                dir("${WORKSPACE}/") {
-                    powershell "vagrant halt"
-                }
-            }
-        }
     }
     post {
         always {
             echo "Cleaning..."
+            
+            dir("${WORKSPACE}/") {
+                powershell "vagrant halt"
+            }
+            
             dir("${WORKSPACE}/") {
                 powershell "vagrant destroy -f"
             }
