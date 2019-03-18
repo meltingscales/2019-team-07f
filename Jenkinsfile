@@ -7,15 +7,15 @@ pipeline {
                 echo 'Building..'
                 powershell 'Write-Output "Hello, world!"'
 
-                powershell "$env:WORKSPACE/ci-scripts/install-deps.ps1"
-                powershell "$env:WORKSPACE/ci-scripts/try-install-vagrant.ps1"
+                powershell "${WORKSPACE}/ci-scripts/install-deps.ps1"
+                powershell "${WORKSPACE}/ci-scripts/try-install-vagrant.ps1"
 
-                powershell "cd $env:WORKSPACE/packer"
+                powershell "cd ${WORKSPACE}/packer"
                 powershell "packer build ubuntu-mysql.json"
                 powershell "packer build ubuntu-storage.json"
                 powershell "packer build ubuntu-webserver.json"
                 
-                powershell "cd $env:WORKSPACE/"
+                powershell "cd ${WORKSPACE}/"
                 powershell "vagrant up"
             }
         }
