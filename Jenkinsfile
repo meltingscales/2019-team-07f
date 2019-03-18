@@ -33,7 +33,7 @@ pipeline {
                 dir("${WORKSPACE}/packer") {
 
 
-                    if (! fileExists './output/ubuntu-mysql.box') {
+                    if (! fileExists('./output/ubuntu-mysql.box')) {
                         
                         print 'Building mySQL box as it does not exist.'
                         powershell "packer build ubuntu-mysql.json"
@@ -41,7 +41,7 @@ pipeline {
                         print 'MySQL box exists.'
                     }
 
-                    if (! fileExists './output/ubuntu-storage.box') {
+                    if (! fileExists('./output/ubuntu-storage.box')) {
                         
                         print 'Building storage box as it does not exist.'
                         powershell "packer build ubuntu-storage.json"
@@ -49,7 +49,7 @@ pipeline {
                         print 'storage box exists.'
                     }
 
-                    if (! fileExists './output/ubuntu-webserver.box') {
+                    if (! fileExists('./output/ubuntu-webserver.box')) {
                         
                         print 'Building webserver box as it does not exist.'
                         powershell "packer build ubuntu-webserver.json"
@@ -73,6 +73,12 @@ pipeline {
         stage("Deploy") {
             steps {
                 echo "Deploying...."
+            }
+        }
+        
+        stage("Clean") {
+            steps {
+                echo "Cleaning..."
             }
         }
     }
