@@ -48,10 +48,16 @@ pipeline {
                 echo "Deploying...."
             }
         }
-        
-        stage("Clean") {
-            steps {
-                echo "Cleaning..."
+        post {
+            always {
+                stage("Clean") {
+                    steps {
+                        echo "Cleaning..."
+                        dir("${WORKSPACE}/") {
+                            powershell "vagrant destroy"
+                        }
+                    }
+                }
             }
         }
     }
