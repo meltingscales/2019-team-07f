@@ -5,11 +5,11 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building.."
-                powershell "Write-Output "Hello, world!""
+                powershell "Write-Output 'Hello, world!'"
 
-                powershell "Write-Output "dis be workspace: ${WORKSPACE}""
-                powershell "Write-Output "dis be workspace: %WORKSPACE%""
-                powershell "Write-Output "dis be workspace: $env:WORKSPACE""
+                powershell "Write-Output 'dis be workspace: ${WORKSPACE}'"
+                powershell "Write-Output 'dis be workspace: %WORKSPACE%'"
+                powershell "Write-Output 'dis be workspace: $env:WORKSPACE'"
                 bat "echo dis be workspace: %WORKSPACE%"
                 bat "dir"
 
