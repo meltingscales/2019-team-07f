@@ -1,23 +1,23 @@
-Write-Host $MyInvocation.MyCommand
+Write-Output $MyInvocation.MyCommand
 
 $changed = git show --name-only --oneline HEAD
 
-pwd | Write-Host
+pwd | Write-Output
 
-Write-Host $changed
+Write-Output $changed
 
 function RemoveIfChanged($artifactbuildfile, $artifactoutput, $delete = $FALSE) {
     
     if($changed.Contains($artifactbuildfile)) {
 
-        Write-Host "Removing $artifactoutput as it was changed last commit!"
+        Write-Output "Removing $artifactoutput as it was changed last commit!"
 
         # If should delete,
         if($delete) {
             # If path exists,
             if(Test-Path $artifactoutput -PathType Leaf) {
                 del "$artifactoutput"
-                Write-Host "DEL $artifactoutput"            
+                Write-Output "DEL $artifactoutput"            
             }
         }
     }
