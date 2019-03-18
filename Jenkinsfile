@@ -9,8 +9,7 @@ pipeline {
 
                 powershell 'Write-Output "dis be workspace: ${WORKSPACE}"'
                 powershell 'Write-Output "dis be workspace: %WORKSPACE%"'
-                bat 'dis be workspace: $WORKSPACE'
-                bat 'echo "dis be workspace: $WORKSPACE"'
+                bat 'echo dis be workspace: %WORKSPACE%'
                 bat 'dir'
 
                 powershell '${WORKSPACE}/ci-scripts/install-deps.ps1'
