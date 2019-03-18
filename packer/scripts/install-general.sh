@@ -6,8 +6,13 @@ apt-get update
 
 # Install add-apt-repository command.
 apt-get install -y software-properties-common
-
 apt-get install -y debconf-utils
+
+# Install better `top` command
+apt-get install -y gtop
+
+# Install good terminal multiplexer.
+apt-get install -y tmux
 
 # Install curl, a way to send HTTP requests.
 apt-get install -y curl
