@@ -49,9 +49,9 @@ It currently will serve a fun random number generator to the following URL:
       
    A command like 
    
-        ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+        ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
         
-   Would work.
+   Could also work.
       
   Then, there will be setup scripts under `/server/src/main/resources/*.sql`.
   Run `setup.sql`. <!-- TODO Remove this manual step. I (-H) tried. -->
