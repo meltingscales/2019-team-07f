@@ -17,7 +17,7 @@ pipeline {
                 powershell 'packer build ubuntu-webserver.json'
                 
                 powershell 'cd ${WORKSPACE}/'
-                powershell 'vagrant up"
+                powershell 'vagrant up'
             }
         }
         stage('Test') {
