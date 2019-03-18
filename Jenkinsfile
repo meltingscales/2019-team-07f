@@ -13,10 +13,10 @@ pipeline {
                 bat "echo dis be workspace: %WORKSPACE%"
                 bat "dir"
 
-                powershell "${WORKSPACE}/ci-scripts/install-deps.ps1"
-                powershell "${WORKSPACE}/ci-scripts/try-install-vagrant.ps1"
+                powershell "'${WORKSPACE}/ci-scripts/install-deps.ps1'"
+                powershell "'${WORKSPACE}/ci-scripts/try-install-vagrant.ps1'"
 
-                powershell "cd ${WORKSPACE}/packer"
+                powershell "cd '${WORKSPACE}/packer'"
                 powershell "packer build ubuntu-mysql.json"
                 powershell "packer build ubuntu-storage.json"
                 powershell "packer build ubuntu-webserver.json"
