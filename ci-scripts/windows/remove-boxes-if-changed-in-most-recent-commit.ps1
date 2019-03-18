@@ -12,9 +12,13 @@ function RemoveIfChanged($artifactbuildfile, $artifactoutput, $delete = $FALSE) 
 
         Write-Host "Removing $artifactoutput as it was changed last commit!"
 
+        # If should delete,
         if($delete) {
-            del "$artifactoutput"
-            Write-Host "DEL $artifactoutput"
+            # If path exists,
+            if(Test-Path $artifactoutput -PathType Leaf) {
+                del "$artifactoutput"
+                Write-Host "DEL $artifactoutput"            
+            }
         }
     }
 }
