@@ -28,7 +28,7 @@ pipeline {
         stage("Test") {
             steps {
                 echo "Testing.."
-                powershell "throw "Error: Software is way too good. Also, testing Jenkins.""
+                powershell "throw 'Error: Software is way too good. Also, testing Jenkins.'"
             }
         }
         stage("Deploy") {
