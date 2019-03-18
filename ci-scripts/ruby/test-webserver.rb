@@ -1,15 +1,22 @@
 require 'net/http'
 
-response = nil
+require '../../__init__'
 
-Net::HTTP.start('127.0.0.1', 8080) {|http|
+VARIABLES = get_variables
+
+begin
+  Net::HTTP.start(VARIABLES['local']['host'], VARIABLES['local']['port']) do |http|
     response = http.head('searchable-video-library')
 
     puts response.code
-    if(response.code != 200) {
-        puts "Didn't get 200 OK! Failure!"
-        puts response.body
-        puts response
-        exit(1)
-    }
-}
+    if response.code != 200
+      puts "Didn't get 200 OK! Failure!"
+      puts response.body
+      puts response
+      exit(1)
+    end
+  end
+rescue Errno::ECONNREFUSED
+  puts "Couldn't connect to web server at #{VARIABLES['local']['host']}:#{VARIABLES['local']['port']}/#{VARIABLES['local']['uri']}"
+  exit 1
+end
