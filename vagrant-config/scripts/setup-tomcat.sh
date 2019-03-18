@@ -7,3 +7,8 @@ cp -f /home/vagrant/2019-team-07f/vagrant-config/config-files/tomcat/tomcat-user
 
 # Set up Tomcat's configuration.
 cp -f /home/vagrant/2019-team-07f/vagrant-config/config-files/tomcat/server.xml /var/lib/tomcat8/conf/server.xml
+
+# Make sure Tomcat is running, and apply configuration.
+systemctl restart tomcat8
+
+echo "Done setting up tomcat."

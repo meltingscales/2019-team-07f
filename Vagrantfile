@@ -303,6 +303,12 @@ Vagrant.configure('2') do |config|
     # Refresh environment variables.
     web.vm.provision :shell, path: 'vagrant-config/scripts/refresh-env.sh' #TODO does this actually work? Is a restart required?
 
+    # Set up maven.
+    web.vm.provision :shell, path: 'vagrant-config/scripts/setup-maven.sh'
+
+    # Set up tomcat.
+    web.vm.provision :shell, path: 'vagrant-config/scripts/setup-tomcat.sh'
+
     # Run tests.
     if RUN_TESTS
       # Test our Python libraries.
