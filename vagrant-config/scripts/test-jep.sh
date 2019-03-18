@@ -12,3 +12,5 @@ javac -version
 mvn package
 
 mvn exec:java
+
+echo "Done testing jep."

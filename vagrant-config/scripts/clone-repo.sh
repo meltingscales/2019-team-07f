@@ -15,3 +15,4 @@ sudo git clone ${REPO_URL} /home/vagrant/2019-team-07f/
 # Give vagrant user ownership of git repo
 sudo chown vagrant:vagrant /home/vagrant/2019-team-07f/
 
+echo "Done cloning repo."
