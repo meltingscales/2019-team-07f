@@ -28,8 +28,6 @@ pipeline {
                 powershell "'${WORKSPACE}/ci-scripts/install-deps.ps1'"
                 powershell "'${WORKSPACE}/ci-scripts/try-install-vagrant.ps1'"
 
-                powershell "throw 'Error: Software is way too good. Also, testing Jenkins.'"
-
                 dir("${WORKSPACE}/packer") {
 
                     script {
