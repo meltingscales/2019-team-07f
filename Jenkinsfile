@@ -24,7 +24,7 @@ pipeline {
 
                 dir("${WORKSPACE}/") {
                     // Remove box files if they were changed in the most recent commit.
-                    powershell "'ci-scripts/windows/remove-boxes-if-changed-in-most-recent-commit.ps1'"
+                    powershell "ruby ci-scripts/ruby/remove-boxes-if-changed-in-most-recent-commit.ps1"
                 }
 
                 dir("${WORKSPACE}/packer") {
