@@ -22,7 +22,7 @@ Dir.glob(File.join(root_folder, "*.json")).each {|jsonfile|
   else
     puts "[MISS] " + boxfile
 
-    command = "packer build -force #{jsonfile}"
+    command = "packer build -force \"#{jsonfile}\""
 
     puts("Running `#{command}`...")
 

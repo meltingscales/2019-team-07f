@@ -8,7 +8,7 @@
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
         "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
         "/install/vmlinuz<wait>",
-        " auto<wait>", 
+        " auto<wait>",
         " console-setup/ask_detect=false<wait>",
         " console-setup/layoutcode=us<wait>",
         " console-setup/modelcode=pc105<wait>",
