@@ -1,6 +1,6 @@
 require 'net/http'
 
-require '../../__init__'
+require_relative '../../__init__'
 
 VARIABLES = get_variables
 
