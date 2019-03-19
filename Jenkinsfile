@@ -47,10 +47,8 @@ pipeline {
                 echo "Testing.."
 
                 dir("${WORKSPACE}/ci-scripts/ruby") {
-                    powershell "test-webserver.rb"
+                    powershell "ruby test-webserver.rb"
                 }
-                
-                powershell "throw 'Error: Software is way too good. Also, testing Jenkins.'"
             }
         }
     }
