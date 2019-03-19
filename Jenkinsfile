@@ -59,7 +59,7 @@ pipeline {
             echo "Cleaning..."
             
             dir("${WORKSPACE}/") {
-                powershell "vagrant halt"
+                powershell "vagrant halt -f"
             }
             
             dir("${WORKSPACE}/") {
