@@ -18,9 +18,12 @@ pipeline {
             steps {
                 echo "Building.."
 
-                // Install dependencies.
-                powershell "'${WORKSPACE}/ci-scripts/windows/install-deps.ps1'"
-                powershell "'${WORKSPACE}/ci-scripts/windows/try-install-vagrant.ps1'"
+                
+                dir("${WORKSPACE}/ci-scripts/windows/") {
+                    // Install dependencies.
+                    bat "powershell -file 'install-deps.ps1'"
+                    bat "powershell -file 'try-install-vagrant.ps1'"
+                }
 
                 dir("${WORKSPACE}/") {
                     // Remove box files if they were changed in the most recent commit.
