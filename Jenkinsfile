@@ -19,6 +19,9 @@ pipeline {
                 echo "Building.."
 
                 
+                // Allow ps1 files to be run ;)
+                bat "powershell Set-ExecutionPolicy unrestricted -Force
+                
                 // Debug print for execution policy.
                 bat "powershell Get-ExecutionPolicy"
                 
