@@ -21,8 +21,8 @@ pipeline {
                 
                 dir("${WORKSPACE}/ci-scripts/windows/") {
                     // Install dependencies.
-                    bat "powershell -file 'install-deps.ps1'"
-                    bat "powershell -file 'try-install-vagrant.ps1'"
+                    bat "powershell -file install-deps.ps1"
+                    bat "powershell -file try-install-vagrant.ps1"
                 }
 
                 dir("${WORKSPACE}/") {
