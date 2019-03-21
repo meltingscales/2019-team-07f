@@ -9,6 +9,10 @@ else
     Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
 
+Write-Host "Enabling global confirmation."
+choco feature enable -n=allowGlobalConfirmation
+
+
 Write-Host "Installing ruby."
 choco install -y ruby
 
