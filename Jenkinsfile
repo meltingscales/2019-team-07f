@@ -36,6 +36,12 @@ pipeline {
                     bat "ruby ci-scripts/ruby/remove-boxes-if-changed-in-most-recent-commit.rb"
                 }
 
+                dir("${WORKSPACE}/") {
+                    // Validate Vagrantfile.
+                    bat "vagrant validate"
+                }
+
+                
                 dir("${WORKSPACE}/packer") {
                     // Create all missing packer box files.
                     bat "ruby build-missing.rb"
