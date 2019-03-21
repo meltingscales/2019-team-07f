@@ -19,6 +19,9 @@ pipeline {
                 echo "Building.."
 
                 
+                // Debug print for execution policy.
+                bat "powershell Get-ExecutionPolicy"
+                
                 dir("${WORKSPACE}/ci-scripts/windows/") {
                     // Install dependencies.
                     bat "powershell -file install-deps.ps1"
@@ -27,12 +30,12 @@ pipeline {
 
                 dir("${WORKSPACE}/") {
                     // Remove box files if they were changed in the most recent commit.
-                    powershell "ruby ci-scripts/ruby/remove-boxes-if-changed-in-most-recent-commit.rb"
+                    bat "ruby ci-scripts/ruby/remove-boxes-if-changed-in-most-recent-commit.rb"
                 }
 
                 dir("${WORKSPACE}/packer") {
                     // Create all missing packer box files.
-                    powershell "ruby build-missing.rb"
+                    bat "ruby build-missing.rb"
                 }
 
             }
@@ -41,7 +44,7 @@ pipeline {
             steps {
                 echo "Deploying...."
                 dir("${WORKSPACE}/") {
-                    powershell "vagrant up"
+                    bat "vagrant up"
                 }
             }
         }
@@ -50,7 +53,7 @@ pipeline {
                 echo "Testing.."
 
                 dir("${WORKSPACE}/ci-scripts/ruby") {
-                    powershell "ruby test-webserver.rb"
+                    bat "ruby test-webserver.rb"
                 }
             }
         }
@@ -60,11 +63,11 @@ pipeline {
             echo "Cleaning..."
             
             dir("${WORKSPACE}/") {
-                powershell "vagrant halt -f"
+                bat "vagrant halt -f"
             }
             
             dir("${WORKSPACE}/") {
-                powershell "vagrant destroy -f"
+                bat "vagrant destroy -f"
             }
         }
     }
