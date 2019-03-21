@@ -1,25 +1,28 @@
+
+Write-Output "Checking if choco is installed."
+
 if (Get-Command choco.exe -errorAction SilentlyContinue)
 {
-    Write-Host("Choco is installed.")
+    Write-Output("Choco is installed.")
 }
 else
 # Choco is not installed.
 {
-    Write-Host("Choco is not installed. Installing...")
+    Write-Output("Choco is not installed. Installing...")
     Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
 
-Write-Host "Enabling global confirmation."
+Write-Output "Enabling global confirmation."
 choco feature enable -n=allowGlobalConfirmation
 
 
-Write-Host "Installing ruby."
+Write-Output "Installing ruby."
 choco install -y ruby
 
 
-Write-Host "Installing virtualbox."
+Write-Output "Installing virtualbox."
 choco install -y virtualbox
 
 
-Write-Host "Installing packer."
+Write-Output "Installing packer."
 choco install -y packer
