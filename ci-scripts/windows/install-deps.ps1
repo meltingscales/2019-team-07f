@@ -1,4 +1,3 @@
-
 Write-Output "Checking if choco is installed."
 
 if (Get-Command choco.exe -errorAction SilentlyContinue)
@@ -15,14 +14,28 @@ else
 Write-Output "Enabling global confirmation."
 choco feature enable -n=allowGlobalConfirmation
 
+if (-Not(Get-Command ruby.exe -ErrorAction SilentlyContinue))
+{
+    Write-Output "Installing ruby."
+    choco install -y ruby
+} else {
+    Write-Output "ruby.exe exists."
+}
 
-Write-Output "Installing ruby."
-choco install -y ruby
+if (-Not(Get-Command VirtualBox.exe -ErrorAction SilentlyContinue))
+{
+    Write-Output "Installing virtualbox."
+    choco install -y virtualbox
+} else {
+    Write-Output "VirtualBox.exe exists."
+}
 
 
-Write-Output "Installing virtualbox."
-choco install -y virtualbox
+if (-Not(Get-Command packer.exe -ErrorAction SilentlyContinue))
+{
+    Write-Output "Installing packer."
+    choco install -y packer
+} else {
+    Write-Output "packer.exe exists."
+}
 
-
-Write-Output "Installing packer."
-choco install -y packer
