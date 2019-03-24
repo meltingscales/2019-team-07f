@@ -38,7 +38,7 @@ MySQL database. It should also upload the file locally (no iSCSI needed)
 1.  NAME: Generate an SSL certificate and add it to the Apache Tomcat server in the
 Vagrant provisioning step. Verify HTTPS works.
     
-1.  Convert a video to audio using a Java library. Add this as a unit test to
+1.  NAME: Convert a video to audio using a Java library. Add this as a unit test to
 verify that this works. Make sure it works within the web server.
 
 # Proof
