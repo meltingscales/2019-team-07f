@@ -33,7 +33,7 @@ both the iSCSI target and initiator.
 .java files that Hibernate will use to create tables.
     
 1.  NAME: Add a video upload form that inserts a video's information to a new `Video`
-table in the MySQL database. It should also upload the file locally (no iSCSI needed)
+table in the MySQL database. It should also upload the file on the webserver (no iSCSI needed)
     
 1.  NAME: Generate an SSL certificate and add it to the Apache Tomcat server in the
 Vagrant provisioning step. Verify HTTPS works.
