@@ -1,3 +1,5 @@
+By Henry Post
+
 # Status update
 
 Alright, here's the deal. I've done most of this project. It's been unfair to me
