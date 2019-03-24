@@ -2,7 +2,7 @@
 ## a. Create a system allowing users to create accounts and upload video, using a speech to text library (cloud based or opensource) to create text transcripts of these videos
 How do we implement the creation of accounts and the upload of videos?
 ### A- User Interface Side:
--Create an inde
+-Create an index
 -Create a detailed information page to be filled up (to allow a user to create his account)
 -Create a user page once the user has been authenticated (user dashboard)
 
