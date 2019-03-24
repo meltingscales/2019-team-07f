@@ -22,21 +22,20 @@ I WILL check commits, so do not have one person do all of the tasks.
 
 # Tasks
 
-1.  Migrate all CSS from the static site (`/website/**/*.css`) to the web server
-servlet (`/server/WebContent/resources/css/`) and ensure the CSS is
-clean-looking and simple. Don't use the OLD CSS, it was much too messy.
+1.  NAME: Add CSS to the web server servlet (`/server/WebContent/resources/css/`) 
+and ensure the CSS is clean-looking and simple. Don't use the OLD CSS, it was much too messy.
 
-1.  Finish setting up an iSCSI target on the iSCSI box, and ensure it can be
+1.  NAME: Finish setting up an iSCSI target on the iSCSI box, and ensure it can be
 mounted as a drive. Add a few test file transfers in the `Vagrantfile` that test
 both the iSCSI target and initiator.
 
-1.  Add 4 database entities that are related to the `Person` object. These are
+1.  NAME: Add 4 database entities that are related to the `Person` object. These are
 .java files that Hibernate will use to create tables.
     
-1.  Add a video upload form that inserts a video to a new `Video` table in the
+1.  NAME: Add a video upload form that inserts a video to a new `Video` table in the
 MySQL database. It should also upload the file locally (no iSCSI needed)
     
-1.  Generate an SSL certificate and add it to the Apache Tomcat server in the
+1.  NAME: Generate an SSL certificate and add it to the Apache Tomcat server in the
 Vagrant provisioning step. Verify HTTPS works.
     
 1.  Convert a video to audio using a Java library. Add this as a unit test to
