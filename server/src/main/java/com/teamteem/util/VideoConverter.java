@@ -14,7 +14,9 @@ public final class VideoConverter {
      * @throws FileNotFoundException Thrown when the video file doesn't exist.
      */
     public static File convertVideo(File pathToVideo) throws FileNotFoundException {
-        if (pathToVideo.exists()) {
+
+        // If video file does not exist,
+        if (!pathToVideo.exists()) {
             throw new FileNotFoundException("Video file doesn't exist!");
         }
 
