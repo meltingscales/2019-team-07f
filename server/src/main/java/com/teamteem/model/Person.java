@@ -2,6 +2,7 @@ package com.teamteem.model;
 
 import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "person")
@@ -24,6 +25,9 @@ public class Person {
     private String country;
 
     private String password;
+
+    @OneToMany(mappedBy = "person")
+    private Set<Video> videos;
 
     public int getId() {
         return id;
@@ -79,4 +83,11 @@ public class Person {
     }
 
 
+    public Set<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Set<Video> videos) {
+        this.videos = videos;
+    }
 }
