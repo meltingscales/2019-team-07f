@@ -263,6 +263,13 @@
             <version>4.0.1</version>
         </dependency>
 
+        <!-- JAVE -->
+        <dependency>
+            <groupId>it.sauronsoftware.jave</groupId>
+            <artifactId>jave</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
         <!-- Tomcat 6 needs this -->
         <dependency>
             <groupId>com.sun.el</groupId>
@@ -283,4 +290,5 @@
             <url>http://download.java.net/maven/2</url>
         </repository>
     </repositories>
+
 </project>
