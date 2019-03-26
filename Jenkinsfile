@@ -53,7 +53,7 @@ pipeline {
             steps {
                 echo "Deploying...."
                 dir("${WORKSPACE}/") {
-                    bat "vagrant up"
+                    bat "vagrant up --provision"
                 }
             }
         }
