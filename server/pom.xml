@@ -263,12 +263,7 @@
             <version>4.0.1</version>
         </dependency>
 
-        <!-- JAVE -->
-        <dependency>
-            <groupId>it.sauronsoftware.jave</groupId>
-            <artifactId>jave</artifactId>
-            <version>1.0.2</version>
-        </dependency>
+
 
         <!-- Tomcat 6 needs this -->
         <dependency>
