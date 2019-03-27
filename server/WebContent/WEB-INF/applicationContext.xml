@@ -45,6 +45,7 @@ my project doesn't suck!
         <property name="annotatedClasses">
             <list>
                 <value>com.teamteem.model.Person</value>
+                <value>com.teamteem.model.Video</value>
             </list>
         </property>
         <property name="hibernateProperties">
