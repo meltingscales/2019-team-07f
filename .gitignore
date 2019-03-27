@@ -24,3 +24,6 @@ out/
 id_rsa.pub
 id_rsa.ppk
 id_rsa
+
+# Logs
+*.log
