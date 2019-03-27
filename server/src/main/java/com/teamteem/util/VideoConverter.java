@@ -1,50 +1,36 @@
 package com.teamteem.util;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.xuggle.mediatool.IMediaReader;
+import com.xuggle.mediatool.IMediaWriter;
+import com.xuggle.mediatool.ToolFactory;
+import com.xuggle.xuggler.ICodec;
 
 
-public final class VideoConverter {
-    /***
-     *
-     * Converts a video file to an audio file.
-     *
-     * @param pathToVideo Path to the video file to convert.
-     * @return A path to the converted MP3 file.
-     * @throws FileNotFoundException Thrown when the video file doesn't exist.
-     */
-    private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
+class VideoToAudio{
 
-    public static void main(String[] args) {
 
-        try {
-            String line;
-            String mp4File = "tools/video-to-audio/sampledata/video/potato.mp4potato.mp4";
-            String mp3File = "tools/video-to-audio/sampledata/video/potato.mp3";
 
-            // ffmpeg -i input.mp4 output.avi as it's on www.ffmpeg.org
-//            FFmpeg ffmpeg = new FFmpeg("/path/to/ffmpeg");
-//            FFprobe ffprobe = new FFprobe("/path/to/ffprobe");
-            String cmd = "ffmpeg -i " + mp4File + " " + mp3File;
-            Process p = Runtime.getRuntime().exec(cmd);
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(p.getErrorStream()));
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-            }
-            p.waitFor();
-            System.out.println("Video converted successfully!");
-            in.close();
-        } catch (IOException | InterruptedException e) {
-            LOG.log(Level.SEVERE, null, e);
-        }
+    public void convertVideoToAudio(){
+        IMediaReader reader = ToolFactory.makeReader("C://Users//Administrator//Downloads//video.mp4");
+        IMediaWriter writer = ToolFactory.makeWriter("C://Users//Administrator//Downloads//video.mp3",reader);
 
+        int sampleRate = 44100;
+        int channels = 1;
+
+        writer.addAudioStream(1, 0, ICodec.ID.CODEC_ID_MP3, channels, sampleRate);
+        reader.addListener(writer);
+
+        while (reader.readPacket() == null);
     }
 
+
+    public static void main(String [] args){
+        VideoToAudio vta = new VideoToAudio();
+        try{
+            vta.convertVideoToAudio();
+        }
+        catch(Exception e){
+            System.out.println("Could not open video file");
+        }
+    }
 }

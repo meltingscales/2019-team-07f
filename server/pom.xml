@@ -282,12 +282,19 @@
             <artifactId>ffmpeg</artifactId>
             <version>0.6.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/ws.schild/jave-core -->
+
+        <!-- https://mvnrepository.com/artifact/xuggle/xuggle-xuggler -->
         <dependency>
-            <groupId>ws.schild</groupId>
-            <artifactId>jave-core</artifactId>
-            <version>2.4.6</version>
+            <groupId>xuggle</groupId>
+            <artifactId>xuggle-xuggler</artifactId>
+            <version>5.4</version>
         </dependency>
+        <dependency>
+            <groupId>xuggle</groupId>
+            <artifactId>xuggle-xuggler</artifactId>
+            <version>5.4</version>
+        </dependency>
+
 
     </dependencies>
     <repositories>
@@ -296,10 +303,10 @@
             <name>java.net m2 repo</name>
             <url>http://download.java.net/maven/2</url>
         </repository>
+
         <repository>
-            <id>Jave</id>
-            <name>Jave Video and Audio encoder</name>
-            <url>https://mvnrepository.com/artifact/ws.schild/jave-core</url>
+            <id>xuggle repo</id>
+            <url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
         </repository>
     </repositories>
 
