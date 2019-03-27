@@ -282,6 +282,11 @@
             <name>java.net m2 repo</name>
             <url>http://download.java.net/maven/2</url>
         </repository>
+        <repository>
+            <id>Jave</id>
+            <name>Jave Video and Audio encoder</name>
+            <url>https://mvnrepository.com/artifact/ws.schild/jave-core</url>
+        </repository>
     </repositories>
 
 </project>
