@@ -263,7 +263,13 @@
             <version>4.0.1</version>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/com.tagtraum/ffmpeg -->
+        <dependency>
+            <groupId>com.tagtraum</groupId>
+            <artifactId>ffmpeg</artifactId>
+            <version>4.0.0</version>
+            <type>pom</type>
+        </dependency>
 
         <!-- Tomcat 6 needs this -->
         <dependency>
