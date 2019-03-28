@@ -29,6 +29,21 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private Set<Video> videos;
 
+    @OneToMany(mappedBy = "person")
+    private Set<Audio> audios;
+
+    @OneToMany(mappedBy = "person")
+    private Set<Text> texts;
+
+    /*OneToOne(mappedBy = "video")
+    private Set<Details> details;
+
+    @OneToOne(mappedBy = "audio")
+    private Set<Details> details;
+
+    @OneToOne(mappedBy = "text")
+    private Set<Details> details;*/
+
     public int getId() {
         return id;
     }
@@ -82,7 +97,6 @@ public class Person {
         return String.format("id=%d, username=%s", getId(), getUsername());
     }
 
-
     public Set<Video> getVideos() {
         return videos;
     }
@@ -90,4 +104,28 @@ public class Person {
     public void setVideos(Set<Video> videos) {
         this.videos = videos;
     }
+
+    public Set<Audio> getAudios() {
+        return audios;
+    }
+
+    public void setAudios(Set<Audio> audios) {
+        this.audios = audios;
+    }
+
+    public Set<Text> getTexts() {
+        return texts;
+    }
+
+    public void setTexts(Set<Text> texts) {
+        this.texts = texts;
+    }
+
+    /*public Set<Details> getDetails() {
+        return details;
+    }
+
+    public void setDetails(Set<Details> details) {
+        this.details = details;
+    }*/
 }
