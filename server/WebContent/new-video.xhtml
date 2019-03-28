@@ -20,7 +20,7 @@
         <h:form enctype="multipart/form-data">
             <h:inputFile value="#{uploadBean.file}"/>
 
-            <h:commandButton value="upload"/>
+            <h:commandButton value="upload" action="#{uploadBean.upload}"/>
         </h:form>
 
 
