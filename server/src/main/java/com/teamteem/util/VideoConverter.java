@@ -1,46 +1,52 @@
 package com.teamteem.util;
 
+import javax.faces.bean.ManagedBean;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
-import java.io.File;
-import com.xuggle.mediatool.IMediaReader;
-import com.xuggle.mediatool.IMediaWriter;
-import com.xuggle.mediatool.ToolFactory;
-import com.xuggle.xuggler.ICodec;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ *
+ * @author Idris
+ *
+ */
+@ManagedBean(name = "videoconverter")
+ class VideoConverter {
 
-class VideoToAudio{
+    private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
 
+    public static void main(String[] args) {
 
+        try {
+            String line;
+            Scanner s = new Scanner(System.in);
+            System.out.println("Enter video path: ");
 
-    public void convertVideoToAudio(){
-        Scanner s1=new Scanner(System.in);
-        System.out.print("Enter input video path: ");
-        String input=s1.next();
-        System.out.print("Enter output audio path: ");
-        String output=s1.next();
-        File source = new File(input);
-        File target = new File(output);
+            String mp4File = s.next();
+            System.out.println("Enter Audio path: ");
+            String mp3File = s.next();
 
-        IMediaReader reader = ToolFactory.makeReader(input);
-        IMediaWriter writer = ToolFactory.makeWriter(output,reader);
+            String cmd = "C:\\Users\\Administrator\\Desktop\\ffmpeg\\bin\\ffmpeg.exe -i " + mp4File + " " + mp3File;
+            System.out.println(cmd);
 
-        int sampleRate = 44100;
-        int channels = 1;
+            Process p = Runtime.getRuntime().exec(cmd);
 
-        writer.addAudioStream(1, 0, ICodec.ID.CODEC_ID_MP3, channels, sampleRate);
-        reader.addListener(writer);
-
-        while (reader.readPacket() == null);
-    }
-
-
-    public static void main(String [] args){
-        VideoToAudio vta = new VideoToAudio();
-        try{
-            vta.convertVideoToAudio();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(p.getErrorStream()));
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+            p.waitFor();
+            System.out.println("Video converted successfully!");
+            in.close();
+            s.close();
+        } catch (IOException | InterruptedException e) {
+            LOG.log(Level.SEVERE, null, e);
         }
-        catch(Exception e){
-            System.out.println("Could not open video file");
-        }
+
     }
 }

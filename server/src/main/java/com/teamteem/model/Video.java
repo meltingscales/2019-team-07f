@@ -18,6 +18,4 @@ public class Video {
     @ManyToOne
     @JoinColumn(name="person_id", nullable = false)
     private Person person;
-
-
 }

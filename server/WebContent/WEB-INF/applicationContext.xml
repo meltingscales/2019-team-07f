@@ -46,6 +46,9 @@ my project doesn't suck!
             <list>
                 <value>com.teamteem.model.Person</value>
                 <value>com.teamteem.model.Video</value>
+                <value>com.teamteem.model.Audio</value>
+                <value>com.teamteem.model.Text</value>
+                <value>com.teamteem.model.Details</value>
             </list>
         </property>
         <property name="hibernateProperties">
