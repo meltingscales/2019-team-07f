@@ -1,36 +1,52 @@
 package com.teamteem.util;
 
-import com.xuggle.mediatool.IMediaReader;
-import com.xuggle.mediatool.IMediaWriter;
-import com.xuggle.mediatool.ToolFactory;
-import com.xuggle.xuggler.ICodec;
+import javax.faces.bean.ManagedBean;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-class VideoToAudio{
+/**
+ *
+ * @author Idris
+ *
+ */
+@ManagedBean(name = "videoconverter")
+ class VideoConverter {
 
+    private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
 
+    public static void main(String[] args) {
 
-    public void convertVideoToAudio(){
-        IMediaReader reader = ToolFactory.makeReader("C://Users//Administrator//Downloads//video.mp4");
-        IMediaWriter writer = ToolFactory.makeWriter("C://Users//Administrator//Downloads//video.mp3",reader);
+        try {
+            String line;
+            Scanner s = new Scanner(System.in);
+            System.out.println("Enter video path: ");
 
-        int sampleRate = 44100;
-        int channels = 1;
+            String mp4File = s.next();
+            System.out.println("Enter Audio path: ");
+            String mp3File = s.next();
 
-        writer.addAudioStream(1, 0, ICodec.ID.CODEC_ID_MP3, channels, sampleRate);
-        reader.addListener(writer);
+            String cmd = "C:\\Users\\Administrator\\Desktop\\ffmpeg\\bin\\ffmpeg.exe -i " + mp4File + " " + mp3File;
+            System.out.println(cmd);
 
-        while (reader.readPacket() == null);
-    }
+            Process p = Runtime.getRuntime().exec(cmd);
 
-
-    public static void main(String [] args){
-        VideoToAudio vta = new VideoToAudio();
-        try{
-            vta.convertVideoToAudio();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(p.getErrorStream()));
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+            p.waitFor();
+            System.out.println("Video converted successfully!");
+            in.close();
+            s.close();
+        } catch (IOException | InterruptedException e) {
+            LOG.log(Level.SEVERE, null, e);
         }
-        catch(Exception e){
-            System.out.println("Could not open video file");
-        }
+
     }
 }
