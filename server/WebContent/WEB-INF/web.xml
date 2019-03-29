@@ -35,18 +35,18 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
-    <listener>
-        <listener-class>VideoConverter()</listener-class>
-    </listener>
+    <!--<listener>-->
+        <!--<listener-class>VideoConverter</listener-class>-->
+    <!--</listener>-->
 
-    <servlet>
-        <servlet-name>Teamteem</servlet-name>
-        <servlet-class>com.teamteem.util.VideoConverter()</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>Teamteem</servlet-name>-->
+        <!--<servlet-class>com.teamteem.util.VideoConverter</servlet-class>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>Teamteem</servlet-name>
-        <url-pattern>*.java</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Teamteem</servlet-name>-->
+        <!--<url-pattern>*.java</url-pattern>-->
+    <!--</servlet-mapping>-->
 </web-app>

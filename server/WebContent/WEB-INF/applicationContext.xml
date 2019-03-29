@@ -78,7 +78,7 @@ my project doesn't suck!
     <context:component-scan base-package="com.teamteem"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <tx:annotation-driven proxy-target-class="videoconverter"/>
+
 
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">
