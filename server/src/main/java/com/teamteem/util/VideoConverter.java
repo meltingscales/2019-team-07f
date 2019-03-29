@@ -2,6 +2,7 @@ package com.teamteem.util;
 
 import javax.faces.bean.ManagedBean;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,7 +31,10 @@ import java.util.logging.Logger;
             System.out.println("Enter Audio path: ");
             String mp3File = s.next();
 
-            String cmd = "C:\\Users\\Administrator\\Desktop\\ffmpeg\\bin\\ffmpeg.exe -i " + mp4File + " " + mp3File;
+            System.out.println("Enter FFmpeg path: ");
+            String ffmpeg = s.next();
+
+            String cmd = ffmpeg + " -i " + mp4File + " " + mp3File;
             System.out.println(cmd);
 
             Process p = Runtime.getRuntime().exec(cmd);
