@@ -2,7 +2,8 @@ package com.teamteem.util;
 
 import javax.faces.bean.ManagedBean;
 
-
+import javax.servlet.*;
+import javax.servlet.http.HttpServlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,11 +17,11 @@ import java.util.logging.Logger;
  *
  */
 @ManagedBean(name = "videoconverter")
- class VideoConverter {
+ class VideoConverter extends HttpServlet{
 
     private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ServletException {
 
         try {
             String line;
