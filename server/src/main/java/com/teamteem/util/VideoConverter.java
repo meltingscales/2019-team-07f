@@ -2,6 +2,8 @@ package com.teamteem.util;
 
 import javax.faces.bean.ManagedBean;
 
+import javax.servlet.*;
+import javax.servlet.http.HttpServlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,11 +17,11 @@ import java.util.logging.Logger;
  *
  */
 @ManagedBean(name = "videoconverter")
- class VideoConverter {
+ class VideoConverter extends HttpServlet{
 
     private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
-
-    public static void main(String[] args) {
+    
+    public static void main(String[] args) throws ServletException {
 
         try {
             String line;
@@ -30,7 +32,10 @@ import java.util.logging.Logger;
             System.out.println("Enter Audio path: ");
             String mp3File = s.next();
 
-            String cmd = "C:\\Users\\Administrator\\Desktop\\ffmpeg\\bin\\ffmpeg.exe -i " + mp4File + " " + mp3File;
+            System.out.println("Enter FFmpeg path: ");
+            String ffmpeg = s.next();
+
+            String cmd = ffmpeg + " -i " + mp4File + " " + mp3File;
             System.out.println(cmd);
 
             Process p = Runtime.getRuntime().exec(cmd);
