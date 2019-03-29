@@ -36,16 +36,9 @@
     </servlet-mapping>
 
 
-    <servlet>
-        <servlet-name>FileUploadServlet</servlet-name>
-        <servlet-class>com.teamteem.util.VideoUpload</servlet-class>
-        <multipart-config />
-    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>FileUploadServlet</servlet-name>
-        <url-pattern>/upload</url-pattern>
-    </servlet-mapping>
+
+    
 
     <!--<listener>-->
         <!--<listener-class>VideoConverter</listener-class>-->
