@@ -18,4 +18,15 @@ public class Text {
     @ManyToOne
     @JoinColumn (name = "person_id", nullable = false)
     private Person person;
+
+    /*@OneToOne(mappedBy = "text")
+    private Set<Details> details;
+
+    public Set<Details> getDetails() {
+        return details;
+    }
+
+    public void setDetails(Set<Details> details) {
+        this.details = details;
+    }*/
 }

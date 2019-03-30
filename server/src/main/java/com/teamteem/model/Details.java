@@ -15,7 +15,15 @@ public class Details {
 
     private String details;
 
-    /*@OneToOne
+    @OneToOne
     @JoinColumn (name = "video_id", nullable = false)
-    private Video video;*/
+    private Video video;
+
+    @OneToOne
+    @JoinColumn (name = "audio_id", nullable = false)
+    private Audio audio;
+
+    @OneToOne
+    @JoinColumn (name = "text_id", nullable = false)
+    private Text text;
 }
