@@ -20,22 +20,14 @@ import java.util.logging.Logger;
  class VideoConverter extends HttpServlet{
 
     private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
-    
-    public static void main(String[] args) throws ServletException {
+
+
+    public String Convert(String mp4File, String mp3File, String ffmpeg) {
 
         try {
             String line;
-            Scanner s = new Scanner(System.in);
-            System.out.println("Enter video path: ");
 
-            String mp4File = s.next();
-            System.out.println("Enter Audio path: ");
-            String mp3File = s.next();
-
-            System.out.println("Enter FFmpeg path: ");
-            String ffmpeg = s.next();
-
-            String cmd = ffmpeg + " -i " + mp4File + " " + mp3File;
+            String cmd = "ffmpeg -i " + mp4File + " " + mp3File;
             System.out.println(cmd);
 
             Process p = Runtime.getRuntime().exec(cmd);
@@ -48,10 +40,27 @@ import java.util.logging.Logger;
             p.waitFor();
             System.out.println("Video converted successfully!");
             in.close();
-            s.close();
         } catch (IOException | InterruptedException e) {
             LOG.log(Level.SEVERE, null, e);
         }
+
+
+        return mp3File;
+
+    }
+
+    
+    public static void main(String[] args) throws ServletException {
+        VideoConverter videoConverter = new VideoConverter();
+
+        String mp4File ="C:\\Users\\Administrator\\Documents\\CMU.mp4";
+        String mp3File ="C:\\Users\\Administrator\\Documents\\CMU.mp3";
+        String ffmpeg ="C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe";
+
+        videoConverter.Convert(mp4File, mp3File, ffmpeg);
+
+
+
 
     }
 }
