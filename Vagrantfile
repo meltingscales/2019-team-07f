@@ -344,6 +344,9 @@ Vagrant.configure('2') do |config|
 
       # Test jep.
       web.vm.provision :shell, path: 'vagrant-config/scripts/test-jep.sh', run: 'always'
+
+      # Test Java.
+      web.vm.provison :java, path: 'src/main/java/com/teamteem/util/VideoConverter.java', run: 'always
     end
 
     if CREATE_SSL
