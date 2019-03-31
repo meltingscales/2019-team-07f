@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  */
 @ManagedBean(name = "videoconverter")
- class VideoConverter extends HttpServlet{
+ class VideoConverter implements javax.servlet.ServletContextListener{
 
     private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
 
