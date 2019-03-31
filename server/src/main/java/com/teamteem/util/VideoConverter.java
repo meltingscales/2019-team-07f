@@ -53,9 +53,12 @@ import java.util.logging.Logger;
     public static void main(String[] args) throws ServletException {
         VideoConverter videoConverter = new VideoConverter();
 
-        String mp4File ="C:\\Users\\Administrator\\Documents\\CMU.mp4";
-        String mp3File ="C:\\Users\\Administrator\\Documents\\CMU.mp3";
-        String ffmpeg ="C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe";
+        //String mp4File ="C:\\Users\\Administrator\\Documents\\CMU.mp4";
+        String mp4File="C:\\Users\\Administrator\\Desktop\\2019-team-07f\\server\\src\\main\\resources\\mp4_test-data\\potato.mp4";
+        String mp3File="C:\\Users\\Administrator\\Desktop\\2019-team-07f\\server/src\\main\\resources\\mp4_test-data\\potato.mp3";
+        //String mp3File ="C:\\Users\\Administrator\\Documents\\CMU.mp3";
+        //String ffmpeg ="C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe";
+        String ffmpeg ="/usr/local/bin/ffmpeg.exe";
 
         videoConverter.Convert(mp4File, mp3File, ffmpeg);
 
