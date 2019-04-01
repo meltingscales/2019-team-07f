@@ -187,12 +187,78 @@ Vagrant.configure('2') do |config|
     SCRIPT
 
 
-  	}
+    # Test that the webserver can ping the iSCSI server.
+    web.vm.provision 'shell', run: 'always', env: {:ISCSI_IP_ADDR => VARIABLES['iscsi']['ip']},
+                     inline: <<-SCRIPT
 
-  	##FFmpeg
-  	sudo add-apt-repository ppa:jonathonf/ffmpeg-4
-  	sudo apt install ffmpeg -y
-  	sudo apt install git -y
+    # Ping iSCSI box once.
+    ping -c1 $ISCSI_IP_ADDR
+
+    # If last error code is zero (success), then...
+    if [ "$?" = 0 ]; then
+        echo "iSCSI box at $ISCSI_IP_ADDR is ping-able!"
+    else
+        echo "iSCSI server at $ISCSI_IP_ADDR could not be pinged! Halting!"
+
+        false # This will force an error.
+    fi
+
+    SCRIPT
+
+    # Test that the web box can connect to the MySQL server running on the database box.
+    web.vm.provision 'shell', run: 'always', env: {
+        :DB_IP_ADDR => VARIABLES['db']['ip'],
+        :USERNAME => VARIABLES['db']['username'],
+        :PASSWORD => VARIABLES['db']['password'],
+        :DB_SCHEMA => VARIABLES['db']['schema']
+    }, inline: <<-SCRIPT
+
+    # Ping DB once.
+    ping -c1 $DB_IP_ADDR
+
+    # Show all tables to verify connection.
+    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "SHOW TABLES;"
+
+    # Create a test table.
+    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "CREATE TABLE test (id integer);"
+
+    # Drop that table.
+    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "DROP TABLE test;"
+
+    echo "MySQL connection OK!"
+
+    SCRIPT
+
+
+    # Install FFmpeg.
+   #  config.vm.provision 'apt', type: 'shell', inline: 'apt-get update -y'
+   #  config.vm.provision 'git', type: 'shell', inline: 'apt-get install -y git'
+   #  config.vm.provision 'yasm', type: 'shell', inline: 'apt-get install -y yasm'
+   #  config.vm.provision 'x264', type: 'shell', inline: 'apt-get install -y libx264-dev'
+   #  config.vm.provision 'ffmpeg', type: 'shell', inline: %Q{
+
+   #  if [[ ! -d FFmpeg ]]; then
+   #    echo "Cloning FFmpeg repo."
+   #    git clone https://github.com/FFmpeg/FFmpeg.git
+   #  else
+   #    echo "Not cloning FFmpeg repo as it exists."
+   #  fi
+
+   #  if hash "ffmpeg" 2>/dev/null; then
+   #    echo "FFmpeg is installed."
+   #  else
+   #    echo "FFmpeg is not installed. Installing..."
+
+   #    cd FFmpeg
+
+   #    ./configure --enable-gpl --enable-libx264
+   #    make
+   #    make install
+   #  fi
+  	# }
+
+  	{sudo add-apt-repository ppa:jonathonf/ffmpeg-4};
+	{sudo apt install ffmpeg -y};
 
 
     # Create a private network, which allows host-only access to the machine
