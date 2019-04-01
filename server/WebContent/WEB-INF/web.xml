@@ -36,13 +36,35 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>Test Servlet</servlet-name>
+        <servlet-class>com.teamteem.TestServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Test Servlet</servlet-name>
+        <url-pattern>/test1</url-pattern>
+    </servlet-mapping>
+
+
+    <filter>
+        <filter-name>f1</filter-name>
+        <filter-class>com.teamteem.filter.VideoConverterFilter</filter-class>
+        <init-param> <!-- optional -->
+            <param-name>video_file_path</param-name>
+            <param-value>/WEB-INF/videos</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>f1</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 
 
 
-    <listener>
-        <listener-class>com.teamteem.util.VideoConverter</listener-class>
-    </listener>
 
     <!--<servlet>-->
         <!--<servlet-name>Teamteem</servlet-name>-->
