@@ -257,9 +257,9 @@ Vagrant.configure('2') do |config|
    #  fi
   	# }
 end
-  	sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+  	(sudo add-apt-repository ppa:jonathonf/ffmpeg-4)
   end
-	{sudo apt install ffmpeg -y};
+	(sudo apt install ffmpeg -y)
 
 end
 
