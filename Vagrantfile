@@ -256,10 +256,9 @@ Vagrant.configure('2') do |config|
    #    make install
    #  fi
   	# }
+
 	config.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
   	
-
-end
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
