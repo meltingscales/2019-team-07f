@@ -19,14 +19,14 @@ public class Text {
     @JoinColumn (name = "person_id", nullable = false)
     private Person person;
 
-    /*@OneToOne(mappedBy = "text")
-    private Set<Details> details;
+    @OneToOne(mappedBy = "text")
+    private Details details;
 
-    public Set<Details> getDetails() {
+    public Details getDetails() {
         return details;
     }
 
-    public void setDetails(Set<Details> details) {
+    public void setDetails(Details details) {
         this.details = details;
-    }*/
+    }
 }

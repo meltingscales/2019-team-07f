@@ -111,4 +111,5 @@ public class Person {
     public void setTexts(Set<Text> texts) {
         this.texts = texts;
     }
+
 }
