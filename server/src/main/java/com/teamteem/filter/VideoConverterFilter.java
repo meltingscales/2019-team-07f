@@ -22,7 +22,7 @@ public class VideoConverterFilter implements Filter {
 
         System.out.println("....ACTUAL path: video_file_path=" + absoluteDiskPath);
 
-        File f = new File("Test.txt");
+        File f = new File("potato.mp4");
         try {
             boolean ok = f.createNewFile();
             if(ok){
