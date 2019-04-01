@@ -14,6 +14,8 @@ public class Details {
     private int id;
 
     private String details;
+    private String type;
+    private double size;
 
     @OneToOne
     @JoinColumn (name = "video_id", nullable = false)

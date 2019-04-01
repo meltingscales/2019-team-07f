@@ -40,11 +40,11 @@ public class VideoConverterFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        System.out.println("VideoConverterFilter.... BEFORE.");
+        //System.out.println("VideoConverterFilter.... BEFORE.");
 
         chain.doFilter(req, res);//sends request to next resource
 
-        System.out.println("VideoConverterFilter.... AFTER.");
+        //System.out.println("VideoConverterFilter.... AFTER.");
     }
 
     public void convertVideos(String parentDir) throws ServletException {
