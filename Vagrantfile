@@ -187,51 +187,12 @@ Vagrant.configure('2') do |config|
     SCRIPT
 
 
-    # Test that the webserver can ping the iSCSI server.
-    web.vm.provision 'shell', run: 'always', env: {:ISCSI_IP_ADDR => VARIABLES['iscsi']['ip']},
-                     inline: <<-SCRIPT
+  	}
 
-    # Ping iSCSI box once.
-    ping -c1 $ISCSI_IP_ADDR
-
-    # If last error code is zero (success), then...
-    if [ "$?" = 0 ]; then
-        echo "iSCSI box at $ISCSI_IP_ADDR is ping-able!"
-    else
-        echo "iSCSI server at $ISCSI_IP_ADDR could not be pinged! Halting!"
-
-        false # This will force an error.
-    fi
-
-    SCRIPT
-
-    # Test that the web box can connect to the MySQL server running on the database box.
-    web.vm.provision 'shell', run: 'always', env: {
-        :DB_IP_ADDR => VARIABLES['db']['ip'],
-        :USERNAME => VARIABLES['db']['username'],
-        :PASSWORD => VARIABLES['db']['password'],
-        :DB_SCHEMA => VARIABLES['db']['schema']
-    }, inline: <<-SCRIPT
-
-    # Ping DB once.
-    ping -c1 $DB_IP_ADDR
-
-    # Show all tables to verify connection.
-    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "SHOW TABLES;"
-
-    # Create a test table.
-    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "CREATE TABLE test (id integer);"
-
-    # Drop that table.
-    mysql -u$USERNAME -p$PASSWORD -h $DB_IP_ADDR $DB_SCHEMA -e "DROP TABLE test;"
-
-    echo "MySQL connection OK!"
-
-    SCRIPT
-
-
- 
- 
+  	##FFmpeg
+  	sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+  	sudo apt install ffmpeg -y
+  	sudo apt install git -y
 
 
     # Create a private network, which allows host-only access to the machine
