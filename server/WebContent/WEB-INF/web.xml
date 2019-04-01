@@ -53,7 +53,7 @@
         <filter-class>com.teamteem.filter.VideoConverterFilter</filter-class>
         <init-param> <!-- optional -->
             <param-name>video_file_path</param-name>
-            <param-value>/WEB-INF/videos</param-value>
+            <param-value>..\\webapps\\searchable-video-library\\WEB-INF\\videos</param-value>
         </init-param>
     </filter>
 

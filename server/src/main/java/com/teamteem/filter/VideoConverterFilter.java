@@ -14,16 +14,25 @@ public class VideoConverterFilter implements Filter {
 
         System.out.println("-------------------VideoConverterFilter... init() BEGIN");
 
-        String videoFilePath = filterConfig.getInitParameter("video_file_path");
+        String relativeWebPath = filterConfig.getInitParameter("video_file_path");
 
-        System.out.println("....RELATIVE path: video_file_path=" + videoFilePath);
+        System.out.println("....RELATIVE path: video_file_path=" + relativeWebPath);
 
-        String relativeWebPath = "/WEB-INF/some/folder";
         String absoluteDiskPath = filterConfig.getServletContext().getRealPath(relativeWebPath);
 
         System.out.println("....ACTUAL path: video_file_path=" + absoluteDiskPath);
 
-        convertVideos(absoluteDiskPath);
+        File f = new File("Test.txt");
+        try {
+            boolean ok = f.createNewFile();
+            if(ok){
+                System.out.println("------" + f.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        convertVideos(relativeWebPath);
 
         System.out.println("-------------------VideoConverterFilter... init() END");
 
