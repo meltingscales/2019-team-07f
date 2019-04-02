@@ -1,3 +1,50 @@
 html {
     background-color: beige;
 }
+
+body {
+    margin: 0;
+}
+
+/*Navigation bar*/
+.topnav {
+    font-family: "Courier New", Courier, monospace;
+    overflow: hidden;
+    background-color: #b94237;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/*index page*/
+.home h1{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    position:static;
+    margin: 12vw 0 0 25vw;
+}
+
+.home h2{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    position:static;
+    margin: 10px 0 0 25vw;
+}
+
+.home p{
+    position:static;
+    margin: 10px 0 0 25vw;
+}
+
+/*Footer*/
+footer {
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    position: fixed;
+}
