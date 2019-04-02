@@ -18,4 +18,15 @@ public class Audio {
     @ManyToOne
     @JoinColumn (name = "person_id", nullable = false)
     private Person person;
+
+    @OneToOne(mappedBy = "audio")
+    private Details details;
+
+    public Details getDetails() {
+        return details;
+    }
+
+    public void setDetails(Details details) {
+        this.details = details;
+    }
 }

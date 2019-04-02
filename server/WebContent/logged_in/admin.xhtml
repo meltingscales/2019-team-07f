@@ -8,44 +8,46 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
+        <title>Admin</title>
         <h:outputStylesheet name="css/style.css"/>
     </h:head>
 
+    <ul>
+        <li><a href="#{request.contextPath}/index.xhtml">Home</a></li>
+        <li><a href="#{request.contextPath}/new-video.xhtml">Upload New Video</a></li>
+    </ul>
+
     <h:body>
-        <ul>
-            <li><a href="#{request.contextPath}/index.xhtml">Home</a></li>
-            <li><a href="#{request.contextPath}/new-video.xhtml">Upload New Video</a></li>
-        </ul>
 
         <h:form>
             <p><h:outputText value="Welcome, #{login.currentUser.getName()}!"/></p>
             <h:commandButton value="Logout" action="#{login.logout()}"/>
         </h:form>
 
-            <h3>Registered Users</h3>
+        <h3>Registered Users</h3>
 
-            <c:if test="${!empty personService.listPersons()}">
-                <table class="tg">
+        <c:if test="${!empty personService.listPersons()}">
+            <table class="tg">
+                <tr>
+                    <th width="80">User ID</th>
+                    <th width="120">Username</th>
+                    <th width="120">Full Name</th>
+                    <th width="120">Email Address</th>
+                    <th width="120">Country</th>
+                    <th width="120">Password</th>
+                </tr>
+                <ui:repeat value="${personService.listPersons()}" var="person">
                     <tr>
-                        <th width="80">User ID</th>
-                        <th width="120">Username</th>
-                        <th width="120">Full Name</th>
-                        <th width="120">Email Address</th>
-                        <th width="120">Country</th>
-                        <th width="120">Password</th>
+                        <td>${person.id}</td>
+                        <td>${person.username}</td>
+                        <td>${person.name}</td>
+                        <td>${person.email}</td>
+                        <td>${person.country}</td>
+                        <td>${person.password}</td>
                     </tr>
-                    <ui:repeat value="${personService.listPersons()}" var="person">
-                        <tr>
-                            <td>${person.id}</td>
-                            <td>${person.username}</td>
-                            <td>${person.name}</td>
-                            <td>${person.email}</td>
-                            <td>${person.country}</td>
-                            <td>${person.password}</td>
-                        </tr>
-                    </ui:repeat>
-                </table>
-            </c:if>
+                </ui:repeat>
+            </table>
+        </c:if>
 
     </h:body>
 

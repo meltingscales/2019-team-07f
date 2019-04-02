@@ -69,14 +69,17 @@ pipeline {
     }
     post {
         always {
-            echo "Cleaning..."
+            echo "Shutting down VMs..."
             
             dir("${WORKSPACE}/") {
-                bat "vagrant halt -f"
+                bat "vagrant halt"
             }
-            
+		}
+		
+		failure {
+			echo "Destroying VMs as build has failed."
             dir("${WORKSPACE}/") {
-                bat "vagrant destroy -f"
+                //bat "vagrant destroy -f"
             }
         }
     }

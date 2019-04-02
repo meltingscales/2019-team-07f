@@ -231,32 +231,34 @@ Vagrant.configure('2') do |config|
 
 
     # Install FFmpeg.
-    config.vm.provision 'apt', type: 'shell', inline: 'apt-get update -y'
-    config.vm.provision 'git', type: 'shell', inline: 'apt-get install -y git'
-    config.vm.provision 'yasm', type: 'shell', inline: 'apt-get install -y yasm'
-    config.vm.provision 'x264', type: 'shell', inline: 'apt-get install -y libx264-dev'
-    config.vm.provision 'ffmpeg', type: 'shell', inline: %Q{
+   #  config.vm.provision 'apt', type: 'shell', inline: 'apt-get update -y'
+   #  config.vm.provision 'git', type: 'shell', inline: 'apt-get install -y git'
+   #  config.vm.provision 'yasm', type: 'shell', inline: 'apt-get install -y yasm'
+   #  config.vm.provision 'x264', type: 'shell', inline: 'apt-get install -y libx264-dev'
+   #  config.vm.provision 'ffmpeg', type: 'shell', inline: %Q{
 
-    if [[ ! -d FFmpeg ]]; then
-      echo "Cloning FFmpeg repo."
-      git clone https://github.com/FFmpeg/FFmpeg.git
-    else
-      echo "Not cloning FFmpeg repo as it exists."
-    fi
+   #  if [[ ! -d FFmpeg ]]; then
+   #    echo "Cloning FFmpeg repo."
+   #    git clone https://github.com/FFmpeg/FFmpeg.git
+   #  else
+   #    echo "Not cloning FFmpeg repo as it exists."
+   #  fi
 
-    if hash "ffmpeg" 2>/dev/null; then
-      echo "FFmpeg is installed."
-    else
-      echo "FFmpeg is not installed. Installing..."
+   #  if hash "ffmpeg" 2>/dev/null; then
+   #    echo "FFmpeg is installed."
+   #  else
+   #    echo "FFmpeg is not installed. Installing..."
 
-      cd FFmpeg
+   #    cd FFmpeg
 
-      ./configure --enable-gpl --enable-libx264
-      make
-      make install
-    fi
-  	}
+   #    ./configure --enable-gpl --enable-libx264
+   #    make
+   #    make install
+   #  fi
+  	# }
 
+	config.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
+  	
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.

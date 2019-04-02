@@ -36,17 +36,39 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>Test Servlet</servlet-name>
+        <servlet-class>com.teamteem.TestServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Test Servlet</servlet-name>
+        <url-pattern>/test1</url-pattern>
+    </servlet-mapping>
 
 
-    
+    <filter>
+        <filter-name>f1</filter-name>
+        <filter-class>com.teamteem.filter.VideoConverterFilter</filter-class>
+        <init-param> <!-- optional -->
+            <param-name>video_file_path</param-name>
+            <param-value>..\\webapps\\searchable-video-library\\WEB-INF\\videos</param-value>
+        </init-param>
+    </filter>
 
-    <!--<listener>-->
-        <!--<listener-class>VideoConverter</listener-class>-->
-    <!--</listener>-->
+    <filter-mapping>
+        <filter-name>f1</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+
 
     <!--<servlet>-->
         <!--<servlet-name>Teamteem</servlet-name>-->
-        <!--<servlet-class>com.teamteem.util.VideoConverter</servlet-class>-->
+        <!--<servlet-class>com.teamteem.util.</servlet-class>-->
         <!--<load-on-startup>1</load-on-startup>-->
     <!--</servlet>-->
 

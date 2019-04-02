@@ -6,25 +6,22 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:define name="content">
         <h1 style="text-align:center;">Upload a video. Get Text.</h1>
 
+            <h:form action="/upload" method="POST" enctype="multipart/form-data">
+                <h:inputFile value="#{uploadBean.file}"/>
+            </h:form>
 
         <!--TODO: Hook up this form!-->
 
-        <h:form action="/upload" method="POST" enctype="multipart/form-data">
-            <h:inputFile value="#{uploadBean.file}"/>
+        </ui:define>
 
-            <h:commandButton value="upload" action="#{uploadBean.upload}"/>
-        </h:form>
+    </ui:composition>
 
-
-    </ui:define>
-f
-</ui:composition>
 </html>
