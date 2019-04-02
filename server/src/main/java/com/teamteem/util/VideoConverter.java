@@ -54,8 +54,8 @@ public class VideoConverter implements javax.servlet.ServletContextListener{
         VideoConverter videoConverter = new VideoConverter();
 
         //String mp4File ="C:\\Users\\Administrator\\Documents\\CMU.mp4";
-        String mp4File="./src/main/resources/mp4_test-data/potato.mp4";
-        String mp3File="./src/main/resources/mp4_test-data/potato.mp3";
+        String mp4File="./src/main/resources/mp4_test-data/Cloud_Speech_API_Demo.mp4";
+        String mp3File="./src/main/resources/mp4_test-data/Cloud_Speech_API_Demo.wav";
         //String mp3File ="C:\\Users\\Administrator\\Documents\\CMU.mp3";
         //String ffmpeg ="C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe";
         String ffmpeg ="/usr/local/bin/ffmpeg.exe";
