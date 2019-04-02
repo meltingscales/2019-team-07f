@@ -18,17 +18,23 @@
 
     <ui:define name="content">
 
-        <p>Hello world!</p>
+        <section class="home">
+            <h1 style="font-size:350%;">TEEM</h1>
+            <h2 style="font-size:300%;">Video to Text Transcript Convertor!</h2>
+            <p style="font-size:160%;">Text transcript a few click away.</p>
+        </section>
 
-        <p>Here are your ten lucky numbers. Go play the lottery.</p>
+        <!--<p>Hello world!</p>-->
 
-        <ui:repeat var="n" value="#{randomNumbers.numbers(10)}">
-            <li>
-                <h:outputText value="#{n}"/>
-            </li>
-        </ui:repeat>
+        <!--<p>Here are your ten lucky numbers. Go play the lottery.</p>-->
 
-        <p>Currently, there are <h:outputText value="#{personService.listPersons().size()}"/> users.</p>
+        <!--<ui:repeat var="n" value="#{randomNumbers.numbers(10)}">-->
+            <!--<li>-->
+                <!--<p><h:outputText value="#{n}"/></p>-->
+            <!--</li>-->
+        <!--</ui:repeat>-->
+
+        <!--<p>Currently, there are <h:outputText value="#{personService.listPersons().size()}"/> users. </p>-->
 
     </ui:define>
 
