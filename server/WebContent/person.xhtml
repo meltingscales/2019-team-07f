@@ -13,42 +13,71 @@
                     xmlns:ui="http://java.sun.com/jsf/facelets">
 
         <ui:define name="content">
-            <h1>Registration</h1>
-            <h:form>
-                <table>
-                    <tr>
-                        <td><label>Username</label></td>
-                        <td><h:inputText id="username" value="#{person.username}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label>Full Name</label></td>
-                        <td><h:inputText id="name" value="#{person.name}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label>Email</label></td>
-                        <td><h:inputText id="email" value="#{person.email}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label>Country</label></td>
-                        <td><h:inputText id="country" value="#{person.country}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label>Password</label></td>
-                        <td><h:inputText id="password" value="#{person.password}"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><h:commandButton action="#{personService.addPerson(person)}" value="Register"/>
-                        </td>
-                    </tr>
+            <div class="user">
+            <h1 style="text-align: center;">Registration</h1>
+            <h:form class="form1">
 
-                </table>
+                    <div class="form__group">
+                        <input type="text" placeholder="Username" class="form__input" />
+                    </div>
+
+                     <div class="form__group">
+                        <input type="text" placeholder="Full Name" class="form__input" />
+                     </div>
+
+                    <div class="form__group">
+                        <input type="text" placeholder="Country" class="form__input" />
+                    </div>
+
+                    <div class="form__group">
+                        <input type="email" placeholder="Email" class="form__input" />
+                    </div>
+
+                    <div class="form__group">
+                        <input type="password" placeholder="Password" class="form__input" />
+                    </div>
+
+                    <button class="button" type="button">Register</button>
 
             </h:form>
+            </div>
+            <!--</div>-->
+
+                <!--<table>-->
+                    <!--<tr>-->
+                        <!--<td><label>Username</label></td>-->
+                        <!--<td><h:inputText id="username" value="#{person.username}"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td><label>Full Name</label></td>-->
+                        <!--<td><h:inputText id="name" value="#{person.name}"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td><label>Email</label></td>-->
+                        <!--<td><h:inputText id="email" value="#{person.email}"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td><label>Country</label></td>-->
+                        <!--<td><h:inputText id="country" value="#{person.country}"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td><label>Password</label></td>-->
+                        <!--<td><h:inputText id="password" value="#{person.password}"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td colspan="2"><h:commandButton action="#{personService.addPerson(person)}" value="Register"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+                <!--</table>-->
+
+            <!--</h:form>-->
+
 
             <!--<h3>Registered Users</h3>
 
