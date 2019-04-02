@@ -6,6 +6,15 @@ body {
     margin: 0;
 }
 
+/*.form {*/
+    /*transform:rotate(0deg);*/
+/*}*/
+
+section.form form input[type=file] {
+    font-family: "Comic Sans MS";
+    font-size: 200px;
+}
+
 /*Navigation bar*/
 .topnav {
     font-family: "Courier New", Courier, monospace;
@@ -39,6 +48,71 @@ body {
 .home p{
     position:static;
     margin: 10px 0 0 25vw;
+}
+
+/*Registration*/
+.user {
+    width: 90%;
+    max-width: 340px;
+    margin: 10vh auto;
+}
+
+.user h1{
+    opacity: 0;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    transform: translate3d(0, 500px, 0);
+    animation: arrive 500ms ease-in-out 0.7s forwards;
+}
+
+.form1 {
+    margin-top: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translate3d(0, 500px, 0);
+    animation: arrive 500ms ease-in-out 0.9s forwards;
+}
+
+.form__input {
+    display: block;
+    line-height: 1;
+    font-size: 100%;
+    width: 100%;
+    padding: 20px 10px 20px 20px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    -webkit-appearance: none;
+    border: 0;
+    outline: 0;
+    transition: 0.3s;
+}
+
+.button {
+    display: block;
+    line-height: 1;
+    font-size: 100%;
+    width: 100%;
+    padding: 20px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    outline: 0;
+    border: 0;
+    color: white;
+    background: #ba8bdd;
+    transition: 0.3s;
+}
+.button:hover{
+    filter: brightness(85%);
+}
+
+@keyframes arrive {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 50px, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 /*Footer*/
