@@ -14,37 +14,29 @@
 
         <ui:define name="content">
             <div class="user">
-            <h1 style="text-align: center;">Registration</h1>
-            <h:form class="form1">
+                <h1 style="text-align: center;">Registration</h1>
 
-                <div>
-                    <label>Username</label>
-                        <h:inputText id="username" styleClass="form_input" value="#{person.username}"/>
-                </div>
+                <h:form class="form1">
 
-                <div>
-                    <label>Full Name</label>
-                        <h:inputText id="name" styleClass="form_input" value="#{person.name}"/>
-                </div>
+                <label>Username</label>
+                    <h:inputText id="username" styleClass="form_input" value="#{person.username}"/>
 
-                <div>
-                    <label>Country</label>
-                        <h:inputText id="country" styleClass="form_input" value="#{person.country}"/>
-                </div>
+                <label>Full Name</label>
+                    <h:inputText id="name" styleClass="form_input" value="#{person.name}"/>
 
-                <div>
-                    <label>Email</label>
-                        <h:inputText id="email" styleClass="form_input" value="#{person.email}"/>
-                </div>
+                <label>Country</label>
+                    <h:inputText id="country" styleClass="form_input" value="#{person.country}"/>
 
-                <div>
-                    <label>Password</label>
-                        <h:inputText id="password" styleClass="form_input" value="#{person.password}"/>
-                </div>
+                <label>Email</label>
+                    <h:inputText id="email" styleClass="form_input" value="#{person.email}"/>
+
+                <label>Password</label>
+                    <h:inputText id="password" styleClass="form_input" value="#{person.password}"/>
 
                 <h:commandButton styleClass="button" action="#{personService.addPerson(person)}" value="Register"/>
 
-            </h:form>
+                </h:form>
+
             </div>
 
         </ui:define>
