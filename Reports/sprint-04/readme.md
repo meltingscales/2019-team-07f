@@ -168,7 +168,21 @@ Explorer](https://github.com/ltearno/pom-explorer)":
     searchable-video-library:searchable-video-library:0.0.1-SNAPSHOT
     xuggle:xuggle-xuggler:5.4
 
-## d. Language/Framework packages
+## d. Application metrics and monitoring
+
+There is a `Jenkinsfile` at the root of the repo that will build, deploy, and
+test this repository's code. It is fully functional on Windows Jenkins hosts.
+
+Currently, application metrics remain in the form of errors and logs. That is to
+say, there is no centralized place to monitor the performance and stability of
+the application.
+
+## e. Destroy script
+
+With ruby installed, run `ruby destroy-everything.rb -f`.
+
+Without the `-f` flag, it will prompt you to confirm in case it was run
+accidentally.
 
 !!! TODO BELOW IS OLD. !!!
 
