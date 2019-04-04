@@ -215,13 +215,18 @@ As the database is separated, it makes making master/slave boxes easier.
 
 # 6. Use of Responsive design:
 
-We do not need a framework to allow for responsive design. Plain CSS can achieve
-a clean, repeating, and responsive interface.
+We do not need a framework to allow for responsive design.
 
-We are using plain CSS to build responsive screens for clients. We plan to
-use mobile-first designs and use relative units and relative positioning to allow our interface to adapt to all screen sizes.
+Plain CSS with some discipline can achieve a clean, repeating, and responsive
+interface.
 
-    TODO add image when rebuild is done
+We are using plain CSS to build responsive screens for clients. We are using
+mobile-first designs and use relative units and relative positioning to allow
+our interface to adapt to all screen sizes.
+
+![Website at 1920x1080.](img/website.PNG)
+
+![Website at a smaller resolution.](img/website-small.PNG)
 
 # 7. Use of HTTP over SSL:
 
