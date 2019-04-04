@@ -184,47 +184,95 @@ With ruby installed, run `ruby destroy-everything.rb -f`.
 Without the `-f` flag, it will prompt you to confirm in case it was run
 accidentally.
 
-!!! TODO BELOW IS OLD. !!!
-
-
-Currently, there is no secret management.
-However, all passwords and other information is easy-to-locate, standardized,
-and will be easy to change. There is also no application metrics capture yet.
-
 # 3. Use of Data Store/Storage:
 
-Using MySQL to store user information, names, emails, etc.
+We are using MySQL 5.7 to store user information, names, emails, etc, and have the MySQL server on a completely separate box.
 
 We are planning on using iSCSI along with file paths to handle storing videos.
-A table will be created to store information about the videos
-(ID, Title, date of creation…) as well as a field that will contact the path to access the video.
-We currently have the ORM engine working and can store a “Person” object without writing any SQL code.
-We have the MySQL server on a completely separate box.
-A separate box has been created to be a iSCSI target and act as a video storage server.
-The Web server will be configured as a iSCSI initiator so it will connect to the storage server which will act as a SCSI hard drive
+We have a separate VM whose only purpose is to act as an iSCSI target (server)
+for the webserver to put large MP4/MP3 files.
 
+A table will be created to store information about the videos (ID, Title, date
+of creation...) as well as a field that will contact the path to access the video.
 
-# 4. Data encrypted at rest:
+We currently have the ORM engine working and can store a "Person" object without
+writing any SQL code.
+
+# 4. Data encryption at rest:
+
 Data is currently stored in plaintext in the MySQL database.
+
 Data encryption at rest is planned.
+
 Truecrypt for full disk encryption is also a good option to add to our security.
 
 # 5. Database makes use of master/slave replication:
-A single schema, there is currently no caching layer, and we use a single MySQL database.
+
+There is currently a single schema, there is no caching layer, and we use a
+single MySQL database.
+
 As the database is separated, it makes making master/slave boxes easier.
 
 # 6. Use of Responsive design:
-Using CSS to build multi platform of different scale monitor screens for clients.
-We havne't build the style for smaller screen devices.
 
-# 7. Use of https:
+We do not need a framework to allow for responsive design. Plain CSS can achieve
+a clean, repeating, and responsive interface.
+
+We are using plain CSS to build responsive screens for clients. We plan to
+use mobile-first designs and use relative units and relative positioning to allow our interface to adapt to all screen sizes.
+
+    TODO add image when rebuild is done
+
+# 7. Use of HTTP over SSL:
+
+## a. Self-signed certificates
+
 We currently have no certificates or self-signing mechanism.
-We are using JavaServer Faces (JSF) alongside a Server Filter and Session Managed Bean to authenticate users and ensure that only authenticated users may access certain pages.
-Our login authentication mechanism is currently working and authenticates to our database to provide access. This was done through Hibernate Query Language (HQL).
-We have port 8080 open for HTTP.
-We do seed the database with 15 test users.
-We are making use of mkcert
 
+## b. Login authentication mechanism
+
+### i. How it works
+
+We are using Java Server Faces (JSF) alongside a Server Filter and a Session
+Managed Bean to authenticate users and ensure that only authenticated users may
+access certain pages.
+
+Our login authentication mechanism is currently working and authenticates to our
+database to provide access. This was done through Hibernate Query Language
+(HQL).
+
+### ii. How it's secured
+
+## c. Security assumptions
+
+### i. Firewall
+
+We have port 8080 open for HTTP, and only port 8080.
+
+### ii. Authentication keys
+
+Authentication keys are to be stored in `~/.ssh/id_rsa` on the host.
+
+These are RSA private keys.
+
+They are copied to the VM's disk, used to clone the git repository, and then
+immediately deleted from the VM.
+
+### iii. Seeding of usernames and passwords
+
+We seed the database with 15 test users.
+
+    TODO give code snippets
+
+### iv. Pre-seeding databases with schema and records
+
+Our only SQL script that gets executed, aside from inserting test data, is one
+that creates a schema called `searchable-video-library`.
+
+All tables are created from POJOs (Plain Old Java Objects) annotated with
+Hibernate annotations and are created at runtime of the Apache servlet.
+
+    TODO show annotations alongside table from intellij idea
 
 # 8. Use of user authentication:
 There is a session in the form of cookies, but no logic to differentiate users as sessions yet, but is currently being configured by pairing UserID with SessionID.
