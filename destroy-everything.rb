@@ -7,7 +7,7 @@ require 'optparse'
 
 # Global variable to not actually delete files.
 # True prevents files from being deleted.
-DRY_RUN = TRUE
+DRY_RUN = FALSE
 
 puts "Operating in this path:"
 puts Dir.pwd
