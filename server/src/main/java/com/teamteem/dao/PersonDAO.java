@@ -2,6 +2,7 @@ package com.teamteem.dao;
 
 import com.teamteem.model.Person;
 import com.teamteem.model.User;
+import com.teamteem.util.BCrypt;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +25,7 @@ public class PersonDAO implements PersonDAOI {
 
     @Autowired
     private static SessionFactory sessionFactory;
-    public static Person person;
+    private static String hashedPassword;
 
     public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
@@ -32,18 +33,23 @@ public class PersonDAO implements PersonDAOI {
 
     public static User validate(String username, String password) {
         Session session;
+        User result = null;
+
         try {
             session = sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
             session = sessionFactory.openSession();
         }
-        User result = null;
-        Query query = session.createQuery("FROM Person WHERE username = :username AND password = :password")
-                .setParameter("username", username)
-                .setParameter("password", password);
-        if (query.getResultList().size() > 0 || username.equals("admin") && password.equals("admin")) {
-            result = new User("username", username);
+
+        Query query = session.createQuery("FROM Person WHERE username = :username")
+                .setParameter("username", username);
+
+        if (BCrypt.checkpw(password, hashedPassword)) {
+            if (query.getResultList().size() > 0) {
+                result = new User("username", username);
+            }
         }
+
         return result;
     }
 
@@ -51,6 +57,10 @@ public class PersonDAO implements PersonDAOI {
     public void addPerson(@NotNull Person person) {
         Session session = this.sessionFactory.getCurrentSession();
         List<FacesMessage> problems = new ArrayList<>();
+
+        // Extra crispy Password hash anyone?
+        hashedPassword = BCrypt.hashpw(person.getPassword(), BCrypt.gensalt(12));
+        person.setPassword(hashedPassword);
 
         // Anyone using that username?
         Query query = session.createQuery("FROM Person WHERE username = ?")
@@ -81,7 +91,6 @@ public class PersonDAO implements PersonDAOI {
             session.save(person);
             logger.info("Person saved successfully, Person Details=" + person);
         }
-
     }
 
     @NotNull
