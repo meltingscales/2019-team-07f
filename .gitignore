@@ -27,3 +27,6 @@ id_rsa
 
 # Logs
 *.log
+
+# Document lock files
+~$*.docx
