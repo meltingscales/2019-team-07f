@@ -271,7 +271,7 @@ Vagrant.configure('2') do |config|
 	config.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
 
   # Test on installing iscsi client side
-  #web.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-client.sh'
+  # web.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-client.sh'
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
