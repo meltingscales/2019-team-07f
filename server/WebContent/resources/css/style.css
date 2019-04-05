@@ -6,10 +6,6 @@ body {
     margin: 0;
 }
 
-/*.form {*/
-    /*transform:rotate(0deg);*/
-/*}*/
-
 section.form form input[type=file] {
     font-family: "Comic Sans MS";
     font-size: 200px;
@@ -51,13 +47,13 @@ section.form form input[type=file] {
 }
 
 /*Registration*/
-.user {
+.heading {
     width: 90%;
     max-width: 340px;
     margin: 10vh auto;
 }
 
-.user h1{
+.heading h1{
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
@@ -70,7 +66,7 @@ section.form form input[type=file] {
     animation: arrive 500ms ease-in-out 0.9s forwards;
 }
 
-.user label {
+.heading label {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     position: fixed;
     left: 16px;
@@ -146,6 +142,14 @@ section.form form input[type=file] {
     color: rgba(0, 0, 0, 0.97);
     background: rgba(107, 227, 46, 0.74);
     cursor: pointer;
+}
+
+/*about-us page*/
+.team{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
 }
 
 /*Footer*/
