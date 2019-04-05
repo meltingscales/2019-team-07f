@@ -4,15 +4,28 @@ apt-get -y install git #TODO this shouldn't be needed, git should be installed i
 
 # Delete cloned repo if it exists
 if [[ -d ${REPO_PATH} ]]; then
-    echo "Deleting repo..."
-    rm -rf ${REPO_PATH}
+    echo "Updating repo as it already exists..."
+	
+	# Move to the REPO_PATH
+	pushd ${REPO_PATH}
+		
+		# Clean working tree
+		git checkout -- .
+		git clean -f
+		
+		# Update
+		git pull
+	
+	popd
+	
+else
+	echo "Cloning repo as it does not exist..."
+	# Clone team repo into REPO_PATH
+	sudo git clone ${REPO_URL} ${REPO_PATH}
+
+	# Give vagrant user ownership of git repo
+	sudo chown vagrant:vagrant ${REPO_PATH}
+
+	echo "Done cloning repo."
 fi
 
-echo "Cloning repo..."
-# Clone team repo into /home/vagrant/2019-team-07f/
-sudo git clone ${REPO_URL} ${REPO_PATH}
-
-# Give vagrant user ownership of git repo
-sudo chown vagrant:vagrant ${REPO_PATH}
-
-echo "Done cloning repo."
