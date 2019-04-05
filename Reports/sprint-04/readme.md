@@ -353,30 +353,52 @@ Hibernate query is used to validate username and password from MySQL Database to
 The UI could easily be modified for authentication / un authentication users via CSS selectors.
 
 # 9. Creation of Dev Environment (local laptop):
-The development environment is well-documented, but is not automatically creatable.
-The instructions are in the form of a markdown file.
-All of our packer build scripts work.
-`vagrant up` works.
-The development environment uses GitHub deploy keys, and everyone deploys using their own keys.
+
+## a) Must work according to specification
+
+Specific versions of required software are documented.
+
+IDE setup is also documented.
+
+The development environment is well-documented, but is not automatically
+creatable.
+
+However, you can run `ruby /packer/build-missing.rb` to build all missing packer
+boxes, and `vagrant up` in `/` to bring the virtual machines up.
+
+## b) Environment must be configurable via a script pre-deploy
+
+All global configuration is stored in `/variables.yml`
+
+## c) Explanation of UI/UX testing methodology
+
+Currently, we only sporadically test and report bugs in UI/UX components.
+
+## d) Github & Trello bug report proof
+
+    TODO give proof via screenshots
 
 # 10. Layout design:
-This is our website layout.
-At top has all the navigations, which direct you to different pages.
-![layout](img/websitlayoutPNG.PNG "website_layout")
 
-## 11. Management of Visio (or comparable) diagram tool of work flow:
+This is our website layout.
+
+The top has a navigation bar, which directs you to different pages.
+
+![The layout of the website.](img/website.PNG "website_layout")
+
+## 11. Diagram tool management:
+
 This is the front-end website workflow.
-![front_end_website_workflow](img/front_end_website_workflow.png "front_end_website_workflow")
+![front_end_website_workflow](img/front_end_website_workflow.png)
 
 This is the user experience flow.
-![user_experience_workflow](img/user_experience_workflow.png "front_end_website_workflow")
+![user_experience_workflow](img/user_experience_workflow.png)
 
 This is the website server UML diagram.
-![web_server_UML](img/web_server_UML.png "web_server_UML")
+![web_server_UML](img/web_server_UML.png)
 
-This is the Deploy keys
-![deploy_key](img/deploy_key.PNG "deploy_key")
-
+These are the Deploy keys
+![deploy_key](img/deploy_key.PNG)
 
 
 # 12. Management of project progress:
