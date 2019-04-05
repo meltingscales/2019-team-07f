@@ -6,10 +6,6 @@ body {
     margin: 0;
 }
 
-/*.form {*/
-    /*transform:rotate(0deg);*/
-/*}*/
-
 section.form form input[type=file] {
     font-family: "Comic Sans MS";
     font-size: 200px;
@@ -51,17 +47,14 @@ section.form form input[type=file] {
 }
 
 /*Registration*/
-.user {
+.heading {
     width: 90%;
     max-width: 340px;
     margin: 10vh auto;
 }
 
-.user h1{
-    opacity: 0;
+.heading h1{
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    transform: translate3d(0, 500px, 0);
-    animation: arrive 500ms ease-in-out 0.7s forwards;
 }
 
 .form1 {
@@ -73,7 +66,7 @@ section.form form input[type=file] {
     animation: arrive 500ms ease-in-out 0.9s forwards;
 }
 
-.user label {
+.heading label {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     position: fixed;
     left: 16px;
@@ -103,9 +96,11 @@ section.form form input[type=file] {
     outline: 0;
     border: 0;
     color: white;
-    background: #ba8bdd;
+    background: #ad7ed0;
+    cursor: pointer;
     transition: 0.3s;
 }
+
 .button:hover{
     filter: brightness(85%);
 }
@@ -120,6 +115,46 @@ section.form form input[type=file] {
         opacity: 1;
         transform: translate3d(0, 0, 0);
     }
+}
+
+/*login page*/
+.log_form input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+    border-radius: 20px;
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+.log_form{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    padding: 16px;
+    margin: 0 35% 0 35%;
+    border-radius: 0.4em;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2), 0 1px 20px 0 rgba(0,0,0,1);
+}
+
+.btn{
+    color: rgba(0, 0, 0, 0.97);
+    background: rgba(107, 227, 46, 0.74);
+    cursor: pointer;
+}
+
+/*about-us page*/
+.team {
+    background-image:url(/resources/images/team.png);
+    display: grid;
+    height: 100%;
+}
+
+.img{
+    max-width: 100%;
+    max-height: 100vh;
+    margin: auto;
 }
 
 /*Footer*/

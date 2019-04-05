@@ -22,13 +22,13 @@ public class Login implements Serializable {
 
     public String login() {
         currentUser = PersonDAO.validate(username, password);
-        /*admin = PersonDAO.validate("admin", "admin");*/
+        /*admin = PersonDAO.validate(username, password);*/
 
         if (currentUser != null) {
             return "/logged_in/home.xhtml?faces-redirect=true";
-        /*} else if (admin != null) {
-            return "/logged_in/admin.xhtml?faces-redirect=true";*/
-        } else {
+        } /*else if (admin != null) {
+            return "/logged_in/admin.xhtml?faces-redirect=true";
+        } */else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username or Password", "Invalid Credentials"));
             return null;
         }

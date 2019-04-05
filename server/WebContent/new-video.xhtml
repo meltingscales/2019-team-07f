@@ -12,13 +12,30 @@
                     xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:define name="content">
-        <h1 style="text-align:center;">Upload a video. Get Text.</h1>
+        <div class="heading">
+            <h1 style="text-align: center;">Upload Video. Get Text!</h1>
+        </div>
 
             <h:form action="/upload" method="POST" enctype="multipart/form-data">
                 <h:inputFile value="#{uploadBean.file}"/>
             </h:form>
 
         <!--TODO: Hook up this form!-->
+
+        <h:form enctype="multipart/form-data">
+            <h:inputFile/>
+            <h:commandButton value="Upload"/>
+            <h:commandButton value="upload" action="#{uploadBean.upload}"/>
+        </h:form>
+
+        <p></p>
+
+        <h:form action="/upload" method="POST" enctype="multipart/form-data">
+        <h:inputFile value="#{uploadBean.file}"/>
+
+        <h:commandButton value="upload" action="#{uploadBean.upload}"/>
+
+        </h:form>
 
         </ui:define>
 

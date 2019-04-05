@@ -21,16 +21,22 @@
             </f:metadata>
         </h:head>
 
+
         <ui:define name="content">
-            <h:form>
-                <h:outputLabel value="Username: "/>
-                <h:inputText value="#{login.username}"/>
+            <div class="heading">
+                <h1 style="text-align: center;">Login</h1>
+            </div>
 
-                <h:outputLabel value="Password: " />
-                <h:inputSecret value="#{login.password}"/>
+            <h:form class="log_form">
+                <h:outputLabel value="Username "/>
+                <h:inputText styleClass="input" value="#{login.username}"/>
 
-                <h:commandButton value="Login" action="#{login.login()}"/>
+                <h:outputLabel value="Password " />
+                <h:inputSecret styleClass="input" value="#{login.password}"/>
+
+                <h:commandButton styleClass="btn" value="Login" action="#{login.login()}"/>
             </h:form>
+
         </ui:define>
 
     </ui:composition>
