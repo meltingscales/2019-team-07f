@@ -2,7 +2,7 @@
 
 echo "Deploying app."
 
-cd /home/vagrant/2019-team-07f/server/
+cd ${REPO_PATH}/server/
 
 # Make sure Tomcat is running.
 systemctl restart tomcat8

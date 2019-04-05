@@ -40,7 +40,8 @@ def clone_repo(box, vars = VARIABLES, public_repo = USE_PUBLIC_REPO)
 
     # Clone repo.
     box.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh', env: {
-        :REPO_URL => vars['private-repo-url']
+        :REPO_URL => vars['private-repo-url'],
+		:REPO_PATH => vars['repo_location'],
     }
 
   end
@@ -240,6 +241,9 @@ Vagrant.configure('2') do |config|
 
     SCRIPT
 
+    # Test on installing iscsi client side
+    #web.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-client.sh'
+
 
     # Install FFmpeg.
    #  config.vm.provision 'apt', type: 'shell', inline: 'apt-get update -y'
@@ -269,9 +273,6 @@ Vagrant.configure('2') do |config|
   	# }
 
 	config.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
-
-  # Test on installing iscsi client side
-  # web.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-client.sh'
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
@@ -379,7 +380,9 @@ Vagrant.configure('2') do |config|
 
     if DEPLOY
       # Deploy our app.
-      web.vm.provision :shell, path: 'vagrant-config/scripts/deploy-app.sh', run: 'always'
+      web.vm.provision :shell, path: 'vagrant-config/scripts/deploy-app.sh', run: 'always', env: {
+		  :REPO_PATH => VARIABLES['repo_location'],
+	  }
 
       # At this point, going to http://127.0.0.1:8080/searchable-video-library/ should yield some HTML page.
     end
@@ -388,6 +391,7 @@ Vagrant.configure('2') do |config|
     if INSERT_TEST_DATA
 
       web.vm.provision :shell, path: 'vagrant-config/scripts/insert-test-users.sh', env: {
+		  :REPO_PATH => VARIABLES['repo_location'],
           :DB_IP_ADDR => VARIABLES['db']['ip'],
           :DB_PORT => VARIABLES['db']['port'],
           :DB_USERNAME => VARIABLES['db']['username'],

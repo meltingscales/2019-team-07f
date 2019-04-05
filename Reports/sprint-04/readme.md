@@ -12,6 +12,7 @@ UI/UX:
 
 # 1. Languages and frameworks
 
+
 ## a. Programming languages and frameworks
 
 ### Java and Kotlin
@@ -186,14 +187,16 @@ accidentally.
 
 # 3. Use of Data Store/Storage:
 
-We are using MySQL 5.7 to store user information, names, emails, etc, and have the MySQL server on a completely separate box.
+We are using MySQL 5.7 to store user information, names, emails, etc, and have
+the MySQL server on a completely separate box.
 
 We are planning on using iSCSI along with file paths to handle storing videos.
 We have a separate VM whose only purpose is to act as an iSCSI target (server)
 for the webserver to put large MP4/MP3 files.
 
 A table will be created to store information about the videos (ID, Title, date
-of creation...) as well as a field that will contact the path to access the video.
+of creation...) as well as a field that will contact the path to access the
+video.
 
 We currently have the ORM engine working and can store a "Person" object without
 writing any SQL code.
@@ -202,7 +205,9 @@ writing any SQL code.
 
 Data is currently stored in plaintext in the MySQL database.
 
-Data encryption at rest is planned.
+User passwords are hashed.
+
+Full data encryption at rest is planned.
 
 Truecrypt for full disk encryption is also a good option to add to our security.
 
@@ -248,6 +253,12 @@ database to provide access. This was done through Hibernate Query Language
 
 ### ii. How it's secured
 
+The username is stored in a Java Servlet Session that the user can identify via
+a cookie.
+
+There is built-in CSRF protection in the form of a nonce that gets inserted with
+all forms.
+
 ## c. Security assumptions
 
 ### i. Firewall
@@ -267,7 +278,19 @@ immediately deleted from the VM.
 
 We seed the database with 15 test users.
 
-    TODO give code snippets
+```sql
+    INSERT INTO `person` (country, email, name, password, username)
+    VALUES ('USA', 'hpost@hawk.iit.edu', 'Henry Post', 'forkbomb123', 'hpost'),
+           ('USA', 'npatel117@hawk.iit.edu', 'Nihar Patel', 'pmsrock!!', 'npatel117'),
+           ('USA', 'ifagbemi@hawk.iit.edu', 'Idris Fagbemi', 'dev4life', 'ifagbemi'),
+           ('USA', 'dbaniekona@hawk.iit.edu', 'Divin Gregis Baniekona', 'itopsguy456', 'dbaniekona'),
+           ('USA', 'ylin95@hawk.iit.edu', 'Yi Ting Lin', 'yitingrox', 'ylin95'),
+           ('USA', 'jtron82@hawk.iit.edu', 'Jimmy Tran', 'uiuxuxui', 'jtron82'),
+
+           ('Dominican Republic', 'carrjess21@gmail.com', 'Jessie Caraballo', 'carrain$!', 'jessiecar2'),
+           ('Albania', 'vgoj@gmail.com', 'Victor Gojcaj', 'nycisforme', 'vgoj'),
+           /*(...)*/
+```
 
 ### iv. Pre-seeding databases with schema and records
 
@@ -276,40 +299,122 @@ that creates a schema called `searchable-video-library`.
 
 All tables are created from POJOs (Plain Old Java Objects) annotated with
 Hibernate annotations and are created at runtime of the Apache servlet.
+    
+```java
 
-    TODO show annotations alongside table from intellij idea
+    package com.teamteem.model;
+
+    import javax.faces.bean.ManagedBean;
+    import javax.persistence.*;
+    import java.util.Set;
+    
+    @Entity
+    @Table(name = "person")
+    @ManagedBean(name = "person")
+    public class Person {
+
+        @Id
+        @Column(name = "id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id;
+
+        private String name;
+
+        @Column(unique = true)
+        private String username;
+
+        @Column(unique = true)
+        private String email;
+
+        private String country;
+
+        private String password;
+
+        @OneToMany(mappedBy = "person")
+        private Set<Video> videos;
+
+        @OneToMany(mappedBy = "person")
+        private Set<Audio> audios;
+
+        @OneToMany(mappedBy = "person")
+        private Set<Text> texts;
+        
+        //(...)
+    
+    }
+```
+
+![A database schema diagram generated from database
+tables.](img/schema-diagram.PNG)
 
 # 8. Use of user authentication:
-There is a session in the form of cookies, but no logic to differentiate users as sessions yet, but is currently being configured by pairing UserID with SessionID.
-Hibernate query is used to validate username and password from MySQL Database to allow user authentication.
-The UI could easily be modified for authentication / un authentication users via CSS selectors.
+
+## a. Using webserver sessions
+
+User sessions work by saving a username to a `jsessionid` that allows an
+authenticated user to have a session after logging in with a valid username and
+password.
+
+## b. Different UI for unauthenticated users
+
+Currently, the UI is the same for authenticated and unauthenticated users.
+
+## c. Different UI for authenticated users
+
+Currently, the UI is the same for authenticated and unauthenticated users.
+
+## d. Different UI for administrative users
+
+Currently, the UI is the same for administrative and unauthenticated users.
+
+## e. UI is modified via CSS selectors
+
+Currently, the UI is the same for authenticated and unauthenticated users.
 
 # 9. Creation of Dev Environment (local laptop):
-The development environment is well-documented, but is not automatically creatable.
-The instructions are in the form of a markdown file.
-All of our packer build scripts work.
-`vagrant up` works.
-The development environment uses GitHub deploy keys, and everyone deploys using their own keys.
+
+## a) Must work according to specification
+
+Specific versions of required software are documented.
+
+IDE setup is also documented.
+
+The development environment is well-documented, but is not automatically
+creatable.
+
+However, you can run `ruby /packer/build-missing.rb` to build all missing packer
+boxes, and `vagrant up` in `/` to bring the virtual machines up.
+
+## b) Environment must be configurable via a script pre-deploy
+
+All global configuration is stored in `/variables.yml`
+
+## c) Explanation of UI/UX testing methodology
+
+Currently, we only sporadically test and report bugs in UI/UX components.
+
+## d) Github & Trello bug report proof
+
+    TODO give proof via screenshots
 
 # 10. Layout design:
-This is our website layout.
-At top has all the navigations, which direct you to different pages.
-![layout](img/websitlayoutPNG.PNG "website_layout")
 
-## 11. Management of Visio (or comparable) diagram tool of work flow:
+This is our website layout.
+
+The top has a navigation bar, which directs you to different pages.
+
+![The layout of the website.](img/website.PNG)
+
+## 11. Diagram tool management:
+
 This is the front-end website workflow.
-![front_end_website_workflow](img/front_end_website_workflow.png "front_end_website_workflow")
+![front_end_website_workflow](img/front_end_website_workflow.png)
 
 This is the user experience flow.
-![user_experience_workflow](img/user_experience_workflow.png "front_end_website_workflow")
+![user_experience_workflow](img/user_experience_workflow.png)
 
-This is the website server UML diagram.
-![web_server_UML](img/web_server_UML.png "web_server_UML")
-
-This is the Deploy keys
-![deploy_key](img/deploy_key.PNG "deploy_key")
-
-
+This is the webserver UML diagram.
+![web_server_UML](img/web_server_UML.png)
 
 # 12. Management of project progress:
 a. [Trello](https://trello.com/b/03OdRjtq/2019-team-07f)
