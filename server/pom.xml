@@ -291,12 +291,12 @@
         </dependency>
 
         <dependency>
-<<<<<<< HEAD
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
-=======
+
+        <dependency>
             <groupId>edu.cmu.sphinx</groupId>
             <artifactId>sphinx4-core</artifactId>
             <version>5prealpha-SNAPSHOT</version>
@@ -307,8 +307,6 @@
             <artifactId>sphinx4-data</artifactId>
             <version>5prealpha-SNAPSHOT</version>
         </dependency>
-
->>>>>>> f9fb5836d5a31ab822b9022615c32bf4e1457c3a
 
     </dependencies>
     <repositories>
