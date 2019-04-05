@@ -72,7 +72,7 @@ public class Person {
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setPassword(String password) {
@@ -80,7 +80,7 @@ public class Person {
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     @Override
@@ -111,5 +111,4 @@ public class Person {
     public void setTexts(Set<Text> texts) {
         this.texts = texts;
     }
-
 }

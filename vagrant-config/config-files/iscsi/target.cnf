@@ -1,7 +1,7 @@
 # create new
 # naming rule : [ iqn.(year)-(month).(reverse of domain name):(any name you like) ]
 <target iqn.2018-05.world.srv:dlp.target01>
-    # provided devicce as a iSCSI target
+    # provided devicce as a iSCSI target (This is LUN = 1)
     backing-store /var/lib/iscsi_disks/disk01.img
     # iSCSI Initiator's IQN you allow to connect to this Target
     initiator-name iqn.2018-05.world.srv:www.initiator01

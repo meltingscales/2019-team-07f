@@ -92,8 +92,19 @@ Vagrant.configure('2') do |config|
 
       vb.memory = '512'
     end
-  end
 
+    # Copy my.cnf to MySQL server.
+    iscsi.vm.provision 'file', source: './vagrant-config/config-files/iscsi/target.cnf', destination: '/tmp/target.cnf'
+    iscsi.vm.provision 'shell', inline: <<-SCRIPT
+
+      sudo mv /tmp/target.cnf /etc/iscsi/target.cnf
+
+    SCRIPT
+
+    # testing on install and configure iscsi target
+    iscsi.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-server.sh'
+
+  end
 
   # MySQL box.
   config.vm.define 'db' do |db|
@@ -258,7 +269,9 @@ Vagrant.configure('2') do |config|
   	# }
 
 	config.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
-  	
+
+  # Test on installing iscsi client side
+  #web.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-client.sh'
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
