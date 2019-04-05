@@ -424,14 +424,13 @@ This is the webserver UML diagram.
 ## c. Development Environment
 
 The development environment is documented in `/README.md` and
-`/server/README.md`. It is crossplatform.
+`/server/README.md`. It is cross-platform.
 
-## d. GitHub goals <--> commits
+## d. GitHub goals and commits
 
     TODO correlate completed goals to commits
     
     XXX what does this mean? Do I associate commit hashes to Trello cards?
-
 
 ## e. GitHub Issues enumeration
 
