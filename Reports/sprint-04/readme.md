@@ -2,13 +2,13 @@
 
 Project Manager: Henry Post
 
-Developer: 
+Developer: Idris Fagbemi
 
-Junior Developer: 
+Junior Developer: Yi-Ting Lin
 
-IT Operation: 
+IT Operation: Jimmy Tran
 
-UI/UX: 
+UI/UX: Nihar Patel, Divin Baniekona
 
 # 1. Languages and frameworks
 
@@ -417,23 +417,30 @@ This is the webserver UML diagram.
 ![web_server_UML](img/web_server_UML.png)
 
 # 12. Management of project progress:
-a. [Trello](https://trello.com/b/03OdRjtq/2019-team-07f)
+## a. Trello
 
-b. [Slack](https://itmt-430-group.slack.com)
+[Trello link](https://trello.com/b/03OdRjtq/2019-team-07f)
 
-c. [GitHub](https://github.com/illinoistech-itm/2019-team-07f)
+## c. Development Environment
 
-d. GitHub Issues to resolve bug posts from UI/UX tester
-![github_bug](img/github_bug.png "github_bug")
+The development environment is documented in `/README.md` and
+`/server/README.md`. It is crossplatform.
+
+## d. GitHub goals <--> commits
+
+    TODO correlate completed goals to commits
+    
+    XXX what does this mean? Do I associate commit hashes to Trello cards?
+
+
+## e. GitHub Issues enumeration
+
+    TODO List all open bugs, closed bugs and who they were assigned to by the PM
 
 # Trello Board:
-![test_user](img/Trello_Board.png "Trello_Board")
+![Trello Board Cards](img/Trello_Board.png)
 
-# Slack:
-![slack](img/slack.PNG "slack")
+# 13. Insertion of test users upon application deployment
 
-# 13. Team must generate at least 15 real “test” user data that is inserted upon instance creation and proper data to test functionality of a system:
-We currently have 15 test users.
-There are connection self-tests that the web box will perform with both the database box and storage box.
-These are performed each time
-![test_user](img/test_user.PNG "test_user")
+We currently have 15 test users that get inserted into the database when the
+application is built.
