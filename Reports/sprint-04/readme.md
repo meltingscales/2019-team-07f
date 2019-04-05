@@ -12,6 +12,7 @@ UI/UX:
 
 # 1. Languages and frameworks
 
+
 ## a. Programming languages and frameworks
 
 ### Java and Kotlin
@@ -186,14 +187,16 @@ accidentally.
 
 # 3. Use of Data Store/Storage:
 
-We are using MySQL 5.7 to store user information, names, emails, etc, and have the MySQL server on a completely separate box.
+We are using MySQL 5.7 to store user information, names, emails, etc, and have
+the MySQL server on a completely separate box.
 
 We are planning on using iSCSI along with file paths to handle storing videos.
 We have a separate VM whose only purpose is to act as an iSCSI target (server)
 for the webserver to put large MP4/MP3 files.
 
 A table will be created to store information about the videos (ID, Title, date
-of creation...) as well as a field that will contact the path to access the video.
+of creation...) as well as a field that will contact the path to access the
+video.
 
 We currently have the ORM engine working and can store a "Person" object without
 writing any SQL code.
@@ -247,6 +250,12 @@ database to provide access. This was done through Hibernate Query Language
 (HQL).
 
 ### ii. How it's secured
+
+The username is stored in a Java Servlet Session that the user can identify via
+a cookie.
+
+There is built-in CSRF protection in the form of a nonce that gets inserted with
+all forms.
 
 ## c. Security assumptions
 
