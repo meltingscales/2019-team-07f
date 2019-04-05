@@ -380,7 +380,9 @@ Vagrant.configure('2') do |config|
 
     if DEPLOY
       # Deploy our app.
-      web.vm.provision :shell, path: 'vagrant-config/scripts/deploy-app.sh', run: 'always'
+      web.vm.provision :shell, path: 'vagrant-config/scripts/deploy-app.sh', run: 'always', env: {
+		  :REPO_PATH => VARIABLES['repo_location'],
+	  }
 
       # At this point, going to http://127.0.0.1:8080/searchable-video-library/ should yield some HTML page.
     end
@@ -389,6 +391,7 @@ Vagrant.configure('2') do |config|
     if INSERT_TEST_DATA
 
       web.vm.provision :shell, path: 'vagrant-config/scripts/insert-test-users.sh', env: {
+		  :REPO_PATH => VARIABLES['repo_location'],
           :DB_IP_ADDR => VARIABLES['db']['ip'],
           :DB_PORT => VARIABLES['db']['port'],
           :DB_USERNAME => VARIABLES['db']['username'],
