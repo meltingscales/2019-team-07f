@@ -384,7 +384,7 @@ This is our website layout.
 
 The top has a navigation bar, which directs you to different pages.
 
-![The layout of the website.](img/website.PNG "website_layout")
+![The layout of the website.](img/website.PNG)
 
 ## 11. Diagram tool management:
 
@@ -394,12 +394,8 @@ This is the front-end website workflow.
 This is the user experience flow.
 ![user_experience_workflow](img/user_experience_workflow.png)
 
-This is the website server UML diagram.
+This is the webserver UML diagram.
 ![web_server_UML](img/web_server_UML.png)
-
-These are the Deploy keys
-![deploy_key](img/deploy_key.PNG)
-
 
 # 12. Management of project progress:
 a. [Trello](https://trello.com/b/03OdRjtq/2019-team-07f)
