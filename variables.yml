@@ -62,6 +62,6 @@ iscsi:
 
 
 # Location the GitHub repository is cloned to.
-repo_location: "/vagrant/home/2019-team-07f/server/"
+repo_location: /vagrant/home/2019-team-07f/
 
 ...

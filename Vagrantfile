@@ -40,7 +40,8 @@ def clone_repo(box, vars = VARIABLES, public_repo = USE_PUBLIC_REPO)
 
     # Clone repo.
     box.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh', env: {
-        :REPO_URL => vars['private-repo-url']
+        :REPO_URL => vars['private-repo-url'],
+		:REPO_PATH => vars['repo_location'],
     }
 
   end
