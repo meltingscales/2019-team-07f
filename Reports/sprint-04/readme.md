@@ -348,9 +348,28 @@ Hibernate annotations and are created at runtime of the Apache servlet.
 tables.](img/schema-diagram.PNG)
 
 # 8. Use of user authentication:
-There is a session in the form of cookies, but no logic to differentiate users as sessions yet, but is currently being configured by pairing UserID with SessionID.
-Hibernate query is used to validate username and password from MySQL Database to allow user authentication.
-The UI could easily be modified for authentication / un authentication users via CSS selectors.
+
+## a. Using webserver sessions
+
+User sessions work by saving a username to a `jsessionid` that allows an
+authenticated user to have a session after logging in with a valid username and
+password.
+
+## b. Different UI for unauthenticated users
+
+Currently, the UI is the same for authenticated and unauthenticated users.
+
+## c. Different UI for authenticated users
+
+Currently, the UI is the same for authenticated and unauthenticated users.
+
+## d. Different UI for administrative users
+
+Currently, the UI is the same for administrative and unauthenticated users.
+
+## e. UI is modified via CSS selectors
+
+Currently, the UI is the same for authenticated and unauthenticated users.
 
 # 9. Creation of Dev Environment (local laptop):
 
