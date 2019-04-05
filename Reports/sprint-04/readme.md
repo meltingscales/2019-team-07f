@@ -205,7 +205,9 @@ writing any SQL code.
 
 Data is currently stored in plaintext in the MySQL database.
 
-Data encryption at rest is planned.
+User passwords are hashed.
+
+Full data encryption at rest is planned.
 
 Truecrypt for full disk encryption is also a good option to add to our security.
 
@@ -276,7 +278,19 @@ immediately deleted from the VM.
 
 We seed the database with 15 test users.
 
-    TODO give code snippets
+```sql
+    INSERT INTO `person` (country, email, name, password, username)
+    VALUES ('USA', 'hpost@hawk.iit.edu', 'Henry Post', 'forkbomb123', 'hpost'),
+           ('USA', 'npatel117@hawk.iit.edu', 'Nihar Patel', 'pmsrock!!', 'npatel117'),
+           ('USA', 'ifagbemi@hawk.iit.edu', 'Idris Fagbemi', 'dev4life', 'ifagbemi'),
+           ('USA', 'dbaniekona@hawk.iit.edu', 'Divin Gregis Baniekona', 'itopsguy456', 'dbaniekona'),
+           ('USA', 'ylin95@hawk.iit.edu', 'Yi Ting Lin', 'yitingrox', 'ylin95'),
+           ('USA', 'jtron82@hawk.iit.edu', 'Jimmy Tran', 'uiuxuxui', 'jtron82'),
+
+           ('Dominican Republic', 'carrjess21@gmail.com', 'Jessie Caraballo', 'carrain$!', 'jessiecar2'),
+           ('Albania', 'vgoj@gmail.com', 'Victor Gojcaj', 'nycisforme', 'vgoj'),
+           /*(...)*/
+```
 
 ### iv. Pre-seeding databases with schema and records
 
@@ -285,8 +299,53 @@ that creates a schema called `searchable-video-library`.
 
 All tables are created from POJOs (Plain Old Java Objects) annotated with
 Hibernate annotations and are created at runtime of the Apache servlet.
+    
+```java
 
-    TODO show annotations alongside table from intellij idea
+    package com.teamteem.model;
+
+    import javax.faces.bean.ManagedBean;
+    import javax.persistence.*;
+    import java.util.Set;
+    
+    @Entity
+    @Table(name = "person")
+    @ManagedBean(name = "person")
+    public class Person {
+
+        @Id
+        @Column(name = "id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id;
+
+        private String name;
+
+        @Column(unique = true)
+        private String username;
+
+        @Column(unique = true)
+        private String email;
+
+        private String country;
+
+        private String password;
+
+        @OneToMany(mappedBy = "person")
+        private Set<Video> videos;
+
+        @OneToMany(mappedBy = "person")
+        private Set<Audio> audios;
+
+        @OneToMany(mappedBy = "person")
+        private Set<Text> texts;
+        
+        //(...)
+    
+    }
+```
+
+![A database schema diagram generated from database
+tables.](img/schema-diagram.PNG)
 
 # 8. Use of user authentication:
 There is a session in the form of cookies, but no logic to differentiate users as sessions yet, but is currently being configured by pairing UserID with SessionID.
