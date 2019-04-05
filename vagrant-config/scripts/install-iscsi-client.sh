@@ -12,7 +12,7 @@ sudo iscsiadm -m discovery -t st -p 10.3.0.11
 sudo iscsiadm -m node -o show
 
 # connect to the target
-sudo iscsiadm -m node --login
+sudo iscsiadm --mode node --targetname iqn.2018-05.world.srv:dlp.target01 --portal 10.3.0.11:3260 --login
 
 # disconnect to all target
-iscsiadm --mode node --logoutall=all
+sudo iscsiadm --mode node --logoutall=all
