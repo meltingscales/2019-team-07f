@@ -451,7 +451,7 @@ bcfdb731e6e4e5f5957e0dfd935014c233cd215b
 
 ### Setting up an iSCSI target
 
-![Trello card](img/trello-hashes/yiting-iscsi.PNG)
+![Trello card](img/trello-hashes/yiting-iscsi.png)
 
 b2cc43f4dc378b8356799a42a10207e6697d1587
 
