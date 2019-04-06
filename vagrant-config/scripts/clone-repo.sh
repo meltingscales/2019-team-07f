@@ -10,8 +10,7 @@ if [[ -d ${REPO_PATH} ]]; then
 	pushd ${REPO_PATH}
 		
 		# Clean working tree
-		git checkout .
-		git clean -f
+		git reset --hard
 		
 		# Update
 		git pull
