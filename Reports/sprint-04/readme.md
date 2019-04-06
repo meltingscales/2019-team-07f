@@ -416,10 +416,13 @@ This is the user experience flow.
 This is the webserver UML diagram.
 ![web_server_UML](img/web_server_UML.png)
 
-# 12. Management of project progress:
+# 12. Management of project progress
+
 ## a. Trello
 
 [Trello link](https://trello.com/b/03OdRjtq/2019-team-07f)
+
+![Trello goals](img/trello-doing-vs-done.PNG)
 
 ## c. Development Environment
 
@@ -434,7 +437,48 @@ The development environment is documented in `/README.md` and
 
 ## e. GitHub Issues enumeration
 
-    TODO List all open bugs, closed bugs and who they were assigned to by the PM
+![GitHub Issues page](img/github-issues.PNG)
+
+### Open bugs
+
+- [Existing RSA keys get clobbered by our RSA key name](https://github.com/illinoistech-itm/2019-team-07f/issues/19)
+  
+    - Assignee: No-one
+
+- [Logging out produces error](https://github.com/illinoistech-itm/2019-team-07f/issues/18)
+
+    - Assignee: Jimmy Tran
+
+- [Storage box iSCSI server setup packer step fails](https://github.com/illinoistech-itm/2019-team-07f/issues/17)
+      
+    - Assignee: Divin Gregis Baniekona
+
+- [Hardcoded mysql root user password](https://github.com/illinoistech-itm/2019-team-07f/issues/16)
+          
+    - Assignee: No-one
+
+    
+- [Build instructions missing port access](https://github.com/illinoistech-itm/2019-team-07f/issues/15)
+              
+    - Assignee: No-one
+
+- [Vagrant box and version mismatch](https://github.com/illinoistech-itm/2019-team-07f/issues/14)
+              
+    - Assignee: No-one
+
+- [User navigation is incorrect](https://github.com/illinoistech-itm/2019-team-07f/issues/13)
+              
+    - Assignee: No-one
+
+### Closed bugs
+
+- [Readme.md doesn't metion what to do without ruby installed](https://github.com/illinoistech-itm/2019-team-07f/issues/21)
+
+    - Assignee: No-one
+
+- [Vagrant .box file included in repo](https://github.com/illinoistech-itm/2019-team-07f/issues/14)
+
+    - Assignee: No-one
 
 # Trello Board:
 ![Trello Board Cards](img/Trello_Board.png)
