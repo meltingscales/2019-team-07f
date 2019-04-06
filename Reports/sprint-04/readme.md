@@ -395,7 +395,7 @@ Currently, we only sporadically test and report bugs in UI/UX components.
 
 ## d) Github & Trello bug report proof
 
-    TODO give proof via screenshots
+No bugs were recorded during this sprint.
 
 # 10. Layout design:
 
