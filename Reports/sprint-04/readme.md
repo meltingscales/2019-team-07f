@@ -431,9 +431,39 @@ The development environment is documented in `/README.md` and
 
 ## d. GitHub goals and commits
 
-    TODO correlate completed goals to commits
-    
-    XXX what does this mean? Do I associate commit hashes to Trello cards?
+### Adding CSS to web server
+
+![Trello card](img/trello-hashes/nihar-css.PNG)
+
+f7efe9f15441f7e3fb3472aca794355f95a4753d
+
+15537020da74b20b307d31b1df78429117cc05b5
+
+abe96ebf0e66e8793f94b7a19381e6cbb19615ce
+
+### Adding Hibernate annotated POJOs
+
+![Trello card](img/trello-hashes/jimmy-hibernate-pojos.PNG)
+
+dfa326f171a685551c501cb3d840762d24f12729
+
+bcfdb731e6e4e5f5957e0dfd935014c233cd215b
+
+### Setting up an iSCSI target
+
+![Trello card](img/trello-hashes/yiting-iscsi.PNG)
+
+b2cc43f4dc378b8356799a42a10207e6697d1587
+
+5748ee1e9c7da8626bb40658cc22fe280486ed7f
+
+### Converting Videos to MP3 files
+
+![Trello card](img/trello-hashes/idris-video-to-mp3.PNG)
+
+8980360ac0bdb2cbef2dfae865072667996058b8
+
+b3ce219c2117f53ceba5708afeb5e54986f87889
 
 ## e. GitHub Issues enumeration
 
@@ -456,7 +486,6 @@ The development environment is documented in `/README.md` and
 - [Hardcoded mysql root user password](https://github.com/illinoistech-itm/2019-team-07f/issues/16)
           
     - Assignee: No-one
-
     
 - [Build instructions missing port access](https://github.com/illinoistech-itm/2019-team-07f/issues/15)
               
