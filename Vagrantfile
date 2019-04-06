@@ -176,6 +176,9 @@ Vagrant.configure('2') do |config|
     # Expose HTTP Port to host computer.
     web.vm.network 'forwarded_port', guest: 8080, host: 8080, host_ip: '127.0.0.1'
 
+    # Expose port for monitoring.
+    web.vm.network 'forwarded_port', guest: 19999, host: 19999, host_ip: '127.0.0.1'
+
     # Add webserver to a private network.
     web.vm.network 'private_network', ip: VARIABLES['web']['ip']
     web.vm.hostname = VARIABLES['web']['hostname']
@@ -240,6 +243,9 @@ Vagrant.configure('2') do |config|
     echo "MySQL connection OK!"
 
     SCRIPT
+
+    # Install netdata for monitoring.
+    web.vm.provision 'netdata', type: 'shell', path: 'vagrant-config/scripts/install-netdata.sh'
 
     # Test on installing iscsi client side
     #web.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-client.sh'
