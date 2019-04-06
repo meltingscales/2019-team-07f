@@ -37,6 +37,9 @@ db:
   # (outwards-facing) port of database.
   port: 3306
 
+  # Outwards-facing netdata port.
+  netdata-port: 19998
+
   # Username and password to the database, accessible only by the web IP address.
   username: webserver
   password: password
@@ -52,6 +55,9 @@ web:
   # IP address of web server.
   ip: 10.3.0.11
 
+  # Outwards-facing netdata port.
+  netdata-port: 19999
+
 # Config for iSCSI box.
 iscsi:
   # Hostname of web server.
@@ -59,6 +65,9 @@ iscsi:
 
   # IP address of web server.
   ip: 10.3.0.12
+
+  # Outwards-facing netdata port.
+  netdata-port: 19997
 
 
 # Location the GitHub repository is cloned to.

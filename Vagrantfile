@@ -94,6 +94,9 @@ Vagrant.configure('2') do |config|
       vb.memory = '512'
     end
 
+	# Install netdata for monitoring.
+    iscsi.vm.provision 'netdata', type: 'shell', path: 'vagrant-config/scripts/install-netdata.sh'
+
     # Copy my.cnf to MySQL server.
     iscsi.vm.provision 'file', source: './vagrant-config/config-files/iscsi/target.cnf', destination: '/tmp/target.cnf'
     iscsi.vm.provision 'shell', inline: <<-SCRIPT
@@ -104,6 +107,10 @@ Vagrant.configure('2') do |config|
 
     # testing on install and configure iscsi target
     iscsi.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-server.sh'
+
+  # Expose port for monitoring via netdata.
+    iscsi.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['iscsi']['netdata-port'], host_ip: '127.0.0.1'
+
 
   end
 
@@ -123,6 +130,13 @@ Vagrant.configure('2') do |config|
 
       vb.memory = '1024'
     end
+
+
+    # Expose port for monitoring via netdata.
+    db.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['db']['netdata-port'], host_ip: '127.0.0.1'
+
+    # Install netdata for monitoring.
+    db.vm.provision 'netdata', type: 'shell', path: 'vagrant-config/scripts/install-netdata.sh'
 
     # Clone GitHub repo.
     clone_repo(db)
@@ -176,8 +190,8 @@ Vagrant.configure('2') do |config|
     # Expose HTTP Port to host computer.
     web.vm.network 'forwarded_port', guest: 8080, host: 8080, host_ip: '127.0.0.1'
 
-    # Expose port for monitoring.
-    web.vm.network 'forwarded_port', guest: 19999, host: 19999, host_ip: '127.0.0.1'
+    # Expose port for monitoring via netdata.
+    web.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['web']['netdata-port'], host_ip: '127.0.0.1'
 
     # Add webserver to a private network.
     web.vm.network 'private_network', ip: VARIABLES['web']['ip']
