@@ -4,6 +4,10 @@
 # 2019-team-07f
 Private team repo for ITMT 430
 
+# Monitoring
+
+Visit http://localhost:19999 for application metrics once it is running.
+
 # Building
 
 ## Requirements
