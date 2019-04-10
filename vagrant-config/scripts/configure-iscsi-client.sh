@@ -5,14 +5,14 @@
 # install open-iSCSI
 apt-get install -y open-iscsi
 
-# check traget ip addresses (web)
-sudo iscsiadm -m discovery -t st -p 10.3.0.11
+# check target ip addresses (web)
+sudo iscsiadm -m discovery -t st -p ${TARGET_IP}
 
 # list out all the iscsi target
 sudo iscsiadm -m node -o show
 
 # connect to the target
-sudo iscsiadm --mode node --targetname iqn.2018-05.world.srv:dlp.target01 --portal 10.3.0.11:3260 --login
+sudo iscsiadm --mode node --targetname iscsi --portal ${TARGET_IP}:3260 --login
 
 # disconnect to all target
 sudo iscsiadm --mode node --logoutall=all

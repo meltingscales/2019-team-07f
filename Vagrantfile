@@ -94,7 +94,7 @@ Vagrant.configure('2') do |config|
       vb.memory = '512'
     end
 
-	# Install netdata for monitoring.
+    # Install netdata for monitoring.
     iscsi.vm.provision 'netdata', type: 'shell', path: 'vagrant-config/scripts/install-netdata.sh'
 
     # Copy my.cnf to MySQL server.
@@ -106,9 +106,9 @@ Vagrant.configure('2') do |config|
     SCRIPT
 
     # testing on install and configure iscsi target
-    iscsi.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-server.sh'
+    iscsi.vm.provision :shell, path: 'vagrant-config/scripts/configure-iscsi-server.sh'
 
-  # Expose port for monitoring via netdata.
+    # Expose port for monitoring via netdata.
     iscsi.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['iscsi']['netdata-port'], host_ip: '127.0.0.1'
 
 
@@ -261,8 +261,10 @@ Vagrant.configure('2') do |config|
     # Install netdata for monitoring.
     web.vm.provision 'netdata', type: 'shell', path: 'vagrant-config/scripts/install-netdata.sh'
 
-    # Test on installing iscsi client side
-    #web.vm.provision :shell, path: 'vagrant-config/scripts/install-iscsi-client.sh'
+    # Set up an iSCSI client.
+    web.vm.provision :shell, path: 'vagrant-config/scripts/configure-iscsi-client.sh', env: {
+        TARGET_IP: VARIABLES['iscsi']['ip']
+    }
 
     config.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
 
