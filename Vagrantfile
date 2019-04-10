@@ -253,9 +253,9 @@ Vagrant.configure('2') do |config|
     SCRIPT
 
     # Set up an iSCSI client.
-    web.vm.provision :shell, path: 'vagrant-config/scripts/configure-iscsi-client.sh', env: {
-        TARGET_IP: VARIABLES['iscsi']['ip']
-    }
+    # web.vm.provision :shell, path: 'vagrant-config/scripts/configure-iscsi-client.sh', env: {
+    #     TARGET_IP: VARIABLES['iscsi']['ip'] #TODO Make iSCSI target work so initiator works.
+    # }
 
     config.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
 
