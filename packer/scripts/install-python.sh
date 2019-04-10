@@ -7,10 +7,10 @@ apt-get install -y python3.6-dev
 
 # Install Python's pip
 apt-get install -y python3.6 python3-pip
-sudo python3.6 -m pip install pipenv
+python3.6 -m pip install pipenv
 
 # Install jep as it isn't included in Pipfile.
-sudo python3.6 -m pip install jep
+python3.6 -m pip install jep
 
 # Set up paths for jep.
 JEP_PATH=/usr/local/lib/python3.6/dist-packages/jep/
