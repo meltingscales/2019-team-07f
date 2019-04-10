@@ -6,9 +6,9 @@ Private team repo for ITMT 430
 
 # Monitoring
 
-Visit http://localhost:{19999,19998,19997} for application metrics once it is running.
+Visit http://localhost:{19999,19998,19997} for application metrics once the application is running.
 
-These map to the `web`, `db`, and `iscsi` boxes respectively.
+These port numbers correspond to the `web`, `db`, and `iscsi` boxes respectively.
 
 Additionally, dashboards are available in `/metrics/*.html`.
 
