@@ -94,9 +94,6 @@ Vagrant.configure('2') do |config|
       vb.memory = '512'
     end
 
-    # Install netdata for monitoring.
-    iscsi.vm.provision 'netdata', type: 'shell', path: 'vagrant-config/scripts/install-netdata.sh'
-
     # Copy my.cnf to MySQL server.
     iscsi.vm.provision 'file', source: './vagrant-config/config-files/iscsi/target.cnf', destination: '/tmp/target.cnf'
     iscsi.vm.provision 'shell', inline: <<-SCRIPT
@@ -134,9 +131,6 @@ Vagrant.configure('2') do |config|
 
     # Expose port for monitoring via netdata.
     db.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['db']['netdata-port'], host_ip: '127.0.0.1'
-
-    # Install netdata for monitoring.
-    db.vm.provision 'netdata', type: 'shell', path: 'vagrant-config/scripts/install-netdata.sh'
 
     # Clone GitHub repo.
     clone_repo(db)
@@ -257,9 +251,6 @@ Vagrant.configure('2') do |config|
     echo "MySQL connection OK!"
 
     SCRIPT
-
-    # Install netdata for monitoring.
-    web.vm.provision 'netdata', type: 'shell', path: 'vagrant-config/scripts/install-netdata.sh'
 
     # Set up an iSCSI client.
     web.vm.provision :shell, path: 'vagrant-config/scripts/configure-iscsi-client.sh', env: {
