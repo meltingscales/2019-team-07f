@@ -76,6 +76,11 @@
     },
     {
       "type": "shell",
+      "script": "scripts/install-netdata.sh",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+    },
+    {
+      "type": "shell",
       "script": "scripts/install-java.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     },
@@ -102,11 +107,6 @@
     {
       "type": "shell",
       "script": "scripts/install-tomcat.sh",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
-    },
-    {
-      "type": "shell",
-      "script": "scripts/install-netdata.sh",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
     },
     {
