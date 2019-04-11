@@ -19,7 +19,7 @@ public class UploadBean {
     public String upload(){
         try {
             InputStream input=file.getInputStream();
-            File f=new File("C:\\Users\\Baniek\\2019-team-07f\\server\\src\\main\\java\\file.txt");
+            File f=new File("src\\main\\resources\\test-data\\file.txt");
             if(!f.exists()){
                 f.createNewFile();
             }
