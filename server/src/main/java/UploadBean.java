@@ -16,10 +16,12 @@ import java.io.IOException;
 public class UploadBean {
 
     private Part file;
+    private String fileName;
     public String upload(){
         try {
             InputStream input=file.getInputStream();
-            File f=new File("src\\main\\resources\\test-data\\file.txt");
+
+            File f=new File(fileName + ".mp4");
             if(!f.exists()){
                 f.createNewFile();
             }
@@ -43,5 +45,13 @@ public class UploadBean {
 
     public void setFile(Part file) {
         this.file = file;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String  fileName) {
+        this.fileName = fileName;
     }
 }
