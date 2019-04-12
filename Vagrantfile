@@ -80,30 +80,30 @@ Vagrant.configure('2') do |config|
   config.ssh.username = 'vagrant'
   config.ssh.password = 'vagrant'
 
-  # iSCSI box.
-  config.vm.define 'iscsi' do |iscsi|
+  # Storage box.
+  config.vm.define 'storage' do |storage|
 
-    iscsi.vm.box = './packer/output/ubuntu-storage.box'
+    storage.vm.box = './packer/output/ubuntu-storage.box'
 
-    iscsi.vm.network 'private_network', ip: VARIABLES['iscsi']['ip']
-    iscsi.vm.hostname = VARIABLES['iscsi']['hostname']
+    storage.vm.network 'private_network', ip: VARIABLES['storage']['ip']
+    storage.vm.hostname = VARIABLES['storage']['hostname']
 
-    iscsi.vm.provider 'virtualbox' do |vb|
+    storage.vm.provider 'virtualbox' do |vb|
       vb.gui = false
 
       vb.memory = '512'
     end
 
     # Copy directory exports file for NFS server.
-    iscsi.vm.provision :file, source: './vagrant-config/config-files/nfs/exports', destination: '/tmp/exports'
+    storage.vm.provision :file, source: './vagrant-config/config-files/nfs/exports', destination: '/tmp/exports'
 
     # Configure NFS server.
-    iscsi.vm.provision :shell, path: 'vagrant-config/scripts/configure-nfs-server.sh', env: {
+    storage.vm.provision :shell, path: 'vagrant-config/scripts/configure-nfs-server.sh', env: {
         :SUBNET_IP => VARIABLES['subnet']
     }
 
     # Expose port for monitoring via netdata.
-    iscsi.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['iscsi']['netdata-port'], host_ip: '127.0.0.1'
+    storage.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['storage']['netdata-port'], host_ip: '127.0.0.1'
 
 
   end
@@ -208,11 +208,11 @@ Vagrant.configure('2') do |config|
 
     # Mount NFS drive.
     web.vm.provision :shell, path: 'vagrant-config/scripts/configure-nfs-client.sh', env: {
-        :NFS_SERVER_IP => VARIABLES['iscsi']['ip'],
+        :NFS_SERVER_IP => VARIABLES['storage']['ip'],
         :MOUNT_LOCATION => VARIABLES['web']['mount-location'],
     }
 
-    # Test that the webserver has correctly mounted the iSCSI box's drive over nfs.
+    # Test that the webserver has correctly mounted the storage box's drive over nfs.
     web.vm.provision 'shell', run: 'always', env: {
         :MOUNT_LOCATION => VARIABLES['web']['mount-location'],
     },
@@ -238,18 +238,18 @@ Vagrant.configure('2') do |config|
 
     SCRIPT
 
-    # Test that the webserver can ping the iSCSI server.
-    web.vm.provision 'shell', run: 'always', env: {:ISCSI_IP_ADDR => VARIABLES['iscsi']['ip']},
+    # Test that the webserver can ping the storage box.
+    web.vm.provision 'shell', run: 'always', env: {:STORAGE_IP_ADDR => VARIABLES['storage']['ip']},
                      inline: <<-SCRIPT
 
-    # Ping iSCSI box once.
-    ping -c1 $ISCSI_IP_ADDR
+    # Ping storage box once.
+    ping -c1 ${STORAGE_IP_ADDR}
 
     # If last error code is zero (success), then...
     if [ "$?" = 0 ]; then
-        echo "iSCSI box at $ISCSI_IP_ADDR is ping-able!"
+        echo "Storage box at ${STORAGE_IP_ADDR} is ping-able!"
     else
-        echo "iSCSI server at $ISCSI_IP_ADDR could not be pinged! Halting!"
+        echo "Storage box at ${STORAGE_IP_ADDR} could not be pinged! Halting!"
 
         false # This will force an error.
     fi

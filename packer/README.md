@@ -12,7 +12,7 @@ If not, you can run the below commands:
 
 Do NOT run these in parallel, as they (can) break each other. <!-- TODO can this be fixed? -->
 
-`packer build ubuntu-storage.json` will build the iSCSI box.
+`packer build ubuntu-storage.json` will build the storage box.
 
 `packer build ubuntu-webserver.json` will build the webserver.
 
