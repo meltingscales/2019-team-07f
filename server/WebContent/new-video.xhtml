@@ -15,9 +15,9 @@
         <div class="heading">
             <h1 style="text-align: center;">Upload Video. Get Text!</h1>
         </div>
-
         <h:form action="/upload" method="POST" enctype="multipart/form-data">
-            <h:inputFile value="#{uploadBean.file}"/>
+            Enter File Name: <h:inputText value="#{uploadBean.fileName}"/><br></br>
+            <h:inputFile value="#{uploadBean.file}"/><br></br>
 
             <h:commandButton value="upload" action="#{uploadBean.upload}"/>
 
