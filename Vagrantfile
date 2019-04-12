@@ -99,7 +99,8 @@ Vagrant.configure('2') do |config|
 
     # Configure NFS server.
     storage.vm.provision :shell, path: 'vagrant-config/scripts/configure-nfs-server.sh', env: {
-        :SUBNET_IP => VARIABLES['subnet']
+        :SUBNET_IP => VARIABLES['subnet'],
+        :HOST_IP => VARIABLES['host-ip'],
     }
 
     # Expose port for monitoring via netdata.

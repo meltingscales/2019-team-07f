@@ -25,6 +25,14 @@ ssl-cert:
   state: Illinois
   city: Chicago
 
+# VirtualBox's host IP address.
+# This is what the VMs see connecting to them when you SSH into the VMs.
+host-ip: 10.0.2.2
+
+# Virtualbox's host subnet.
+host-subnet: 10.0.2.0
+
+# Subnet IP of private network.
 subnet: 10.3.0.0
 
 # Config for db box.

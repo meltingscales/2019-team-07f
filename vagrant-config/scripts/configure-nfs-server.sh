@@ -21,13 +21,14 @@ sudo exportfs -a
 
 sudo systemctl restart nfs-kernel-server
 
+# Allow nfs mounting from any
 sudo ufw allow from ${SUBNET_IP}/24 to any port nfs
 
-# Allow SSH from anywhere
-sudo ufw allow 22
+# Allow SSH from only host ip
+sudo ufw allow from ${HOST_IP} to any port ssh
 
-# Allow netdata from anywhere
-sudo ufw allow 19999
+# Allow netdata from only host ip
+sudo ufw allow from ${HOST_IP} to any port 19999
 
 yes | ufw enable
 
