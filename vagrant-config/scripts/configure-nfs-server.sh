@@ -22,7 +22,12 @@ sudo exportfs -a
 sudo systemctl restart nfs-kernel-server
 
 sudo ufw allow from ${SUBNET_IP}/24 to any port nfs
+
+# Allow SSH from anywhere
 sudo ufw allow 22
+
+# Allow netdata from anywhere
+sudo ufw allow 19999
 
 yes | ufw enable
 
