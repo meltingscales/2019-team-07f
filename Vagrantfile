@@ -94,16 +94,13 @@ Vagrant.configure('2') do |config|
       vb.memory = '512'
     end
 
-    # Copy my.cnf to MySQL server.
-    iscsi.vm.provision 'file', source: './vagrant-config/config-files/iscsi/target.cnf', destination: '/tmp/target.cnf'
-    iscsi.vm.provision 'shell', inline: <<-SCRIPT
+    # Copy directory exports file for NFS server.
+    iscsi.vm.provision :file, source: './vagrant-config/config-files/nfs/exports', destination: '/tmp/exports'
 
-      sudo mv /tmp/target.cnf /etc/iscsi/target.cnf
-
-    SCRIPT
-
-    # testing on install and configure iscsi target
-    iscsi.vm.provision :shell, path: 'vagrant-config/scripts/configure-iscsi-server.sh'
+    # Configure NFS server.
+    iscsi.vm.provision :shell, path: 'vagrant-config/scripts/configure-nfs-server.sh', env: {
+        :SUBNET_IP => VARIABLES['subnet']
+    }
 
     # Expose port for monitoring via netdata.
     iscsi.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['iscsi']['netdata-port'], host_ip: '127.0.0.1'
@@ -209,6 +206,37 @@ Vagrant.configure('2') do |config|
 
     SCRIPT
 
+    # Mount NFS drive.
+    web.vm.provision :shell, path: 'vagrant-config/scripts/configure-nfs-client.sh', env: {
+        :NFS_SERVER_IP => VARIABLES['iscsi']['ip'],
+        :MOUNT_LOCATION => VARIABLES['web']['mount-location'],
+    }
+
+    # Test that the webserver has correctly mounted the iSCSI box's drive over nfs.
+    web.vm.provision 'shell', run: 'always', env: {
+        :MOUNT_LOCATION => VARIABLES['web']['mount-location'],
+    },
+                     inline: <<-SCRIPT
+
+    if [[ ! -d $MOUNT_LOCATION ]]; then
+        echo "NFS folder at $MOUNT_LOCATION does not exist!"
+        false
+    else
+        echo "NFS folder is mounted at $MOUNT_LOCATION successfully. Testing if I can create files."
+
+        echo "test" > $MOUNT_LOCATION/test_file.txt
+
+        if [[ ! -f $MOUNT_LOCATION/test_file.txt ]]; then
+            echo "Somehow test file does not exist after we have created it."
+            false
+        else
+            echo "Successfully created test file in network-mounted drive!"
+            sudo rm $MOUNT_LOCATION/test_file.txt
+        fi
+        
+    fi
+
+    SCRIPT
 
     # Test that the webserver can ping the iSCSI server.
     web.vm.provision 'shell', run: 'always', env: {:ISCSI_IP_ADDR => VARIABLES['iscsi']['ip']},
@@ -252,12 +280,7 @@ Vagrant.configure('2') do |config|
 
     SCRIPT
 
-    # Set up an iSCSI client.
-    # web.vm.provision :shell, path: 'vagrant-config/scripts/configure-iscsi-client.sh', env: {
-    #     TARGET_IP: VARIABLES['iscsi']['ip'] #TODO Make iSCSI target work so initiator works.
-    # }
-
-    config.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
+    web.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
