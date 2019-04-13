@@ -21,7 +21,8 @@ public class UploadBean {
         try {
             InputStream input=file.getInputStream();
 
-            File f=new File("/webapps/searchable-video-library/WEB-INF/videos/" + fileName + ".mp4");
+            File f=new File("..\\webapps\\searchable-video-library\\WEB-INF\\videos\\" + fileName + ".mp4");
+            System.out.println(Paths.get(".."));
             if(!f.exists()){
                 f.createNewFile();
             }
