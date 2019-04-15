@@ -21,7 +21,7 @@ public class UploadBean {
         try {
             InputStream input=file.getInputStream();
 
-            File f=new File("//WEB-INF//videos");
+            File f=new File("..//WEB-INF//videos");
             //fileName=file.getSubmittedFileName();
             if(!f.exists()){
                 f.createNewFile();
