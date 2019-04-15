@@ -35,19 +35,19 @@ NOTE: This is not required if you edit the `Vagrantfile` and change the `USE_PUB
   guide](https://confluence.atlassian.com/bitbucketserver054/creating-ssh-keys-939508421.html)
   for a good overview of how to do it.
   
-  The private key will be called `id_rsa` and the public key will be called
-  `id_rsa.pub`.
+  The private key will be called `id_rsa_2019_team_07f` and the public key will be called
+  `id_rsa_2019_team_07f.pub`.
 
   For example, my keys are stored at `C:\Users\henryfbp\.ssh\`.
 
 - Add the PUBLIC key to this GitHub repository by clicking on `Settings > Deploy
-  keys > Add deploy key` and copy-pasting the contents of `~/.ssh/id_rsa.pub`
+  keys > Add deploy key` and copy-pasting the contents of `~/.ssh/id_rsa_2019_team_07f.pub`
   into the text box.
 
 If your private key isn't in the place it's expected to be, then `vagrant up`
 will error.
 
-The key file (`id_rsa`) should look something like this:
+The key file (`id_rsa_2019_team_07f`) should look something like this:
 
     -----BEGIN RSA PRIVATE KEY-------
     SGFzIGFueW9uZSByZWFsbHkgYmVlbiBmYXIgYXMgZGVjaWRlZCB0byB1c2UgZXZl
