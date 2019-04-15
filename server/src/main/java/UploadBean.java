@@ -21,7 +21,8 @@ public class UploadBean {
         try {
             InputStream input=file.getInputStream();
 
-            File f=new File("mnt/nfs_videos/fileName" + ".mp3");
+            File f=new File("..\\webapps\\searchable-video-library\\WEB-INF\\videos\\");
+            fileName=file .getSubmittedFileName();
             if(!f.exists()){
                 f.createNewFile();
             }
