@@ -79,7 +79,7 @@ pipeline {
 		failure {
 			echo "Destroying VMs as build has failed."
             dir("${WORKSPACE}/") {
-                //bat "vagrant destroy -f"
+                bat "vagrant destroy -f"
             }
         }
     }
