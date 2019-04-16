@@ -39,7 +39,7 @@ pipeline {
             steps {
                 echo "Building.."
 				
-				node {
+				node("Slack Notification") {
 					slackSend channel: 'ci', message: "Building commit ${commitHashForBuild(currentBuild.rawBuild)}", tokenCredentialId: 'slack-integration-token'
 				}
                 
@@ -105,6 +105,13 @@ pipeline {
             dir("${WORKSPACE}/") {
                 bat "vagrant destroy -f"
             }
+
+			slackSend channel: 'ci', message: "Build failed! See Jenkins for the log.", tokenCredentialId: 'slack-integration-token'
+
         }
+		
+		success {
+			slackSend channel: 'ci', message: "Build succeeded!", tokenCredentialId: 'slack-integration-token'
+		}
     }
 }
