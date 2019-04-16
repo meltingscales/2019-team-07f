@@ -21,7 +21,7 @@ public class UploadBean {
         try {
             InputStream input=file.getInputStream();
 
-            File f=new File("/home/vagrant/2019-team-07f/server/WEB-INF/videos");
+            File f=new File("/mnt/nfs_videos");
             //File f=new File(fileName + ".mp4");
             //fileName=file.getSubmittedFileName();
             if(!f.exists()){
