@@ -38,10 +38,12 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building.."
-
-				slackSend channel: 'ci', message: "Building commit ${commitHashForBuild(currentBuild.rawBuild)}", tokenCredentialId: 'slack-integration-token'
-
-                // Allow ps1 files to be run ;)
+				
+				node {
+					slackSend channel: 'ci', message: "Building commit ${commitHashForBuild(currentBuild.rawBuild)}", tokenCredentialId: 'slack-integration-token'
+				}
+                
+				// Allow ps1 files to be run ;)
                 bat "powershell Set-ExecutionPolicy unrestricted -Force"
                 
                 // Debug print for execution policy.
