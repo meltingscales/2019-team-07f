@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo "Building.."
 
-				slackSend channel: 'ci', message: "Building commit ${env.COMMIT_HASH}", tokenCredentialId: 'slack-integration-token'
+				slackSend channel: 'ci', message: "Building commit ${COMMIT_HASH}", tokenCredentialId: 'slack-integration-token'
 
                 // Allow ps1 files to be run ;)
                 bat "powershell Set-ExecutionPolicy unrestricted -Force"
