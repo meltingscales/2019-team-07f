@@ -39,9 +39,7 @@ pipeline {
             steps {
                 echo "Building.."
 				
-				node("Slack Notification") {
-					slackSend channel: 'ci', message: "Building commit ${commitHashForBuild(currentBuild.rawBuild)}", tokenCredentialId: 'slack-integration-token'
-				}
+				slackSend channel: 'ci', message: "Building commit ${commitHashForBuild(currentBuild.rawBuild)}", tokenCredentialId: 'slack-integration-token'
                 
 				// Allow ps1 files to be run ;)
                 bat "powershell Set-ExecutionPolicy unrestricted -Force"
