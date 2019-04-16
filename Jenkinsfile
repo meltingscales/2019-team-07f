@@ -10,11 +10,6 @@ import hudson.plugins.accurev.*
 
 //def changes = changeSet.getItems();
 
-node {
-	def scmVars = checkout scm
-	def commitHash = scmVars.GIT_COMMIT
-}
-
 pipeline {
     agent any
 
@@ -23,7 +18,7 @@ pipeline {
             steps {
                 echo "Building.."
 
-				slackSend channel: 'ci', message: "Building commit ${commitHash}", tokenCredentialId: 'slack-integration-token'
+				slackSend channel: 'ci', message: "Building commit ${env.COMMIT_HASH}", tokenCredentialId: 'slack-integration-token'
 
                 // Allow ps1 files to be run ;)
                 bat "powershell Set-ExecutionPolicy unrestricted -Force"
