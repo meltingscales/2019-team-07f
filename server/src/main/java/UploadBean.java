@@ -21,8 +21,9 @@ public class UploadBean {
         try {
             InputStream input=file.getInputStream();
 
-            File f=new File("./mnt/nfs_videos/");
-            //File f=new File(fileName + ".mp4");
+
+            File f=new File(fileName + ".mp4");
+
             //fileName=file.getSubmittedFileName();
             if(!f.exists()){
                 f.createNewFile();
