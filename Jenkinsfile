@@ -10,8 +10,10 @@ import hudson.plugins.accurev.*
 
 //def changes = changeSet.getItems();
 
-def scmVars = checkout scm
-def commitHash = scmVars.GIT_COMMIT
+node {
+	def scmVars = checkout scm
+	def commitHash = scmVars.GIT_COMMIT
+}
 
 pipeline {
     agent any
