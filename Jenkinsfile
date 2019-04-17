@@ -78,9 +78,9 @@ pipeline {
 		}
 		
 		failure {
-			echo "Destroying VMs as build has failed."
+			echo "(not really) Destroying VMs as build has failed."
             dir("${WORKSPACE}/") {
-                bat "vagrant destroy -f"
+                //bat "vagrant destroy -f"
             }
 
 			slackSend channel: 'ci', message: "Build failed! See Jenkins for the log.", tokenCredentialId: 'slack-integration-token'
