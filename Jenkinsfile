@@ -17,9 +17,10 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building.."
-
-                
-                // Allow ps1 files to be run ;)
+				
+				slackSend channel: 'ci', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack-integration-token'
+					
+				// Allow ps1 files to be run ;)
                 bat "powershell Set-ExecutionPolicy unrestricted -Force"
                 
                 // Debug print for execution policy.
@@ -81,6 +82,13 @@ pipeline {
             dir("${WORKSPACE}/") {
                 bat "vagrant destroy -f"
             }
+
+			slackSend channel: 'ci', message: "Build failed! See Jenkins for the log.", tokenCredentialId: 'slack-integration-token'
+
         }
+		
+		success {
+			slackSend channel: 'ci', message: "Build succeeded!", tokenCredentialId: 'slack-integration-token'
+		}
     }
 }
