@@ -23,7 +23,7 @@ public class UploadBean {
 
 
 
-            File f=new File("/mnt/nfs_videos");
+            File f=new File("..//mnt//nfs_videos");
             System.out.println(f.getAbsolutePath());
 
             //fileName=file.getSubmittedFileName();
