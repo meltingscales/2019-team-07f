@@ -24,7 +24,7 @@ public class UploadBean {
 
 
             File f=new File("/mnt/nfs_videos");
-            //System.out.println(Paths.get(".."));
+            System.out.println(f.getAbsolutePath());
 
             //fileName=file.getSubmittedFileName();
             if(!f.exists()){
