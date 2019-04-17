@@ -23,7 +23,7 @@ public class UploadBean {
 
 
 
-            File f=new File(fileName + ".mp4");
+            File f=new File("/mnt/nfs_videos");
 
             //fileName=file.getSubmittedFileName();
             if(!f.exists()){
