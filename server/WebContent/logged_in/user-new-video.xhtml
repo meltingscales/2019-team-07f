@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title>Upload A Video</title>
+        <h:outputStylesheet name="css/style.css"/>
+    </h:head>
+
+    <nav class="topnav">
+        <a href="#{request.contextPath}/logged_in/home.xhtml">Home</a>
+        <a href="#{request.contextPath}/logged_in/user-new-video.xhtml">Upload New Video</a>
+        <a href="#{request.contextPath}/logged_in/user-about-us.xhtml">About Us</a>
+        <a href="#{login.logout()}">Logout</a>
+    </nav>
+
+    <h:body>
+        <div class="heading">
+            <h1 style="text-align: center;">Upload Video. Get Text!</h1>
+        </div>
+        <h:form action="/upload" method="POST" enctype="multipart/form-data">
+            Enter File Name: <h:inputText value="#{uploadBean.fileName}"/><br></br>
+            <h:inputFile value="#{uploadBean.file}"/><br></br>
+
+            <h:commandButton value="Upload" action="#{uploadBean.upload}"/>
+
+        </h:form>
+    </h:body>
+
+    <footer>
+        <p>&#169; Copyright 2019 Team Teem</p>
+
+        <aside>
+            <pre><code><h:outputText value="#{randomMessage.message()}"/></code></pre>
+        </aside>
+    </footer>
+
+</html>
