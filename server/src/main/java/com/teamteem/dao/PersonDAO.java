@@ -90,6 +90,7 @@ public class PersonDAO implements PersonDAOI {
         } else { // No problems, then...
             session.save(person);
             logger.info("Person saved successfully, Person Details=" + person);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration Successful!", "Registered"));
         }
     }
 
