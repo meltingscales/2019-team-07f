@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 
 require 'yaml'
+require './util'
 
 # Build script settings.
 RUN_TESTS = false # Run tests?
@@ -16,37 +17,6 @@ USE_PUBLIC_REPO = false # Use a public repository URL in case the private one is
 
 # Load YAML file containing IP addresses, as well as other variables.
 VARIABLES = YAML.load_file('variables.yml')
-
-# Clones the Github repo into a box.
-def clone_repo(box, vars = VARIABLES, public_repo = USE_PUBLIC_REPO)
-
-  if public_repo
-
-    # Clone repo.
-    box.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh', env: {
-        :REPO_URL => vars['public-repo-url']
-    }
-
-  else
-
-    # Copy SSH private key.
-    box.vm.provision 'file', source: vars['ssh-key-location'], destination: '/home/vagrant/id_rsa'
-
-    # Copy SSH config.
-    box.vm.provision 'file', source: './vagrant-config/config-files/ssh/config', destination: '/home/vagrant/config'
-
-    # Set up SSH keys.
-    box.vm.provision :shell, path: 'vagrant-config/scripts/setup-ssh-keys.sh'
-
-    # Clone repo.
-    box.vm.provision :shell, path: 'vagrant-config/scripts/clone-repo.sh', env: {
-        :REPO_URL => vars['private-repo-url'],
-        :REPO_PATH => vars['repo_location'],
-    }
-
-  end
-
-end
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -131,7 +101,7 @@ Vagrant.configure('2') do |config|
     db.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['db']['netdata-port'], host_ip: '127.0.0.1'
 
     # Clone GitHub repo.
-    clone_repo(db)
+    clone_repo(db, VARIABLES, USE_PUBLIC_REPO)
 
     # Copy my.cnf to MySQL server.
     db.vm.provision 'file', source: './vagrant-config/config-files/mysql/my.cnf', destination: '/tmp/my.cnf'
@@ -321,7 +291,7 @@ Vagrant.configure('2') do |config|
     #   apt-get install -y apache2
     # SHELL
 
-    clone_repo(web)
+    clone_repo(web, VARIABLES, USE_PUBLIC_REPO)
 
     # Modify database.properties to make web box's app use db box's database
     web.vm.provision :shell, env: {
