@@ -22,6 +22,11 @@ public class UploadBean {
      */
     private String fileName;
 
+    /**
+     * File extension of the file.
+     */
+    private String fileExt = "mp4";
+
     private File videos_folder = UploadConfig.videosFolder;
 
     public void upload() throws IOException, Exception {
@@ -30,14 +35,14 @@ public class UploadBean {
             throw new Exception("Videos folder does not exist!");
         }
 
-        if(!fileName.endsWith("mp4")){ //TODO actually show error in form instead of creating a stack trace
-            throw new IllegalArgumentException("Only MP4 files can be uploaded!");
+        if (!file.getSubmittedFileName().endsWith(fileExt)) { //TODO actually show error in form instead of creating a stack trace
+            throw new IllegalArgumentException(String.format("Only %s files can be uploaded!", fileExt));
         }
 
         if (file != null) {
             InputStream input = file.getInputStream();
 
-            File videos_file = new File(videos_folder, fileName);
+            File videos_file = new File(videos_folder, String.format("%s.%s", fileName, fileExt));
 
             System.out.println(videos_folder.getAbsolutePath());
 
