@@ -5,42 +5,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    xmlns:h="http://java.sun.com/jsf/html"
-                    xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-        <ui:define name="content">
-            <div class="heading">
-                <h1 style="text-align: center;">Registration</h1>
+    <ui:define name="content">
+        <div class="heading">
+            <h1 style="text-align: center;">Registration</h1>
 
-                <h:form class="form1">
+            <h:form class="form1">
 
                 <label>Username</label>
-                    <h:inputText id="username" styleClass="form_input" value="#{person.username}"/>
+                <h:inputText id="username" styleClass="form_input" value="#{person.username}"/>
 
                 <label>Full Name</label>
-                    <h:inputText id="name" styleClass="form_input" value="#{person.name}"/>
+                <h:inputText id="name" styleClass="form_input" value="#{person.name}"/>
 
                 <label>Country</label>
-                    <h:inputText id="country" styleClass="form_input" value="#{person.country}"/>
+                <h:inputText id="country" styleClass="form_input" value="#{person.country}"/>
 
                 <label>Email</label>
-                    <h:inputText id="email" styleClass="form_input" value="#{person.email}"/>
+                <h:inputText id="email" styleClass="form_input" value="#{person.email}"/>
 
                 <label>Password</label>
-                    <h:inputText id="password" styleClass="form_input" value="#{person.password}"/>
+                <h:inputSecret id="password" styleClass="form_input" value="#{person.password}"/>
 
                 <h:commandButton styleClass="button" action="#{personService.addPerson(person)}" value="Register"/>
 
-                </h:form>
+            </h:form>
 
-            </div>
+        </div>
 
-        </ui:define>
+    </ui:define>
 
-    </ui:composition>
+</ui:composition>
 
 </html>

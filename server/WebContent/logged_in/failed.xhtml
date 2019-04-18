@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <h:outputStylesheet name="css/style.css"/>
+    </h:head>
+
+    <nav class="topnav">
+        <a href="#{request.contextPath}/logged_in/home.xhtml">Home</a>
+        <a href="#{request.contextPath}/logged_in/user-new-video.xhtml">Upload New Video</a>
+        <a href="#{request.contextPath}/logged_in/user-about-us.xhtml">About Us</a>
+        <a href="#{login.logout()}">Logout</a>
+    </nav>
+
+    <h:body>
+        <h1>Failed!</h1>
+
+        <p>Failed to upload file.</p>
+        <p>File not chosen or invalid file.</p>
+
+    </h:body>
+
+</html>

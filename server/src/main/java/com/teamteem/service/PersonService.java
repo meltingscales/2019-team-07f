@@ -24,6 +24,7 @@ public class PersonService implements PersonServiceI {
     @Transactional
     public void addPerson(Person person) {
         this.personDAO.addPerson(person);
+
     }
 
     @Transactional

@@ -4,12 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:head>
-        <title>Welcome, #{login.currentUser.getName()}!</title>
+        <title>Upload A Video</title>
         <h:outputStylesheet name="css/style.css"/>
     </h:head>
 
@@ -21,11 +19,16 @@
     </nav>
 
     <h:body>
-        <section class="home">
-            <h1 style="font-size:350%;">Team Teem Presents</h1>
-            <h2 style="font-size:300%;">Video to Text Transcript Convertor!</h2>
-            <p style="font-size:160%;">Text transcript only a few clicks away.</p>
-        </section>
+        <div class="heading">
+            <h1 style="text-align: center;">Upload Video. Get Text!</h1>
+        </div>
+        <h:form action="/upload" method="POST" enctype="multipart/form-data">
+            Enter File Name: <h:inputText value="#{uploadBean.fileName}"/><br></br>
+            <h:inputFile value="#{uploadBean.file}"/><br></br>
+
+            <h:commandButton value="Upload" action="#{uploadBean.upload}"/>
+
+        </h:form>
     </h:body>
 
     <footer>
