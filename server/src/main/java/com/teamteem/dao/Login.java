@@ -17,18 +17,16 @@ public class Login implements Serializable {
     private String username;
     private String password;
 
-    /*private User admin;*/
     private User currentUser;
 
     public String login() {
         currentUser = PersonDAO.validate(username, password);
-        /*admin = PersonDAO.validate(username, password);*/
 
         if (currentUser != null) {
             return "/logged_in/home.xhtml?faces-redirect=true";
-        } /*else if (admin != null) {
+        } else if (username.equals("admin") && password.equals("admin")) {
             return "/logged_in/admin.xhtml?faces-redirect=true";
-        } */else {
+        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username or Password", "Invalid Credentials"));
             return null;
         }
@@ -37,7 +35,7 @@ public class Login implements Serializable {
     // invalidate/logout the session
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/login.xhtml?faces-redirect=true";
+        return "/searchable-video-library/login.xhtml?faces-redirect=true";
     }
 
     // check if current user is logged in
