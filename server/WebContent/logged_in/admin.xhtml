@@ -66,6 +66,8 @@
                 <h:inputText id="password" value="#{person.password}"></h:inputText></li>
 
                 <h:commandButton action="#{personService.addPerson(person)}" value="Create"/>
+                <h:commandButton action="#{personDAO.clear(person)}" value="Clear"/>
+                <!--<h:commandButton action="#{personService.delPerson(person)}" value="Delete"/>-->
             </ul>
         </h:form>
 
