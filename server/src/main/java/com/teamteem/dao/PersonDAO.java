@@ -53,6 +53,14 @@ public class PersonDAO implements PersonDAOI {
         return result;
     }
 
+    public void clear(Person person) {
+        person.setUsername(null);
+        person.setName(null);
+        person.setCountry(null);
+        person.setEmail(null);
+        person.setPassword(null);
+    }
+
     @Override
     public void addPerson(@NotNull Person person) {
         Session session = this.sessionFactory.getCurrentSession();
