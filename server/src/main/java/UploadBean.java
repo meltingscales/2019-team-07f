@@ -1,3 +1,5 @@
+import com.teamteem.config.UploadConfig;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
@@ -10,11 +12,22 @@ import java.io.InputStream;
 @SessionScoped
 public class UploadBean {
 
+    /**
+     * File stream from the form.
+     */
     private Part file;
 
-    private File videos_folder = new File("/mnt/nfs_videos/");
-
+    /**
+     * Filename from the form.
+     */
     private String fileName;
+
+    /**
+     * File extension of the file.
+     */
+    private String fileExt = "mp4";
+
+    private File videos_folder = UploadConfig.videosFolder;
 
     public void upload() throws IOException, Exception {
 
@@ -22,10 +35,14 @@ public class UploadBean {
             throw new Exception("Videos folder does not exist!");
         }
 
+        if (!file.getSubmittedFileName().endsWith(fileExt)) { //TODO actually show error in form instead of creating a stack trace
+            throw new IllegalArgumentException(String.format("Only %s files can be uploaded!", fileExt));
+        }
+
         if (file != null) {
             InputStream input = file.getInputStream();
 
-            File videos_file = new File(videos_folder, fileName);
+            File videos_file = new File(videos_folder, String.format("%s.%s", fileName, fileExt));
 
             System.out.println(videos_folder.getAbsolutePath());
 

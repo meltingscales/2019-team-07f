@@ -24,6 +24,7 @@ ssl-cert:
   country: US
   state: Illinois
   city: Chicago
+  password: password
 
 # VirtualBox's host IP address.
 # This is what the VMs see connecting to them when you SSH into the VMs.
