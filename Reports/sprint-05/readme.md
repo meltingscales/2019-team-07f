@@ -244,7 +244,7 @@ relative units and relative positioning to allow our interface to adapt to all s
 
 ## a. Self-signed Certificates
 
-We currently still do not have any certificates or self-signing mechanism.
+We can create certificates locally, but it is currently not automated.
 
 ## b. Login Authentication Mechanism
 
@@ -369,7 +369,7 @@ The UI for Authenticated Users is the same for Unauthenticated Users.
 
 ## d. Different UI for Administrative Users
 
-The UI for Administrative User is the same as Unauthenticaed and Authenticated Users.
+The UI for Administrative User is the same as Unauthenticated and Authenticated Users.
 
 ## e. UI is Modified per Authenticated User via CSS
 
@@ -443,7 +443,7 @@ Web Server UML Diagram.
 
 ## c. Development Environment
 
-Our development environment cross-plateform and is documented in `/README.md` and `/server/README.md`.
+Our development environment cross-platform and is documented in `/README.md` and `/server/README.md`.
 
 ## d. GitHub - Correlate Completed Goals to GitHub Commits
 
