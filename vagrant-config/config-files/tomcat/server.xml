@@ -32,6 +32,8 @@
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+  <Listener className="org.apache.catalina.core.AprLifecycleListener"
+          SSLEngine="on" SSLRandomSeed="builtin" />
 
   <!-- Global JNDI resources
        Documentation at /docs/jndi-resources-howto.html
@@ -71,7 +73,14 @@
     <Connector port="8080" protocol="HTTP/1.1"
                connectionTimeout="20000"
                URIEncoding="UTF-8"
-               redirectPort="8443" />
+               redirectPort="8443"
+               scheme="https"
+               secure="true"
+               SSLEnabled="true"
+               keystoreFile="/home/vagrant/key.jks"
+               keystorePass="password"
+               SSLVerifyClient="false"
+               SSLProtocol="TLSv1+TLSv1.1+TLSv1.2"  />
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
