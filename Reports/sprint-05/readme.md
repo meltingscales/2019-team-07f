@@ -185,7 +185,7 @@ With the '-f' flag, it will force (automatically confirm) through the confirmati
 
 # 3. Use of Data Store/Storage
 
-## a. Databse or Similar Storage Technology
+## a. Database or Similar Storage Technology
 
 We are currently utilizing MySQL 5.7 as our database to store all user information such as
 usernames, names, emails, passwords, and etc.
@@ -222,7 +222,7 @@ We are using a single MySQL database with a single schema.
 
 We currently have no caching layer.
 
-## c&d. Master for Database Writes & Slave for Database Reads
+## c & d. Master for Database Writes & Slave for Database Reads
 
 Since the database is separated, it makes making master/slave boxes easier.
 
@@ -400,7 +400,7 @@ Although some bugs were corrected this sprint, none of which were recorded.
 
 # 10. Layout Design
 
-## a&b. Diagrams of Site Functionality & Other Usability Features
+## a & b. Diagrams of Site Functionality & Other Usability Features
 
 This is the home page layout of our website.
 
