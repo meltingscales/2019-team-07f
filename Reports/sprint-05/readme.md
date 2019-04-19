@@ -14,7 +14,7 @@ UI/UX: Divin Baniekona
 
 ## a. Programming Language and Language Framework
 
-### Java JDK 1.8.0_191 and Kotlin 1.3
+### Java DK 1.8.0_191 and Kotlin 1.3
 
 Java is primarily used for our web server logic, our modeling business objects,
 and to present our data.
@@ -94,6 +94,8 @@ Languages/Frameworks
     mysql-server-5.7
 
 #### i. Operating System Packages such as .deb
+
+.deb Packages for Web, Database, and Storage.
 
 [Web-Packages](img/web-packages.txt)
 [DB-Packages](img/db-packages.txt)
