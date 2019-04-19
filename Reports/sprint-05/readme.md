@@ -268,7 +268,7 @@ cryptographic nonce that gets inserted with all forms.
 
 ### i. Firewall
 
-We have only port 8080 open for HTTP.
+We have port 8080 open for HTTP on the web box and port 19999 is open for netdata on all boxes.
 
 ### ii. Authentication Keys
 
