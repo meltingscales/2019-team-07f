@@ -10,7 +10,7 @@ DESTROY_DB = false # Destroy the database?
 ENGAGE_CAKE = true # Engage cake? yes
 DEPLOY = true # Deploy the app?
 INSERT_TEST_DATA = true # Insert test data upon provision step?
-CREATE_SSL = false # Create an SSL Certificate
+CREATE_SSL = true # Create an SSL Certificate
 
 USE_PUBLIC_REPO = false # Use a public repository URL in case the private one is no more or inaccessible?
 
@@ -151,6 +151,8 @@ Vagrant.configure('2') do |config|
 
     # Expose HTTP Port to host computer.
     web.vm.network 'forwarded_port', guest: 8080, host: 8080, host_ip: '127.0.0.1'
+    # Expose HTTPS Port to host computer.
+    web.vm.network 'forwarded_port', guest: 443, host: 443, host_ip: '127.0.0.1'
 
     # Expose port for monitoring via netdata.
     web.vm.network 'forwarded_port', guest: 19999, host: VARIABLES['web']['netdata-port'], host_ip: '127.0.0.1'
@@ -204,7 +206,7 @@ Vagrant.configure('2') do |config|
             echo "Successfully created test file in network-mounted drive!"
             sudo rm $MOUNT_LOCATION/test_file.txt
         fi
-        
+
     fi
 
     SCRIPT
