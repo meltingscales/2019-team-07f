@@ -68,5 +68,5 @@ sudo apt-get install ufw
 sudo ufw enable
 sudo ufw allow ssh
 
-#echo "restart Tomcat 8"
-#systemctl restart tomcat8
+echo "restart Tomcat 8"
+systemctl restart tomcat8
