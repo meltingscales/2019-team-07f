@@ -126,9 +126,6 @@
                     <url>${tomcat.url}</url>
                     <server>${tomcat.name}</server>
                     <path>/searchable-video-library</path>
-                    <!--httpsPort>8443</httpsPort>
-                    <keystoreFile>\home\vagrant\newkey.jks</keystoreFile>
-                    <keystorePass>password</keystorePass-->
                 </configuration>
             </plugin>
         </plugins>
