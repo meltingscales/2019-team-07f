@@ -2,6 +2,7 @@ package com.teamteem.service;
 
 import com.teamteem.dao.PersonDAO;
 import com.teamteem.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @SessionScoped
 public class PersonService implements PersonServiceI {
 
+    @Autowired
     private PersonDAO personDAO;
 
     public PersonService() {
@@ -40,5 +42,9 @@ public class PersonService implements PersonServiceI {
 
     public void setPersonDAO(PersonDAO personDAO) {
         this.personDAO = personDAO;
+    }
+
+    public PersonDAO getPersonDAO() {
+        return this.personDAO;
     }
 }
