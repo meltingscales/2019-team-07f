@@ -38,10 +38,9 @@ public class UploadBean {
         if (session.getAttribute("user") != null) {
             // TODO Then upload to a specific folder...
         } else {
-            //TODO for some reason
-//            throw new Exception("You are not logged in and thus cannot upload videos!");
+            //TODO for some reason, 'user' is null. Session not being set correctly?
+            throw new Exception("You are not logged in and thus cannot upload videos!");
         }
-
 
         if (!videos_folder.exists()) {
             throw new Exception("Videos folder does not exist!");
