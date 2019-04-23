@@ -14,7 +14,7 @@ systemctl restart tomcat8
 mvn clean install
 
 # Deploy WAR to Tomcat.
-mvn tomcat7:redeploy -X
+mvn tomcat7:redeploy #-X
 
 # Show our page!
 curl http://localhost:8080/searchable-video-library/
