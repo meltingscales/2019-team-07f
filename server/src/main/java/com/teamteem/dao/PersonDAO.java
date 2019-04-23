@@ -3,6 +3,7 @@ package com.teamteem.dao;
 import com.teamteem.model.Person;
 import com.teamteem.model.User;
 import com.teamteem.util.BCrypt;
+import org.apache.http.auth.InvalidCredentialsException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,26 +32,36 @@ public class PersonDAO implements PersonDAOI {
         this.sessionFactory = sf;
     }
 
-    public static User validate(String username, String password) {
-        Session session;
-        User result = null;
-
+    public static Session getSession() {
         try {
-            session = sessionFactory.getCurrentSession();
+            return sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
-            session = sessionFactory.openSession();
+            return sessionFactory.openSession();
         }
+    }
+
+    /**
+     * Gets a Person by username and password, or throw an {@link InvalidCredentialsException} if the credentials supplied are invalid.
+     *
+     * @param username Username of a Person.
+     * @param password Unhashed password of a Person.
+     * @return The Person associated with this login information.
+     */
+    public Person getPersonByUsernameAndPassword(String username, String password) throws InvalidCredentialsException {
+
+        Session session = getSession();
 
         Query query = session.createQuery("FROM Person WHERE username = :username")
                 .setParameter("username", username);
 
         if (BCrypt.checkpw(password, hashedPassword)) {
             if (query.getResultList().size() > 0) {
-                result = new User("username", username);
+                return (Person) query.getResultList().get(0);
             }
         }
 
-        return result;
+        throw new InvalidCredentialsException("Username and password are invalid!");
+
     }
 
     public void clear(Person person) {
@@ -63,7 +74,7 @@ public class PersonDAO implements PersonDAOI {
 
     @Override
     public void addPerson(@NotNull Person person) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSession();
         List<FacesMessage> problems = new ArrayList<>();
 
         // Extra crispy Password hash anyone?

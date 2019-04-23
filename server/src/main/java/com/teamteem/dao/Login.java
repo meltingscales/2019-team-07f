@@ -1,14 +1,17 @@
 package com.teamteem.dao;
 
-import com.teamteem.model.User;
+import com.teamteem.model.Person;
+import org.apache.http.auth.InvalidCredentialsException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import java.io.Serializable;
 
-@ManagedBean
+@ManagedBean(name = "login")
 @SessionScoped
 public class Login implements Serializable {
 
@@ -17,30 +20,40 @@ public class Login implements Serializable {
     private String username;
     private String password;
 
-    private User currentUser;
+    private Person currentUser;
+
+    @Autowired
+    private PersonDAO personDAO;
+
+    public void setPersonDAO(PersonDAO personDAO) {
+        this.personDAO = personDAO;
+    }
+
 
     public String login() {
-        currentUser = PersonDAO.validate(username, password);
 
-        if (currentUser != null) {
-            return "/logged_in/home.xhtml?faces-redirect=true";
-        } else if (username.equals("admin") && password.equals("admin")) {
-            return "/logged_in/admin.xhtml?faces-redirect=true";
-        } else {
+        if(username == null) {
+            throw new NullPointerException("Username cannot be null!");
+        }
+
+        if(password == null) {
+            throw new NullPointerException("Password cannot be null!");
+        }
+
+        try {
+            currentUser = personDAO.getPersonByUsernameAndPassword(username, password);
+        } catch (InvalidCredentialsException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username or Password", "Invalid Credentials"));
             return null;
         }
+
+        return "/logged_in/home.xhtml?faces-redirect=true";
     }
 
     // invalidate/logout the session
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/searchable-video-library/login.xhtml?faces-redirect=true";
-    }
-
-    // check if current user is logged in
-    public boolean isLoggedIn() {
-        return currentUser != null;
     }
 
     public String getUsername() {
@@ -59,7 +72,7 @@ public class Login implements Serializable {
         this.password = password;
     }
 
-    public User getCurrentUser() {
+    public Person getCurrentUser() {
         return currentUser;
     }
 
