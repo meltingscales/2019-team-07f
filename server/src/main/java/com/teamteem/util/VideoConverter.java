@@ -17,18 +17,36 @@ import java.util.logging.Logger;
 @ManagedBean(name = "videoconverter")
 public class VideoConverter implements javax.servlet.ServletContextListener {
 
+    private static final String FFMPEG_NAME = "ffmpeg";
+
+    /*
+     Makes sure that ffmpeg is installed.
+     */
+    static {
+        try {
+            Runtime.getRuntime().exec(FFMPEG_NAME);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new NullPointerException(String.format("The %s executable does not seem to be on the path.", FFMPEG_NAME));
+        }
+    }
+
     private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
 
-    public File Convert(File mp4File, File mp3File) throws IOException, InterruptedException {
+    public File mp4_to_mp3(File mp4File, File mp3File) throws IOException, InterruptedException {
 
         if (mp3File.exists()) {
             throw new FileExistsException(String.format("Output file %s already exists.", mp3File.getAbsolutePath()));
         }
 
+        if (!mp4File.exists()) {
+            throw new FileNotFoundException(String.format("Input file %s does not exist!", mp4File.getAbsolutePath()));
+        }
+
         try {
             String line;
 
-            String cmd = "ffmpeg -i " + mp4File + " " + mp3File;
+            String cmd = String.format("%s -i %s %s", FFMPEG_NAME, mp4File, mp3File); // TODO Severe command injection risk.
             System.out.println(cmd);
 
             Process p = Runtime.getRuntime().exec(cmd);
@@ -38,6 +56,7 @@ public class VideoConverter implements javax.servlet.ServletContextListener {
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
             }
+
             p.waitFor();
 
             System.out.println("Video converted successfully!");

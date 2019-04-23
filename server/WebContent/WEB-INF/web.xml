@@ -50,7 +50,7 @@
 
     <filter>
         <filter-name>f1</filter-name>
-        <filter-class>com.teamteem.filter.VideoConverterFilter</filter-class>
+        <filter-class>com.teamteem.filter.VideoConverterTestFilter</filter-class>
         <init-param> <!-- optional -->
             <param-name>video_file_path</param-name>
             <param-value>..\\webapps\\searchable-video-library\\WEB-INF\\videos</param-value>

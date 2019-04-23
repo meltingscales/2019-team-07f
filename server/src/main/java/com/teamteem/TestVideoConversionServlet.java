@@ -27,7 +27,7 @@ public class TestVideoConversionServlet extends HttpServlet {
             mp3File.delete();
         }
 
-        videoConverter.Convert(mp4File, mp3File);
+        videoConverter.mp4_to_mp3(mp4File, mp3File);
 
         return "Test successful.";
 
