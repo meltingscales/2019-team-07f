@@ -4,6 +4,9 @@ echo "Deploying app."
 
 cd ${REPO_PATH}/server/
 
+# Undeploy WAR from Tomcat.
+mvn tomcat7:undeploy -X
+
 # Make sure Tomcat is running.
 systemctl restart tomcat8
 
@@ -11,7 +14,7 @@ systemctl restart tomcat8
 mvn clean install
 
 # Deploy WAR to Tomcat.
-mvn tomcat7:redeploy
+mvn tomcat7:redeploy -X
 
 # Show our page!
 curl http://localhost:8080/searchable-video-library/
