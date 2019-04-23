@@ -2,13 +2,15 @@ import com.teamteem.config.UploadConfig;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-@ManagedBean
+@ManagedBean(name = "uploadBean")
 @SessionScoped
 public class UploadBean {
 
@@ -30,6 +32,16 @@ public class UploadBean {
     private File videos_folder = UploadConfig.videosFolder;
 
     public void upload() throws IOException, Exception {
+
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+        if (session.getAttribute("user") != null) {
+            // TODO Then upload to a specific folder...
+        } else {
+            //TODO for some reason
+//            throw new Exception("You are not logged in and thus cannot upload videos!");
+        }
+
 
         if (!videos_folder.exists()) {
             throw new Exception("Videos folder does not exist!");

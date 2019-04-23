@@ -37,20 +37,20 @@
 
 
     <servlet>
-        <servlet-name>Test Servlet</servlet-name>
-        <servlet-class>com.teamteem.TestServlet</servlet-class>
+        <servlet-name>Video Conversion Test Servlet</servlet-name>
+        <servlet-class>com.teamteem.TestVideoConversionServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Test Servlet</servlet-name>
-        <url-pattern>/test1</url-pattern>
+        <servlet-name>Video Conversion Test Servlet</servlet-name>
+        <url-pattern>/test_conversion</url-pattern>
     </servlet-mapping>
 
 
     <filter>
         <filter-name>f1</filter-name>
-        <filter-class>com.teamteem.filter.VideoConverterFilter</filter-class>
+        <filter-class>com.teamteem.filter.VideoConverterTestFilter</filter-class>
         <init-param> <!-- optional -->
             <param-name>video_file_path</param-name>
             <param-value>..\\webapps\\searchable-video-library\\WEB-INF\\videos</param-value>

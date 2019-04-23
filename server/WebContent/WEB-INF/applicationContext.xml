@@ -75,6 +75,11 @@ my project doesn't suck!
         <property name="personDAO" ref="personDAO"/>
     </bean>
 
+    <bean id="login"
+          class="com.teamteem.dao.Login">
+        <property name="personDAO" ref="personDAO"/>
+    </bean>
+
     <context:component-scan base-package="com.teamteem"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

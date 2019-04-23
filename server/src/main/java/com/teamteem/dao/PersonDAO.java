@@ -3,6 +3,7 @@ package com.teamteem.dao;
 import com.teamteem.model.Person;
 import com.teamteem.model.User;
 import com.teamteem.util.BCrypt;
+import org.apache.http.auth.InvalidCredentialsException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,33 +25,50 @@ public class PersonDAO implements PersonDAOI {
     private static final Logger logger = LoggerFactory.getLogger(PersonDAO.class);
 
     @Autowired
-    private static SessionFactory sessionFactory;
-    private static String hashedPassword;
+    private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
     }
 
-    public static User validate(String username, String password) {
-        Session session;
-        User result = null;
-
+    public Session getSession() {
         try {
-            session = sessionFactory.getCurrentSession();
+            return sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
-            session = sessionFactory.openSession();
+            return sessionFactory.openSession();
         }
+    }
+
+    /**
+     * Gets a Person by username and password, or throw an {@link InvalidCredentialsException} if the credentials supplied are invalid.
+     *
+     * @param username Username of a Person.
+     * @param password Unhashed password of a Person.
+     * @return The Person associated with this login information.
+     */
+    public Person getPersonByUsernameAndPassword(String username, String password) throws InvalidCredentialsException {
+
+        Session session = getSession();
 
         Query query = session.createQuery("FROM Person WHERE username = :username")
                 .setParameter("username", username);
 
-        if (BCrypt.checkpw(password, hashedPassword)) {
-            if (query.getResultList().size() > 0) {
-                result = new User("username", username);
-            }
+
+
+        List<Person> results = query.getResultList();
+        if(results.size() == 0) {
+            throw new InvalidCredentialsException("No user by that username exists!");
         }
 
-        return result;
+        Person person = results.get(0);
+
+        if (BCrypt.checkpw(password, person.getPassword())) {
+            return (Person) query.getResultList().get(0);
+        } else {
+            throw new InvalidCredentialsException("Password is invalid!");
+        }
+
+
     }
 
     public void clear(Person person) {
@@ -63,11 +81,11 @@ public class PersonDAO implements PersonDAOI {
 
     @Override
     public void addPerson(@NotNull Person person) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = getSession();
         List<FacesMessage> problems = new ArrayList<>();
 
         // Extra crispy Password hash anyone?
-        hashedPassword = BCrypt.hashpw(person.getPassword(), BCrypt.gensalt(12));
+        String hashedPassword = BCrypt.hashpw(person.getPassword(), BCrypt.gensalt(12));
         person.setPassword(hashedPassword);
 
         // Anyone using that username?

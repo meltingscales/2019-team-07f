@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-sudo apt install -y nfs-kernel-server
-sudo apt install -y dos2unix
+sudo apt install -y nfs-kernel-server #TODO remove this later as it's in packer
+sudo apt install -y dos2unix #TODO remove this later as it's in packer
 
 # Copy config file.
 sudo mv /tmp/exports /etc/exports

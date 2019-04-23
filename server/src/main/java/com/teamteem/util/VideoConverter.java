@@ -1,70 +1,77 @@
 package com.teamteem.util;
 
+import org.apache.commons.io.FileExistsException;
+
 import javax.faces.bean.ManagedBean;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Idris
- *
  */
 @ManagedBean(name = "videoconverter")
-public class VideoConverter implements javax.servlet.ServletContextListener{
+public class VideoConverter implements javax.servlet.ServletContextListener {
+
+    private static final String FFMPEG_NAME = "ffmpeg";
+
+    /*
+     Makes sure that ffmpeg is installed.
+     */
+    static {
+        try {
+            Runtime.getRuntime().exec(FFMPEG_NAME);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new NullPointerException(String.format("The %s executable does not seem to be on the path.", FFMPEG_NAME));
+        }
+    }
 
     private static final Logger LOG = Logger.getLogger(VideoConverter.class.getName());
 
+    public File mp4_to_mp3(File mp4File, File mp3File) throws IOException, InterruptedException {
 
-    public String Convert(String mp4File, String mp3File, String ffmpeg) {
+        if (mp3File.exists()) {
+            throw new FileExistsException(String.format("Output file %s already exists.", mp3File.getAbsolutePath()));
+        }
+
+        if (!mp4File.exists()) {
+            throw new FileNotFoundException(String.format("Input file %s does not exist!", mp4File.getAbsolutePath()));
+        }
 
         try {
             String line;
 
-            String cmd = "ffmpeg -i " + mp4File + " " + mp3File;
+            String cmd = String.format("%s -i %s %s", FFMPEG_NAME, mp4File, mp3File); // TODO Severe command injection risk.
             System.out.println(cmd);
 
             Process p = Runtime.getRuntime().exec(cmd);
 
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(p.getErrorStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
             }
+
             p.waitFor();
+
             System.out.println("Video converted successfully!");
             in.close();
         } catch (IOException | InterruptedException e) {
             LOG.log(Level.SEVERE, null, e);
+            throw e;
         }
 
+        if (!mp3File.exists()) {
+            throw new FileNotFoundException(String.format("File %s should exist after conversion but it does not!", mp3File.getAbsolutePath()));
+        }
 
         return mp3File;
 
     }
-
-    
-    public static void main(String[] args) throws ServletException {
-        VideoConverter videoConverter = new VideoConverter();
-
-        //String mp4File ="C:\\Users\\Administrator\\Documents\\CMU.mp4";
-        String mp4File="./src/main/resources/mp4_test-data/Cloud_Speech_API_Demo.mp4";
-        String mp3File="./src/main/resources/mp4_test-data/Cloud_Speech_API_Demo.wav";
-        //String mp3File ="C:\\Users\\Administrator\\Documents\\CMU.mp3";
-        //String ffmpeg ="C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe";
-        String ffmpeg ="/usr/local/bin/ffmpeg.exe";
-
-        videoConverter.Convert(mp4File, mp3File, ffmpeg);
-
-
-
-    }
-
 
 }

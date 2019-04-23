@@ -6,10 +6,20 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-    <title>Convert Video to Audio</title>
-</h:head>
-<h:body>
-    <h:outputText value="#{videoconverter.Convert(mp4File, mp3File, ffmpeg)}"></h:outputText>
-</h:body>
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="title">Convert Video to Audio</ui:define>
+
+    <ui:define name="content">
+        <section>
+            <a href="#{request.contextPath}/test_conversion">Test video conversion</a>
+        </section>
+    </ui:define>
+
+</ui:composition>
+
 </html>
