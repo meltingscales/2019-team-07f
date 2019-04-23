@@ -25,7 +25,7 @@ public class VideoConverterFilter implements Filter {
         File f = new File("potato.mp4");
         try {
             boolean ok = f.createNewFile();
-            if(ok){
+            if (ok) {
                 System.out.println("------" + f.getAbsolutePath());
             }
         } catch (IOException e) {
@@ -50,17 +50,15 @@ public class VideoConverterFilter implements Filter {
     public void convertVideos(String parentDir) throws ServletException {
         VideoConverter videoConverter = new VideoConverter();
 
-        //String mp4File ="C:\\Users\\Administrator\\Documents\\CMU.mp4";
-       // String mp4File= parentDir + File.separator + "potato.mp4";
-        // String mp3File= parentDir + File.separator + "potato.mp3";
+        File mp4File = new File(parentDir, "potato.mp4");
+        File mp3File = new File(parentDir, "potato.mp3");
 
-        String mp4File= parentDir + "\\" + "potato.mp4";
-        String mp3File= parentDir + "\\" + "potato.mp3";
-        //String mp3File ="C:\\Users\\Administrator\\Documents\\CMU.mp3";
-        //String ffmpeg ="C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe";
-        String ffmpeg ="/usr/local/bin/ffmpeg.exe";
-
-        videoConverter.Convert(mp4File, mp3File, ffmpeg);
+        try {
+            videoConverter.Convert(mp4File, mp3File);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            throw(new ServletException(e.getMessage()));
+        }
 
     }
 }

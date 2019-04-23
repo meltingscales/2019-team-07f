@@ -37,14 +37,14 @@
 
 
     <servlet>
-        <servlet-name>Test Servlet</servlet-name>
-        <servlet-class>com.teamteem.TestServlet</servlet-class>
+        <servlet-name>Video Conversion Test Servlet</servlet-name>
+        <servlet-class>com.teamteem.TestVideoConversionServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Test Servlet</servlet-name>
-        <url-pattern>/test1</url-pattern>
+        <servlet-name>Video Conversion Test Servlet</servlet-name>
+        <url-pattern>/test_conversion</url-pattern>
     </servlet-mapping>
 
 
