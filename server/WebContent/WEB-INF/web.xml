@@ -48,19 +48,20 @@
     </servlet-mapping>
 
 
-    <filter>
-        <filter-name>f1</filter-name>
-        <filter-class>com.teamteem.filter.VideoConverterTestFilter</filter-class>
-        <init-param> <!-- optional -->
-            <param-name>video_file_path</param-name>
-            <param-value>..\\webapps\\searchable-video-library\\WEB-INF\\videos</param-value>
-        </init-param>
-    </filter>
+    <!-- Fails to initialize in VM. -->
+    <!--<filter>-->
+        <!--<filter-name>f1</filter-name>-->
+        <!--<filter-class>com.teamteem.filter.VideoConverterTestFilter</filter-class>-->
+        <!--<init-param> &lt;!&ndash; optional &ndash;&gt;-->
+            <!--<param-name>video_file_path</param-name>-->
+            <!--<param-value>..\\webapps\\searchable-video-library\\WEB-INF\\videos</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
 
-    <filter-mapping>
-        <filter-name>f1</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!--<filter-mapping>-->
+        <!--<filter-name>f1</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
 
 
