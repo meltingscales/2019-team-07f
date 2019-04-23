@@ -25,14 +25,13 @@ public class PersonDAO implements PersonDAOI {
     private static final Logger logger = LoggerFactory.getLogger(PersonDAO.class);
 
     @Autowired
-    private static SessionFactory sessionFactory;
-    private static String hashedPassword;
+    private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
     }
 
-    public static Session getSession() {
+    public Session getSession() {
         try {
             return sessionFactory.getCurrentSession();
         } catch (HibernateException e) {
@@ -54,13 +53,21 @@ public class PersonDAO implements PersonDAOI {
         Query query = session.createQuery("FROM Person WHERE username = :username")
                 .setParameter("username", username);
 
-        if (BCrypt.checkpw(password, hashedPassword)) {
-            if (query.getResultList().size() > 0) {
-                return (Person) query.getResultList().get(0);
-            }
+
+
+        List<Person> results = query.getResultList();
+        if(results.size() == 0) {
+            throw new InvalidCredentialsException("No user by that username exists!");
         }
 
-        throw new InvalidCredentialsException("Username and password are invalid!");
+        Person person = results.get(0);
+
+        if (BCrypt.checkpw(password, person.getPassword())) {
+            return (Person) query.getResultList().get(0);
+        } else {
+            throw new InvalidCredentialsException("Password is invalid!");
+        }
+
 
     }
 
@@ -78,7 +85,7 @@ public class PersonDAO implements PersonDAOI {
         List<FacesMessage> problems = new ArrayList<>();
 
         // Extra crispy Password hash anyone?
-        hashedPassword = BCrypt.hashpw(person.getPassword(), BCrypt.gensalt(12));
+        String hashedPassword = BCrypt.hashpw(person.getPassword(), BCrypt.gensalt(12));
         person.setPassword(hashedPassword);
 
         // Anyone using that username?

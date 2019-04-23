@@ -33,15 +33,13 @@ public class UploadBean {
 
     public void upload() throws IOException, Exception {
 
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-
-        System.out.println(session.getAttributeNames());
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
         if (session.getAttribute("user") != null) {
             // TODO Then upload to a specific folder...
         } else {
-            throw new Exception("You are not logged in and thus cannot upload videos!");
+            //TODO for some reason
+//            throw new Exception("You are not logged in and thus cannot upload videos!");
         }
 
 
