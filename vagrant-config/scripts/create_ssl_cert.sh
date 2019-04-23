@@ -32,15 +32,20 @@
 # Create Keystore file (password for tomcat:password)
 echo "Start generating keystore file..."
 
-keytool -genkey -alias tomcatSSL \
-  -keysize 2048 \
-  -storetype PKCS12 -keyalg RSA  \
-  -storepass password \
-  -keypass password \
-  -keystore key.jks \
-  -dname "CN=$WEB_IP_ADDR/OU=$TEAM_NAME/O=$TEAM_ORG/L=$CITY/ST=$STATE/C=$COUNTRY" \
-  -noprompt \
-
+#keytool -genkey -alias tomcatSSL \
+#  -keysize 2048 \
+#  -storetype PKCS12 -keyalg RSA  \
+#  -storepass password \
+#  -keypass password \
+#  -keystore key.jks \
+#  -dname "CN=$WEB_IP_ADDR/OU=$TEAM_NAME/O=$TEAM_ORG/L=$CITY/ST=$STATE/C=$COUNTRY" \
+#  -noprompt \
+keytool -delete -alias tomcatSSL -keystore newkey.jks
+keytool -genkeypair -alias tomcatSSL -keyalg RSA -dname "CN=$WEB_IP_ADDR,OU=$TEAM_NAME,O=$TEAM_ORG,L=$CITY,S=$STATE,C=$COUNTRY" -keypass password -keystore newkey.jks -storepass password
+keytool -genkeypair -alias tomcatSSL -keystore newkey.p12 -storetype pkcs12 -keyalg RSA -dname "CN=$WEB_IP_ADDR,OU=$TEAM_NAME,O=$TEAM_ORG,L=$CITY,S=$STATE,C=$COUNTRY" -keypass password -storepass password
+keytool -exportcert -alias tomcatSSL -file newkey.cer -keystore newkey.p12 -storetype pkcs12 -storepass password
+keytool -importcert -keystore newkey.jks -alias tomcatSSL -file newkey.cer -v -trustcacerts -noprompt -storepass password
+keytool -list -v -keystore newkey.jks -storepass password
 echo "Finishing create keystore file"
 
 # Create Certificate Signing Request (CSR)

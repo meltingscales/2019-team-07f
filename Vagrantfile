@@ -253,6 +253,8 @@ Vagrant.configure('2') do |config|
 
     SCRIPT
 
+	# TODO We can safely remove this line as it is in the packer build step. This affects ALL team members though.
+	# Did not remove to avoid having others being forced to rebuild.
     web.vm.provision 'ffmpeg', type: 'shell', inline: 'sudo add-apt-repository ppa:jonathonf/ffmpeg-4 ; sudo apt install ffmpeg -y'
 
     # Create a private network, which allows host-only access to the machine
