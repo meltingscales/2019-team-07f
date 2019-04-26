@@ -77,4 +77,18 @@
         <!--<servlet-name>Teamteem</servlet-name>-->
         <!--<url-pattern>*.java</url-pattern>-->
     <!--</servlet-mapping>-->
+
+    <!-- force entire website to use SSL-->
+    <security-constraint>
+	     <web-resource-collection>
+		       <web-resource-name></web-resource-name>
+		       <url-pattern>/searchable-video-library/*</url-pattern>
+	     </web-resource-collection>
+
+	     <user-data-constraint>
+		       <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+	     </user-data-constraint>
+    </security-constraint>
+
+
 </web-app>
