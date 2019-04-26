@@ -10,7 +10,7 @@ DESTROY_DB = false # Destroy the database?
 ENGAGE_CAKE = true # Engage cake? yes
 DEPLOY = true # Deploy the app?
 INSERT_TEST_DATA = true # Insert test data upon provision step?
-CREATE_SSL = false # Create an SSL Certificate
+CREATE_SSL = true # Create an SSL Certificate
 
 USE_PUBLIC_REPO = false # Use a public repository URL in case the private one is no more or inaccessible?
 
