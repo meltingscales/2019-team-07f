@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,9 +55,8 @@ public class PersonDAO implements PersonDAOI {
                 .setParameter("username", username);
 
 
-
         List<Person> results = query.getResultList();
-        if(results.size() == 0) {
+        if (results.size() == 0) {
             throw new InvalidCredentialsException("No user by that username exists!");
         }
 
@@ -78,6 +78,51 @@ public class PersonDAO implements PersonDAOI {
         person.setEmail(null);
         person.setPassword(null);
     }
+
+    /***
+     * Given an ID, return the Person associated with that ID.
+     * Throws an {@link javax.persistence.EntityNotFoundException} if the Person does not exist.
+     * @param id The id of a Person.
+     * @return A Person.
+     * @throws javax.persistence.EntityNotFoundException
+     */
+    public Person getPersonByID(int id) {
+
+        Session session = getSession();
+
+        Query query = session.createQuery("FROM Person WHERE id=?").setParameter(0, id);
+
+        List<Person> results = query.getResultList();
+
+        if (results.size() <= 0) {
+            throw new EntityNotFoundException("No person by that ID found.");
+        }
+
+        return results.get(0);
+    }
+
+    /***
+     * Given a username, return the Person associated with that username.
+     * Throws an {@link javax.persistence.EntityNotFoundException} if the Person does not exist.
+     * @param username The username of a Person.
+     * @return A Person.
+     * @throws javax.persistence.EntityNotFoundException
+     */
+    public Person getPersonByUsername(String username) {
+
+        Session session = getSession();
+
+        Query query = session.createQuery("FROM Person WHERE username=?").setParameter(0, username);
+
+        List<Person> results = query.getResultList();
+
+        if (results.size() <= 0) {
+            throw new EntityNotFoundException("No person by that username found.");
+        }
+
+        return results.get(0);
+    }
+
 
     @Override
     public void addPerson(@NotNull Person person) {

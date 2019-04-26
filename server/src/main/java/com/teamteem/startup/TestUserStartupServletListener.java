@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ReferencedBean;
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -17,12 +18,17 @@ import java.util.List;
  * A servlet listener that inserts test users into the database on startup.
  */
 @WebListener
-@ManagedBean(name="testUserStartupServletListener")
+@ManagedBean(name = "testUserStartupServletListener")
 public class TestUserStartupServletListener implements ServletContextListener {
 
-    private PersonService personService = new PersonService();
+    @Autowired
+    private PersonDAO personDAO;
 
-    public static final List<Person> people = new ArrayList<Person>() {
+    public void setPersonDAO(PersonDAO personDAO) {
+        this.personDAO = personDAO;
+    }
+
+    private static final List<Person> people = new ArrayList<Person>() {
         {
             add(new Person("Test Man", "TestDude123", "testman", "TestCountry", "testpassword"));
         }
@@ -30,22 +36,34 @@ public class TestUserStartupServletListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
-        System.out.println("POTATO DESTROYED");
+        System.out.printf("%s DESTROYED", TestUserStartupServletListener.class.getSimpleName());
     }
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-        System.out.println("POTATO INITIALIZED");
 
-        System.out.println("My personService:");
-        System.out.println(personService);
+        System.out.printf("%s INITIALIZED", TestUserStartupServletListener.class.getSimpleName());
 
-        for (Person person : people) {
-            System.out.printf("Adding '%s'\n", person.toString());
-//            personService.addPerson(person);
+        if (personDAO == null) {
+            System.out.print("personDAO is NULL. Cannot insert test users!");
+        } else {
+            for (Person person : people) {
+                try {
+
+                    // If the person exists,
+                    personDAO.getPersonByUsername(person.getUsername());
+
+                    //Do nothing.
+
+                } catch (EntityNotFoundException e) {
+                    // Add new Person if they do not exist.
+                    personDAO.addPerson(person);
+                }
+
+            }
+
         }
 
+
     }
-
-
 }
