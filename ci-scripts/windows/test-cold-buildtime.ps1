@@ -16,16 +16,9 @@ $REPO_CLONE_PATH = Join-Path $TEMP_DIR -ChildPath "repo";
 # Record date before we begin
 Get-Date > $START_TIME_PATH;
 
-
 if (-not(Test-Path $LOG_PATH))
 {
     mkdir.exe $LOG_PATH
-}
-
-if (Test-Path $REPO_CLONE_PATH)
-{
-    # Delete cloned repo directory after vagrant up runs.
-    Remove-Item -Force -Recurse $REPO_CLONE_PATH
 }
 
 if (-Not(Test-Path $REPO_CLONE_PATH))
@@ -34,6 +27,20 @@ if (-Not(Test-Path $REPO_CLONE_PATH))
     # Clone repo if it doesn't exist.
     git.exe clone $REPO_URL $REPO_CLONE_PATH
 }
+
+
+if (Test-Path $REPO_CLONE_PATH)
+{
+    Set-Location $REPO_CLONE_PATH
+    # Update cloned repo.
+	git.exe stash
+	git.exe pull
+}
+
+
+# Destroy VMs if they exist.
+Set-Location $REPO_CLONE_PATH
+ruby destroy-everything.rb -f
 
 
 # Go to packer folder and build VMs.
@@ -50,9 +57,6 @@ vagrant.exe up
 Get-Date > $END_TIME_PATH
 
 vagrant.exe halt -f
-
-# Go back up from repo clone path to parent directory
-Pop-Location
 
 Write-Output "Start time:"
 Get-Content $START_TIME_PATH
