@@ -13,9 +13,6 @@ $END_TIME_PATH = Join-Path -Path $LOG_PATH -ChildPath "end_time.txt";
 $REPO_URL = "https://github.com/illinoistech-itm/2019-team-07f";
 $REPO_CLONE_PATH = Join-Path $TEMP_DIR -ChildPath "repo";
 
-# Record date before we begin
-Get-Date > $START_TIME_PATH;
-
 if (-not(Test-Path $LOG_PATH))
 {
     mkdir.exe $LOG_PATH
@@ -42,6 +39,8 @@ if (Test-Path $REPO_CLONE_PATH)
 Set-Location $REPO_CLONE_PATH
 ruby destroy-everything.rb -f
 
+# Record date before we begin
+Get-Date > $START_TIME_PATH;
 
 # Go to packer folder and build VMs.
 Set-Location (Join-Path $REPO_CLONE_PATH -ChildPath "packer");
