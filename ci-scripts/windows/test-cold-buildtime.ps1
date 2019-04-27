@@ -61,4 +61,4 @@ Write-Output "Start time:"
 Get-Content $START_TIME_PATH
 
 Write-Output "End time:"
-Get-Content $START_TIME_PATH
+Get-Content $END_TIME_PATH
