@@ -13,6 +13,11 @@ $END_TIME_PATH = Join-Path -Path $LOG_PATH -ChildPath "end_time.txt";
 $REPO_URL = "https://github.com/illinoistech-itm/2019-team-07f";
 $REPO_CLONE_PATH = Join-Path $TEMP_DIR -ChildPath "repo";
 
+if(Test-Path $LOG_PATH)
+{
+    Remove-Item -Recurse -Force $LOG_PATH
+}
+
 if (-not(Test-Path $LOG_PATH))
 {
     mkdir.exe $LOG_PATH
@@ -24,7 +29,6 @@ if (-Not(Test-Path $REPO_CLONE_PATH))
     # Clone repo if it doesn't exist.
     git.exe clone $REPO_URL $REPO_CLONE_PATH
 }
-
 
 if (Test-Path $REPO_CLONE_PATH)
 {
@@ -61,4 +65,4 @@ Write-Output "Start time:"
 Get-Content $START_TIME_PATH
 
 Write-Output "End time:"
-Get-Content $START_TIME_PATH
+Get-Content $END_TIME_PATH
