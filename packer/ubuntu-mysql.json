@@ -34,6 +34,7 @@
       "headless": true,
       "http_directory": "http",
       "iso_urls": [
+        "~/iso/ubuntu-16.04.6-server-amd64.iso",
         "iso/ubuntu-16.04.6-server-amd64.iso",
         "http://releases.ubuntu.com/16.04/ubuntu-16.04.6-server-amd64.iso"
       ],
