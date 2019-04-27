@@ -30,7 +30,6 @@ if (-Not(Test-Path $REPO_CLONE_PATH))
     git.exe clone $REPO_URL $REPO_CLONE_PATH
 }
 
-
 if (Test-Path $REPO_CLONE_PATH)
 {
     Set-Location $REPO_CLONE_PATH
