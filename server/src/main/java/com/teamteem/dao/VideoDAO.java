@@ -4,6 +4,8 @@ import com.teamteem.config.UploadConfig;
 import com.teamteem.model.Person;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.teamteem.config.UploadConfig.*;
 
@@ -30,6 +32,19 @@ public class VideoDAO {
         }
 
         return person_video_folder;
+    }
+
+    /**
+     *
+     * @param person
+     * @return
+     */
+    public static List<File> getVideos(Person person) {
+        File personVideoFolder = getPersonVideoFolder(person);
+
+        File[] files = personVideoFolder.listFiles();
+
+        return Arrays.asList(personVideoFolder.listFiles());
     }
 
 }

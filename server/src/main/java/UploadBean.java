@@ -1,9 +1,11 @@
 import com.teamteem.config.UploadConfig;
+import com.teamteem.dao.VideoDAO;
+import com.teamteem.model.Person;
+import com.teamteem.util.SessionHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,6 +15,9 @@ import java.io.InputStream;
 @ManagedBean(name = "uploadBean")
 @SessionScoped
 public class UploadBean {
+
+    @Autowired
+    private SessionHelper sessionHelper;
 
     /**
      * File stream from the form.
@@ -29,33 +34,30 @@ public class UploadBean {
      */
     private String fileExt = "mp4";
 
-    private File videos_folder = UploadConfig.videosFolder;
-
     public void upload() throws IOException, Exception {
 
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
-        if (session.getAttribute("user") != null) {
-            // TODO Then upload to a specific folder...
-        } else {
-            //TODO for some reason, 'user' is null. Session not being set correctly?
-            throw new Exception("You are not logged in and thus cannot upload videos!");
-        }
-
-        if (!videos_folder.exists()) {
-            throw new Exception("Videos folder does not exist!");
-        }
+        Person person = sessionHelper.getLoggedInPerson();
 
         if (!file.getSubmittedFileName().endsWith(fileExt)) { //TODO actually show error in form instead of creating a stack trace
             throw new IllegalArgumentException(String.format("Only %s files can be uploaded!", fileExt));
         }
 
+        if (person == null) {
+            //TODO for some reason, 'user' is null. Session not being set correctly?
+            throw new Exception("You are not logged in and thus cannot upload videos!");
+        }
+
+        // TODO Then upload to a specific folder...
+
+        // The video folder that the Person owns.
+        File person_video_folder = VideoDAO.getPersonVideoFolder(person);
+
         if (file != null) {
             InputStream input = file.getInputStream();
 
-            File videos_file = new File(videos_folder, String.format("%s.%s", fileName, fileExt));
+            File videos_file = new File(person_video_folder, String.format("%s.%s", fileName, fileExt));
 
-            System.out.println(videos_folder.getAbsolutePath());
+            System.out.println(person_video_folder.getAbsolutePath());
 
             if (!videos_file.exists()) {
                 videos_file.createNewFile();

@@ -70,6 +70,8 @@ my project doesn't suck!
                   ref="hibernate5AnnotatedSessionFactory"/>
     </bean>
 
+    <bean id="uploadBean" class="UploadBean"/>
+
     <bean id="personService"
           class="com.teamteem.service.PersonService">
         <property name="personDAO" ref="personDAO"/>
