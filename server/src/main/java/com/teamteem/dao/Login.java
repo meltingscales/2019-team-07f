@@ -1,6 +1,7 @@
 package com.teamteem.dao;
 
 import com.teamteem.model.Person;
+import com.teamteem.util.SessionHelper;
 import org.apache.http.auth.InvalidCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,7 +9,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
@@ -36,11 +36,11 @@ public class Login implements Serializable {
         // Get current session if it exists.
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
-        if(username == null) {
+        if (username == null) {
             throw new NullPointerException("Username cannot be null!");
         }
 
-        if(password == null) {
+        if (password == null) {
             throw new NullPointerException("Password cannot be null!");
         }
 
@@ -52,13 +52,14 @@ public class Login implements Serializable {
             return null;
         }
 
-        return "/logged_in/home.xhtml?faces-redirect=true";
+        return "/";
     }
 
     // invalidate/logout the session
     public String logout() {
+        System.out.printf("%s IS LOGGING OUT!", new SessionHelper().getLoggedInPerson().getName());
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/searchable-video-library/login.xhtml?faces-redirect=true";
+        return "/";
     }
 
     public String getUsername() {
