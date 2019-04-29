@@ -32,11 +32,19 @@ public class UploadBean {
     /**
      * File extension of the file.
      */
-    private String fileExt = "mp4";
+    private static final String fileExt = "mp4";
 
     public void upload() throws IOException, Exception {
 
         Person person = sessionHelper.getLoggedInPerson();
+
+        if (file.getSubmittedFileName() == null) {
+            throw new NullPointerException("You cannot upload a null filename!");
+        }
+
+        if (file.getSubmittedFileName().equalsIgnoreCase("")) {
+            throw new IllegalArgumentException("You cannot upload a file with an empty name!");
+        }
 
         if (!file.getSubmittedFileName().endsWith(fileExt)) { //TODO actually show error in form instead of creating a stack trace
             throw new IllegalArgumentException(String.format("Only %s files can be uploaded!", fileExt));
