@@ -2,6 +2,7 @@ package com.teamteem.dao;
 
 import com.teamteem.config.UploadConfig;
 import com.teamteem.model.Person;
+import com.teamteem.model.Video;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -82,7 +83,18 @@ public class VideoDAO {
         return Arrays.asList(Objects.requireNonNull(personVideoFolder.listFiles()));
     }
 
-    public File saveVideo(Person person, Part file, String filename) throws IOException {
+    /***
+     * Save a {@link Video} object.
+     * @param video The {@link Video} object to a database.
+     * @return The {@link Video} object.
+     */
+    public Video saveVideo(Video video) {
+        Session session = getSession();
+
+        return null; //TODO finish this method!
+    }
+
+    public File saveVideoFile(Person person, Part file, String filename) throws IOException {
 
         File person_video_folder = this.getPersonVideoFolder(person);
 
@@ -107,6 +119,8 @@ public class VideoDAO {
 
         input.close();
         output.close();
+
+        Video video = new Video(); //TODO Save this Video object to the database!
 
         return videoFile;
 

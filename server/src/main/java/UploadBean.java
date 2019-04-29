@@ -1,4 +1,3 @@
-import com.teamteem.config.UploadConfig;
 import com.teamteem.dao.VideoDAO;
 import com.teamteem.model.Person;
 import com.teamteem.util.SessionHelper;
@@ -7,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 @ManagedBean(name = "uploadBean")
 @SessionScoped
@@ -60,7 +56,7 @@ public class UploadBean {
 
         if (file != null) {
 
-            videoDAO.saveVideo(person, file, String.format("%s.%s", fileName, fileExt));
+            videoDAO.saveVideoFile(person, file, String.format("%s.%s", fileName, fileExt));
 
         } else {
             throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", UploadBean.class.getSimpleName()));
