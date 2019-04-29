@@ -17,6 +17,9 @@ import java.io.InputStream;
 public class UploadBean {
 
     @Autowired
+    public VideoDAO videoDAO;
+
+    @Autowired
     private SessionHelper sessionHelper;
 
     /**
@@ -55,33 +58,9 @@ public class UploadBean {
             throw new Exception("You are not logged in and thus cannot upload videos!");
         }
 
-        // TODO Then upload to a specific folder...
-
-        // The video folder that the Person owns.
-        File person_video_folder = VideoDAO.getPersonVideoFolder(person);
-
         if (file != null) {
-            InputStream input = file.getInputStream();
 
-            File videos_file = new File(person_video_folder, String.format("%s.%s", fileName, fileExt));
-
-            System.out.println(person_video_folder.getAbsolutePath());
-
-            if (!videos_file.exists()) {
-                videos_file.createNewFile();
-            }
-
-            FileOutputStream output = new FileOutputStream(videos_file);
-
-            byte[] buffer = new byte[1024];
-            int length;
-
-            while ((length = input.read(buffer)) > 0) {
-                output.write(buffer, 0, length);
-            }
-
-            input.close();
-            output.close();
+            videoDAO.saveVideo(person, file, String.format("%s.%s", fileName, fileExt));
 
         } else {
             throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", UploadBean.class.getSimpleName()));
