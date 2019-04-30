@@ -8,6 +8,7 @@
 
 # Local machine config for CI and testing.
 local:
+  scheme: http
   host: localhost
   port: 8080
   uri: searchable-video-library
