@@ -13,18 +13,19 @@ if [[ -d ${REPO_PATH} ]]; then
 		git reset --hard
 		
 		# Update
-		git pull
+		if ! git pull; then
+			echo "Git pulling failed!"
+			exit 1
+		fi
 	
 	popd
 	
 else
 	echo "Cloning repo as it does not exist..."
 	# Clone team repo into REPO_PATH
-	sudo git clone ${REPO_URL} ${REPO_PATH}
-	
-	if [[ ! -d ${REPO_PATH} ]]; then
-		echo "For some reason, cloning the git repo has failed!"
-		false
+	if ! sudo git clone ${REPO_URL} ${REPO_PATH}; then
+		echo "Git cloning failed!"
+		exit 1
 	fi
 
 	# Give vagrant user ownership of git repo
