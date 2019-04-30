@@ -18,7 +18,7 @@
             <h1>List of Videos</h1>
         </div>
         <section>
-            <h:outputText value="#{videoDAO.getVideos(videoDAO)}"/>
+            <h:outputText value="#{videoDAO.getVideos(sessionHelper.loggedInPerson)}"/>
 
         </section>
     </ui:define>
