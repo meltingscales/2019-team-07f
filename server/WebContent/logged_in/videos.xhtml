@@ -8,19 +8,21 @@
       xmlns:p="http://www.w3.org/2001/XMLSchema-instance">
 
 <ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <ui:define name="title">Video to Text</ui:define>
 
     <ui:define name="content">
+        <div class="heading">
+            <h1>List of Videos</h1>
+        </div>
+        <section>
+            <h:outputText value="#{ShowVideo.}"/>
 
-        <section class="home">
-            <h1>Team Teem Presents</h1>
-            <h2>Video to Text Transcript Convertor!</h2>
-            <p>Text transcript only a few clicks away.</p>
         </section>
-
     </ui:define>
 
 </ui:composition>
+
 </html>

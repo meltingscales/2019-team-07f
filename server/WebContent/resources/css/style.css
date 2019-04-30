@@ -33,17 +33,20 @@ section.form form input[type=file] {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     position:static;
     margin: 12vw 0 0 25vw;
+    font-size:350%;
 }
 
 .home h2{
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     position:static;
     margin: 10px 0 0 25vw;
+    font-size:300%;
 }
 
 .home p{
     position:static;
     margin: 10px 0 0 25vw;
+    font-size:160%;
 }
 
 /*Registration*/
@@ -55,6 +58,7 @@ section.form form input[type=file] {
 
 .heading h1{
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    text-align: center;
 }
 
 .form1 {
@@ -156,6 +160,12 @@ section.form form input[type=file] {
     max-height: 100vh;
     margin: auto;
 }
+
+/*admin page*/
+.tg th{
+    table-layout: fixed;
+}
+
 
 /*Footer*/
 footer {
