@@ -82,7 +82,7 @@
     <security-constraint>
 	     <web-resource-collection>
 		       <web-resource-name></web-resource-name>
-		       <url-pattern>/*</url-pattern>
+		       <url-pattern>/searchable-video-library/*</url-pattern>
 	     </web-resource-collection>
 
 	     <user-data-constraint>
