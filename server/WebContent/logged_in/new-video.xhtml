@@ -16,10 +16,11 @@
     <ui:define name="content">
 
         <div class="heading">
-            <h1 style="text-align: center;">Upload Video. Get Text!</h1>
+            <h1>Upload Video. Get Text!</h1>
         </div>
 
         <h:form action="/upload" method="POST" enctype="multipart/form-data">
+
             Enter File Name: <h:inputText value="#{uploadBean.fileName}"/>
             <h:inputFile value="#{uploadBean.file}"/>
 
