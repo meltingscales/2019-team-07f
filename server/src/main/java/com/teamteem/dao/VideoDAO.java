@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.faces.bean.ManagedBean;
 import javax.servlet.http.Part;
@@ -86,12 +87,15 @@ public class VideoDAO {
     /***
      * Save a {@link Video} object.
      * @param video The {@link Video} object to a database.
+     * @param person The {@link Person} object which owns the {@link Video}.
      * @return The {@link Video} object.
      */
-    public Video saveVideo(Video video) {
+    public Video saveVideo(Person person, Video video) {
         Session session = getSession();
 
-        return null; //TODO finish this method!
+//        session.saveOrUpdate(video);
+
+        throw new NullPointerException(String.format("SaveVideo method is unfinished!")); //TODO finish this method!
     }
 
     public File saveVideoFile(Person person, Part file, String filename) throws IOException {
@@ -120,9 +124,14 @@ public class VideoDAO {
         input.close();
         output.close();
 
-        Video video = new Video(); //TODO Save this Video object to the database!
+        Video video = new Video(); //TODO instantiate this Video object with the correct parameters!
+
+//        this.saveVideo(person, video);
+        //TODO Save this Video object to the database!
 
         return videoFile;
 
     }
+
+
 }
