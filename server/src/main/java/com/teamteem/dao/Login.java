@@ -9,7 +9,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
 @ManagedBean(name = "login")
@@ -26,15 +25,15 @@ public class Login implements Serializable {
     @Autowired
     private PersonDAO personDAO;
 
+    @Autowired
+    private SessionHelper sessionHelper;
+
     public void setPersonDAO(PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
 
     public String login() {
-
-        // Get current session if it exists.
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
         if (username == null) {
             throw new NullPointerException("Username cannot be null!");
@@ -46,7 +45,7 @@ public class Login implements Serializable {
 
         try {
             currentUser = personDAO.getPersonByUsernameAndPassword(username, password);
-            session.setAttribute("user", currentUser);
+            sessionHelper.setLoggedInPerson(currentUser);
         } catch (InvalidCredentialsException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username or Password", "Invalid Credentials"));
             return null;

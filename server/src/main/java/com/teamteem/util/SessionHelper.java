@@ -1,5 +1,6 @@
 package com.teamteem.util;
 
+import com.google.api.Http;
 import com.teamteem.model.Person;
 
 import javax.annotation.ManagedBean;
@@ -10,24 +11,43 @@ import javax.servlet.http.HttpSession;
 @ManagedBean("sessionHelper")
 @SessionScoped
 public class SessionHelper {
-    public static HttpSession getCurrentSession(boolean create) {
+
+    /**
+     * The key that identifies a Person who is logged in in the current session.
+     */
+    public static final String USER_KEY = "user";
+
+    public HttpSession getCurrentSession(boolean create) {
         return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(create);
     }
 
-    public static HttpSession getCurrentSession() {
+    public HttpSession getCurrentSession() {
         return getCurrentSession(true);
     }
 
-    public Person getLoggedInPerson() {
-        return (Person) getCurrentSession().getAttribute("user");
+    public Person getLoggedInPerson(HttpSession session) {
+        return (Person) session.getAttribute(USER_KEY);
     }
 
+    public Person getLoggedInPerson() {
+        return getLoggedInPerson(getCurrentSession());
+    }
+
+    public HttpSession setLoggedInPerson(HttpSession session, Person person) {
+        session.setAttribute(USER_KEY, person);
+
+        return session;
+    }
+
+    public HttpSession setLoggedInPerson(Person person) {
+        return setLoggedInPerson(getCurrentSession(), person);
+    }
 
     /***
      * Return if the session is logged in or not with the current session.
      * @return If the session is logged in.
      */
-    public static boolean isLoggedIn() {
+    public boolean isLoggedIn() {
         return isLoggedIn(getCurrentSession(true));
     }
 
@@ -36,9 +56,9 @@ public class SessionHelper {
      * @param session The session.
      * @return If the session is logged in.
      */
-    public static boolean isLoggedIn(HttpSession session) {
+    public boolean isLoggedIn(HttpSession session) {
 
-        Object object = session.getAttribute("user");
+        Object object = session.getAttribute(USER_KEY);
 
         try {
             Person person = (Person) object;
