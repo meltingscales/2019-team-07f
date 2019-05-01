@@ -6,25 +6,31 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    xmlns:h="http://java.sun.com/jsf/html"
-                    xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="title">
+        Upload A Video
+    </ui:define>
 
     <ui:define name="content">
+
         <div class="heading">
-            <h1 style="text-align: center;">Upload Video. Get Text!</h1>
+            <h1>Upload Video. Get Text!</h1>
         </div>
+
         <h:form action="/upload" method="POST" enctype="multipart/form-data">
-            Enter File Name: <h:inputText value="#{uploadBean.fileName}"/><br></br>
-            <h:inputFile value="#{uploadBean.file}"/><br></br>
+
+            Enter File Name: <h:inputText value="#{uploadBean.fileName}"/>
+            <h:inputFile value="#{uploadBean.file}"/>
 
             <h:commandButton value="Upload" action="#{uploadBean.upload}"/>
+            <h:commandButton value="Convert" action="#{videoConverter.mp4_to_mp3(mp4File)}" />
 
         </h:form>
 
-        </ui:define>
+    </ui:define>
 
-    </ui:composition>
+</ui:composition>
 
 </html>

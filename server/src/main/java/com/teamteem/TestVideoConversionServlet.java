@@ -12,22 +12,24 @@ import java.net.URL;
 
 public class TestVideoConversionServlet extends HttpServlet {
 
-    public static String run_conversion_test() throws IOException, InterruptedException {
+    public static String run_conversion_test() throws Exception {
 
         VideoConverter videoConverter = new VideoConverter();
 
-        URL mp4_test_folder = TestVideoConversionServlet.class.getClassLoader().getResource("mp4_test-data");
+        File mp4_test_folder = new File(TestVideoConversionServlet.class.getClassLoader().getResource("mp4_test-data").getFile());
 
-        System.out.printf("File is %s", mp4_test_folder);
-
-        File mp4File = new File(mp4_test_folder.getFile(), "Cloud_Speech_API_Demo.mp4");
-        File mp3File = new File(mp4_test_folder.getFile(), "output.wav");
+        File mp4File = new File(mp4_test_folder, "Cloud_Speech_API_Demo.mp4");
+        File mp3File = new File(mp4_test_folder, "output.wav");
 
         if (mp3File.exists()) {
             mp3File.delete();
         }
 
         videoConverter.mp4_to_mp3(mp4File, mp3File);
+
+        if (!mp3File.exists()) {
+            throw new Exception("MP3 file we converted does not exist somehow!");
+        }
 
         return "Test successful.";
 
@@ -38,7 +40,7 @@ public class TestVideoConversionServlet extends HttpServlet {
 
         try {
             run_conversion_test();
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new ServletException(e.getMessage());
         }

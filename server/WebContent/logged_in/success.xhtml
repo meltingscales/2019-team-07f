@@ -6,22 +6,20 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <h:head>
-        <h:outputStylesheet name="css/style.css"/>
-    </h:head>
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml">
 
-    <nav class="topnav">
-        <a href="#{request.contextPath}/logged_in/home.xhtml">Home</a>
-        <a href="#{request.contextPath}/logged_in/user-new-video.xhtml">Upload New Video</a>
-        <a href="#{request.contextPath}/logged_in/user-about-us.xhtml">About Us</a>
-        <a href="#{login.logout()}">Logout</a>
-    </nav>
+</ui:composition>
 
-    <h:body>
-        <h1>Success!</h1>
+<h:head>
+    <h:outputStylesheet name="css/style.css"/>
+</h:head>
 
-        <p>Successfully uploaded file.</p>
+<h:body>
+    <h1>Success!</h1>
 
-    </h:body>
+    <p>Successfully uploaded file.</p>
+
+</h:body>
 
 </html>

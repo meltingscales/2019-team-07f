@@ -7,6 +7,7 @@ import java.io.File;
  */
 public final class UploadConfig {
 
+    // TODO This value should be dynamically loaded from some external configuration file.
     public static File videosFolder = new File("/mnt/nfs_videos/");
 
     static {
@@ -18,10 +19,15 @@ public final class UploadConfig {
 
             videosFolder = new File(System.getProperty("java.io.tmpdir"), "searchable-video-library");
 
-            if (!videosFolder.exists()) {
-                videosFolder.mkdirs();
-            }
         }
+
+        videosFolder = new File(videosFolder, "videos");
+
+        if (!videosFolder.exists()) {
+            videosFolder.mkdirs();
+        }
+
+
     }
 
 }

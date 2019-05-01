@@ -2,36 +2,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <h:head>
-        <title>Welcome, admin!</title>
-        <h:outputStylesheet name="css/style.css"/>
-    </h:head>
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml">
 
-    <nav class="topnav">
-        <a href="#{request.contextPath}/logged_in/home.xhtml">Home</a>
-        <a href="#{request.contextPath}/logged_in/user-new-video.xhtml">Upload New Video</a>
-        <a href="#{request.contextPath}/logged_in/admin.xhtml">Admin CRUD</a>
-        <a href="#{login.logout()}">Logout</a>
-    </nav>
+    <ui:define name="title">Welcome, admin!</ui:define>
 
-    <h:body>
+    <ui:define name="content">
 
         <h3>Registered Users</h3>
 
         <c:if test="${!empty personService.listPersons()}">
             <table class="tg">
                 <tr>
-                    <th width="80">User ID</th>
-                    <th width="120">Username</th>
-                    <th width="120">Full Name</th>
-                    <th width="120">Email Address</th>
-                    <th width="120">Country</th>
-                    <th width="120">Password</th>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Email Address</th>
+                    <th>Country</th>
+                    <th>Password</th>
                 </tr>
                 <ui:repeat value="${personService.listPersons()}" var="person">
                     <tr>
@@ -51,19 +45,19 @@
         <h:form>
             <ul style="list-style: none;">
                 <li><label>Username: </label>
-                <h:inputText id="username" value="#{person.username}"></h:inputText></li>
+                    <h:inputText id="username" value="#{person.username}"></h:inputText></li>
 
                 <li><label>Full Name: </label>
-                <h:inputText id="name" value="#{person.name}"></h:inputText></li>
+                    <h:inputText id="name" value="#{person.name}"></h:inputText></li>
 
                 <li><label>Country: </label>
-                <h:inputText id="country" value="#{person.country}"></h:inputText></li>
+                    <h:inputText id="country" value="#{person.country}"></h:inputText></li>
 
                 <li><label>Email: </label>
-                <h:inputText id="email" value="#{person.email}"></h:inputText></li>
+                    <h:inputText id="email" value="#{person.email}"></h:inputText></li>
 
                 <li><label>Password: </label>
-                <h:inputText id="password" value="#{person.password}"></h:inputText></li>
+                    <h:inputText id="password" value="#{person.password}"></h:inputText></li>
 
                 <h:commandButton action="#{personService.addPerson(person)}" value="Create"/>
                 <h:commandButton action="#{personDAO.clear(person)}" value="Clear"/>
@@ -71,6 +65,7 @@
             </ul>
         </h:form>
 
-    </h:body>
+    </ui:define>
+</ui:composition>
 
 </html>
