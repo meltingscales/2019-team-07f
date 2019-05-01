@@ -8,11 +8,14 @@ import com.google.cloud.speech.v1.SpeechClient;
 import com.google.cloud.speech.v1.SpeechRecognitionAlternative;
 import com.google.cloud.speech.v1.SpeechRecognitionResult;
 import com.google.protobuf.ByteString;
+
+import javax.faces.bean.ManagedBean;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+@ManagedBean (name = "mp3ToText")
 
 public class Mp3ToText {
     /**
@@ -23,7 +26,8 @@ public class Mp3ToText {
         try (SpeechClient speechClient = SpeechClient.create()) {
 
             // The path to the audio file to transcribe
-            String fileName = "C:\\Temp\\Demo.mp3";
+            String fileName = "/mnt/nfs_videos/videos/person/31/Potato.mp4";
+            //String fileName = "C:\\Temp\\Demo.mp3";
 
             // Reads the audio file into memory
             Path path = Paths.get(fileName);
@@ -52,4 +56,5 @@ public class Mp3ToText {
             }
         }
     }
+
 }

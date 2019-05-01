@@ -1,8 +1,11 @@
 package com.teamteem.util;
 
 import java.io.*;
+import javax.faces.bean.ManagedBean;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+@ManagedBean (name = "showVideo")
 
 public class ShowVideo extends HttpServlet {
 

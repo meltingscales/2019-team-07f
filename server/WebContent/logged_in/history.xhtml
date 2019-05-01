@@ -15,11 +15,11 @@
 
     <ui:define name="content">
         <div class="heading">
-            <h1>List of Videos</h1>
+            <h1>List of Converted Video to Text</h1>
         </div>
         <section>
-            <h:commandLink
-            <h:outputText value="#{videoDAO.getVideos(sessionHelper.loggedInPerson)}"/>
+
+            <h:outputText value="#{mp3ToText.main()}"/>
 
         </section>
     </ui:define>
