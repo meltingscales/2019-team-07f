@@ -57,7 +57,7 @@ public class Login implements Serializable {
     // invalidate/logout the session
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/";
+        return "/searchable-video-library/login.xhtml?faces-redirect=true";
     }
 
     public String getUsername() {
