@@ -74,8 +74,8 @@ public class UploadBean {
             throw new IllegalArgumentException("You cannot convert a file with an empty name!");
         }
 
-        if (!file.getSubmittedFileName().endsWith(fileExt) || !file.getSubmittedFileName().endsWith(fileExt2)) {
-            throw new IllegalArgumentException(String.format("Only %s and #s files can be converted!", fileExt, fileExt2));
+        if (!file.getSubmittedFileName().endsWith(fileExt)) {
+            throw new IllegalArgumentException(String.format("Only %s files can be converted!", fileExt));
         }
 
         if (person == null) {

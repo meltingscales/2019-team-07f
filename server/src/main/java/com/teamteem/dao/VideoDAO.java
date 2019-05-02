@@ -142,8 +142,6 @@ public class VideoDAO {
 
         File person_video_folder = this.getPersonVideoFolder(person);
 
-        InputStream input = file.getInputStream();
-
         File audioFile = new File(person_video_folder, filename);
 
         File videoFile = new File(person_video_folder, filename);
@@ -152,19 +150,7 @@ public class VideoDAO {
             audioFile.createNewFile();
         }
 
-        FileOutputStream output = new FileOutputStream(audioFile);
-
         videoConverter.mp4_to_mp3(videoFile, audioFile);
-
-        byte[] buffer = new byte[1024];
-        int length;
-
-        while ((length = input.read(buffer)) > 0) {
-            output.write(buffer, 0, length);
-        }
-
-        input.close();
-        output.close();
 
         return audioFile;
 
