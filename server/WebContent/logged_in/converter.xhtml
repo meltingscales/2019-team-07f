@@ -14,7 +14,8 @@
 
     <ui:define name="content">
         <section>
-            <a href="#{request.contextPath}/test_conversion">Test video conversion</a>
+            Enter Uploaded File Name: <h:inputText value="#{videoconverter.uploadedfileName}"/>
+            <h:commandButton action="#{videoconverter.placeAudioFile()}" value="Convert"/>
         </section>
     </ui:define>
 
