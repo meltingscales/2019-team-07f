@@ -171,9 +171,11 @@ public class PersonDAO implements PersonDAOI {
     public List<Person> listPersons() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Person> personsList = session.createQuery("from Person").list();
+
         for (Person p : personsList) {
             logger.info("Person List::" + p);
         }
+
         return personsList;
     }
 

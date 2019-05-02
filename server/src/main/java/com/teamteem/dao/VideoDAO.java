@@ -16,10 +16,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.teamteem.config.UploadConfig.*;
 
@@ -70,16 +67,13 @@ public class VideoDAO {
         return person_video_folder;
     }
 
-    public List<File> getVideos(Person person) {
-        File personVideoFolder = getPersonVideoFolder(person);
-
-        File[] files = personVideoFolder.listFiles();
-
-        if ((files == null) || (files.length == 0)) {
-            return new ArrayList<>();
-        }
-
-        return Arrays.asList(Objects.requireNonNull(personVideoFolder.listFiles()));
+    /***
+     * Get all videos a {@link Person} owns.
+     * @param person
+     * @return
+     */
+    public List<Video> getVideos(Person person) {
+        return person.getVideos();
     }
 
     /***
