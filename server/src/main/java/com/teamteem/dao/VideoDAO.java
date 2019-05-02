@@ -88,12 +88,12 @@ public class VideoDAO {
      * @param person The {@link Person} object which owns the {@link Video}.
      * @return The {@link Video} object.
      */
-    public Video saveVideo(Person person, Video video) {
+    public Video addVideo(Person person, Video video) {
         Session session = getSession();
 
-//        session.saveOrUpdate(video);
+        session.save(video);
 
-        throw new NullPointerException(String.format("SaveVideo method is unfinished!")); //TODO finish this method!
+        return video;
     }
 
     public File saveVideoFile(Person person, Part file, String filename) throws IOException {
@@ -122,9 +122,9 @@ public class VideoDAO {
         input.close();
         output.close();
 
-        Video video = new Video(); //TODO instantiate this Video object with the correct parameters!
+        Video video = new Video(filename, videoFile.getAbsolutePath(), person, null); //TODO instantiate this Video object with the correct parameters!
 
-//        this.saveVideo(person, video);
+        video = this.addVideo(person, video);
         //TODO Save this Video object to the database!
 
         return videoFile;
