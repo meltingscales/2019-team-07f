@@ -68,6 +68,13 @@ public class VideoDAO {
         return person_video_folder;
     }
 
+    /**
+     * Given a {@link Video}, get its size in bytes.
+     */
+    public long getVideoFileSize(Video video) {
+        return new File(video.getPath()).length();
+    }
+
     /***
      * Get all videos a {@link Person} owns.
      */
