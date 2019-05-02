@@ -1,5 +1,7 @@
 package com.teamteem.util;
 
+import org.apache.commons.io.FileExistsException;
+
 import javax.faces.bean.ManagedBean;
 import java.io.*;
 import java.util.logging.Level;
@@ -29,9 +31,9 @@ public class VideoConverter implements javax.servlet.ServletContextListener {
 
     public File mp4_to_mp3(File mp4File, File mp3File) throws IOException, InterruptedException {
 
-        /*if (mp3File.exists()) {
+        if (mp3File.exists()) {
             throw new FileExistsException(String.format("Output file %s already exists.", mp3File.getAbsolutePath()));
-        }*/
+        }
 
         if (!mp4File.exists()) {
             throw new FileNotFoundException(String.format("Input file %s does not exist!", mp4File.getAbsolutePath()));
