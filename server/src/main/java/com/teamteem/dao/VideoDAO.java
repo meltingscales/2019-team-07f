@@ -27,6 +27,10 @@ import static com.teamteem.config.UploadConfig.*;
 @ManagedBean(name = "videoDAO")
 public class VideoDAO {
 
+    /*private VideoConverter videoConverter;
+
+    private File audioFile;*/
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -51,7 +55,7 @@ public class VideoDAO {
      * @param person A Person.
      * @return The Folder their videos should reside in.
      */
-    public /*static*/ File getPersonVideoFolder(Person person) {
+    public File getPersonVideoFolder(Person person) {
 
         int person_id = person.getId();
 
@@ -131,5 +135,27 @@ public class VideoDAO {
 
     }
 
+    /*public File saveAudioFile(Person person, Part file, String filename) throws IOException, InterruptedException {
+
+        File person_video_folder = this.getPersonVideoFolder(person);
+
+        InputStream input = file.getInputStream();
+
+        File videoFile = new File(person_video_folder, filename);
+
+        if (!videoFile.exists()) {
+            videoFile.createNewFile();
+        }
+
+        FileOutputStream output = new FileOutputStream(videoFile);
+
+        videoConverter.mp4_to_mp3(videoFile, audioFile);
+
+        input.close();
+        output.close();
+
+        return audioFile;
+
+    }*/
 
 }
