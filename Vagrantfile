@@ -137,6 +137,9 @@ Vagrant.configure('2') do |config|
       vb.memory = '1536'
     end
 
+	if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vbguest.auto_update = false
+	end
 
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine. In the example below,

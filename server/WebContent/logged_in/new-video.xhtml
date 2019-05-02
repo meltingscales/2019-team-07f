@@ -3,7 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
@@ -25,6 +25,10 @@
             <h:inputFile value="#{uploadBean.file}"/>
 
             <h:commandButton value="Upload" action="#{uploadBean.upload}"/>
+<<<<<<< HEAD
+=======
+            <h:commandButton value="Convert" action="#{testVideoConversion.run_conversion_test}" />
+>>>>>>> c0a532afa3502f1f0246e54285284b361b854b54
 
         </h:form>
 
