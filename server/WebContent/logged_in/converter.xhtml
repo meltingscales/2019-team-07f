@@ -14,8 +14,8 @@
 
     <ui:define name="content">
         <section>
-            Enter Uploaded File Name: <h:inputText value="#{videoconverter.uploadedfileName}"/>
-            <h:commandButton action="#{videoconverter.placeAudioFile()}" value="Convert"/>
+            Enter Uploaded File Name: <h:inputText value="#{videoDAO.uploadedfileName}"/>
+            <h:commandButton action="#{videoDAO.placeAudioFile()}" value="Convert"/>
         </section>
     </ui:define>
 
