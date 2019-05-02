@@ -166,6 +166,25 @@ section.form form input[type=file] {
     table-layout: fixed;
 }
 
+/*!*upload page*!*/
+/*.upload{*/
+   /**/
+    /*display: inline-block;*/
+/*}*/
+/*.btn2{*/
+    /*color: rgba(0, 0, 0, 0.97);*/
+    /*background: rgba(107, 227, 46, 0.74);*/
+    /*cursor: pointer;*/
+    /*font-size: 20px;*/
+    /*font-weight: bold;*/
+/*}*/
+/*.upload input{*/
+    /*font-size: 100px;*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*opacity: 0;*/
+/*}*/
 
 /*Footer*/
 footer {
