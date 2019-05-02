@@ -2,6 +2,7 @@ package com.teamteem.model;
 
 import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,13 +39,13 @@ public class Person {
     private String password;
 
     @OneToMany(mappedBy = "person")
-    private Set<Video> videos;
+    private List<Video> videos;
 
     @OneToMany(mappedBy = "person")
-    private Set<Audio> audios;
+    private List<Audio> audios;
 
     @OneToMany(mappedBy = "person")
-    private Set<Text> texts;
+    private List<Text> texts;
 
     public int getId() {
         return id;
@@ -99,27 +100,27 @@ public class Person {
         return String.format("id=%d, username=%s", getId(), getUsername());
     }
 
-    public Set<Video> getVideos() {
+    public List<Video> getVideos() {
         return videos;
     }
 
-    public void setVideos(Set<Video> videos) {
+    public void setVideos(List<Video> videos) {
         this.videos = videos;
     }
 
-    public Set<Audio> getAudios() {
+    public List<Audio> getAudios() {
         return audios;
     }
 
-    public void setAudios(Set<Audio> audios) {
+    public void setAudios(List<Audio> audios) {
         this.audios = audios;
     }
 
-    public Set<Text> getTexts() {
+    public List<Text> getTexts() {
         return texts;
     }
 
-    public void setTexts(Set<Text> texts) {
+    public void setTexts(List<Text> texts) {
         this.texts = texts;
     }
 }

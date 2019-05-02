@@ -11,15 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.faces.bean.ManagedBean;
+import javax.persistence.EntityManager;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.teamteem.config.UploadConfig.*;
 
@@ -74,16 +72,23 @@ public class VideoDAO {
         return person_video_folder;
     }
 
-    public List<File> getVideos(Person person) {
-        File personVideoFolder = getPersonVideoFolder(person);
+    /**
+     * Given a {@link Video}, get its size in bytes.
+     */
+    public long getVideoFileSize(Video video) {
+        return new File(video.getPath()).length();
+    }
 
-        File[] files = personVideoFolder.listFiles();
+    /***
+     * Get all videos a {@link Person} owns.
+     */
+    public List<Video> getVideos(Person person) {
 
-        if ((files == null) || (files.length == 0)) {
-            return new ArrayList<>();
-        }
+        Session session = getSession();
 
-        return Arrays.asList(Objects.requireNonNull(personVideoFolder.listFiles()));
+        session.update(person);
+
+        return person.getVideos();
     }
 
     /***
@@ -92,12 +97,12 @@ public class VideoDAO {
      * @param person The {@link Person} object which owns the {@link Video}.
      * @return The {@link Video} object.
      */
-    public Video saveVideo(Person person, Video video) {
+    public Video addVideo(Person person, Video video) {
         Session session = getSession();
 
-//        session.saveOrUpdate(video);
+        session.save(video);
 
-        throw new NullPointerException(String.format("SaveVideo method is unfinished!")); //TODO finish this method!
+        return video;
     }
 
     public File saveVideoFile(Person person, Part file, String filename) throws IOException {
@@ -126,9 +131,9 @@ public class VideoDAO {
         input.close();
         output.close();
 
-        Video video = new Video(); //TODO instantiate this Video object with the correct parameters!
+        Video video = new Video(filename, videoFile.getAbsolutePath(), person, null); //TODO instantiate this Video object with the correct parameters!
 
-//        this.saveVideo(person, video);
+        video = this.addVideo(person, video);
         //TODO Save this Video object to the database!
 
         return videoFile;

@@ -56,7 +56,6 @@ public class Login implements Serializable {
 
     // invalidate/logout the session
     public String logout() {
-        System.out.printf("%s IS LOGGING OUT!", new SessionHelper().getLoggedInPerson().getName());
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/";
     }

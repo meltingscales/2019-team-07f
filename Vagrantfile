@@ -366,7 +366,7 @@ Vagrant.configure('2') do |config|
 
     if DEPLOY
       # Deploy our app.
-      web.vm.provision :shell, path: 'vagrant-config/scripts/deploy-app.sh', run: 'always', env: {
+      web.vm.provision :shell, path: 'vagrant-config/scripts/deploy-app.sh', env: {
           :REPO_PATH => VARIABLES['repo_location'],
       }
 
