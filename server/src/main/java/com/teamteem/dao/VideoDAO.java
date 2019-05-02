@@ -150,9 +150,9 @@ public class VideoDAO {
             audioFile.delete();
         }
 
-        if (!audioFile.exists()) {
+        /*if (!audioFile.exists()) {
             audioFile.createNewFile();
-        }
+        }*/
 
         videoConverter.mp4_to_mp3(videoFile, audioFile);
 
