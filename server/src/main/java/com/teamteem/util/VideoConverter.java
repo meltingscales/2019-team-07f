@@ -3,11 +3,7 @@ package com.teamteem.util;
 import org.apache.commons.io.FileExistsException;
 
 import javax.faces.bean.ManagedBean;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
 import java.io.*;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +13,16 @@ import java.util.logging.Logger;
 @ManagedBean(name = "videoconverter")
 public class VideoConverter implements javax.servlet.ServletContextListener {
 
+    /*@Autowired
+    public VideoDAO videoDAO;
+
+    @Autowired
+    private SessionHelper sessionHelper;
+
+    private Part file;
+    private String uploadedfileName;*/
+
+    private static final String fileExt = "mp3";
     private static final String FFMPEG_NAME = "ffmpeg";
 
     /*
@@ -71,7 +77,27 @@ public class VideoConverter implements javax.servlet.ServletContextListener {
         }
 
         return mp3File;
-
     }
+
+    /*public void placeAudioFile() throws Exception{
+
+        Person person = sessionHelper.getLoggedInPerson();
+
+        File person_video_folder = VideoDAO.getPersonVideoFolder(person);
+
+        File videoFile = new File(person_video_folder, uploadedfileName);
+
+        if (videoFile.exists()) {
+            mp4_to_mp3();
+        } else {
+            throw new NullPointerException("mp4 file does't exist!");
+        }
+
+        if (file != null) {
+            videoDAO.saveVideoFile(person, file, String.format("%s.%s", uploadedfileName, fileExt));
+        } else {
+            throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", VideoConverter.class.getSimpleName()));
+        }
+    }*/
 
 }

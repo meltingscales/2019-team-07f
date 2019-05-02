@@ -1,6 +1,5 @@
 package com.teamteem.dao;
 
-import com.teamteem.config.UploadConfig;
 import com.teamteem.model.Person;
 import com.teamteem.model.Video;
 import org.hibernate.HibernateException;
@@ -10,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.faces.bean.ManagedBean;
 import javax.servlet.http.Part;
@@ -53,7 +51,7 @@ public class VideoDAO {
      * @param person A Person.
      * @return The Folder their videos should reside in.
      */
-    public File getPersonVideoFolder(Person person) {
+    public static File getPersonVideoFolder(Person person) {
 
         int person_id = person.getId();
 
