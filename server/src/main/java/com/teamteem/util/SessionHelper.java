@@ -1,14 +1,18 @@
 package com.teamteem.util;
 
 import com.google.api.Http;
+import com.teamteem.dao.PersonDAO;
 import com.teamteem.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-@ManagedBean("sessionHelper")
+@Transactional
+@ManagedBean(name = "sessionHelper")
 @SessionScoped
 public class SessionHelper {
 
@@ -16,6 +20,9 @@ public class SessionHelper {
      * The key that identifies a Person who is logged in in the current session.
      */
     public static final String USER_KEY = "user";
+
+    @Autowired
+    private PersonDAO personDAO;
 
     public HttpSession getCurrentSession(boolean create) {
         return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(create);
@@ -26,7 +33,15 @@ public class SessionHelper {
     }
 
     public Person getLoggedInPerson(HttpSession session) {
-        return (Person) session.getAttribute(USER_KEY);
+
+        // Person from session, potentially old.
+        Person session_person = (Person) session.getAttribute(USER_KEY);
+
+        // New person that could have updated Videos, name, etc.
+        Person updated_person = personDAO.getPersonByID(session_person.getId());
+
+        return updated_person;
+
     }
 
     public Person getLoggedInPerson() {

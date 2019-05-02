@@ -72,6 +72,8 @@ my project doesn't suck!
 
     <bean id="uploadBean" class="UploadBean"/>
 
+    <bean id="sessionHelper" class="com.teamteem.util.SessionHelper"/>
+
     <bean id="personService"
           class="com.teamteem.service.PersonService">
         <property name="personDAO" ref="personDAO"/>

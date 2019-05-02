@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 @ManagedBean(name = "videoService")
 @SessionScoped
 public class VideoService {

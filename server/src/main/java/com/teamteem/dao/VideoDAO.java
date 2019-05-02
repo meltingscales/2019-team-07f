@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.faces.bean.ManagedBean;
+import javax.persistence.EntityManager;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -69,10 +70,13 @@ public class VideoDAO {
 
     /***
      * Get all videos a {@link Person} owns.
-     * @param person
-     * @return
      */
     public List<Video> getVideos(Person person) {
+
+        Session session = getSession();
+
+        session.update(person);
+
         return person.getVideos();
     }
 
