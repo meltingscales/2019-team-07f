@@ -19,15 +19,16 @@
             <h1>Upload Video. Get Text!</h1>
         </div>
 
-        <h:form action="/upload" method="POST" enctype="multipart/form-data">
+        <h:form action="/upload" class="upload" method="POST" enctype="multipart/form-data">
 
-            Enter File Name: <h:inputText value="#{uploadBean.fileName}"/>
+            <h:outputLabel value="File Name"/>
+            <h:inputText value="#{uploadBean.fileName}"/>
             <h:inputFile value="#{uploadBean.file}"/>
 
 
-            <h:commandButton value="Upload" action="#{uploadBean.upload}"/>
+            <h:commandButton value="Upload" styleClass="btn2" action="#{uploadBean.upload}"/>
 
-            <h:commandButton value="Convert" action="#{uploadBean.convert}"/>
+            <h:commandButton value="Convert" styleClass="btn2" action="#{uploadBean.convert}"/>
 
         </h:form>
 
