@@ -28,7 +28,7 @@
 
         <!-- Spring -->
         <!--<spring-framework.version>4.0.3.RELEASE</spring-framework.version>-->
-        <spring-framework.version>5.0.2.RELEASE</spring-framework.version>
+        <spring-framework.version>[5.0.7,)</spring-framework.version>
         <aspectj.version>1.7.4</aspectj.version>
 
         <!-- Hibernate / JPA -->
