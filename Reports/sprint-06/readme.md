@@ -4,7 +4,7 @@ Project Manager: Divin Gregis Baniekona
 
 Developer: Yi-Ting Lin
 
-Junior Developer: Heny Post
+Junior Developer: Henry Post
 
 IT Operation: Nihar Patel
 

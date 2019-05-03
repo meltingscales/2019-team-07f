@@ -33,8 +33,6 @@ public class UploadBean {
      */
     private static final String fileExt = "mp4";
     private static final String fileExt2 = "mp3";
-    private static final String fileExt3 = "wav";
-    private static final String fileExt4 = "txt";
 
     public void upload() throws IOException, Exception {
 
@@ -58,14 +56,11 @@ public class UploadBean {
         }
 
         if (file != null) {
-
             videoDAO.saveVideoFile(person, file, String.format("%s.%s", fileName, fileExt));
-            //videoDAO.saveAudioFile(person, file, String.format("%s.%s", fileName, fileExt2));
         } else {
             throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", UploadBean.class.getSimpleName()));
         }
     }
-
 
     public void convert() throws Exception {
 
@@ -89,13 +84,10 @@ public class UploadBean {
 
         if (file != null) {
             videoDAO.saveAudioFile(person, file, String.format("%s.%s", fileName, fileExt2));
-            //videoDAO.saveWavFile(person,file, String.format("%s.%s", fileName, fileExt3));
-            //videoDAO.saveTextFile(person,file, String.format("%s.%s", fileName, fileExt4));
         } else {
             throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", UploadBean.class.getSimpleName()));
         }
     }
-
 
     public Part getFile() {
         return file;
