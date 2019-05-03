@@ -9,6 +9,9 @@
 <ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml">
 
+    <ui:define name="title">
+        Upload A Video
+    </ui:define>
 
     <ui:define name="content">
 
@@ -19,8 +22,8 @@
         <h:form action="/upload" styleClass="upload" method="POST" enctype="multipart/form-data">
 
             <h:outputLabel value="File Name"/>
-            <h:inputText value="#{uploadBean.fileName}" styleClass="filename"/>
-            <h:inputFile value="#{uploadBean.file}" styleClass="file"/>
+            <h:inputText value="#{uploadBean.fileName}"/>
+            <h:inputFile value="#{uploadBean.file}"/>
 
 
 
