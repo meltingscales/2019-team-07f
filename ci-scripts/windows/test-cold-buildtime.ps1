@@ -2,7 +2,18 @@
 # This script will run a build of the repository from a cold start in a temporary directory,
 # and record how long that cold start takes. Akin to building with a newly-bought laptop.
 #
-$TEMP_DIR = Join-Path $Env:TEMP -ChildPath "2019-team-07f"
+$TEMP_FOLDER = $Env:TEMP
+
+if(-not $TEMP_FOLDER) { #Linux or OSX doesn't have $Env:TEMP
+    $TEMP_FOLDER = "/tmp"
+}
+
+$TEMP_DIR = Join-Path $TEMP_FOLDER -ChildPath "2019-team-07f"
+
+if(-not(Test-Path $TEMP_DIR))
+{
+    mkdir $TEMP_DIR
+}
 
 $LOG_PATH = Join-Path $TEMP_DIR -ChildPath "log";
 
@@ -20,22 +31,22 @@ if(Test-Path $LOG_PATH)
 
 if (-not(Test-Path $LOG_PATH))
 {
-    mkdir.exe $LOG_PATH
+    mkdir $LOG_PATH
 }
 
 if (-Not(Test-Path $REPO_CLONE_PATH))
 {
     Set-Location $TEMP_DIR
     # Clone repo if it doesn't exist.
-    git.exe clone $REPO_URL $REPO_CLONE_PATH
+    git clone $REPO_URL $REPO_CLONE_PATH
 }
 
 if (Test-Path $REPO_CLONE_PATH)
 {
     Set-Location $REPO_CLONE_PATH
     # Update cloned repo.
-	git.exe stash
-	git.exe pull
+	git stash
+	git pull
 }
 
 
@@ -49,17 +60,17 @@ Get-Date > $START_TIME_PATH;
 # Go to packer folder and build VMs.
 Set-Location (Join-Path $REPO_CLONE_PATH -ChildPath "packer");
 
-ruby.exe "build-missing.rb"
+ruby "build-missing.rb"
 
 # Go back up from packer to repo folder.
 Set-Location $REPO_CLONE_PATH
 # Bring VMs up.
-vagrant.exe up
+vagrant up
 
 # Record date after we finish.
 Get-Date > $END_TIME_PATH
 
-vagrant.exe halt -f
+vagrant halt -f
 
 Write-Output "Start time:"
 Get-Content $START_TIME_PATH
