@@ -2,6 +2,7 @@ package com.teamteem.dao;
 
 import com.teamteem.model.Person;
 import com.teamteem.model.Video;
+import com.teamteem.util.Mp3ToText;
 import com.teamteem.util.VideoConverter;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -26,9 +27,9 @@ import static com.teamteem.config.UploadConfig.*;
 @ManagedBean(name = "videoDAO")
 public class VideoDAO {
 
-    /*private VideoConverter videoConverter;
+    private VideoConverter videoConverter;
 
-    private File audioFile;*/
+    private File audioFile;
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -145,7 +146,6 @@ public class VideoDAO {
 
         File person_video_folder = this.getPersonVideoFolder(person);
 
-<<<<<<< HEAD
         InputStream input = file.getInputStream();
 
         File videoFile = new File(person_video_folder, filename);
@@ -161,10 +161,9 @@ public class VideoDAO {
         input.close();
         output.close();
 
-=======
         File audioFile = new File(person_video_folder, filename);
 
-        File videoFile = new File(person_video_folder, filename);
+        //File videoFile = new File(person_video_folder, filename);
 
         if (!audioFile.exists()) {
             audioFile.createNewFile();
@@ -172,9 +171,48 @@ public class VideoDAO {
 
         videoConverter.mp4_to_mp3(videoFile, audioFile);
 
->>>>>>> ff21e03b6f59798efa5f13bd188517e8b0719720
         return audioFile;
 
     }
+
+    /*public File saveWavFile(Person person, Part file, String filename) throws IOException, InterruptedException {
+
+        VideoConverter audioconvert = new VideoConverter();
+
+        File person_video_folder = this.getPersonVideoFolder(person);
+
+        File wavFile = new File(person_video_folder, filename);
+
+        File audioFile = new File(person_video_folder, filename);
+
+        if (audioFile.exists()) {
+            wavFile.createNewFile();
+        }
+
+        audioconvert.mp3_to_wav(audioFile, wavFile);
+
+        return wavFile;
+
+    }
+
+    public File saveTextFile(Person person, Part file, String filename) throws IOException, InterruptedException {
+
+        VideoConverter wavconvert = new VideoConverter();
+
+        File person_video_folder = this.getPersonVideoFolder(person);
+
+        File wavFile = new File(person_video_folder, filename);
+
+        File textFile = new File(person_video_folder, filename);
+
+        if (textFile.exists()) {
+            textFile.createNewFile();
+        }
+
+        wavconvert.mp3_to_wav(wavFile, textFile);
+
+        return textFile;
+
+    }*/
 
 }
