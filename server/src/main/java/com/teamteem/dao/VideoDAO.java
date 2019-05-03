@@ -147,8 +147,8 @@ public class VideoDAO {
         File videoFile = new File(person_video_folder, filename);
 
         if (!audioFile.exists()) {
-            //audioFile.createNewFile();
             videoConverter.mp4_to_mp3(videoFile, audioFile);
+            audioFile.createNewFile();
         }
 
         return audioFile;
