@@ -57,13 +57,12 @@ public class UploadBean {
 
         if (file != null) {
             videoDAO.saveVideoFile(person, file, String.format("%s.%s", fileName, fileExt));
-            videoDAO.saveAudioFile(person, file, String.format("%s.%s", fileName, fileExt2));
         } else {
             throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", UploadBean.class.getSimpleName()));
         }
     }
 
-    /*public void convert() throws Exception {
+    public void convert() throws Exception {
 
         Person person = sessionHelper.getLoggedInPerson();
 
@@ -88,7 +87,7 @@ public class UploadBean {
         } else {
             throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", UploadBean.class.getSimpleName()));
         }
-    }*/
+    }
 
     public Part getFile() {
         return file;

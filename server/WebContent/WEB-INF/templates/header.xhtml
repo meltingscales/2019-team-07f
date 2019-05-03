@@ -16,6 +16,9 @@
             <a href="#{request.contextPath}/logged_in/videos.xhtml">Videos</a>
             <!--<a href="#{request.contextPath}/logged_in/history.xhtml">History</a>-->
 
+            <a href="#{request.contextPath}/about-us.xhtml">About Us</a>
+
+
             <h:form>
                 <h:commandLink value="Log out" action="#{login.logout}"/>
             </h:form>
@@ -26,10 +29,11 @@
 
             <a href="#{request.contextPath}/person.xhtml">Register</a>
             <a href="#{request.contextPath}/login.xhtml">Login</a>
+            <a href="#{request.contextPath}/about-us.xhtml">About Us</a>
 
         </ui:fragment>
 
-        <a href="#{request.contextPath}/about-us.xhtml">About Us</a>
+
     </nav>
 
     <ui:fragment rendered="#{!sessionHelper.isLoggedIn()}">
