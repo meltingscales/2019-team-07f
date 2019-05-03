@@ -69,4 +69,45 @@ public class VideoConverter implements javax.servlet.ServletContextListener {
         return mp3File;
 
     }
+
+    public File mp3_to_wav(File mp3File, File wavFile) throws IOException, InterruptedException {
+
+        if (wavFile.exists()) {
+            throw new FileExistsException(String.format("Output file %s already exists.", wavFile.getAbsolutePath()));
+        }
+
+        if (!mp3File.exists()) {
+            throw new FileNotFoundException(String.format("Input file %s does not exist!", mp3File.getAbsolutePath()));
+        }
+
+        try {
+            String line;
+
+            String cmd = String.format("%s -i %s %s", FFMPEG_NAME, mp3File, wavFile); // TODO Severe command injection risk.
+            System.out.println(cmd);
+
+            Process p = Runtime.getRuntime().exec(cmd);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            p.waitFor();
+
+            System.out.println("Audio converted successfully!");
+            in.close();
+        } catch (IOException | InterruptedException e) {
+            LOG.log(Level.SEVERE, null, e);
+            throw e;
+        }
+
+        if (!wavFile.exists()) {
+            throw new FileNotFoundException(String.format("File %s should exist after conversion but it does not!", wavFile.getAbsolutePath()));
+        }
+
+        return wavFile;
+
+    }
 }
