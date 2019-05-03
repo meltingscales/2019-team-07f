@@ -86,8 +86,8 @@ public class UploadBean {
 
         if (file != null) {
             videoDAO.saveAudioFile(person, file, String.format("%s.%s", fileName, fileExt2));
-            videoDAO.saveWavFile(person,file, String.format("%s.%s", fileName, fileExt3));
-            videoDAO.saveTextFile(person,file, String.format("%s.%s", fileName, fileExt4));
+            //videoDAO.saveWavFile(person,file, String.format("%s.%s", fileName, fileExt3));
+            //videoDAO.saveTextFile(person,file, String.format("%s.%s", fileName, fileExt4));
         } else {
             throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", UploadBean.class.getSimpleName()));
         }

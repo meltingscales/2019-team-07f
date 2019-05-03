@@ -1,5 +1,7 @@
 package com.teamteem.util;
 
+import org.apache.commons.io.FileExistsException;
+
 import javax.faces.bean.ManagedBean;
 import java.io.*;
 import java.util.logging.Level;
@@ -68,7 +70,7 @@ public class VideoConverter implements javax.servlet.ServletContextListener {
 
     }
 
-    public File mp3_to_wav(File mp3File, File wavFile) throws IOException, InterruptedException {
+    /*public File mp3_to_wav(File mp3File, File wavFile) throws IOException, InterruptedException {
 
         if (wavFile.exists()) {
             throw new FileExistsException(String.format("Output file %s already exists.", wavFile.getAbsolutePath()));
@@ -107,5 +109,5 @@ public class VideoConverter implements javax.servlet.ServletContextListener {
 
         return wavFile;
 
-    }
+    }*/
 }
