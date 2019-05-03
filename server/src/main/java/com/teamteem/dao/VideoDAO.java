@@ -13,18 +13,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.faces.bean.ManagedBean;
+import javax.persistence.EntityManager;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.util.*;
 
-import static com.teamteem.config.UploadConfig.videosFolder;
+import static com.teamteem.config.UploadConfig.*;
 
 @Repository
 @ManagedBean(name = "videoDAO")
 public class VideoDAO {
+
+    /*private VideoConverter videoConverter;
+
+    private File audioFile;*/
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -139,10 +144,25 @@ public class VideoDAO {
 
     public File saveAudioFile(Person person, Part file, String filename) throws IOException, InterruptedException {
 
-        VideoConverter videoConverter = new VideoConverter();
-
         File person_video_folder = this.getPersonVideoFolder(person);
 
+<<<<<<< HEAD
+        InputStream input = file.getInputStream();
+
+        File videoFile = new File(person_video_folder, filename);
+
+        if (!videoFile.exists()) {
+            videoFile.createNewFile();
+        }
+
+        FileOutputStream output = new FileOutputStream(videoFile);
+
+        videoConverter.mp4_to_mp3(videoFile, audioFile);
+
+        input.close();
+        output.close();
+
+=======
         File audioFile = new File(person_video_folder, filename);
 
         File videoFile = new File(person_video_folder, filename);
@@ -153,6 +173,7 @@ public class VideoDAO {
 
         videoConverter.mp4_to_mp3(videoFile, audioFile);
 
+>>>>>>> ff21e03b6f59798efa5f13bd188517e8b0719720
         return audioFile;
 
     }
