@@ -147,7 +147,7 @@ public class VideoDAO {
 
         File videoFile = new File(person_video_folder, filename);
 
-        if (videoFile.exists()) {
+        if (!audioFile.exists()) {
             audioFile.createNewFile();
         }
 
