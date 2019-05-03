@@ -152,10 +152,6 @@ public class VideoDAO {
 
         videoConverter.mp4_to_mp3(videoFile, audioFile);
 
-        if (audioFile.exists()) {
-            audioFile.delete();
-        }
-
         return audioFile;
 
     }
