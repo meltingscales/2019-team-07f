@@ -119,6 +119,8 @@ public class VideoDAO {
 
         if (!videoFile.exists()) {
             videoFile.mkdirs(); // Make directories for file if it does not exist
+            videoFile.delete(); //Delete video 'file' as it is a directory
+
             videoFile.createNewFile();
         }
 
