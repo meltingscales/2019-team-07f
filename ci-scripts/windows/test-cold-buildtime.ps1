@@ -10,7 +10,7 @@ $LOG_PATH = Join-Path $TEMP_DIR -ChildPath "log";
 $START_TIME_PATH = Join-Path -Path $LOG_PATH -ChildPath "start_time.txt";
 $END_TIME_PATH = Join-Path -Path $LOG_PATH -ChildPath "end_time.txt";
 
-$REPO_URL = "https://github.com/illinoistech-itm/2019-team-07f";
+$REPO_URL = "https://github.com/henryfbp/2019-team-07f";
 $REPO_CLONE_PATH = Join-Path $TEMP_DIR -ChildPath "repo";
 
 if(Test-Path $LOG_PATH)
