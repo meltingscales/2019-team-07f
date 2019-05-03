@@ -25,10 +25,6 @@ import static com.teamteem.config.UploadConfig.videosFolder;
 @ManagedBean(name = "videoDAO")
 public class VideoDAO {
 
-    private VideoConverter videoConverter;
-
-    private File audioFile;
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -144,6 +140,8 @@ public class VideoDAO {
     }
 
     public File saveAudioFile(Person person, Part file, String filename) throws IOException, InterruptedException {
+
+        VideoConverter videoConverter = new VideoConverter();
 
         File person_video_folder = this.getPersonVideoFolder(person);
 
