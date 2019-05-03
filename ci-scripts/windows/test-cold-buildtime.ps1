@@ -2,6 +2,9 @@
 # This script will run a build of the repository from a cold start in a temporary directory,
 # and record how long that cold start takes. Akin to building with a newly-bought laptop.
 #
+
+Push-Location ./
+
 $TEMP_FOLDER = $Env:TEMP
 
 if(-not $TEMP_FOLDER) { #Linux or OSX doesn't have $Env:TEMP
@@ -77,3 +80,5 @@ Get-Content $START_TIME_PATH
 
 Write-Output "End time:"
 Get-Content $END_TIME_PATH
+
+Pop-Location
