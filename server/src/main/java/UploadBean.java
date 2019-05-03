@@ -64,6 +64,35 @@ public class UploadBean {
         }
     }
 
+
+    public void convert() throws Exception {
+
+        Person person = sessionHelper.getLoggedInPerson();
+
+        if (file.getSubmittedFileName() == null) {
+            throw new NullPointerException("You cannot convert a null filename!");
+        }
+
+        if (file.getSubmittedFileName().equalsIgnoreCase("")) {
+            throw new IllegalArgumentException("You cannot convert a file with an empty name!");
+        }
+
+        if (!file.getSubmittedFileName().endsWith(fileExt)) {
+            throw new IllegalArgumentException(String.format("Only %s files can be converted!", fileExt));
+        }
+
+        if (person == null) {
+            throw new Exception("You are not logged in and thus cannot convert videos!");
+        }
+
+        if (file != null) {
+            videoDAO.saveAudioFile(person, file, String.format("%s.%s", fileName, fileExt2));
+        } else {
+            throw new NullPointerException(String.format("`file` is null somehow! This %s's variables are not being automatically filled in!", UploadBean.class.getSimpleName()));
+        }
+    }
+
+
     public Part getFile() {
         return file;
     }

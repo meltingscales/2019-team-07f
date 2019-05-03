@@ -2,6 +2,7 @@ package com.teamteem.dao;
 
 import com.teamteem.model.Person;
 import com.teamteem.model.Video;
+import com.teamteem.util.VideoConverter;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -140,10 +141,11 @@ public class VideoDAO {
 
     }
 
-    /*public File saveAudioFile(Person person, Part file, String filename) throws IOException, InterruptedException {
+    public File saveAudioFile(Person person, Part file, String filename) throws IOException, InterruptedException {
 
         File person_video_folder = this.getPersonVideoFolder(person);
 
+<<<<<<< HEAD
         InputStream input = file.getInputStream();
 
         File videoFile = new File(person_video_folder, filename);
@@ -159,8 +161,20 @@ public class VideoDAO {
         input.close();
         output.close();
 
+=======
+        File audioFile = new File(person_video_folder, filename);
+
+        File videoFile = new File(person_video_folder, filename);
+
+        if (!audioFile.exists()) {
+            audioFile.createNewFile();
+        }
+
+        videoConverter.mp4_to_mp3(videoFile, audioFile);
+
+>>>>>>> ff21e03b6f59798efa5f13bd188517e8b0719720
         return audioFile;
 
-    }*/
+    }
 
 }

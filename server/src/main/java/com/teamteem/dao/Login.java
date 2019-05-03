@@ -51,13 +51,13 @@ public class Login implements Serializable {
             return null;
         }
 
-        return "/";
+        return "/index.xhtml?faces-redirect=true";
     }
 
     // invalidate/logout the session
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/";
+        return "/login.xhtml?faces-redirect=true";
     }
 
     public String getUsername() {
