@@ -4,7 +4,7 @@ apt-get -y install git #TODO this shouldn't be needed, git should be installed i
 
 # Delete cloned repo if it exists
 if [[ -d ${REPO_PATH} ]]; then
-    echo "Updating repo as it already exists..."
+    echo "Updating repo as it already exists at ${REPO_PATH}..."
 	
 	# Move to the REPO_PATH
 	pushd ${REPO_PATH}
@@ -21,7 +21,7 @@ if [[ -d ${REPO_PATH} ]]; then
 	popd
 	
 else
-	echo "Cloning repo as it does not exist..."
+	echo "Cloning repo as it does not exist at ${REPO_PATH}..."
 	# Clone team repo into REPO_PATH
 	if ! sudo git clone ${REPO_URL} ${REPO_PATH}; then
 		echo "Git cloning failed!"
