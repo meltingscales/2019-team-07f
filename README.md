@@ -4,6 +4,8 @@
 # 2019-team-07f
 Private team repo for ITMT 430
 
+See <https://github.com/HenryFBP/2019-team-07f-dockerized> for a Dockerized version that is WIP!
+
 # Monitoring
 
 Visit http://localhost:{19999,19998,19997} for application metrics once the application is running.
