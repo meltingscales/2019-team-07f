@@ -33,11 +33,11 @@
       "guest_os_type": "Ubuntu_64",
       "headless": true,
       "http_directory": "http",
-      "iso_checksum": "sha256:16afb1375372c57471ea5e29803a89a5a6bd1f6aabea2e5e34ac1ab7eb9786ac",
+      "iso_checksum": "sha256:b23488689e16cad7a269eb2d3a3bf725d3457ee6b0868e00c8762d3816e25848",
       "iso_urls": [
-        "~/iso/ubuntu-16.04.6-server-amd64.iso",
-        "iso/ubuntu-16.04.6-server-amd64.iso",
-        "http://releases.ubuntu.com/16.04/ubuntu-16.04.6-server-amd64.iso"
+        "~/iso/ubuntu-16.04.7-server-amd64.iso",
+        "iso/ubuntu-16.04.7-server-amd64.iso",
+        "http://lt.releases.ubuntu.com/xenial/ubuntu-16.04.7-server-amd64.iso"
       ],
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
       "ssh_password": "vagrant",
@@ -60,7 +60,7 @@
         ]
       ],
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "packer-ubuntu-16.04.6-amd64_storage"
+      "vm_name": "packer-ubuntu-16.04.7-amd64_storage"
     }
   ],
   "post-processors": [
