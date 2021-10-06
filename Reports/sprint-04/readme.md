@@ -64,17 +64,17 @@ The OS is Ubuntu Server 16.04 for all VMs.
 
 Filename:
 
-    ubuntu-16.04.6-server-amd64.iso
+    ubuntu-16.04.7-server-amd64.iso
 
 Download:
 
-http://releases.ubuntu.com/16.04/ubuntu-16.04.6-server-amd64.iso
+http://lt.releases.ubuntu.com/xenial/ubuntu-16.04.7-server-amd64.iso
 
 Checksums:
 
     openssl_md5          = ac8a79a86a905ebdc3ef3f5dd16b7360
     openssl_sha1         = 056b7c15efc15bbbf40bf1a9ff1a3531fcbf70a2
-    openssl_sha256       = 16afb1375372c57471ea5e29803a89a5a6bd1f6aabea2e5e34ac1ab7eb9786ac
+    openssl_sha256       = b23488689e16cad7a269eb2d3a3bf725d3457ee6b0868e00c8762d3816e25848
     openssl_sha512       = ecbf736f54adf81d930583d5c99733e0f24eb78781755da37152b68fe55fa2bcdaf9933e1d7848fdb133ed910dc1e1e3dc17bb55ce0bfd251c68cf0837ce441a
 
 We chose Ubuntu because of its maturity, ease of use, and heavy documentation.
