@@ -29,7 +29,7 @@
         <!-- Spring -->
         <!--<spring-framework.version>4.0.3.RELEASE</spring-framework.version>-->
         <spring-framework.version>[5.0.7,)</spring-framework.version>
-        <aspectj.version>1.7.4</aspectj.version>
+        <aspectj.version>1.9.7</aspectj.version>
 
         <!-- Hibernate / JPA -->
         <!--<hibernate.version>4.3.5.Final</hibernate.version>-->
