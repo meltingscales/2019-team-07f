@@ -110,3 +110,10 @@ dbaniekona@hawk.iit.edu
 
 ## [Jimmy Tran](https://github.com/jtron82)
 jtran8@hawk.iit.edu
+
+# Testing
+
+    cd /packer
+    ruby ./build-missing.rb
+    cd ..
+    vagrant up
