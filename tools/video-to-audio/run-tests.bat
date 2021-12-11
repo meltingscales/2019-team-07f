@@ -1,3 +1,5 @@
+pipenv install
+
 pipenv run python test.py
 
 cd jep-example
